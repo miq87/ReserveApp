@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <form (ngSubmit)="onSubmit()">
+        <form>
             <div>
                 <input type="text" name="firstName" placeholder="firstName">
             </div>
@@ -14,7 +14,10 @@
                 <input type="number" name="phone" placeholder="number">
             </div>
             <div>
-                <button class="btn btn-primary btn-lg">Wyślij</button>
+                <button class="btn btn-primary btn-lg" (click)="onSubmit()">Wyślij</button>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-secondary btn-lg" (click)="onGetHeroes()">Odbierz</button>
             </div>
         </form>
     </div>
