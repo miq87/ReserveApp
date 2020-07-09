@@ -2,22 +2,20 @@
     <div class="row">
         <form>
             <div>
-                <input type="text" name="firstName" placeholder="firstName">
+                <input class="form-control" type="text" name="firstName" placeholder="firstName" [(ngModel)]="formHero.firstName">
             </div>
             <div>
-                <input type="text" name="lastName" placeholder="lastName">
+                <input class="form-control" type="text" name="lastName" placeholder="lastName" [(ngModel)]="formHero.lastName">
             </div>
             <div>
-                <input type="text" name="email" placeholder="email">
+                <input class="form-control" type="email" name="email" placeholder="email" [(ngModel)]="formHero.email">
             </div>
             <div>
-                <input type="number" name="phone" placeholder="number">
+                <input class="form-control" type="number" name="phone" placeholder="phone" [(ngModel)]="formHero.phone">
             </div>
-            <div>
-                <button class="btn btn-primary btn-lg" (click)="onSubmit()">Wyślij</button>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-secondary btn-lg" (click)="onGetHeroes()">Odbierz</button>
+            <div class="btn-group mt-4">
+                <button class="btn btn-primary btn-sm" (click)="onSubmit()">Wyślij</button>
+                <button type="submit" class="btn btn-warning btn-sm" (click)="onGetHeroes()">Odbierz</button>
             </div>
         </form>
     </div>

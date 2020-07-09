@@ -12,13 +12,11 @@ export class HeroService {
   constructor(private http: HttpClient) { }
 
   getHeroes(): Observable<Hero[]> {
-    console.log(heroesUrl)
     return this.http.get<Hero[]>(heroesUrl)
   }
 
   addHeroes(hero: Hero): Observable<any> {
     // JSON.stringify, JSON.parse
-    //console.log(hero)
     return this.http.post(heroesUrl, hero)
   }
 
