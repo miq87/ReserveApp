@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HeroService } from 'src/app/services/hero.service';
 import { Hero } from 'src/app/models/hero';
 
@@ -10,10 +10,14 @@ import { Hero } from 'src/app/models/hero';
 export class HeroComponent implements OnInit {
 
   formHero = new Hero()
+  AllHeroes : Hero[]
+  @Output() AllHeroesOut = new EventEmitter<Hero[]>()
+
 
   constructor(private _heroService: HeroService) { }
 
   ngOnInit(): void {
+    this.onGetHeroes()
   }
 
   onSubmit() {
@@ -26,7 +30,9 @@ export class HeroComponent implements OnInit {
 
   onGetHeroes() {
     this._heroService.getHeroes().subscribe(data => {
-      console.log(data)
+      this.AllHeroes = data
+      console.log(this.AllHeroes)
+      this.AllHeroesOut.emit(this.AllHeroes)
     }, err => {
       console.log(err)
     })

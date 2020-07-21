@@ -10,6 +10,24 @@ import { HeaderComponent } from './shared/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FirstcolComponent } from './components/firstcol/firstcol.component';
+import { SecondcolComponent } from './components/secondcol/secondcol.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
+  authDomain: "reserveapp-1e819.firebaseapp.com",
+  databaseURL: "https://reserveapp-1e819.firebaseio.com",
+  projectId: "reserveapp-1e819",
+  storageBucket: "reserveapp-1e819.appspot.com",
+  messagingSenderId: "975222630848",
+  appId: "1:975222630848:web:7da25526260536bdaec025",
+  measurementId: "G-HC19CB5LSS"
+};
 
 @NgModule({
   declarations: [
@@ -19,13 +37,19 @@ import { FormsModule } from '@angular/forms';
     NavComponent,
     FooterComponent,
     HeaderComponent,
-    HeroComponent
+    HeroComponent,
+    FirstcolComponent,
+    SecondcolComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule // storage
   ],
   providers: [],
   bootstrap: [AppComponent]

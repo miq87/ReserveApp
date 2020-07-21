@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
   })
   hero.save()
   .then(result => {
-    res.status(200).json({ msg: 'Add new hero' })
+    res.status(200).json({ msg: 'New hero added!' })
   })
   .catch(err => {
     res.status(500).json({ Error: err })
@@ -61,7 +61,7 @@ router.patch('/:id', (req, res, next) => {
     if(data) {
       res.status(200).json(data)
     }
-    res.status(200).json({ msg: 'No hero!' })
+    res.status(200).json({ msg: 'There is no hero!' })
   })
   .catch(err => {
     res.status(500).json({ Error: err })

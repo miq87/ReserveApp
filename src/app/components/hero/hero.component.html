@@ -19,4 +19,11 @@
             </div>
         </form>
     </div>
+    <div class="row">
+        <div class="container m-2">
+            <div class="row" *ngFor="let hero of AllHeroes">
+                <div class="col">{{ hero.firstName }}, {{ hero.lastName }}, {{ hero.email }}, {{ hero.phone }}</div>
+            </div>
+        </div>
+    </div>
 </div>

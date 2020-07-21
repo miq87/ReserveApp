@@ -1,5 +1,5 @@
 export class Hero {
-    _id: number
+    _id: string
     firstName: string
     lastName: string
     phone: number
