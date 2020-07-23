@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "reserveapp-1e819": {
+      "hosting": {
+        "ReserveApp": [
+          "reserveapp-1e819"
+        ]
+      }
+    }
+  }
+}

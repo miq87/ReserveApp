@@ -12,11 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FirstcolComponent } from './components/firstcol/firstcol.component';
 import { SecondcolComponent } from './components/secondcol/secondcol.component';
-
+import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -40,6 +37,7 @@ const firebaseConfig = {
     HeroComponent,
     FirstcolComponent,
     SecondcolComponent,
+    MembersComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +45,6 @@ const firebaseConfig = {
     HttpClientModule,
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
   ],
   providers: [],
   bootstrap: [AppComponent]

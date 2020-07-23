@@ -1,1 +1,9 @@
-<p>login works!</p>
+<h3>Login</h3>
+<div class="form-container">
+    <span class="error" *ngIf="error"> {{ error }}</span>
+    <div class="btn-group-vertical">
+        <button class="btn btn-primary" (click)="loginFb()">Login with Facebook</button>
+        <button class="btn btn-secondary" (click)="loginGoogle()">Login with Google</button>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+</div>
