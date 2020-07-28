@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { auth } from 'firebase';
 
@@ -19,8 +19,10 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  createUser(userRegForm: any) {
-    this._auth.createUser(userRegForm)
+  createUser(form) {
+    console.log(form)
+    console.log(form.value)
+    this._auth.createUser(form.value)
   }
 
 }
