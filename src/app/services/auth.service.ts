@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators'
 import { User } from '../models/user'
@@ -12,21 +12,41 @@ import { User } from '../models/user'
 })
 export class AuthService {
 
-  user$: Observable<any>
+  private eventAuthError = new BehaviorSubject<string>("")
+  eventAuthError$ = this.eventAuthError.asObservable()
+  newUser: any
 
-  constructor(private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private router: Router) {
-      this.user$ = this.afAuth.authState.pipe(
-        switchMap(user => {
-          if(user) {
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-          }
-          else {
-            return of(null)
-          }
-        }
-        )
-      )
-    }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore,
+    private router: Router) { }
+    
+  createUser(user) {
+    this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+      .then(userCredential => {
+        this.newUser = user
+        console.log(userCredential)
+        userCredential.user.updateProfile({
+            displayName: user.firstName + ' ' + user.lastName
+        })
+        
+        this.insertUserData(userCredential)
+          .then(() => {
+            this.router.navigate(['/hero'])
+          })
+      .catch(error => {
+        this.eventAuthError.next(error)
+      })
+    })
+  }
+
+  insertUserData(userCredential: firebase.auth.UserCredential) {
+    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+      email: this.newUser.email,
+      firstname: this.newUser.firstName,
+      lastname: this.newUser.lastName,
+      role: 'network user'
+    })
+  }
+  
 }

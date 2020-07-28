@@ -14,6 +14,7 @@ import { FirstcolComponent } from './components/firstcol/firstcol.component';
 import { SecondcolComponent } from './components/secondcol/secondcol.component';
 import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
+import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -38,6 +39,7 @@ const firebaseConfig = {
     FirstcolComponent,
     SecondcolComponent,
     MembersComponent,
+    DbfirestoreComponent,
   ],
   imports: [
     BrowserModule,

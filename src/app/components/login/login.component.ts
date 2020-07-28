@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app'
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +18,33 @@ export class LoginComponent implements OnInit {
   }
 
   loginFb() {
-    this.auth.signInWithPopup(new auth.FacebookAuthProvider())
+    const provider = new auth.FacebookAuthProvider()
+    this.auth.signInWithPopup(provider).then(function(result) {
+      let token = (<any>result).credential.accessToken
+      let user : User = result.user
+		
+      console.log(token)
+      console.log(user)
+    })
+    .catch(function(error) {
+      console.log('error')
+      console.log(error)
+    })
   }
 
   loginGoogle() {
-    this.auth.signInWithPopup(new auth.GoogleAuthProvider())
-    console.log(auth)
+    const provider = new auth.GoogleAuthProvider()
+    this.auth.signInWithPopup(provider).then(function(result) {
+      let token = (<any>result).credential.accessToken
+      let user : User = result.user
+		
+      console.log(token)
+      console.log(user)
+    })
+    .catch(function(error) {
+      console.log('error')
+      console.log(error)
+    })
   }
 
   logout() {
