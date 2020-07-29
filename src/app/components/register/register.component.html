@@ -6,31 +6,29 @@
     </div>
     <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
         <div class="row">
-            <div class="col-6-md p-1">First Name</div>
-            <div class="col-6-md p-1">
+            <div class="col-12-md p-1">
                 <input type="text" name="firstName" placeholder="First Name" ngModel #firstname="ngModel">
             </div>
         </div>
         <div class="row">
-            <div class="col-6-md p-1">Last Name</div>
-            <div class="col-6-md p-1">
+            <div class="col-12-md p-1">
                 <input type="text" name="lastName" placeholder="Last Name" ngModel #lastname="ngModel">
             </div>
         </div>
         <div class="row">
-            <div class="col-6-md p-1">E-mail</div>
-            <div class="col-6-md p-1">
+            <div class="col-12-md p-1">
                 <input type="text" name="email" placeholder="E-mail" ngModel #email="ngModel">
             </div>
         </div>
         <div class="row">
-            <div class="col-6-md p-1">Password</div>
-            <div class="col-6-md p-1">
-                <input type="text" name="password" placeholder="Password" ngModel #password="ngModel">
+            <div class="col-12-md p-1">
+                <input type="password" name="password" placeholder="Password" ngModel #password="ngModel">
             </div>
         </div>
         <div class="row">
-            <button class="btn-primary btn-md" type="submit">Zarejestruj</button>
+            <div class="col-12-md p-1">
+                <button class="btn btn-primary btn-sm" type="submit">Zarejestruj</button>
+            </div>
         </div>
     </form>
 </div>

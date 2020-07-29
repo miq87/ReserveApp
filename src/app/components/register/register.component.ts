@@ -20,8 +20,6 @@ export class RegisterComponent implements OnInit {
   }
 
   createUser(form) {
-    console.log(form)
-    console.log(form.value)
     this._auth.createUser(form.value)
   }
 
