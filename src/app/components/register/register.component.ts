@@ -1,6 +1,5 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { auth } from 'firebase';
 
 @Component({
   selector: 'app-register',

@@ -4,25 +4,26 @@
             {{ authError?.message }}
         </div>
     </div>
+
     <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
-        <div class="row">
+        <div class="row form-group">
             <div class="col-12-md p-1">
-                <input type="text" name="firstName" placeholder="First Name" ngModel #firstname="ngModel">
+                <input class="form-control ng-valid" required type="text" name="firstName" placeholder="First Name" ngModel #firstname="ngModel">
             </div>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <div class="col-12-md p-1">
-                <input type="text" name="lastName" placeholder="Last Name" ngModel #lastname="ngModel">
+                <input class="form-control" required type="text" name="lastName" placeholder="Last Name" ngModel #lastname="ngModel">
             </div>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <div class="col-12-md p-1">
-                <input type="text" name="email" placeholder="E-mail" ngModel #email="ngModel">
+                <input class="form-control" required type="text" name="email" placeholder="E-mail" ngModel #email="ngModel">
             </div>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <div class="col-12-md p-1">
-                <input type="password" name="password" placeholder="Password" ngModel #password="ngModel">
+                <input class="form-control" required type="password" name="password" placeholder="Password" ngModel #password="ngModel">
             </div>
         </div>
         <div class="row">
