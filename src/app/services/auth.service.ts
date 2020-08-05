@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'firebase'
+import { auth } from 'firebase/app'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  readonly authState$: Observable<User | null> = this.fireAuth.authState
   private eventAuthError = new BehaviorSubject<string>("")
   eventAuthError$ = this.eventAuthError.asObservable()
   newUser: any
 
   constructor(
-    private fireAuth: AngularFireAuth,
+    public fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore,
     private router: Router) { }
     
@@ -35,9 +38,28 @@ export class AuthService {
       .catch(error => {
         this.eventAuthError.next(error)
       })
-
     })
   }
+
+  loginGoogle() {
+    const provider = new auth.GoogleAuthProvider
+    this.fireAuth.signInWithPopup(provider).then(function(result) {
+      let token = (<any>result).credential.accessToken
+      let user : User = result.user
+		
+      console.log(token)
+      console.log(user)
+    })
+    .catch(function(error) {
+      console.log('error')
+      console.log(error)
+    })
+  }
+
+  logout() {
+    this.fireAuth.signOut()
+  }
+
 
   insertUserData(userCredential: firebase.auth.UserCredential) {
     return this.fireStore.doc(`Users/${userCredential.user.uid}`).set({
