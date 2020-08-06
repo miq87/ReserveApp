@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'firebase'
-import { auth } from 'firebase/app'
+import * as firebase from 'firebase/app'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthService {
   newUser: any
 
   constructor(
-    public fireAuth: AngularFireAuth,
+    private fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore,
     private router: Router) { }
     
@@ -41,26 +41,6 @@ export class AuthService {
     })
   }
 
-  loginGoogle() {
-    const provider = new auth.GoogleAuthProvider
-    this.fireAuth.signInWithPopup(provider).then(function(result) {
-      let token = (<any>result).credential.accessToken
-      let user : User = result.user
-		
-      console.log(token)
-      console.log(user)
-    })
-    .catch(function(error) {
-      console.log('error')
-      console.log(error)
-    })
-  }
-
-  logout() {
-    this.fireAuth.signOut()
-  }
-
-
   insertUserData(userCredential: firebase.auth.UserCredential) {
     return this.fireStore.doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
@@ -68,6 +48,25 @@ export class AuthService {
       lastname: this.newUser.lastName,
       role: 'network user'
     })
+  }
+
+  loginGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider
+    this.fireAuth.signInWithPopup(provider).then(result => {
+      let token = (<any>result).credential.accessToken
+      let user : User = result.user
+		
+      console.log(token)
+      console.log(user)
+    })
+    .catch(error => {
+      console.log('error')
+      console.log(error)
+    })
+  }
+
+  logout() {
+    this.fireAuth.signOut()
   }
   
 }
