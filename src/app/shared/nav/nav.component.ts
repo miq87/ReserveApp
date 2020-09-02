@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app'
-import { AngularFireAuth } from '@angular/fire/auth';
-
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,20 +8,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private fireAuth: AngularFireAuth) { }
-
   user: any
 
+  constructor(private _auth: AuthService) {}
+
   ngOnInit(): void {
-    this.fireAuth.onAuthStateChanged(function(user) {
-    //firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        this.user = user
-        console.log('Zalogowany')
-        console.log()
-      } else {
-        console.log('Niezalogowany')
-      }
-    });
+    this._auth.checkLogged()
   }
+
 }

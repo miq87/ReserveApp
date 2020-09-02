@@ -82,5 +82,18 @@ export class AuthService {
     //this.fireAuth.signOut()
     firebase.auth().signOut()
   }
-  
+
+  checkLogged(): any {
+    this.fireAuth.onAuthStateChanged(function(user) {
+    //firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log('Zalogowany jako [' + user.displayName + ']')
+        console.log(firebase.auth().currentUser)
+        return user.displayName
+      } else {
+        console.log('Niezalogowany')
+      }
+    })
+  }
+
 }
