@@ -22,7 +22,8 @@ export class AuthService {
     private router: Router) { }
     
   createUser(user) {
-    this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
+    //this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(userCredential => {
       this.newUser = user
       console.log(user)
@@ -42,7 +43,8 @@ export class AuthService {
   }
 
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    return this.fireStore.doc(`Users/${userCredential.user.uid}`).set({
+    //return this.fireStore.doc(`Users/${userCredential.user.uid}`).set({
+    return firebase.firestore().doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstname: this.newUser.firstName,
       lastname: this.newUser.lastName,
@@ -74,7 +76,8 @@ export class AuthService {
   }
 
   logout() {
-    this.fireAuth.signOut()
+    //this.fireAuth.signOut()
+    firebase.auth().signOut()
   }
   
 }
