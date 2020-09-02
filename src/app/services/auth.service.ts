@@ -56,6 +56,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
+      console.log(errorMessage)
     });
   }
 
@@ -68,6 +69,8 @@ export class AuthService {
 		
       console.log(token)
       console.log(user)
+
+      this.router.navigate(['/members'])
     })
     .catch(error => {
       console.log('error')
