@@ -8,12 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavComponent implements OnInit {
 
-  user: any
+  user: string
 
   constructor(private _auth: AuthService) {}
 
   ngOnInit(): void {
-    this._auth.checkLogged()
+    this.user = this._auth.checkLogged()
+    console.log(this.user)
   }
 
 }

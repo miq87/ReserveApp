@@ -92,6 +92,7 @@ export class AuthService {
         return user.displayName
       } else {
         console.log('Niezalogowany')
+        return null
       }
     })
   }
