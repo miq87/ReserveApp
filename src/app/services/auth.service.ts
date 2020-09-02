@@ -50,9 +50,17 @@ export class AuthService {
     })
   }
 
+  loginWithEmail(user) {
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+  }
+
   loginGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider
-    this.fireAuth.signInWithPopup(provider).then(result => {
+    //this.fireAuth.signInWithPopup(provider).then(result => {
+    firebase.auth().signInWithPopup(provider).then(result => {
       let token = (<any>result).credential.accessToken
       let user : User = result.user
 		

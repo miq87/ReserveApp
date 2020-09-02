@@ -15,6 +15,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loginWithEmail(form) {
+    this.auth_.loginWithEmail(form.value)
+  }
+
   loginFb() {
     this.auth_.loginGoogle()
   }

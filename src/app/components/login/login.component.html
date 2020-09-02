@@ -1,9 +1,24 @@
 <h3>Login</h3>
 <div class="form-container">
-    <span class="error" *ngIf="error"> {{ error }}</span>
-    <div class="btn-group-vertical">
-        <button class="btn btn-primary" (click)="loginFb()">Login with Facebook</button>
-        <button class="btn btn-secondary" (click)="loginGoogle()">Login with Google</button>
-        <button class="btn btn-danger" (click)="logout()">Logout</button>
+    <div class="row">
+        <form #userLogForm="ngForm" (ngSubmit)="loginWithEmail(userLogForm)">
+            <div class="form-group">
+                <input class="form-control" required type="email" name="email" placeholder="E-mail" ngModel #email="ngModel">
+            </div>
+            <div class="form-group">
+                <input class="form-control" required type="password" name="password" placeholder="Password" ngModel #password="ngModel">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" type="submit">Zaloguj</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <span class="error" *ngIf="error"> {{ error }}</span>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary btn-sm" (click)="loginFb()">Login with Facebook</button>
+            <button class="btn btn-secondary btn-sm" (click)="loginGoogle()">Login with Google</button>
+            <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
+        </div>
     </div>
 </div>
