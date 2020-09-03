@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { switchMap, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -8,13 +9,19 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavComponent implements OnInit {
 
-  user: string
+  displayName: string
 
-  constructor(private _auth: AuthService) {}
+  constructor(private auth_: AuthService) { }
 
   ngOnInit(): void {
-    this.user = this._auth.checkLogged()
-    console.log(this.user)
+    
+  }
+
+  getUser() {
+    this.auth_.authState$.pipe(first()).subscribe(data => {
+      //this.displayName = data.displayName
+    })
+    //console.log(this.displayName)
   }
 
 }

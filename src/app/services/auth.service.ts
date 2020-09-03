@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'firebase'
-import * as firebase from 'firebase/app'
+
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+import * as firebase from "firebase/app";
+// Add the Firebase services that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +29,6 @@ export class AuthService {
     private router: Router) { }
     
   createUser(user) {
-    //this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(userCredential => {
       this.newUser = user
@@ -43,7 +49,6 @@ export class AuthService {
   }
 
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    //return this.fireStore.doc(`Users/${userCredential.user.uid}`).set({
     return firebase.firestore().doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstname: this.newUser.firstName,
@@ -62,7 +67,6 @@ export class AuthService {
 
   loginGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider
-    //this.fireAuth.signInWithPopup(provider).then(result => {
     firebase.auth().signInWithPopup(provider).then(result => {
       let token = (<any>result).credential.accessToken
       let user : User = result.user
@@ -79,22 +83,22 @@ export class AuthService {
   }
 
   logout() {
-    //this.fireAuth.signOut()
     firebase.auth().signOut()
   }
 
-  checkLogged(): any {
-    this.fireAuth.onAuthStateChanged(function(user) {
-    //firebase.auth().onAuthStateChanged(function(user) {
+  checkLogged() {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('Zalogowany jako [' + user.displayName + ']')
-        console.log(firebase.auth().currentUser)
-        return user.displayName
-      } else {
-        console.log('Niezalogowany')
-        return null
+        console.log('Logged as ' + user.displayName)
+      }
+      else {
+        console.log('no logged!')
       }
     })
+  }
+
+  getUser() {
+    return this.authState$.pipe(first())
   }
 
 }
