@@ -5,13 +5,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'firebase'
 
+
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
 // Add the Firebase services that you want to use
 import "firebase/auth";
 import "firebase/firestore";
-import { first } from 'rxjs/operators';
+import { first, take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -100,5 +101,17 @@ export class AuthService {
   getUser() {
     return this.authState$.pipe(first())
   }
+
+  getUserr(): Observable<User> {
+    return this.authState$.pipe(take(1));
+  }
+  
+  isLoggedIn(): Observable<boolean> {
+    return this.authState$.pipe(
+      //take(1),
+      map(authState => !!authState)
+    )
+  }
+
 
 }
