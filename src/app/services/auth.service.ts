@@ -97,21 +97,11 @@ export class AuthService {
       }
     })
   }
-
-  getUser() {
-    return this.authState$.pipe(first())
-  }
-
-  getUserr(): Observable<User> {
-    return this.authState$.pipe(take(1));
-  }
   
   isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(
-      //take(1),
       map(authState => !!authState)
     )
   }
-
 
 }

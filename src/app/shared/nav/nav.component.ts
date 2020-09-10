@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -32,7 +32,7 @@ export class NavComponent implements OnInit {
     },
     error => {
       console.log(error)
-    })    
+    })
   }
-
+  
 }
