@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
   }
 
   createUser(form) {
+    console.log('form: ' + form)
+    console.log('form value: ' + form.value)
     this._auth.createUser(form.value)
   }
 
