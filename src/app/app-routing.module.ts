@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'booking', component: BookingComponent, pathMatch: 'full' },
   { path: 'hero', component: HeroComponent, canActivate: [AuthGuard] },
-  { path: 'members', component: MembersComponent, canActivate: [AuthGuard] }
+  { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
   { path: 'fb', component: FormBuilderComponent }
 ];
 
