@@ -17,6 +17,7 @@ import { AngularFireModule } from '@angular/fire';
 import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
 import { AgmCoreModule } from '@agm/core';
 import { BookingComponent } from './components/booking/booking.component';
+import { FormBuilderComponent } from './components/form-builder/form-builder.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -43,6 +44,7 @@ const firebaseConfig = {
     MembersComponent,
     DbfirestoreComponent,
     BookingComponent,
+    FormBuilderComponent,
   ],
   imports: [
     BrowserModule,

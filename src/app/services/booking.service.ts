@@ -24,7 +24,7 @@ export class BookingService {
   }
 
   searchHotel(term: string) {
-    let promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.getBooking(term)
         .toPromise()
         .then(
@@ -38,7 +38,7 @@ export class BookingService {
           }
         );
     });
-    return promise;
+    //return promise;
   }
 
 }

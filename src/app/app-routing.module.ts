@@ -6,6 +6,7 @@ import { BookingComponent } from './components/booking/booking.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { MembersComponent } from './components/members/members.component';
 import { AuthGuard } from './guard/auth.guard';
+import { FormBuilderComponent } from './components/form-builder/form-builder.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'booking', component: BookingComponent, pathMatch: 'full' },
   { path: 'hero', component: HeroComponent, canActivate: [AuthGuard] },
   { path: 'members', component: MembersComponent, canActivate: [AuthGuard] }
+  { path: 'fb', component: FormBuilderComponent }
 ];
 
 @NgModule({
