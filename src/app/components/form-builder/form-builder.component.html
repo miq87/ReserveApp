@@ -1,1 +1,13 @@
 <p>form-builder works!</p>
+
+<form [formGroup]="myForm">
+
+    <p>Value: {{ myForm.value | json }}</p>
+
+    <hr>
+
+    <mat-form-field class="full">
+        <input matInput placeholder="firstName" formControlName="firstName">
+    </mat-form-field>
+
+</form>
