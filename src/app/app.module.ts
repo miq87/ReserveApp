@@ -15,16 +15,17 @@ import { SecondcolComponent } from './components/secondcol/secondcol.component';
 import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
 import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 import { AgmCoreModule } from '@agm/core';
 import { BookingComponent } from './components/booking/booking.component';
-import { FormBuilderComponent } from './components/form-builder/form-builder.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatChipsModule } from '@angular/material/chips'
+import { MatChipsModule } from '@angular/material/chips';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card'
 
 
 const firebaseConfig = {
@@ -52,7 +53,7 @@ const firebaseConfig = {
     MembersComponent,
     DbfirestoreComponent,
     BookingComponent,
-    FormBuilderComponent,
+    AddressFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,9 @@ const firebaseConfig = {
     MatButtonModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
