@@ -30,11 +30,15 @@ import { TablesComponent } from './components/tables/tables.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { LayoutModule } from '@angular/cdk/layout'
+import { LayoutModule } from '@angular/cdk/layout';
+import { DragdropComponent } from './components/dragdrop/dragdrop.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PromiseComponent } from './components/promise/promise.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const firebaseConfig = {
@@ -65,6 +69,8 @@ const firebaseConfig = {
     AddressFormComponent,
     TablesComponent,
     DashboardComponent,
+    DragdropComponent,
+    PromiseComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +96,9 @@ const firebaseConfig = {
     MatGridListModule,
     MatMenuModule,
     MatIconModule,
-    LayoutModule
+    LayoutModule,
+    DragDropModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
