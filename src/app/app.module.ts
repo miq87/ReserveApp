@@ -25,7 +25,16 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { TablesComponent } from './components/tables/tables.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { LayoutModule } from '@angular/cdk/layout'
 
 
 const firebaseConfig = {
@@ -54,6 +63,8 @@ const firebaseConfig = {
     DbfirestoreComponent,
     BookingComponent,
     AddressFormComponent,
+    TablesComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +83,14 @@ const firebaseConfig = {
     MatCheckboxModule,
     MatChipsModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatIconModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
