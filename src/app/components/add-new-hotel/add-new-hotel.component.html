@@ -6,26 +6,26 @@
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width" appearance="legacy">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Nazwa hotelu" formControlName="hotelName">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width" appearance="legacy">
+          <mat-form-field class="full-width">
             <textarea matInput placeholder="Adres" formControlName="address"></textarea>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width" appearance="legacy">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Miasto" formControlName="city">
           </mat-form-field>
         </div>
         <div class="col">
-          <mat-form-field class="full-width" appearance="legacy">
+          <mat-form-field class="full-width">
             <mat-select placeholder="Województwo" formControlName="state">
               <mat-option *ngFor="let state of states" [value]="state.abbreviation">
                 {{ state.name }}
