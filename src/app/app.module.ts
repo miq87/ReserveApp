@@ -10,12 +10,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FirstcolComponent } from './components/firstcol/firstcol.component';
-import { SecondcolComponent } from './components/secondcol/secondcol.component';
 import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
 import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
-import { AddressFormComponent } from './components/address-form/address-form.component';
 import { AgmCoreModule } from '@agm/core';
 import { BookingComponent } from './components/booking/booking.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,19 +23,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { TablesComponent } from './components/tables/tables.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { LayoutModule } from '@angular/cdk/layout';
-import { DragdropComponent } from './components/dragdrop/dragdrop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PromiseComponent } from './components/promise/promise.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
 
 
 const firebaseConfig = {
@@ -61,16 +56,11 @@ const firebaseConfig = {
     FooterComponent,
     HeaderComponent,
     HeroComponent,
-    FirstcolComponent,
-    SecondcolComponent,
     MembersComponent,
     DbfirestoreComponent,
     BookingComponent,
-    AddressFormComponent,
-    TablesComponent,
-    DashboardComponent,
-    DragdropComponent,
     PromiseComponent,
+    AddNewHotelComponent,
   ],
   imports: [
     BrowserModule,

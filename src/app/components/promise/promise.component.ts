@@ -14,7 +14,6 @@ export class PromiseComponent implements OnInit {
   color: ThemePalette = 'primary'
   mode: ProgressSpinnerMode = 'indeterminate'
   isVisible = true
-  isLoaded = false
 
   constructor() { }
 
@@ -22,7 +21,6 @@ export class PromiseComponent implements OnInit {
     this.getPresent().then(present => {
       console.log(present)
       this.isVisible = !this.isVisible
-      this.isLoaded = !this.isLoaded
     }).catch(error => {
       console.log(error)
     })

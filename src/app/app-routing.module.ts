@@ -6,11 +6,8 @@ import { BookingComponent } from './components/booking/booking.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { MembersComponent } from './components/members/members.component';
 import { AuthGuard } from './guard/auth.guard';
-import { AddressFormComponent } from './components/address-form/address-form.component';
-import { TablesComponent } from './components/tables/tables.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DragdropComponent } from './components/dragdrop/dragdrop.component';
 import { PromiseComponent } from './components/promise/promise.component';
+import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,12 +16,8 @@ const routes: Routes = [
   { path: 'booking', component: BookingComponent, pathMatch: 'full' },
   { path: 'hero', component: HeroComponent, canActivate: [AuthGuard] },
   { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
-  { path: 'fb', component: AddressFormComponent },
-  { path: 'tables', component: TablesComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'dragdrop', component: DragdropComponent },
   { path: 'promise', component: PromiseComponent },
-
+  { path: 'add', component: AddNewHotelComponent }
 ];
 
 @NgModule({
