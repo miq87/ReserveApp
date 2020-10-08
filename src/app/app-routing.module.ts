@@ -8,6 +8,7 @@ import { MembersComponent } from './components/members/members.component';
 import { AuthGuard } from './guard/auth.guard';
 import { PromiseComponent } from './components/promise/promise.component';
 import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
+import { HotelsComponent } from './components/hotels/hotels.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'hero', component: HeroComponent, canActivate: [AuthGuard] },
   { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
   { path: 'promise', component: PromiseComponent },
-  { path: 'add', component: AddNewHotelComponent }
+  { path: 'add', component: AddNewHotelComponent },
+  { path: 'hotels', component: HotelsComponent }
 ];
 
 @NgModule({

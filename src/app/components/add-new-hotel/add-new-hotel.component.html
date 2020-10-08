@@ -1,50 +1,32 @@
-<form [formGroup]="hotelForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-card class="shipping-card">
-    <mat-card-header>
-      <mat-card-title>Dodaj nowy hotel</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Nazwa hotelu" formControlName="hotelName">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Adres" formControlName="address"></textarea>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Miasto" formControlName="city">
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Województwo" formControlName="state">
-              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
-                {{ state.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput #postalCode maxlength="5" placeholder="Kod pocztowy" type="number" formControlName="postalCode">
-            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!hotelForm.valid">Wyślij</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+<h3>Dodaj nowy hotel</h3>
+<div class="form-container">
+    <div class="row">
+        <form [formGroup]="hotelForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="hotelName">Nazwa hotelu:</label>
+              <input class="form-control" required name="hotelName" id="hotelName" placeholder="Nazwa hotelu" formControlName="hotelName">
+            </div>
+            <div class="form-group">
+              <label for="address">Adres:</label>
+              <input class="form-control" required name="address" id="address" placeholder="Adres" formControlName="address">
+            </div>
+            <div class="form-group">
+              <label for="city">Miasto:</label>
+              <input class="form-control" required name="city" id="city" placeholder="Miasto" formControlName="city">
+            </div>
+            <div class="form-group">
+              <label for="postalCode">Kod pocztowy:</label>
+              <input class="form-control" required name="postalCode" id="postalCode" placeholder="Kod pocztowy" formControlName="postalCode">
+            </div>
+            <div class="form-group">
+              <label for="address">Województwo:</label>
+              <select class="form-control" required name="state" id="state" formControlName="state">
+                <option *ngFor="let state of states" [value]="state.name">{{ state.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-md" type="submit">Dodaj nowy hotel</button>
+            </div>
+        </form>
+    </div>
+</div>

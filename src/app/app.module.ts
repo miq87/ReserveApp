@@ -34,6 +34,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PromiseComponent } from './components/promise/promise.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
+import { HotelsComponent } from './components/hotels/hotels.component';
 
 
 const firebaseConfig = {
@@ -61,6 +62,7 @@ const firebaseConfig = {
     BookingComponent,
     PromiseComponent,
     AddNewHotelComponent,
+    HotelsComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,18 +19,28 @@ export class AddNewHotelComponent {
   });
 
   states = [
-    {name: 'Pomorskie', abbreviation: 'PM'},
-    {name: 'Zachodnio-pomorskie', abbreviation: 'ZP'},
-    {name: 'Kujawsko-pomorskie', abbreviation: 'KP'}
-  ];
+    { name: 'dolnośląskie' },
+    { name: 'kujawsko-pomorskie' },
+    { name: 'lubelskie' },
+    { name: 'lubuskie' }, 
+    { name: 'łódzkie' },
+    { name: 'małopolskie' },
+    { name: 'mazowieckie' },
+    { name: 'opolskie' },
+    { name: 'podkarpackie' },
+    { name: 'podlaskie' },
+    { name: 'pomorskie' },
+    { name: 'śląskie' },
+    { name: 'świętokrzyskie' },
+    { name: 'warmińsko-mazurskie' },
+    { name: 'wielkopolskie' },
+    { name: 'zachodnio-pomorskie' },
+
+  ]
 
   constructor(private fb: FormBuilder, private _nhs: AddNewHotelService) {}
 
   onSubmit() {
-    this._nhs.AddNewHotel(this.hotelForm).then((res) => {
-      console.log(res)
-    }).catch((error) => {
-      console.log(error)
-    })
+    this._nhs.AddNewHotel(this.hotelForm)
   }
 }

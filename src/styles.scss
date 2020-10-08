@@ -1,9 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 
 body {
     background-color: #293241;
     color: #ee6c4d;
     margin: 20px;
-    //font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.form-container {
+    min-width: 200px;
+    max-width: 600px;
+    width: 100%;
 }
