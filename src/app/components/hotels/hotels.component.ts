@@ -27,6 +27,8 @@ export class HotelsComponent implements OnInit {
 
   async onSubmit(form) {
 
+    this.snapshot = []
+
     console.log('City: ' + form.value.city)
 
     const hotelsRef = firebase.firestore().collection('hotels')
