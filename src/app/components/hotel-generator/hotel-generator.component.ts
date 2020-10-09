@@ -12,4 +12,8 @@ export class HotelGeneratorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  hotelGenerator() {
+    
+  }
+
 }
