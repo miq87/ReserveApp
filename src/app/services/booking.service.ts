@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import * as firebase from "firebase/app";
+import { Hotel } from '../model/hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +47,26 @@ export class BookingService {
   async addNewHotel(form: FormGroup) {
     return await firebase.firestore().collection('hotels').add({
       hotelName: form.value.hotelName,
-      address: form.value.address,
+      street: form.value.street,
       city: form.value.city,
       state: form.value.state,
       postalCode: form.value.postalCode
     }).then((res) => {
       console.log('Dodałem nowy hotel o id: ' + res.id)
+    }).catch((error) => {
+      console.log('Błąd podczas dodawania nowego hotelu.', error)
+    })
+  }
+
+  async addNewRandomHotels(hotel: Hotel) {
+    return await firebase.firestore().collection('hotels').add({
+      hotelName: hotel.hotelName,
+      street: hotel.street,
+      city: hotel.city,
+      state: hotel.state,
+      postalCode: hotel.postalCode
+    }).then((res) => {
+      console.log(`Dodałem:\n\t${hotel.hotelName} Hotel\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
     }).catch((error) => {
       console.log('Błąd podczas dodawania nowego hotelu.', error)
     })
@@ -66,6 +81,6 @@ export class BookingService {
     })
   }
 
-  
+
 
 }

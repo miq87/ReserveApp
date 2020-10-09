@@ -1,7 +1,7 @@
 export class Hotel {
     id: string
     hotelName: string
-    address: string
+    street: string
     city: string
     state: string
     postalCode: string
@@ -9,7 +9,7 @@ export class Hotel {
     constructor(docId: string, data: any) {
         this.id = docId
         this.hotelName = data.hotelName
-        this.address = data.address
+        this.street = data.street
         this.city = data.city
         this.state = data.state
         this.postalCode = data.postalCode

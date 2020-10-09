@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
   selector: 'app-hotel-generator',
@@ -15,19 +16,19 @@ export class HotelGeneratorComponent implements OnInit {
                   'Generała Józefa Fiszera', 'Prezydenta Lecha Kaczyńskiego', 'Stanisława Wyspiańskiego', 'Generała Józefa Hallera',
                   'Jana Pawła II', 'Kołobrzeska', 'Macieja Płażyńskiego', 'Piastowska', 'Pomorska', 'Kolejowa' ]
 
-  constructor() { }
+  constructor(private booking_: BookingService) { }
 
   ngOnInit(): void {
   }
 
   hotelGenerator() {
-    for(let i = 1; i <= 9999; i++) {
+    for(let i = 1; i <= 50; i++) {
       let rName = this.hotelNames[Math.floor((Math.random() * (this.hotelNames.length-1)) + 0)]
       let rCity = this.hotelCity[Math.floor((Math.random() * (this.hotelCity.length-1)) + 0)]
       let rStreet = this.hotelStreet[Math.floor((Math.random() * (this.hotelStreet.length-1)) + 0)]
       let rNumber = Math.floor((Math.random() * 100) + 10)
       let rPostalCode = Math.floor((Math.random() * 99999) + 10000)
-      console.log(`${i}. ${rName} Hotel\n\t${rPostalCode} ${rCity}\n\t${rStreet} ${rNumber}\n`)
+      console.log(`${i}. ${rName} Hotel\n\t${rStreet} ${rNumber}\n\t${rPostalCode} ${rCity}\n`)
     }
   }
 
