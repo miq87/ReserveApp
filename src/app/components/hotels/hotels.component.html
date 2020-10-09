@@ -13,9 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="row" *ngFor="let snap of snapshot">
-        <div class="col-md">
-            <p>{{ snap.hotelName }} - {{ snap.address }} </p>
-        </div>
+    <div class="row" *ngFor="let snap of snapshots">
+        <app-hotel-item [hotel]="snap"></app-hotel-item>
     </div>
 </div>

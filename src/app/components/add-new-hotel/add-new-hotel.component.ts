@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AddNewHotelService } from 'src/app/services/add-new-hotel.service';
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
   selector: 'app-add-new-hotel',
@@ -38,9 +38,10 @@ export class AddNewHotelComponent {
 
   ]
 
-  constructor(private fb: FormBuilder, private _nhs: AddNewHotelService) {}
+  constructor(private fb: FormBuilder, private _booking: BookingService) {}
 
   onSubmit() {
-    this._nhs.AddNewHotel(this.hotelForm)
+    this._booking.addNewHotel(this.hotelForm)
   }
+
 }

@@ -1,5 +1,8 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+import * as firebase from "firebase/app";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +41,21 @@ export class BookingService {
           }
         );
     });
-    //return promise;
+  }
+
+  async addNewHotel(form: FormGroup) {
+    //return await this.db.collection('hotels').add({
+    return await firebase.firestore().collection('hotels').add({
+      hotelName: form.value.hotelName,
+      address: form.value.address,
+      city: form.value.city,
+      state: form.value.state,
+      postalCode: form.value.postalCode
+    }).then((res) => {
+      console.log('Dodałem nowy hotel o id: ' + res.id)
+    }).catch((error) => {
+      console.log('Błąd podczas dodawania nowego hotelu', error)
+    })
   }
 
 }

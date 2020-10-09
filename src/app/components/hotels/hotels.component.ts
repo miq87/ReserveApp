@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
 // Add the Firebase services that you want to use
-import "firebase/auth";
-import "firebase/firestore";
+//import "firebase/auth";
+//import "firebase/firestore";
 
 @Component({
   selector: 'app-hotels',
@@ -16,10 +14,10 @@ import "firebase/firestore";
 })
 export class HotelsComponent implements OnInit {
 
-  snapshot: any[]
+  snapshots: any[]
 
   constructor() {
-    this.snapshot = []
+    this.snapshots = []
   }
 
   ngOnInit(): void {
@@ -27,10 +25,7 @@ export class HotelsComponent implements OnInit {
 
   async onSubmit(form) {
 
-    this.snapshot = []
-
-    console.log('City: ' + form.value.city)
-
+    this.snapshots = []
     const hotelsRef = firebase.firestore().collection('hotels')
 
     const snapshot = await hotelsRef.where('city', '==', form.value.city).get();
@@ -40,7 +35,7 @@ export class HotelsComponent implements OnInit {
     }
     snapshot.forEach(doc => {
       console.log(doc.id, '=>', doc.data())
-      this.snapshot.push(doc.data())
+      this.snapshots.push(doc.data())
     })
 
   }
