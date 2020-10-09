@@ -1,12 +1,13 @@
 <div class="card text-white bg-primary mb-2" style="width: 100%">
-    <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
-    <div class="card-body">
-        <h5 class="card-title">{{ hotel.address }}</h5>
-        <div class="col-md">{{ hotel.city }}</div>
-        <div class="col-md">{{ hotel.state }}</div>
-        <div class="col-md">{{ hotel.postalCode }}</div>
-    </div>
-    <div class="card-footer">
-        <button class="btn btn-danger btn-md" (click)="onBook(hotel.id)">Zarezerwuj hotel</button>
-    </div>
+  <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
+  <div class="card-body">
+    <h5 class="card-title">{{ hotel.address }}</h5>
+    <div class="col-md">{{ hotel.city }}</div>
+    <div class="col-md">{{ hotel.state }}</div>
+    <div class="col-md">{{ hotel.postalCode }}</div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-warning btn-md" (click)="onBook(hotel.id)">Zarezerwuj hotel</button>
+    <button class="btn btn-danger btn-md" (click)="onRemove(hotel.id)">Usuń hotel</button>
+  </div>
 </div>

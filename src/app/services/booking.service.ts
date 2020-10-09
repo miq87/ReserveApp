@@ -44,7 +44,6 @@ export class BookingService {
   }
 
   async addNewHotel(form: FormGroup) {
-    //return await this.db.collection('hotels').add({
     return await firebase.firestore().collection('hotels').add({
       hotelName: form.value.hotelName,
       address: form.value.address,
@@ -54,7 +53,16 @@ export class BookingService {
     }).then((res) => {
       console.log('Dodałem nowy hotel o id: ' + res.id)
     }).catch((error) => {
-      console.log('Błąd podczas dodawania nowego hotelu', error)
+      console.log('Błąd podczas dodawania nowego hotelu.', error)
+    })
+  }
+
+  async removeHotelById(hotelId: string) {
+    await firebase.firestore().collection('hotels').doc(hotelId).delete()
+    .then((res) => {
+      console.log('Usunąłem hotel o id: ' + hotelId)
+    }).catch((error) => {
+      console.log('Błąd podczas usuwania hotelu.', error)
     })
   }
 

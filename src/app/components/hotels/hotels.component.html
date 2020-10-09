@@ -1,19 +1,19 @@
 <div class="container">
-    <div class="row">
-        <div class="form-container">
-            <div class="row">
-                <form #hotelCity="ngForm" (ngSubmit)="onSubmit(hotelCity)">
-                    <div class="form-group">
-                        <input class="form-control" #city="ngModel" ngModel name="city" placeholder="Miasto">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-md" type="submit">Poszukaj</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div class="row">
+    <div class="form-container">
+      <div class="row">
+        <form #hotelCity="ngForm" (ngSubmit)="onSubmit(hotelCity)">
+          <div class="form-group">
+            <input class="form-control" #city="ngModel" ngModel name="city" placeholder="Miasto">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-md" type="submit">Poszukaj</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="row" *ngFor="let snap of snapshots">
-        <app-hotel-item [hotel]="snap"></app-hotel-item>
-    </div>
+  </div>
+  <div class="row" *ngFor="let snap of snapshots">
+    <app-hotel-item [hotel]="snap"></app-hotel-item>
+  </div>
 </div>

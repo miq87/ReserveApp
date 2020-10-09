@@ -35,7 +35,8 @@ export class HotelsComponent implements OnInit {
     }
     snapshot.forEach(doc => {
       console.log(doc.id, '=>', doc.data())
-      this.snapshots.push(doc.data())
+      console.log('Koniec')
+      //this.snapshots.push(doc.data())
     })
 
   }
