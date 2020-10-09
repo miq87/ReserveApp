@@ -14,7 +14,6 @@ import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
 import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
 import { AgmCoreModule } from '@agm/core';
-import { BookingComponent } from './components/booking/booking.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
@@ -38,7 +37,6 @@ import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.component';
 import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
   authDomain: "reserveapp-1e819.firebaseapp.com",
@@ -61,7 +59,6 @@ const firebaseConfig = {
     HeroComponent,
     MembersComponent,
     DbfirestoreComponent,
-    BookingComponent,
     PromiseComponent,
     AddNewHotelComponent,
     HotelsComponent,

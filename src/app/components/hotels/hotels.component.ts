@@ -4,6 +4,7 @@ import { Hotel } from 'src/app/model/hotel';
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
+import { MessengerService } from 'src/app/services/messenger.service';
 // Add the Firebase services that you want to use
 //import "firebase/auth";
 //import "firebase/firestore";
@@ -15,24 +16,28 @@ import * as firebase from "firebase/app";
 })
 export class HotelsComponent implements OnInit {
 
-  snapshots: any[]
   hotelList: Hotel[]
+  tmpHotelCity: string
 
-  constructor() {
-    this.snapshots = []
-    this.hotelList = []
-  }
+  constructor(private _msg: MessengerService) { }
 
   ngOnInit(): void {
+    this._msg.getMsg().subscribe((data) => {
+      this.hotelList = []
+      console.log(`Otrzymałem wiadomość ${data}`)
+      this.onLoadHotels(this.tmpHotelCity)
+    })
   }
 
-  async onSubmit(form) {
+  onSubmit(hotelCity: string) {
+    this.tmpHotelCity = hotelCity
+    this._msg.sendMsg(hotelCity)
+  }
 
-    this.snapshots = []
-    this.hotelList = []
+  async onLoadHotels(hotelCity: string) {
     const hotelsRef = firebase.firestore().collection('hotels')
 
-    const snapshot = await hotelsRef.where('city', '==', form.value.city).get();
+    const snapshot = await hotelsRef.where('city', '==', hotelCity).get();
     if(snapshot.empty) {
       console.log('Brak wyników')
       return

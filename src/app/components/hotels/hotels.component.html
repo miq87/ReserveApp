@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-container">
       <div class="row">
-        <form #hotelCity="ngForm" (ngSubmit)="onSubmit(hotelCity)">
+        <form #hotelCity="ngForm" (ngSubmit)="onSubmit(hotelCity.value.city)">
           <div class="form-group">
             <input class="form-control" #city="ngModel" ngModel name="city" placeholder="Miasto">
           </div>
@@ -12,6 +12,9 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class="row" *ngIf="hotelList">
+    <div class="col-md">Liczba wyników: {{ hotelList.length }}</div>
   </div>
   <div class="row">
     <div class="col-md" *ngFor="let hotel of hotelList">

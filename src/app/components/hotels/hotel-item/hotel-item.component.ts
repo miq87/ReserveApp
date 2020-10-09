@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Hotel } from 'src/app/model/hotel';
 import { BookingService } from 'src/app/services/booking.service';
+import { MessengerService } from 'src/app/services/messenger.service';
 
 @Component({
   selector: 'app-hotel-item',
@@ -11,10 +12,9 @@ export class HotelItemComponent implements OnInit {
 
   @Input() hotel: Hotel
 
-  constructor(private booking_: BookingService) { }
+  constructor(private _booking: BookingService, private _msg: MessengerService) { }
 
   ngOnInit(): void {
-    console.log('Hotel = >', this.hotel)
   }
 
   onBook() {
@@ -22,7 +22,9 @@ export class HotelItemComponent implements OnInit {
   }
 
   onRemove() {
-    this.booking_.removeHotelById(this.hotel.id)
+    this._booking.removeHotelById(this.hotel.id).finally(() => {
+      this._msg.sendMsg(this.hotel.id)
+    })
   }
 
 }

@@ -21,9 +21,8 @@ export class HotelGeneratorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  hotelGenerator() {
-    let startDate = Date.now()
-    for(let i = 1; i <= 50; i++) {
+  hotelGenerator(ileHoteli: number) {
+    for(let i = 1; i <= ileHoteli; i++) {
       let rName = this.hotelNames[Math.floor((Math.random() * (this.hotelNames.length-1)) + 0)] + ' Hotel'
       let rStreet = this.hotelStreet[Math.floor((Math.random() * (this.hotelStreet.length-1)) + 0)]
       let rCity = this.hotelCity[Math.floor((Math.random() * (this.hotelCity.length-1)) + 0)]
@@ -37,7 +36,7 @@ export class HotelGeneratorComponent implements OnInit {
           'state': 'Pomorskie',
           'postalCode': rPostalCode })
 
-          this.booking_.addNewRandomHotels(rHotel)
+      this.booking_.addNewRandomHotels(rHotel)
     }
   }
 }
