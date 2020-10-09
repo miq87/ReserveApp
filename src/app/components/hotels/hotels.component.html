@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngFor="let snap of snapshots">
-    <app-hotel-item [hotel]="snap"></app-hotel-item>
+  <div class="row" *ngFor="let hotel of hotelList">
+    <app-hotel-item [hotel]="hotel"></app-hotel-item>
   </div>
 </div>

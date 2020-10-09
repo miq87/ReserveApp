@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Hotel } from 'src/app/model/hotel';
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
@@ -15,9 +16,11 @@ import * as firebase from "firebase/app";
 export class HotelsComponent implements OnInit {
 
   snapshots: any[]
+  hotelList: Hotel[]
 
   constructor() {
     this.snapshots = []
+    this.hotelList = []
   }
 
   ngOnInit(): void {
@@ -26,19 +29,17 @@ export class HotelsComponent implements OnInit {
   async onSubmit(form) {
 
     this.snapshots = []
+    this.hotelList = []
     const hotelsRef = firebase.firestore().collection('hotels')
 
     const snapshot = await hotelsRef.where('city', '==', form.value.city).get();
     if(snapshot.empty) {
-      console.log('No matching documents.')
+      console.log('Brak wyników')
       return
     }
     snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data())
-      console.log('Koniec')
-      //this.snapshots.push(doc.data())
+      this.hotelList.push(new Hotel(doc.id, doc.data()))
     })
-
   }
 
 }
