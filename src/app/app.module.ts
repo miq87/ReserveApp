@@ -36,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.component';
+import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 
 
 const firebaseConfig = {
@@ -65,6 +66,7 @@ const firebaseConfig = {
     AddNewHotelComponent,
     HotelsComponent,
     HotelItemComponent,
+    HotelGeneratorComponent,
   ],
   imports: [
     BrowserModule,
