@@ -18,11 +18,10 @@ export class HotelItemComponent implements OnInit {
   }
 
   onBook() {
-    console.log('Rezerwuje: ' + this.hotel.id)
+    console.log('Chcę zarezerwować: ' + this.hotel.id)
   }
 
   onRemove() {
-    console.log('Usuwam: ' + this.hotel.id)
     this.booking_.removeHotelById(this.hotel.id)
   }
 
