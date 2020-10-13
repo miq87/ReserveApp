@@ -7,7 +7,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { HeroComponent } from './components/hero/hero.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MembersComponent } from './components/members/members.component';
@@ -57,7 +56,6 @@ const firebaseConfig = {
     NavComponent,
     FooterComponent,
     HeaderComponent,
-    HeroComponent,
     MembersComponent,
     DbfirestoreComponent,
     PromiseComponent,
