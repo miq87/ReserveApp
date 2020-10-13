@@ -18,25 +18,10 @@ export class AddNewHotelComponent {
     ],
   });
 
-  states = [
-    { name: 'dolnośląskie' },
-    { name: 'kujawsko-pomorskie' },
-    { name: 'lubelskie' },
-    { name: 'lubuskie' }, 
-    { name: 'łódzkie' },
-    { name: 'małopolskie' },
-    { name: 'mazowieckie' },
-    { name: 'opolskie' },
-    { name: 'podkarpackie' },
-    { name: 'podlaskie' },
-    { name: 'pomorskie' },
-    { name: 'śląskie' },
-    { name: 'świętokrzyskie' },
-    { name: 'warmińsko-mazurskie' },
-    { name: 'wielkopolskie' },
-    { name: 'zachodnio-pomorskie' },
-
-  ]
+  states = [ 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie',
+             'lubuskie', 'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie',
+             'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie',
+             'warmińsko-mazurskie', 'wielkopolskie', 'zachodnio-pomorskie' ]
 
   constructor(private fb: FormBuilder, private _booking: BookingService) {}
 

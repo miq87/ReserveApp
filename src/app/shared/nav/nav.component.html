@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="btn btn-lg btn-primary" [routerLink]="['login']">Zaloguj</button>
                 <button class="btn btn-lg btn-warning" [routerLink]="['register']">Zarejestruj</button>
@@ -9,9 +9,9 @@
                 <button class="btn btn-lg btn-secondary" [routerLink]="['generator']">Generator Hoteli</button>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <p>Hej {{ displayName }}</p>
-            <p>Is Logged? : {{ isLogged }}</p>
+            <p>{{ isLogged }}</p>
         </div>
     </div>
 </div>
