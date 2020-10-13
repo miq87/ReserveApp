@@ -15,7 +15,6 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisternewComponent },
-  { path: 'hero', component: HeroComponent, canActivate: [AuthGuard] },
   { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
   { path: 'promise', component: PromiseComponent },
   { path: 'add', component: AddNewHotelComponent },
