@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Hotel } from 'src/app/model/hotel';
+import { MessengerService } from 'src/app/services/messenger.service';
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
-import { MessengerService } from 'src/app/services/messenger.service';
 // Add the Firebase services that you want to use
 //import "firebase/auth";
 //import "firebase/firestore";
@@ -24,6 +24,7 @@ export class HotelsComponent implements OnInit {
   ngOnInit(): void {
     this._msg.getMsg().subscribe((data) => {
       this.hotelList = []
+      this.tmpHotelCity = <string>data
       console.log(`Otrzymałem wiadomość ${data}`)
       this.onLoadHotels(this.tmpHotelCity)
     })

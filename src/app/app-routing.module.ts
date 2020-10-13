@@ -10,7 +10,7 @@ import { HotelGeneratorComponent } from './components/hotel-generator/hotel-gene
 import { RegisternewComponent } from './components/registernew/registernew.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'hotels', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisternewComponent },
   { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },

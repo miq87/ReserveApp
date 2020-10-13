@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <form #hotelCity="ngForm" (ngSubmit)="onSubmit(hotelCity.value.city)">
+            <div class="form-group">
+              <input class="form-control" #city="ngModel" ngModel name="city" placeholder="Miasto">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" ngModel #dateFrom="ngModel" name="dateFrom">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" ngModel #dateTo="ngModel" name="dateTo">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-md" type="submit">SZUKAJ</button>
+            </div>
+          </form>
+    </div>
+  </div>
+  
