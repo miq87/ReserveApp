@@ -1,38 +1,34 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-            <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)" class="form-horizontal">
-                <div class="heading">Rejestracja</div>
-                <div class="form-group">
-                    <i class="fa fa-user"></i>
-                    <input class="form-control" type="text" name="firstName" placeholder="Imię" ngModel #firstname="ngModel">
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-user"></i>
-                    <input class="form-control" type="text" name="lastName" placeholder="Nazwisko" ngModel #lastname="ngModel">
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-envelope"></i>
-                    <input class="form-control" type="text" name="email" placeholder="E-mail" ngModel #email="ngModel">
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-lock"></i>
-                    <input class="form-control" type="password" name="firstName" placeholder="Hasło" ngModel #password="ngModel">
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Zarejestruj</button>
-                    <span class="form-login">Masz już konto ? <a href="/login">Zaloguj</a></span>
-                </div>
-                <div class="form-footer">
-                    <span>Zarejestruj przez:</span>
-                    <ul class="social">
-                        <li><a class="fab fa-facebook-f" href=""></a></li>
-                        <li><a class="fab fa-twitter" href=""></a></li>
-                        <li><a class="fab fa-instagram" href=""></a></li>
-                        <li><a class="fab fa-pinterest" href=""></a></li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="myCard">
+  <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
+      <div class="heading"><h3>Rejestracja</h3></div>
+      <div class="form-group">
+          <i class="fa fa-user"></i>
+          <input class="form-control" type="text" name="firstName" placeholder="Imię" ngModel #firstname="ngModel">
+      </div>
+      <div class="form-group">
+          <i class="fa fa-user"></i>
+          <input class="form-control" type="text" name="lastName" placeholder="Nazwisko" ngModel #lastname="ngModel">
+      </div>
+      <div class="form-group">
+          <i class="fa fa-envelope"></i>
+          <input class="form-control" type="text" name="email" placeholder="E-mail" ngModel #email="ngModel">
+      </div>
+      <div class="form-group">
+          <i class="fa fa-lock"></i>
+          <input class="form-control" type="password" name="firstName" placeholder="Hasło" ngModel #password="ngModel">
+      </div>
+      <div class="form-group">
+          <button type="submit" class="btn btn-success">Zarejestruj</button>
+          <span class="form-login">Masz już konto ? <a href="/login">Zaloguj</a></span>
+      </div>
+      <div class="form-footer">
+          <span>Zarejestruj przez:</span>
+          <ul class="social">
+              <li><a class="fab fa-facebook-f" href=""></a></li>
+              <li><a class="fab fa-twitter" href=""></a></li>
+              <li><a class="fab fa-instagram" href=""></a></li>
+              <li><a class="fab fa-pinterest" href=""></a></li>
+          </ul>
+      </div>
+  </form>
 </div>

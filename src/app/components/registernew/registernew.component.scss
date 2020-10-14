@@ -4,136 +4,77 @@ $charcoal: rgba(47, 72, 88, 1);
 $honey-yellow: rgba(246, 174, 45, 1);
 $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 
-.form-horizontal {
-    background-color: $queen-blue;
-    padding: 10px;
-    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-    position: relative;
-    color: $dark-sky-blue;
-}
-.form-horizontal .heading {
-    color: $dark-sky-blue;
-    font-size: 32px;
-    text-align: center;
-    margin: 0px auto 10px;
-}
-.form-horizontal .form-group {
-    margin: 0 auto 10px;
-    position: relative;
-}
-.form-horizontal .form-group > i {
-    color: $queen-blue;
-    font-size: 26px;
-    line-height: 32px;
-    position: absolute;
-    left: 6px;
-    top: 6px;
-}
-.form-horizontal .form-control {
-    color: $queen-blue;
-    font-size: 18px;
-    height: 42px;
-    padding: 6px 8px 6px 40px;
-    box-shadow: none;
-    transition: all 0.5s;
-    border-radius: 0;
-}
-.form-horizontal .form-control:hover {
-    color: #FFF;
-    background: $dark-sky-blue;
-    border-radius: 0;
+.myCard {
+    .form-control {
+        box-sizing: border-box;
+        padding: 8px 30px;
+    }
+    .form-login {
+        color: #FFF;
+        font-size: 16px;
+        margin: 10px 0;
+        display: block;
+        a { color: #3FA9F2; }
+        a:hover { text-decoration: underline; }
+    }
+    .form-footer {
+        background-color: $dark-sky-blue;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .form-footer:before{
+        content: 'LUB';
+        color: #3FA9F2;
+        background-color: #fff;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        height: 46px;
+        width: 46px;
+        margin: -46px auto 0;
+        border: 3px solid $queen-blue;
+        border-radius: 50%;
+        display: block;
+    }
+    .form-footer span {
+        color: #fff;
+        font-size: 18px;
+        margin: 20px;
+        display: block;
+    }
+    .social {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+            display: inline-block;
+            margin: 0 6px;
+        }
+        a {
+            color: #FFF;
+            background-color: $queen-blue;
+            font-size: 24px;
+            text-align: center;
+            line-height: 42px;
+            height: 44px;
+            width: 44px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: all 0.5s;
+        }
+        a:hover{
+            color: #fff;
+            background-color: #3FA9F2;
+            border-color: #fff;
+            text-decoration: none;
+        }
+    }
 }
 
-.form-control::placeholder {
-    color: rgba(0,0,0,0.2);
-    font-size: 18px;
-    text-transform: uppercase;
-}
-.form-horizontal .form-control:focus {
-    box-shadow: none;
-    border-color: #3FA9F2;
-}
-.form-horizontal .form-terms a { color: #3FA9F2;}
-.form-horizontal .form-terms a:hover { text-decoration: underline; }
-.form-horizontal .btn {
-    color: #000;
-    background-color: $dark-sky-blue;
-    font-size: 16px;
-    padding: 6px 12px;
-    margin: 0 0 10px;
-    border-radius: 6px;
-    border: 2px solid transparent;
-    transition: all 0.5s;
-}
-.form-horizontal .btn:focus, .form-horizontal .btn:hover {
-    color: #3FA9F2;
-    background-color: #fff;
-    border: 2px solid $dark-sky-blue;
-}
-.form-horizontal .form-login {
-    color: #FFF;
-    font-size: 16px;
-    margin: 10px 0;
-    display: block;
-}
-.form-horizontal .form-login a { color: #3FA9F2; }
-.form-horizontal .form-login a:hover { text-decoration: underline; }
-.form-horizontal .form-footer {
-    background-color: $dark-sky-blue;
-    text-align: center;
-    padding: 20px;
-    border-radius: 20px;
-}
-.form-horizontal .form-footer:before{
-    content: 'LUB';
-    color: #3FA9F2;
-    background-color: #fff;
-    text-align: center;
-    line-height: 40px;
-    font-weight: bold;
-    height: 46px;
-    width: 46px;
-    margin: -46px auto 0;
-    border: 3px solid $queen-blue;
-    border-radius: 50%;
-    display: block;
-}
-.form-horizontal .form-footer span {
-    color: #fff;
-    font-size: 18px;
-    margin: 20px;
-    display: block;
-}
-.form-horizontal .social {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-.form-horizontal .social li {
-    display: inline-block;
-    margin: 0 6px;
-}
-.form-horizontal .social a {
-    color: #FFF;
-    background-color: $queen-blue;
-    font-size: 24px;
-    text-align: center;
-    line-height: 42px;
-    height: 44px;
-    width: 44px;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    transition: all 0.5s;
-}
-.form-horizontal .social a:hover{
-    color: #fff;
-    background-color: #3FA9F2;
-    border-color: #fff;
-    text-decoration: none;
-}
 @media screen and (max-width:576px) {
-    .form-horizontal .form-group .btn,
-    .form-horizontal .form-group .form-login{
+    .myCard .form-group .btn,
+    .myCard .form-group .form-login {
         text-align: center;
         display: block;
         float: none;
