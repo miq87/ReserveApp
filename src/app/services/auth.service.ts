@@ -72,7 +72,7 @@ export class AuthService {
       console.log(token)
       console.log(user)
 
-      this.router.navigate(['/members'])
+      this.router.navigate(['/hotels'])
     })
     .catch(error => {
       console.log('error')
