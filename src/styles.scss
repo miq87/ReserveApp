@@ -1,14 +1,49 @@
-html, body { height: 100%; }
+$queen-blue: rgba(51, 101, 138, 1);
+$dark-sky-blue: rgba(134, 187, 216, 1);
+$charcoal: rgba(47, 72, 88, 1);
+$honey-yellow: rgba(246, 174, 45, 1);
+$safety-orange-blaze-orange: rgba(242, 100, 25, 1);
+
+html, body { height: 100% }
 
 body {
-    background-color: #293241;
-    color: #ee6c4d;
-    margin: 10px;
+    background-color: $dark-sky-blue;
     font-family: 'Roboto', "Helvetica Neue", sans-serif;
     font-size: 18px;
+    color: $safety-orange-blaze-orange;
+    margin: 6px;
 }
-.form-container {
-    min-width: 200px;
-    max-width: 600px;
-    width: 100%;
+
+.myCard {
+    background-color: $queen-blue;
+    padding: 10px;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    color: $dark-sky-blue;
+    box-sizing: border-box;
+
+    .heading {
+        color: $safety-orange-blaze-orange;
+        text-align: center;
+        margin: 0px auto 10px;
+        h3 {
+            font-size: 24px;
+        }
+        span {
+            font-size: 18px;
+        }
+    }
+    .btn {
+        border-radius: 0;
+        padding: 4px 8px 4px 8px;
+        margin: 4px;
+        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    }
+    .form-control {
+        border-radius: 0;
+        padding: 4px;
+        margin: 4px;
+        box-sizing: border-box;
+        width: 90%;
+        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    }
 }

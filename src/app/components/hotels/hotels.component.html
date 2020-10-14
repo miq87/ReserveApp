@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="row" *ngIf="hotelList">
-    <div class="col-md-12">Liczba wyników: {{ hotelList.length }}</div>
+<div class="myCard">
+  <div class="heading" *ngIf="hotelList">
+    <span>Liczba wyników: {{ hotelList.length }}</span>
   </div>
-  <div class="row">
+  <div>
     <div class="col-md-12" *ngFor="let hotel of hotelList">
       <app-hotel-item [hotel]="hotel"></app-hotel-item>
     </div>
