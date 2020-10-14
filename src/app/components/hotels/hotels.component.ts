@@ -19,7 +19,9 @@ export class HotelsComponent implements OnInit {
   hotelList: Hotel[]
   tmpHotelCity: string
 
-  constructor(private _msg: MessengerService) { }
+  constructor(private _msg: MessengerService) { 
+    this.hotelList = [];
+  }
 
   ngOnInit(): void {
     this._msg.getMsg().subscribe((data) => {

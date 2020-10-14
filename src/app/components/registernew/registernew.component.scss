@@ -21,7 +21,12 @@ $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
         background-color: $dark-sky-blue;
         text-align: center;
         padding: 20px;
-        border-radius: 20px;
+        span {
+            color: #fff;
+            font-size: 18px;
+            margin: 20px;
+            display: block;
+        }
     }
     .form-footer:before{
         content: 'LUB';
@@ -35,12 +40,6 @@ $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
         margin: -46px auto 0;
         border: 3px solid $queen-blue;
         border-radius: 50%;
-        display: block;
-    }
-    .form-footer span {
-        color: #fff;
-        font-size: 18px;
-        margin: 20px;
         display: block;
     }
     .social {

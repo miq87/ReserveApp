@@ -23,7 +23,7 @@ export class HotelItemComponent implements OnInit {
 
   onRemove() {
     this._booking.removeHotelById(this.hotel.id).finally(() => {
-      this._msg.sendMsg(this.hotel.id)
+      this._msg.sendMsg(this.hotel.city)
     })
   }
 

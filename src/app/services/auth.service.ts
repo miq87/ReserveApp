@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'firebase'
 
 // Firebase App (the core Firebase SDK) is always required and
@@ -11,7 +10,7 @@ import * as firebase from "firebase/app";
 // Add the Firebase services that you want to use
 import "firebase/auth";
 import "firebase/firestore";
-import { first, take, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +24,6 @@ export class AuthService {
 
   constructor(
     private fireAuth: AngularFireAuth,
-    private fireStore: AngularFirestore,
     private router: Router) { }
     
   createUser(user) {
@@ -40,7 +38,7 @@ export class AuthService {
 
       this.insertUserData(userCredential)
       .then(() => {
-        this.router.navigate(['/hero'])
+        this.router.navigate(['/hotels'])
       })
       .catch(error => {
         this.eventAuthError.next(error)

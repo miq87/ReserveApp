@@ -1,5 +1,5 @@
-<div class="myCard">
-  <div class="heading" *ngIf="hotelList">
+<div class="myCard" *ngIf="hotelList.length > 0">
+  <div class="heading">
     <span>Liczba wyników: {{ hotelList.length }}</span>
   </div>
   <div>
