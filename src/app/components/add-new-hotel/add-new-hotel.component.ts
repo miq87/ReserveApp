@@ -18,9 +18,8 @@ export class AddNewHotelComponent {
     ],
   });
 
-  states = [ 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie',
-             'lubuskie', 'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie',
-             'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie',
+  states = [ 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'łódzkie', 'małopolskie',
+             'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie',
              'warmińsko-mazurskie', 'wielkopolskie', 'zachodnio-pomorskie' ]
 
   constructor(private fb: FormBuilder, private _booking: BookingService) {}

@@ -20,7 +20,7 @@ export class HotelsComponent implements OnInit {
   tmpHotelCity: string
 
   constructor(private _msg: MessengerService) { 
-    this.hotelList = [];
+    this.hotelList = []
   }
 
   ngOnInit(): void {
@@ -30,11 +30,6 @@ export class HotelsComponent implements OnInit {
       console.log(`Otrzymałem wiadomość ${data}`)
       this.onLoadHotels(this.tmpHotelCity)
     })
-  }
-
-  onSubmit(hotelCity: string) {
-    this.tmpHotelCity = hotelCity
-    this._msg.sendMsg(hotelCity)
   }
 
   async onLoadHotels(hotelCity: string) {

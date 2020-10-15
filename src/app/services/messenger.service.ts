@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 
 export class MessengerService {
 
-    subject = new Subject()
+    subject = new BehaviorSubject('')
 
     constructor() { }
 

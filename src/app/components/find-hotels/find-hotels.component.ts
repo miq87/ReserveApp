@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hotel } from 'src/app/model/hotel';
 import { MessengerService } from 'src/app/services/messenger.service';
-import * as firebase from "firebase/app";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-hotels',
@@ -12,13 +11,14 @@ export class FindHotelsComponent implements OnInit {
 
   tmpHotelCity: string
 
-  constructor(private _msg: MessengerService) { }
+  constructor(private _msg: MessengerService, private router: Router) { }
 
   ngOnInit(): void { }
 
   onSubmit(hotelCity: string) {
     this.tmpHotelCity = hotelCity
+    this.router.navigate(['hotels'])//.finally(() => {
     this._msg.sendMsg(hotelCity)
+    //})
   }
-
 }
