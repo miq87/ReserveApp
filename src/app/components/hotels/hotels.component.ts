@@ -5,6 +5,7 @@ import { MessengerService } from 'src/app/services/messenger.service';
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
+import { Router } from '@angular/router';
 // Add the Firebase services that you want to use
 //import "firebase/auth";
 //import "firebase/firestore";
@@ -17,18 +18,19 @@ import * as firebase from "firebase/app";
 export class HotelsComponent implements OnInit {
 
   hotelList: Hotel[]
-  tmpHotelCity: string
+  numReq = 0;
 
   constructor(private _msg: MessengerService) { 
     this.hotelList = []
   }
 
   ngOnInit(): void {
-    this._msg.getMsg().subscribe((data) => {
+    this._msg.getMsg().subscribe(data => {
       this.hotelList = []
-      this.tmpHotelCity = <string>data
+      this.numReq++
       console.log(`Otrzymałem wiadomość ${data}`)
-      this.onLoadHotels(this.tmpHotelCity)
+      console.log(`Ilość zapytań: ${this.numReq}`)
+      this.onLoadHotels(<string>data)
     })
   }
 
@@ -40,6 +42,7 @@ export class HotelsComponent implements OnInit {
       console.log('Brak wyników')
       return
     }
+    console.log(`Załadowałem: ${hotelCity}\n`)
     snapshot.forEach(doc => {
       this.hotelList.push(new Hotel(doc.id, doc.data()))
     })

@@ -33,7 +33,7 @@ export class BookingService {
       state: hotel.state,
       postalCode: hotel.postalCode
     }).then(() => {
-      console.log(`Dodałem:\n\t${hotel.hotelName} Hotel\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
+      console.log(`Dodałem:\n\t${hotel.hotelName}\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
     }).catch((error) => {
       console.log('Błąd podczas dodawania nowego hotelu.', error)
     })

@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 
 export class MessengerService {
 
-    subject = new BehaviorSubject('')
+    subject = new BehaviorSubject(null)
 
     constructor() { }
 

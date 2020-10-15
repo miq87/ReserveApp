@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MessengerService } from 'src/app/services/messenger.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-hotels',
@@ -9,16 +8,11 @@ import { Router } from '@angular/router';
 })
 export class FindHotelsComponent implements OnInit {
 
-  tmpHotelCity: string
+  constructor(private _msg: MessengerService) { }
 
-  constructor(private _msg: MessengerService, private router: Router) { }
-
-  ngOnInit(): void { }
+  ngOnInit() { }
 
   onSubmit(hotelCity: string) {
-    this.tmpHotelCity = hotelCity
-    this.router.navigate(['hotels'])//.finally(() => {
     this._msg.sendMsg(hotelCity)
-    //})
   }
 }

@@ -10,10 +10,10 @@ import { BookingService } from 'src/app/services/booking.service';
 export class HotelGeneratorComponent implements OnInit {
 
   hotelNames = [ 'Grand', 'Hanza', 'Sheraton', 'Amber', 'Mercure', 'Orbis', 'Radisson Blu',
-                 'Rezydent', 'Number One', 'Smart', 'Eva', 'Bryza', 'Szydłowski' ]
+                 'Rezydent', 'Number One', 'Smart', 'Eva', 'Bryza', 'Szydłowski', 'Roko' ]
   hotelStreet = [ 'Adama Mickiewicza', 'Grunwaldzka', 'Jana Jerzego Haffnera', 'Stefana Czarnieckiego', 'Henryka Sienkiewicza',
                  'Generała Józefa Fiszera', 'Prezydenta Lecha Kaczyńskiego', 'Stanisława Wyspiańskiego', 'Generała Józefa Hallera',
-                 'Jana Pawła II', 'Kołobrzeska', 'Macieja Płażyńskiego', 'Piastowska', 'Pomorska', 'Kolejowa' ]
+                 'Jana Pawła II', 'Kołobrzeska', 'Macieja Płażyńskiego', 'Piastowska', 'Pomorska', 'Kolejowa', 'Traugutta' ]
   
   hotelCity = [ ['Gdańsk', 'pomorskie'], ['Sopot', 'pomorskie'], ['Gdynia', 'pomorskie'],
                 ['Warszawa', 'mazowieckie'], ['Kraków', 'małopolskie'], ['Wrocław', 'dolnośląskie'], ['Poznań', 'wielkopolskie'],
