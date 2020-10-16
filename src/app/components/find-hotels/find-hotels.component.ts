@@ -14,6 +14,7 @@ export class FindHotelsComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit(hotelCity: string) {
+    hotelCity = hotelCity.substring(0,1).toUpperCase() + hotelCity.substring(1).toLowerCase()
     this._msg.sendMsg(hotelCity)
     this._router.navigate(['hotels'])
   }
