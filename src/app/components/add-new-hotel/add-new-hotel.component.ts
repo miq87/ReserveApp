@@ -26,13 +26,13 @@ export class AddNewHotelComponent {
   constructor(private fb: FormBuilder, private _booking: BookingService) {}
 
   onSubmit() {
+    let correctCity = (<string>this.hotelForm.value.city).substring(0,1).toUpperCase() + (<string>this.hotelForm.value.city).substring(1)
     let newHotel = new Hotel(null,
       { 'hotelName': this.hotelForm.value.hotelName,
         'street': this.hotelForm.value.street,
-        'city': this.hotelForm.value.city,
+        'city': correctCity,
         'state': this.hotelForm.value.state,
         'postalCode': this.hotelForm.value.postalCode })
-
     this._booking.addNewHotel(newHotel)
   }
 
