@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Hotel } from 'src/app/model/hotel';
+import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
 import { MessengerService } from 'src/app/services/messenger.service';
 

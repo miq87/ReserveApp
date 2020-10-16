@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hotel } from 'src/app/model/hotel';
+import { Hotel } from 'src/app/models/hotel';
 import { MessengerService } from 'src/app/services/messenger.service';
-
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
+import { Subscription } from 'rxjs';
 import * as firebase from "firebase/app";
-import { Router } from '@angular/router';
-// Add the Firebase services that you want to use
 //import "firebase/auth";
 //import "firebase/firestore";
 
@@ -18,20 +14,27 @@ import { Router } from '@angular/router';
 export class HotelsComponent implements OnInit {
 
   hotelList: Hotel[]
-  numReq = 0;
+  numReq = 0
+  subscription: Subscription
 
   constructor(private _msg: MessengerService) { 
     this.hotelList = []
   }
 
   ngOnInit(): void {
-    this._msg.getMsg().subscribe(data => {
-      this.hotelList = []
-      this.numReq++
-      console.log(`Otrzymałem wiadomość ${data}`)
-      console.log(`Ilość zapytań: ${this.numReq}`)
-      this.onLoadHotels(<string>data)
+    this.subscription = this._msg.getMsg().subscribe(data => {
+      if(data) {
+        this.hotelList = []
+        this.numReq++
+        console.log(`Otrzymałem wiadomość ${data}`)
+        console.log(`Ilość zapytań: ${this.numReq}`)
+        this.onLoadHotels(<string>data)
+      }
     })
+  }
+  ngOnDestroy() {
+    this._msg.sendMsg(null)
+    this.subscription.unsubscribe();
   }
 
   async onLoadHotels(hotelCity: string) {

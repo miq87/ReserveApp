@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hotel } from 'src/app/model/hotel';
+import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
@@ -34,14 +34,14 @@ export class HotelGeneratorComponent implements OnInit {
       let rNumber = Math.floor((Math.random() * 100) + 10)
       let rPostalCode = Math.floor((Math.random() * 80000) + 10000)
       
-      let rHotel = new Hotel(null,
+      let newHotel = new Hotel(null,
         { 'hotelName': rName,
           'street': rStreet + ' ' + rNumber,
           'city': rCity[0],
           'state': rCity[1],
           'postalCode': rPostalCode })
 
-      this.booking_.addNewRandomHotels(rHotel)
+      this.booking_.addNewHotel(newHotel)
     }
   }
 }

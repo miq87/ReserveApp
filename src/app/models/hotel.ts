@@ -14,5 +14,4 @@ export class Hotel {
         this.state = data.state
         this.postalCode = data.postalCode
     }
-
 }
