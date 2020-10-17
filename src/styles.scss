@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 $queen-blue: rgba(51, 101, 138, 1);
 $dark-sky-blue: rgba(134, 187, 216, 1);
 $charcoal: rgba(47, 72, 88, 1);
@@ -6,12 +8,39 @@ $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 
 html, body { height: 100% }
 
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Roboto', "Helvetica Neue", sans-serif;
+}
+
 body {
     background-color: $dark-sky-blue;
-    font-family: 'Roboto', "Helvetica Neue", sans-serif;
-    font-size: 18px;
     color: $safety-orange-blaze-orange;
-    margin: 6px;
+    font-size: 18px;
+}
+
+header {
+    background: linear-gradient(rgba(0, 0, 117, 0.678), rgba(62, 62, 204, 0.746));
+    background-size: cover;
+    background-position: center;
+    min-height: 100px;
+    margin-bottom: 12px;
+    a {
+        color: #FFF;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    ul {
+        list-style: none;
+        padding: 12px;
+    }
+    ul li {
+        display: inline-block;
+        padding: 0px 12px;
+    }
 }
 
 .myCard {
