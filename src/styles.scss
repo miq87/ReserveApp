@@ -22,26 +22,85 @@ body {
 }
 
 header {
-    background: linear-gradient(rgba(0, 0, 117, 0.678), rgba(62, 62, 204, 0.746));
-    background-size: cover;
-    background-position: center;
-    min-height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 8vh;
+    background: #000;
+    position: relative;
     margin-bottom: 12px;
-    a {
-        color: #FFF;
+    .logo {
+        h4 {
+            font-family: 'Poppins', sans-serif;
+            color: #FFF;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            border: 1px solid #FFF;
+            font-size: 44px;
+            margin: 4px;
+            padding: 4px;
+        }
     }
-    a:hover {
-        text-decoration: none;
-    }
-    ul {
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         list-style: none;
-        padding: 12px;
+        margin: 0px;
+        transition: 2ms all ease-in-out;
     }
-    ul li {
-        display: inline-block;
-        padding: 0px 12px;
+    .nav-links a {
+        color: #FFF;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-size: 14px;
+        margin: 8px;
+        text-transform: uppercase;
+    }
+    .nav-active {
+        transform: translateX(0%);
+    }
+    .burger {
+        display: none;
+        div {
+            width: 4px;
+            height: 3px;
+            background-color: #FFF;
+            margin: 5px
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .nav-links {
+            position: absolute;
+            right: 0px;
+            top: 8vh;
+            margin: 0px;
+            padding: 0px;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            width: auto;
+            //transform: translateX(100%);
+            transition: transform 0.5s ease-in;
+            z-index: 1
+        }
+        .nav-links li {
+            //opacity: 0;
+        }
+        .burger {
+            display: block;
+        }
     }
 }
+
+
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+}
+
 
 .myCard {
     background-color: $queen-blue;
@@ -116,3 +175,5 @@ header {
         border-left: 5px solid #a94442;
     }
 }
+
+
