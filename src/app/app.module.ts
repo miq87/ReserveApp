@@ -36,6 +36,7 @@ import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.co
 import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 import { RegisternewComponent } from './components/registernew/registernew.component';
 import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
+import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -64,6 +65,7 @@ const firebaseConfig = {
     HotelGeneratorComponent,
     RegisternewComponent,
     FindHotelsComponent,
+    HotelDetailComponent,
   ],
   imports: [
     BrowserModule,

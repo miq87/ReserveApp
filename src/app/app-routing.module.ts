@@ -8,6 +8,7 @@ import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.c
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 import { RegisternewComponent } from './components/registernew/registernew.component';
+import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hotels', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'promise', component: PromiseComponent },
   { path: 'add', component: AddNewHotelComponent },
   { path: 'hotels', component: HotelsComponent },
+  { path: 'hotels/:id', component: HotelDetailComponent },
   { path: 'generator', component: HotelGeneratorComponent }
 ];
 
