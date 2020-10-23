@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase'
 
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
-// Add the Firebase services that you want to use
 import "firebase/auth";
 import "firebase/firestore";
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +56,7 @@ export class AuthService {
     });
   }
   loginGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider
     firebase.auth().signInWithPopup(provider).then((result) => {
       let token = (<any>result).credential.accessToken
       let user = result.user
@@ -73,7 +70,7 @@ export class AuthService {
     })
   }
   loginFb() {
-    const provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider
     //provider.addScope('user_birthday')
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then((result) => {
@@ -94,15 +91,18 @@ export class AuthService {
       this.router.navigate(["/login"])
     })
   }
-  checkLogged() {
+  checkLogged(): boolean {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
+      if(user) {
         console.log('Logged as ' + user.displayName)
+        return true
       }
       else {
         console.log('no logged!')
+        return false
       }
     })
+    return false
   }
   isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(

@@ -17,7 +17,6 @@ export class RegisternewComponent implements OnInit {
       this.authError = data
     })
   }
-
   createUser(form) {
     console.log('form: ' + form)
     console.log('form value: ' + form.value)

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  displayName: string | null
+
+  constructor(private _auth: AuthService) { }
 
   ngOnInit() {
+    this.handleBurger()
+    this.handleIsLogged()
+  }
+
+  handleBurger() {
     const burger = document.querySelector('.burger')
     const nav = document.querySelector('.nav-links')
     const navLinks = document.querySelectorAll('.nav-links li')
@@ -23,7 +31,16 @@ export class HeaderComponent implements OnInit {
 
       burger.classList.toggle('toggle')
     })
+  }
 
+  handleIsLogged() {
+    if(this._auth.checkLogged()) {
+      this._auth.authState$.subscribe((user) => {
+        console.log('handleIsLogged(): ')
+        this.displayName = user.displayName
+        console.log(user.displayName)
+      })
+    }
   }
 
 }
