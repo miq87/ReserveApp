@@ -8,31 +8,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  error: any
-
-  constructor(private auth_: AuthService) {}
+  constructor(private _auth: AuthService) {}
 
   ngOnInit(): void {
   }
-
   loginWithEmail(form) {
-    this.auth_.loginWithEmail(form.value)
+    this._auth.loginWithEmail(form.value)
   }
-
   loginFb() {
-    this.auth_.loginGoogle()
+    this._auth.loginFb()
   }
-
   loginGoogle() {
-    this.auth_.loginGoogle()
+    this._auth.loginGoogle()
   }
-
   logout() {
-    this.auth_.logout()
+    this._auth.logout()
   }
-
   checkLogged() {
-    this.auth_.checkLogged()
+    this._auth.checkLogged()
   }
 
 }

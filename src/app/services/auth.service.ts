@@ -22,13 +22,11 @@ export class AuthService {
   eventAuthError$ = this.eventAuthError.asObservable()
   newUser: any
 
-  constructor(
-    private fireAuth: AngularFireAuth,
-    private router: Router) { }
+  constructor(private fireAuth: AngularFireAuth, private router: Router) { }
     
   createUser(user) {
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-    .then(userCredential => {
+    .then((userCredential) => {
       this.newUser = user
       console.log(user)
       console.log(userCredential)
@@ -45,7 +43,6 @@ export class AuthService {
       })
     })
   }
-
   insertUserData(userCredential: firebase.auth.UserCredential) {
     return firebase.firestore().doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
@@ -54,7 +51,6 @@ export class AuthService {
       role: 'network user'
     })
   }
-
   loginWithEmail(user) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(function(error) {
       var errorCode = error.code;
@@ -62,16 +58,13 @@ export class AuthService {
       console.log(errorMessage)
     });
   }
-
   loginGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider
-    firebase.auth().signInWithPopup(provider).then(result => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    firebase.auth().signInWithPopup(provider).then((result) => {
       let token = (<any>result).credential.accessToken
-      let user : User = result.user
-		
+      let user = result.user
       console.log(token)
       console.log(user)
-
       this.router.navigate(['/hotels'])
     })
     .catch(error => {
@@ -79,11 +72,28 @@ export class AuthService {
       console.log(error)
     })
   }
-
-  logout() {
-    firebase.auth().signOut()
+  loginFb() {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    //provider.addScope('user_birthday')
+    firebase.auth().languageCode = 'pl_PL'
+    firebase.auth().signInWithPopup(provider).then((result) => {
+      let token = (<any>result).credential.accessToken
+      let user = result.user
+      console.log(token)
+      console.log(user)
+      this.router.navigate(['/hotels'])
+    })
+    .catch(error => {
+      console.log('error')
+      console.log(error)
+    })
   }
-
+  logout() {
+    firebase.auth().signOut().finally(() => {
+      console.log('Logged out!')
+      this.router.navigate(["/login"])
+    })
+  }
   checkLogged() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -94,7 +104,6 @@ export class AuthService {
       }
     })
   }
-  
   isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(
       map(authState => !!authState)
