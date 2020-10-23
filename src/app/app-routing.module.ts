@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'add', component: AddNewHotelComponent },
   { path: 'hotels', component: HotelsComponent },
   { path: 'hotels/:id', component: HotelDetailComponent },
-  { path: 'generator', component: HotelGeneratorComponent }
+  { path: 'generator', component: HotelGeneratorComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

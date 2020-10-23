@@ -15,11 +15,13 @@
   </form>
   <div>
     <span class="error" *ngIf="error"> {{ error }}</span>
-    <div class="btn-group-vertical">
-      <button class="btn btn-primary btn-sm" (click)="loginFb()">Login with Facebook</button>
-      <button class="btn btn-secondary btn-sm" (click)="loginGoogle()">Login with Google</button>
-      <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
-      <button class="btn btn-primary btn-sm" (click)="checkLogged()">Check Logged</button>
+    <div>
+      <ul class="social">
+        <li><a class="fab fa-facebook-f" href="" (click)="loginFb()"></a></li>
+        <li><a class="fab fa-google" href="" (click)="loginGoogle()"></a></li>
+        <li><a class="fas fa-sign-out-alt" href="" (click)="logout()"></a></li>
+        <li><a class="fas fa-user-check" href="" (click)="checkLogged()"></a></li>
+      </ul>
     </div>
   </div>
 </div>
