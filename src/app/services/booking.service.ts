@@ -25,13 +25,15 @@ export class BookingService {
       console.log('Błąd podczas usuwania hotelu!', error)
     })
   }
-  async getHotelDetails(hotelId: string) {
+  async getHotelDetails(hotelId: string): Promise<Hotel> {
+    let hotel: Hotel
     await firebase.firestore().collection('hotels').doc(hotelId).get()
-    .then((hotel) => {
-      console.log(hotel)
+    .then((doc) => {
+      hotel = new Hotel(doc.id, doc.data) 
     }).catch((error) => {
       console.log('Błąd podczas ładowania szczegółów hotelu!', error)
     })
+    return hotel || null
   }
   async onLoadHotels(hotelCity: string): Promise<Hotel[]> {
     const hotelsRef = firebase.firestore().collection('hotels')
