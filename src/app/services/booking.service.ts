@@ -29,12 +29,28 @@ export class BookingService {
     let hotel: Hotel
     await firebase.firestore().collection('hotels').doc(hotelId).get()
     .then((doc) => {
-      hotel = new Hotel(doc.id, doc.data) 
+      hotel = new Hotel(doc.id, doc.data()) 
     }).catch((error) => {
       console.log('Błąd podczas ładowania szczegółów hotelu!', error)
     })
     return hotel || null
   }
+
+  async getHotelFacilities(hotelId: string): Promise<number[]> {
+    let hotelFacilities: number[] = []
+
+    await firebase.firestore().collection('facilities').doc(hotelId).get()
+    .then((doc) => {
+      console.log(doc.data())
+      hotelFacilities = <number[]>(doc.data().facList)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+    return hotelFacilities || null;
+  }
+
   async onLoadHotels(hotelCity: string): Promise<Hotel[]> {
     const hotelsRef = firebase.firestore().collection('hotels')
     let hotelList: Hotel[] = [];
