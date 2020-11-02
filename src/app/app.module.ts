@@ -36,6 +36,7 @@ import { HotelGeneratorComponent } from './components/hotel-generator/hotel-gene
 import { RegisternewComponent } from './components/registernew/registernew.component';
 import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
+import * as firebase from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -46,7 +47,9 @@ const firebaseConfig = {
   messagingSenderId: "975222630848",
   appId: "1:975222630848:web:7da25526260536bdaec025",
   measurementId: "G-HC19CB5LSS"
-};
+}
+
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
