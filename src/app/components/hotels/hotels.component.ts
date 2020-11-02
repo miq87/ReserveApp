@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hotel } from 'src/app/models/hotel';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Subscription } from 'rxjs';
-import * as firebase from "firebase/app";
-//import "firebase/auth";
-//import "firebase/firestore";
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
   selector: 'app-hotels',
@@ -17,7 +15,7 @@ export class HotelsComponent implements OnInit {
   numReq = 0
   subscription: Subscription
 
-  constructor(private _msg: MessengerService) { 
+  constructor(private _msg: MessengerService, private _booking: BookingService) { 
     this.hotelList = []
   }
 
@@ -36,18 +34,12 @@ export class HotelsComponent implements OnInit {
     this._msg.sendMsg(null)
     this.subscription.unsubscribe();
   }
-
-  async onLoadHotels(hotelCity: string) {
-    const hotelsRef = firebase.firestore().collection('hotels')
-
-    const snapshot = await hotelsRef.where('city', '==', hotelCity).get();
-    if(snapshot.empty) {
-      console.log('Brak wyników')
-      return
-    }
-    console.log(`Załadowałem: ${hotelCity}\n`)
-    snapshot.forEach(doc => {
-      this.hotelList.push(new Hotel(doc.id, doc.data()))
+  onLoadHotels(hotelCity: string) {
+    this._booking.onLoadHotels(hotelCity).then((hotels) => {
+      this.hotelList = hotels
+    })
+    .catch((error) => {
+      console.log(error)
     })
   }
 

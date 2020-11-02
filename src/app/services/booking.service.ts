@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
 import * as firebase from "firebase/app";
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,19 +14,40 @@ export class BookingService {
     .then((res) => {
       this.consoleAddedNewHotel(hotel)
     }).catch((error) => {
-      console.log('Błąd podczas dodawania nowego hotelu.', error)
+      console.log('Błąd podczas dodawania nowego hotelu!', error)
     })
   }
-
   async removeHotelById(hotelId: string) {
     await firebase.firestore().collection('hotels').doc(hotelId).delete()
     .then(() => {
       console.log('Usunąłem hotel o id: ' + hotelId)
     }).catch((error) => {
-      console.log('Błąd podczas usuwania hotelu.', error)
+      console.log('Błąd podczas usuwania hotelu!', error)
     })
   }
+  async getHotelDetails(hotelId: string) {
+    await firebase.firestore().collection('hotels').doc(hotelId).get()
+    .then((hotel) => {
+      console.log(hotel)
+    }).catch((error) => {
+      console.log('Błąd podczas ładowania szczegółów hotelu!', error)
+    })
+  }
+  async onLoadHotels(hotelCity: string): Promise<Hotel[]> {
+    const hotelsRef = firebase.firestore().collection('hotels')
+    let hotelList: Hotel[] = [];
 
+    const snapshot = await hotelsRef.where('city', '==', hotelCity).get()
+    if(snapshot.empty) {
+      console.log('Brak wyników!')
+      return null
+    }
+    console.log(`Załadowałem: ${hotelCity}\n`)
+    snapshot.forEach(doc => {
+      hotelList.push(new Hotel(doc.id, doc.data()))
+    })
+    return hotelList;
+  }
   consoleAddedNewHotel(hotel: Hotel) {
     console.log(`Dodałem:\n\t${hotel.hotelName}\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
   }
