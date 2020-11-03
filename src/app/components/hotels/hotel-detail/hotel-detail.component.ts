@@ -11,7 +11,7 @@ import { FireStorageService } from 'src/app/services/fire-storage.service';
 })
 export class HotelDetailComponent implements OnInit {
   hotel: Hotel
-  hotelFacilities: number[] = []
+  hotelFacilities: number[]
   hotelMainImg: any
 
   constructor(private route: ActivatedRoute,

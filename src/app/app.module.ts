@@ -37,6 +37,7 @@ import { RegisternewComponent } from './components/registernew/registernew.compo
 import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 import * as firebase from "firebase/app";
+import { Error404Component } from './components/error404/error404.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -67,6 +68,7 @@ firebase.initializeApp(firebaseConfig);
     RegisternewComponent,
     FindHotelsComponent,
     HotelDetailComponent,
+    Error404Component,
   ],
   imports: [
     BrowserModule,

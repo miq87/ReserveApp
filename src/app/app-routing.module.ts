@@ -9,6 +9,7 @@ import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 import { RegisternewComponent } from './components/registernew/registernew.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
+import { Error404Component } from './components/error404/error404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hotels', pathMatch: 'full' },
@@ -16,10 +17,11 @@ const routes: Routes = [
   { path: 'register', component: RegisternewComponent },
   { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
   { path: 'promise', component: PromiseComponent },
-  { path: 'add', component: AddNewHotelComponent },
+  { path: 'add', component: AddNewHotelComponent, canActivate: [AuthGuard] },
   { path: 'hotels', component: HotelsComponent },
   { path: 'hotels/:id', component: HotelDetailComponent },
-  { path: 'generator', component: HotelGeneratorComponent, canActivate: [AuthGuard] }
+  { path: 'generator', component: HotelGeneratorComponent, canActivate: [AuthGuard] },
+  { path: '**', component: Error404Component }
 ];
 
 @NgModule({
