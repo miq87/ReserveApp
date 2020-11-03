@@ -26,13 +26,13 @@ $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 }
 .hotel-body {
     padding: 12px;
-
     ul {
-        color: #808080;
+        font-size: 14px;
+        color: #fff;
         display: flex;
+        justify-content: flex-start;
         li {
             padding: 4px;
         }
     }
-    
 }

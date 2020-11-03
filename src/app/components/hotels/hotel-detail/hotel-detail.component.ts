@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
+import { FacilitiesService } from 'src/app/services/facilities.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
 
 @Component({
@@ -11,11 +12,11 @@ import { FireStorageService } from 'src/app/services/fire-storage.service';
 })
 export class HotelDetailComponent implements OnInit {
   hotel: Hotel
-  hotelFacilities: number[]
+  hotelFacilities: string[]
   hotelMainImg: any
 
   constructor(private route: ActivatedRoute,
-    private _bs: BookingService, private _fs: FireStorageService) { }
+    private _bs: BookingService, private _fs: FireStorageService, private _facs: FacilitiesService) { }
 
   ngOnInit(): void {
     let hotelId = this.route.snapshot.paramMap.get('id')
@@ -27,7 +28,7 @@ export class HotelDetailComponent implements OnInit {
     })
 
     this._bs.getHotelFacilities(hotelId).then((data) => {
-      this.hotelFacilities = data
+      this.hotelFacilities = this._facs.getInfo(data)
     }).catch((error) => {
       console.log(error)
     })
