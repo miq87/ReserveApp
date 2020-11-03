@@ -29,9 +29,9 @@ export class HotelDetailComponent implements OnInit {
     }).catch((error) => {
       console.log(error)
     })
-    
+
     this._bs.getHotelFacilities(hotelId).then((data) => {
-      this.hotelFacilities = this._facs.getInfo(data)
+      this.hotelFacilities = this._facs.getFacilities(data)
     }).catch((error) => {
       console.log(error)
     })
@@ -41,6 +41,9 @@ export class HotelDetailComponent implements OnInit {
     })
     .catch((error) => {
       console.log(error.message)
+      this._fs.getDefaultMainImage().getDownloadURL().then((doc) => {
+        this.hotelMainImg = doc
+      })
     })
 
   }

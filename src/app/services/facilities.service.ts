@@ -13,7 +13,7 @@ export class FacilitiesService {
     })
   }
 
-  getInfo(values: number[]): string[] {
+  getFacilities(values: number[]): string[] {
     let retValues: string[] = []
     values.forEach((value) => {
       let selectedOpt = this.facilities.find(opt => opt.id == value);
