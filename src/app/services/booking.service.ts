@@ -14,7 +14,7 @@ export class BookingService {
     .then((res) => {
       this.consoleAddedNewHotel(hotel)
     }).catch((error) => {
-      console.log('Błąd podczas dodawania nowego hotelu!', error)
+      console.log('Błąd podczas dodawania nowego hotelu!', error.message)
     })
   }
   async removeHotelById(hotelId: string) {
@@ -22,7 +22,7 @@ export class BookingService {
     .then(() => {
       console.log('Usunąłem hotel o id: ' + hotelId)
     }).catch((error) => {
-      console.log('Błąd podczas usuwania hotelu!', error)
+      console.log('Błąd podczas usuwania hotelu!', error.message)
     })
   }
   async getHotelDetails(hotelId: string): Promise<Hotel> {
@@ -31,7 +31,7 @@ export class BookingService {
     .then((doc) => {
       hotel = new Hotel(doc.id, doc.data()) 
     }).catch((error) => {
-      console.log('Błąd podczas ładowania szczegółów hotelu!', error)
+      console.log('Błąd podczas ładowania szczegółów hotelu!', error.message)
     })
     return hotel || null
   }
@@ -41,11 +41,10 @@ export class BookingService {
 
     await firebase.firestore().collection('facilities').doc(hotelId).get()
     .then((doc) => {
-      console.log(doc.data())
       hotelFacilities = <number[]>(doc.data().facList)
     })
     .catch((error) => {
-      console.log(error)
+      console.log("Nie wczytano udogodnień!", error.message)
     })
 
     return hotelFacilities || null;
