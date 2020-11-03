@@ -15,8 +15,11 @@ export class HotelDetailComponent implements OnInit {
   hotelFacilities: string[]
   hotelMainImg: any
 
-  constructor(private route: ActivatedRoute,
-    private _bs: BookingService, private _fs: FireStorageService, private _facs: FacilitiesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private _bs: BookingService,
+    private _fs: FireStorageService,
+    private _facs: FacilitiesService) { }
 
   ngOnInit(): void {
     let hotelId = this.route.snapshot.paramMap.get('id')
@@ -26,7 +29,7 @@ export class HotelDetailComponent implements OnInit {
     }).catch((error) => {
       console.log(error)
     })
-
+    
     this._bs.getHotelFacilities(hotelId).then((data) => {
       this.hotelFacilities = this._facs.getInfo(data)
     }).catch((error) => {
