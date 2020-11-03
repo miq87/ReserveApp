@@ -6,4 +6,30 @@ $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 
 .card {
     background-color: $queen-blue;
+    border-radius: 0px;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+}
+
+.card-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.hotel-img {
+    width: 200px;
+    img {
+        max-width: 100%;
+    }
+}
+.hotel-body {
+    padding: 12px;
+
+    ul {
+        color: #808080;
+        display: flex;
+        li {
+            padding: 4px;
+        }
+    }
+    
 }
