@@ -12,19 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input'
-import { MatSelectModule } from '@angular/material/select'
-import { MatButtonModule } from '@angular/material/button'
-import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatChipsModule } from '@angular/material/chips';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PromiseComponent } from './components/promise/promise.component'
@@ -36,8 +24,9 @@ import { HotelGeneratorComponent } from './components/hotel-generator/hotel-gene
 import { RegisternewComponent } from './components/registernew/registernew.component';
 import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
-import * as firebase from "firebase/app";
 import { Error404Component } from './components/error404/error404.component';
+import * as firebase from "firebase/app";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -81,19 +70,7 @@ firebase.initializeApp(firebaseConfig);
     }),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatRadioModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatIconModule,
+    MatSnackBarModule,
     LayoutModule,
     DragDropModule,
     MatProgressSpinnerModule

@@ -9,13 +9,16 @@ export class BookingService {
 
   constructor() { }
 
-  async addNewHotel(hotel: Hotel) {
-    return await firebase.firestore().collection('hotels').add(JSON.parse(JSON.stringify(hotel)))
-    .then((res) => {
+  async addNewHotel(hotel: Hotel): Promise<string> {
+    let retHotelId: string
+    await firebase.firestore().collection('hotels').add(JSON.parse(JSON.stringify(hotel)))
+    .then((doc) => {
       this.consoleAddedNewHotel(hotel)
+      retHotelId = doc.id
     }).catch((error) => {
       console.log('Błąd podczas dodawania nowego hotelu!', error.message)
     })
+    return retHotelId || null
   }
   async removeHotelById(hotelId: string) {
     await firebase.firestore().collection('hotels').doc(hotelId).delete()

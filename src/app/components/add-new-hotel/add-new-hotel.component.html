@@ -22,6 +22,16 @@
         </select>
       </div>
       <div class="form-group">
+        <label for="mainImg">Zdjęcie tytułowe:</label>
+        <input type="file" class="form-control" name="mainImg">
+      </div>
+      <div class="form-group" *ngFor="let img of images; index as i">
+        <input type="file" class="form-control" name="img.value">
+      </div>
+      <div>
+        <i class="fas fa-plus" (click)="addNewImgControl()"></i>
+      </div>
+      <div class="form-group">
           <button class="btn btn-primary btn-md" type="submit">Dodaj</button>
       </div>
     </form>
