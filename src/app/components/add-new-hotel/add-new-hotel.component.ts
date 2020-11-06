@@ -23,17 +23,15 @@ export class AddNewHotelComponent {
 
   imgCount: number = 0
   images: FormControl[] = []
-
   states: any[]
 
-  constructor(private fb: FormBuilder, private _booking: BookingService, private http: HttpClient) {}
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder, private _booking: BookingService, private http: HttpClient) {
     this.http.get("assets/data.json").subscribe((data) => {
       this.states = (<any>data).states
-      console.log(data)
     })
   }
+
+  ngOnInit() { }
 
   onSubmit() {
     let returnHotelId: string

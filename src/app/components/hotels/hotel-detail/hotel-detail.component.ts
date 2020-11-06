@@ -13,7 +13,7 @@ import { FireStorageService } from 'src/app/services/fire-storage.service';
 export class HotelDetailComponent implements OnInit {
   hotel: Hotel
   hotelFacilities: string[]
-  hotelMainImg: any
+  hotelMainImg: string
 
   constructor(
     private route: ActivatedRoute,
@@ -27,23 +27,18 @@ export class HotelDetailComponent implements OnInit {
     this._bs.getHotelDetails(hotelId).then((data) => {
       this.hotel = data;
     }).catch((error) => {
-      console.log(error)
+      console.log(error.message)
     })
 
     this._bs.getHotelFacilities(hotelId).then((data) => {
       this.hotelFacilities = this._facs.getFacilities(data)
     }).catch((error) => {
-      console.log(error)
+      console.log(error.message)
     })
 
-    this.hotelMainImg = this._fs.getMainImage(hotelId).getDownloadURL().then((doc) => {
-      this.hotelMainImg = doc
-    })
-    .catch((error) => {
-      console.log(error.message)
-      this._fs.getDefaultMainImage().getDownloadURL().then((doc) => {
-        this.hotelMainImg = doc
-      })
+    this._fs.getMainImage(hotelId).then((data) => {
+      console.log(data)
+      this.hotelMainImg = data
     })
 
   }

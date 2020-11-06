@@ -7,12 +7,9 @@
         <div class="hotel-body">
             <p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p>
             <ul *ngIf="hotelFacilities">
-                <li *ngFor="let fac of hotelFacilities">
-                    {{ fac }}
-                </li>
+                <li *ngFor="let fac of hotelFacilities">{{ fac }}</li>
             </ul>
         </div>
     </div>
     <div class="card-footer"></div>
 </div>
-

@@ -10,7 +10,6 @@ export class FacilitiesService {
   constructor(private http: HttpClient) {
     this.http.get("assets/data.json").subscribe((data) => {
       this.facilities = (<any>data).facilities
-      console.log(data)
     })
   }
 
