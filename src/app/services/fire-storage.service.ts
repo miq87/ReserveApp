@@ -30,7 +30,7 @@ export class FireStorageService {
     }).finally(() => {
       return imgUrl
     })
-    //return imgUrl
+    return imgUrl
 
   }
 
