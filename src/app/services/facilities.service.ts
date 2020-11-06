@@ -7,9 +7,10 @@ import { Injectable } from '@angular/core';
 export class FacilitiesService {
   facilities: any[]
 
-  constructor(private _http: HttpClient) {
-    this._http.get("assets/facilities.json").subscribe((data) => {
-      this.facilities = <any>data
+  constructor(private http: HttpClient) {
+    this.http.get("assets/data.json").subscribe((data) => {
+      this.facilities = (<any>data).facilities
+      console.log(data)
     })
   }
 

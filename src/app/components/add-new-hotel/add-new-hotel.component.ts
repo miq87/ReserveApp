@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Hotel } from 'src/app/models/hotel';
@@ -23,11 +24,16 @@ export class AddNewHotelComponent {
   imgCount: number = 0
   images: FormControl[] = []
 
-  states = [ 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'łódzkie', 'małopolskie',
-             'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie',
-             'warmińsko-mazurskie', 'wielkopolskie', 'zachodnio-pomorskie' ]
+  states: any[]
 
-  constructor(private fb: FormBuilder, private _booking: BookingService) {}
+  constructor(private fb: FormBuilder, private _booking: BookingService, private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get("assets/data.json").subscribe((data) => {
+      this.states = (<any>data).states
+      console.log(data)
+    })
+  }
 
   onSubmit() {
     let returnHotelId: string
