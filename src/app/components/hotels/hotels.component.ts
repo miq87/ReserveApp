@@ -17,7 +17,7 @@ export class HotelsComponent implements OnInit {
 
   constructor(private _msg: MessengerService, private _booking: BookingService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.subscription = this._msg.getMsg().subscribe(data => {
       if(data) {
         this.hotelList = []
@@ -34,10 +34,11 @@ export class HotelsComponent implements OnInit {
   }
   onLoadHotels(hotelCity: string) {
     this._booking.onLoadHotels(hotelCity).then((hotels) => {
+      this.hotelList = []
       this.hotelList = hotels
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error.message)
     })
   }
 
