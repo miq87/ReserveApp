@@ -18,18 +18,16 @@
       </div>
       <div class="form-group">
         <select class="form-control" required name="state" id="state" formControlName="state">
-          <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+          <option *ngFor="let state of states" [value]="state.name">{{ state.name }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="mainImg">Zdjęcie tytułowe:</label>
-        <input type="file" class="form-control" name="mainImg">
+        <input type="file" class="form-control" name="mainImg" (change)="onFileSelected($event)">
       </div>
-      <div class="form-group" *ngFor="let img of images; index as i">
-        <input type="file" class="form-control" name="img.value">
-      </div>
-      <div>
-        <i class="fas fa-plus" (click)="addNewImgControl()"></i>
+      <div class="form-group">
+        <label for="mainImg">Reszta zdjęć:</label>
+        <input type="file" class="form-control" name="images" (change)="onFileSelected($event)" multiple>
       </div>
       <div class="form-group">
           <button class="btn btn-primary btn-md" type="submit">Dodaj</button>

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
+import { FireStorageService } from 'src/app/services/fire-storage.service';
 
 @Component({
   selector: 'app-add-new-hotel',
@@ -18,23 +19,32 @@ export class AddNewHotelComponent {
     postalCode: [null, Validators.compose([
       Validators.required, Validators.minLength(5), Validators.maxLength(5)])
     ],
-    imgTitle: [null]
+    imgTitle: [null],
+    images: [null]
   })
 
-  imgCount: number = 0
-  images: FormControl[] = []
-  states: any[]
+  states: any
+  returnHotelId: string
+  selectedFile: File
 
-  constructor(private fb: FormBuilder, private _booking: BookingService, private http: HttpClient) {
-    this.http.get("assets/data.json").subscribe((data) => {
-      this.states = (<any>data).states
-    })
+  constructor(
+    private fb: FormBuilder,
+    private _booking: BookingService,
+    private _fs: FireStorageService,
+    private http: HttpClient) {
+      this.http.get("assets/data.json").subscribe((data) => {
+        this.states = (<any>data).states
+      })
   }
 
   ngOnInit() { }
 
+  onFileSelected(event) {
+    console.log(event.target.files)
+    this.selectedFile = event.target.files[0]
+  }
+
   onSubmit() {
-    let returnHotelId: string
     let correctCity = (<string>this.hotelForm.value.city).substring(0,1).toUpperCase() + (<string>this.hotelForm.value.city).substring(1)
     let newHotel = new Hotel(null,
       { 'hotelName': this.hotelForm.value.hotelName,
@@ -43,20 +53,23 @@ export class AddNewHotelComponent {
         'state': this.hotelForm.value.state,
         'postalCode': this.hotelForm.value.postalCode })
     this._booking.addNewHotel(newHotel).then((data) => {
-      returnHotelId = data
-      console.log(returnHotelId)
+      this.returnHotelId = data
+      console.log(this.returnHotelId)
+    })
+    .finally(() => {
+      this._fs.sendTitleImage(this.returnHotelId, this.selectedFile).then((data) => {
+        console.log(data)
+        console.log(`Dodałem zdjęcie ${this.selectedFile.name} do hotelu o id ${this.returnHotelId}!`)
+      })
     })
   }
 
-  addNewImgControl() {
+  /*addNewImgControl() {
     let controlka = new FormControl()
     this.images.push(controlka)
     this.hotelForm.addControl(`img${this.imgCount++}`, controlka)
     console.log(this.hotelForm)
-  }
+  }*/
 
-  onFileChanged(event) {
-    const file = event.target.files[0]
-  }
 
 }

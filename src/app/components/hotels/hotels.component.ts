@@ -11,13 +11,11 @@ import { BookingService } from 'src/app/services/booking.service';
 })
 export class HotelsComponent implements OnInit {
 
-  hotelList: Hotel[]
+  hotelList: Hotel[] = []
   numReq = 0
   subscription: Subscription
 
-  constructor(private _msg: MessengerService, private _booking: BookingService) { 
-    this.hotelList = []
-  }
+  constructor(private _msg: MessengerService, private _booking: BookingService) { }
 
   ngOnInit(): void {
     this.subscription = this._msg.getMsg().subscribe(data => {

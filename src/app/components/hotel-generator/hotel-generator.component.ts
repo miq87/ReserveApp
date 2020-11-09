@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
@@ -23,8 +24,7 @@ export class HotelGeneratorComponent implements OnInit {
 
   constructor(private booking_: BookingService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
   hotelGenerator(ileHoteli: number) {
     for(let i = 1; i <= ileHoteli; i++) {

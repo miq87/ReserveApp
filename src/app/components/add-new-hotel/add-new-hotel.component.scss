@@ -3,6 +3,7 @@
 }
 
 .form-control[type=file] {
-    height: 40px;
     background: transparent;
+    box-shadow: none;
+    border: 0px;
 }
