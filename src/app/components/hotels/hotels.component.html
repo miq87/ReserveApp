@@ -1,4 +1,4 @@
-<div class="myCard" *ngIf="hotelList.length > 0">
+<div class="myCard" *ngIf="hotelList">
   <div class="heading">
     <span>Liczba wyników: {{ hotelList.length }}</span>
   </div>
@@ -8,3 +8,4 @@
     </div>
   </div>
 </div>
+<div class="myCard" *ngIf="!hotelList">Liczba wyników: 0</div>

@@ -21,8 +21,12 @@ export class FireStorageService {
     var spaceRef = this.storageRef.child('images/main_img.jpg')
     return spaceRef.getDownloadURL()
   }
-  sendTitleImage(hotelId: string, file: File) {
+  sendMainImage(hotelId: string, file: File) {
     var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
+    return spaceRef.put(file)
+  }
+  sendImage(hotelId: string, file: File) {
+    var spaceRef = this.storageRef.child(`images/${hotelId}/${file.name}`)
     return spaceRef.put(file)
   }
 

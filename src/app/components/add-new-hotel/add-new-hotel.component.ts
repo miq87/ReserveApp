@@ -25,7 +25,7 @@ export class AddNewHotelComponent {
 
   states: any
   returnHotelId: string
-  selectedFile: File
+  allFiles: File[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -37,11 +37,20 @@ export class AddNewHotelComponent {
       })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.allFiles.length)
+  }
 
   onFileSelected(event) {
-    console.log(event.target.files)
-    this.selectedFile = event.target.files[0]
+    this.allFiles.push(event.target.files[0])
+    console.log(this.allFiles.length)
+
+  }
+  onFilesSelected(event) {
+    for(let i = 0; i < event.target.files.length; i++) {
+      this.allFiles.push(event.target.files[i])
+    }
+    console.log(this.allFiles)
   }
 
   onSubmit() {
@@ -57,19 +66,26 @@ export class AddNewHotelComponent {
       console.log(this.returnHotelId)
     })
     .finally(() => {
-      this._fs.sendTitleImage(this.returnHotelId, this.selectedFile).then((data) => {
+      this._fs.sendMainImage(this.returnHotelId, this.allFiles[0]).then((data) => {
         console.log(data)
-        console.log(`Dodałem zdjęcie ${this.selectedFile.name} do hotelu o id ${this.returnHotelId}!`)
+        console.log(`Dodałem zdjęcie ${this.allFiles[0].name} do hotelu o id ${this.returnHotelId}!`)
       })
+      
+      for(let i = 1; i < this.allFiles.length; i++) {
+        this._fs.sendImage(this.returnHotelId, this.allFiles[i]).then((data) => {
+          console.log(`Dodałem ${this.allFiles[i]} do hotelu o ID ${this.returnHotelId}`)
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
+      }
+
     })
   }
-
   /*addNewImgControl() {
     let controlka = new FormControl()
     this.images.push(controlka)
     this.hotelForm.addControl(`img${this.imgCount++}`, controlka)
     console.log(this.hotelForm)
   }*/
-
-
 }

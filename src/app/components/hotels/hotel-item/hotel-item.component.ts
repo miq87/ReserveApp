@@ -15,8 +15,7 @@ export class HotelItemComponent implements OnInit {
 
   constructor(private _booking: BookingService, private _msg: MessengerService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
   onBook() {
     console.log('Chcę zarezerwować: ' + this.hotel.id)
