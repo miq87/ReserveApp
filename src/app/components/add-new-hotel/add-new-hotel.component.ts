@@ -65,14 +65,12 @@ export class AddNewHotelComponent {
     })
     .finally(() => {
       this._fs.sendMainImage(this.returnHotelId, this.allFiles[0]).then((data) => {
-        console.log(data)
-        console.log(`Dodałem '${this.allFiles[0].name}' do hotelu o ID '${this.returnHotelId}'!`)
+        this.consoleInfo(this.allFiles[0].name, this.returnHotelId)
       })
       
       for(let i = 1; i < this.allFiles.length; i++) {
         this._fs.sendImage(this.returnHotelId, this.allFiles[i]).then((data) => {
-          console.log(`Dodałem '${this.allFiles[i].name}' do hotelu o ID '${this.returnHotelId}'!`)
-          console.log(data)
+          this.consoleInfo(this.allFiles[i].name, this.returnHotelId)
         })
         .catch((error) => {
           console.log(error.message)
@@ -81,4 +79,9 @@ export class AddNewHotelComponent {
 
     })
   }
+
+  consoleInfo(name: string, id: string) {
+    console.log(`Dodałem '${name}' do hotelu o ID '${id}'!`)
+  }
+
 }
