@@ -73,7 +73,8 @@ export class AddNewHotelComponent {
       
       for(let i = 1; i < this.allFiles.length; i++) {
         this._fs.sendImage(this.returnHotelId, this.allFiles[i]).then((data) => {
-          console.log(`Dodałem ${this.allFiles[i]} do hotelu o ID ${this.returnHotelId}`)
+          console.log(`Dodałem ${this.allFiles[i].name} do hotelu o ID ${this.returnHotelId}`)
+          console.log(data)
         })
         .catch((error) => {
           console.log(error.message)
