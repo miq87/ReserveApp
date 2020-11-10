@@ -18,9 +18,7 @@ export class AddNewHotelComponent {
     state: [null, Validators.required],
     postalCode: [null, Validators.compose([
       Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    ],
-    imgTitle: [null],
-    images: [null]
+    ]
   })
 
   states: any
@@ -68,12 +66,12 @@ export class AddNewHotelComponent {
     .finally(() => {
       this._fs.sendMainImage(this.returnHotelId, this.allFiles[0]).then((data) => {
         console.log(data)
-        console.log(`Dodałem zdjęcie ${this.allFiles[0].name} do hotelu o id ${this.returnHotelId}!`)
+        console.log(`Dodałem '${this.allFiles[0].name}' do hotelu o ID '${this.returnHotelId}'!`)
       })
       
       for(let i = 1; i < this.allFiles.length; i++) {
         this._fs.sendImage(this.returnHotelId, this.allFiles[i]).then((data) => {
-          console.log(`Dodałem ${this.allFiles[i].name} do hotelu o ID ${this.returnHotelId}`)
+          console.log(`Dodałem '${this.allFiles[i].name}' do hotelu o ID '${this.returnHotelId}'!`)
           console.log(data)
         })
         .catch((error) => {
@@ -83,10 +81,4 @@ export class AddNewHotelComponent {
 
     })
   }
-  /*addNewImgControl() {
-    let controlka = new FormControl()
-    this.images.push(controlka)
-    this.hotelForm.addControl(`img${this.imgCount++}`, controlka)
-    console.log(this.hotelForm)
-  }*/
 }
