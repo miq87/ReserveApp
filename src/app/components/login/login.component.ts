@@ -24,8 +24,5 @@ export class LoginComponent implements OnInit {
   logout() {
     this._auth.logout()
   }
-  checkLogged() {
-    this._auth.checkLogged()
-  }
 
 }

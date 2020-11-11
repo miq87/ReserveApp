@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.handleBurger()
-    this.handleIsLogged()
   }
 
   handleBurger() {
@@ -24,23 +23,11 @@ export class HeaderComponent implements OnInit {
 
     burger.addEventListener('click', () => {
       nav.classList.toggle('nav-active')
-
       navLinks.forEach((link) => {
         link.classList.add('nav-links-fade')
       })
-
       burger.classList.toggle('toggle')
     })
-  }
-
-  handleIsLogged() {
-    if(this._auth.checkLogged()) {
-      this._auth.authState$.subscribe((user) => {
-        console.log('handleIsLogged(): ')
-        this.displayName = user.displayName
-        console.log(user.displayName)
-      })
-    }
   }
 
 }

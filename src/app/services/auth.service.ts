@@ -91,19 +91,6 @@ export class AuthService {
       this.router.navigate(["/login"])
     })
   }
-  checkLogged(): boolean {
-    firebase.auth().onAuthStateChanged(user => {
-      if(user) {
-        console.log('Logged as ' + user.displayName)
-        return true
-      }
-      else {
-        console.log('no logged!')
-        return false
-      }
-    })
-    return false
-  }
   isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(
       map(authState => !!authState)
