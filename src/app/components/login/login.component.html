@@ -2,16 +2,10 @@
   <div class="heading">
     <h3>Login</h3>
   </div>
-  <form #userLogForm="ngForm" (ngSubmit)="loginWithEmail(userLogForm)">
-    <div class="form-group">
-        <input class="form-control" required type="email" name="email" placeholder="E-mail" ngModel #email="ngModel">
-    </div>
-    <div class="form-group">
-        <input class="form-control" required type="password" name="password" placeholder="Password" ngModel #password="ngModel">
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary btn-sm" type="submit">Zaloguj</button>
-    </div>
+  <form [formGroup]="loginForm" (ngSubmit)="loginWithEmail()">
+    <input class="form-control" formControlName="email" type="email" name="email" placeholder="E-mail">
+    <input class="form-control" formControlName="password" type="password" name="password" placeholder="Password">
+    <button class="btn btn-primary btn-sm" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
   </form>
   <div>
     <div>

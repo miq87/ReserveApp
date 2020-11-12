@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
   currentUser: any
 
-  constructor() { }
+  constructor(private _auth: AuthService) { }
 
   ngOnInit() {
     this.handleBurger()
@@ -31,6 +32,10 @@ export class HeaderComponent implements OnInit {
       })
       burger.classList.toggle('toggle')
     })
+  }
+
+  onLogout() {
+    this._auth.logout()
   }
 
 }

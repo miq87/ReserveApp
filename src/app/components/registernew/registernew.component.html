@@ -1,5 +1,5 @@
 <div class="myCard">
-  <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
+  <form [formGroup]="registerForm" (ngSubmit)="createUser()">
     <div class="heading"><h3>Rejestracja</h3></div>
     <div class="row" *ngIf="authError">
       <div class="col-12-md alert-danger">
@@ -8,22 +8,22 @@
     </div>
     <div class="form-group">
         <i class="fa fa-user"></i>
-        <input class="form-control" type="text" name="firstName" placeholder="Imię" ngModel #firstname="ngModel">
+        <input class="form-control" formControlName="firstName" type="text" name="firstName" placeholder="Imię">
     </div>
     <div class="form-group">
         <i class="fa fa-user"></i>
-        <input class="form-control" type="text" name="lastName" placeholder="Nazwisko" ngModel #lastname="ngModel">
+        <input class="form-control" formControlName="lastName" type="text" name="lastName" placeholder="Nazwisko">
     </div>
     <div class="form-group">
         <i class="fa fa-envelope"></i>
-        <input class="form-control" type="text" name="email" placeholder="E-mail" ngModel #email="ngModel">
+        <input class="form-control" formControlName="email" type="text" name="email" placeholder="E-mail">
     </div>
     <div class="form-group">
         <i class="fa fa-lock"></i>
-        <input class="form-control" type="password" name="password" placeholder="Hasło" ngModel #password="ngModel">
+        <input class="form-control" formControlName="password" type="password" name="password" placeholder="Hasło">
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-success">Zarejestruj</button>
+        <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Zarejestruj</button>
         <span class="form-login">Masz już konto ? <a href="/login">Zaloguj</a></span>
     </div>
     <div class="form-footer">

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,12 +9,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _auth: AuthService) {}
+  loginForm = this.fb.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  })
 
-  ngOnInit(): void {
-  }
-  loginWithEmail(form) {
-    this._auth.loginWithEmail(form.value)
+  constructor(private fb: FormBuilder, private _auth: AuthService) {}
+
+  ngOnInit(): void { }
+
+  loginWithEmail() {
+    console.log(this.loginForm.value)
+    this._auth.loginWithEmail(this.loginForm.value)
   }
   loginFb() {
     this._auth.loginFb()

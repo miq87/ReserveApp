@@ -39,9 +39,12 @@ export class AuthService {
         this.eventAuthError.next(error)
       })
     })
+    .catch((error) => {
+      this.eventAuthError.next(error)
+    })
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    return firebase.firestore().doc(`Users/${userCredential.user.uid}`).set({
+    return firebase.firestore().doc(`users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstname: this.newUser.firstName,
       lastname: this.newUser.lastName,
