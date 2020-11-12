@@ -2,8 +2,8 @@
   <div class="logo">
     <h4>ReserveApp</h4>
   </div>
-  <div *ngIf="displayName">
-    <p>Zalogowano jako {{ displayName }}</p>
+  <div *ngIf="currentUser">
+    <p>Zalogowano jako {{ currentUser.email }}</p>
   </div>
   <ul class="nav-links">
     <li><a href="#" [routerLink]="['/login']">Zaloguj</a></li>

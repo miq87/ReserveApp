@@ -88,13 +88,16 @@ export class AuthService {
   logout() {
     firebase.auth().signOut().finally(() => {
       console.log('Logged out!')
-      this.router.navigate(["/login"])
+      this.router.navigate(["/hotels"])
     })
   }
   isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(
       map(authState => !!authState)
     )
+  }
+  getCurrentUser() {
+    return firebase.auth().currentUser
   }
 
 }

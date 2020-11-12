@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import * as firebase from 'firebase/app'
 
 @Component({
   selector: 'app-header',
@@ -8,14 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  displayName: string | null
+  currentUser: any
 
-  constructor(private _auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
     this.handleBurger()
+    firebase.auth().onAuthStateChanged((user) => {
+      this.currentUser = user
+    })
   }
-
+  
   handleBurger() {
     const burger = document.querySelector('.burger')
     const nav = document.querySelector('.nav-links')
