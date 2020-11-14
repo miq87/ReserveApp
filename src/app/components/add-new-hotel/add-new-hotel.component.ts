@@ -35,20 +35,15 @@ export class AddNewHotelComponent {
       })
   }
 
-  ngOnInit() {
-    console.log(this.allFiles.length)
-  }
+  ngOnInit() { }
 
   onFileSelected(event) {
     this.allFiles.push(event.target.files[0])
-    console.log(this.allFiles.length)
-
   }
   onFilesSelected(event) {
     for(let i = 0; i < event.target.files.length; i++) {
       this.allFiles.push(event.target.files[i])
     }
-    console.log(this.allFiles)
   }
 
   onSubmit() {
