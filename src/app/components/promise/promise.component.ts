@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-
+import * as firebase from 'firebase/app'
 
 @Component({
   selector: 'app-promise',
@@ -29,8 +29,9 @@ export class PromiseComponent implements OnInit {
   getPresent() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve('Oto prezent!')
-      }, 4000);
+        var user = firebase.auth().currentUser
+        resolve(user)
+      }, 2000);
     });
   }
 
