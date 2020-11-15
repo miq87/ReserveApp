@@ -30,7 +30,7 @@ export class PromiseComponent implements OnInit {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         var user = firebase.auth().currentUser
-        resolve(user)
+        reject('error message')
       }, 2000);
     });
   }
