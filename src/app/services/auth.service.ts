@@ -100,4 +100,8 @@ export class AuthService {
     )
   }
 
+   getCurrentUser(cb) {
+    return firebase.auth().onAuthStateChanged(cb)
+  }
+
 }
