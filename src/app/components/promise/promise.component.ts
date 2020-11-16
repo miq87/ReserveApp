@@ -19,6 +19,7 @@ export class PromiseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPresent().then(present => {
+      console.log('Idzie:')
       console.log(present)
       this.isVisible = !this.isVisible
     }).catch(error => {
@@ -27,11 +28,12 @@ export class PromiseComponent implements OnInit {
   }
 
   getPresent() {
+    let user
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        var user = firebase.auth().currentUser
-        reject('error message')
-      }, 2000);
+        user = firebase.auth().currentUser
+        resolve(user)
+      }, 1000);
     });
   }
 

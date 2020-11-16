@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.handleBurger()
     firebase.auth().onAuthStateChanged((user) => {
-      this.currentUser = user
+      if(user) this.currentUser = user
+      else this.currentUser = null
     })
   }
   

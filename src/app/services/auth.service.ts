@@ -99,8 +99,5 @@ export class AuthService {
       map(authState => !!authState)
     )
   }
-  getCurrentUser() {
-    return firebase.auth().currentUser
-  }
 
 }
