@@ -17,11 +17,9 @@ export class DbfirestoreComponent implements OnInit {
     this.books = db.collection('books').valueChanges()
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  makeCollection() {
-  }
+  makeCollection() { }
 
   addBook(form) {
     console.log('Form value: ' + JSON.stringify(form.value))

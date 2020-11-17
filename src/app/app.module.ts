@@ -27,6 +27,7 @@ import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-det
 import { Error404Component } from './components/error404/error404.component';
 import * as firebase from "firebase/app";
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 const firebaseConfig = {
@@ -60,6 +61,7 @@ firebase.initializeApp(firebaseConfig);
     HotelDetailComponent,
     Error404Component,
     RightSidebarComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
