@@ -2,14 +2,11 @@
   <div class="logo">
     <h4>ReserveApp</h4>
   </div>
-  <div *ngIf="currentUser">
-    <p>Zalogowano jako {{ currentUser.email }}</p>
-  </div>
   <ul class="nav-links">
-    <li><a href="#" [routerLink]="['/login']" *ngIf="!currentUser">Zaloguj</a></li>
-    <li><a href="#" *ngIf="currentUser" (click)="onLogout()">Wyloguj</a></li>
+    <li><a href="#" *ngIf="isLogged" (click)="onLogout()">Wyloguj <span>({{ this.currentUser.displayName }})</span></a></li>
+    <li><a href="#" *ngIf="isLogged" [routerLink]="['/profile']">Profil</a></li>
     <li><a href="#" [routerLink]="['/register']">Zarejestruj</a></li>
-    <li><a href="#" *ngIf="currentUser" [routerLink]="['/generator']">Generator hoteli</a></li>
+    <li><a href="#" *ngIf="isLogged" [routerLink]="['/generator']">Generator hoteli</a></li>
   </ul>
   <div class="burger">
     <div class="line1"></div>

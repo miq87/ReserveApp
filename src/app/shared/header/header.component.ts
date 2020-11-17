@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app'
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,13 +9,20 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   currentUser: any
+  isLogged: boolean
 
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
     this.handleBurger()
     this._auth.getCurrentUser((user) => {
-      this.currentUser = user
+      if(user) {
+        this.currentUser = user
+        this.isLogged = true
+      }
+      else {
+        this.isLogged = false
+      }
     })
   }
   

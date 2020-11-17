@@ -31,10 +31,14 @@ header {
 .nav-links a {
     color: #FFF;
     text-decoration: none;
-    letter-spacing: 3px;
-    font-size: 14px;
+    letter-spacing: 1px;
+    font-size: 16px;
     margin: 8px;
     text-transform: uppercase;
+    span {
+        font-size: 0.7em;
+        color: yellow;
+    }
 }
 .nav-active {
     transform: translateX(0%);

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { MembersComponent } from './components/members/members.component';
-import { AuthGuard } from './guard/auth.guard';
 import { PromiseComponent } from './components/promise/promise.component';
 import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
@@ -21,8 +20,8 @@ const routes: Routes = [
   { path: 'promise', component: PromiseComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'add', component: AddNewHotelComponent, canActivate: [AngularFireAuthGuard] },
-  { path: 'hotels', component: HotelsComponent },
-  { path: 'hotels/:id', component: HotelDetailComponent },
+  { path: 'hotels', component: HotelsComponent, canActivate: [AngularFireAuthGuard] },
+  { path: 'hotels/:id', component: HotelDetailComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'generator', component: HotelGeneratorComponent, canActivate: [AngularFireAuthGuard] },
   { path: '**', component: Error404Component }
 ];
