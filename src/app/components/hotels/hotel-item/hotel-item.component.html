@@ -1,8 +1,13 @@
 <div class="card mb-2">
   <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
   <div class="card-body">
-    <h4 class="card-title">{{ hotel.street }}</h4>
-    <p>{{ hotel.postalCode }} {{ hotel.city }}, {{ hotel.state }}</p>
+    <div>
+      <img [src]="imgMain" [alt]="hotel.hotelName">
+    </div>
+    <div>
+      <h4 class="card-title">{{ hotel.street }}</h4>
+      <p>{{ hotel.postalCode }} {{ hotel.city }}, {{ hotel.state }}</p>
+    </div>
   </div>
   <div class="card-footer">
     <div class="btn-group">

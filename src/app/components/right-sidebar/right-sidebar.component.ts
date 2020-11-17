@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-right-sidebar',
@@ -10,10 +10,10 @@ export class RightSidebarComponent implements OnInit {
 
   currentUser: any
 
-  constructor() { }
+  constructor(private _auth: AuthService) { }
 
   ngOnInit(): void {
-    firebase.auth().onAuthStateChanged((user) => {
+    this._auth.getCurrentUser((user) => {
       this.currentUser = user
     })
   }

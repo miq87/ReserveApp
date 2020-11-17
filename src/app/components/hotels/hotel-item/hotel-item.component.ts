@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
+import { FireStorageService } from 'src/app/services/fire-storage.service';
 import { MessengerService } from 'src/app/services/messenger.service';
 
 @Component({
@@ -12,10 +13,25 @@ import { MessengerService } from 'src/app/services/messenger.service';
 export class HotelItemComponent implements OnInit {
 
   @Input() hotel: Hotel
+  imgMain: string
 
-  constructor(private _booking: BookingService, private _msg: MessengerService, private router: Router) { }
+  constructor(
+    private _fs: FireStorageService,
+    private _bs: BookingService,
+    private _msg: MessengerService,
+    private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._fs.getMainImage(this.hotel.id).then((data) => {
+      this.imgMain = data
+    })
+    .catch((err) => {
+      console.log(err.message)
+      this._fs.getDefaultImage().then((data) => {
+        this.imgMain = data
+      })
+    })
+  }
 
   onBook() {
     console.log('Chcę zarezerwować: ' + this.hotel.id)
@@ -23,7 +39,7 @@ export class HotelItemComponent implements OnInit {
   }
 
   onRemove() {
-    this._booking.removeHotelById(this.hotel.id).finally(() => {
+    this._bs.removeHotelById(this.hotel.id).finally(() => {
       this._msg.sendMsg(this.hotel.city)
     })
   }
