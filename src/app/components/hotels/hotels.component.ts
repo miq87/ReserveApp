@@ -3,6 +3,7 @@ import { Hotel } from 'src/app/models/hotel';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Subscription } from 'rxjs';
 import { BookingService } from 'src/app/services/booking.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-hotels',
@@ -15,7 +16,7 @@ export class HotelsComponent implements OnInit {
   numReq = 0
   subscription: Subscription
 
-  constructor(private _msg: MessengerService, private _booking: BookingService) {
+  constructor(private _msg: MessengerService, private _booking: BookingService, private snack: MatSnackBar) {
     this.hotelList = []
   }
 
@@ -38,8 +39,11 @@ export class HotelsComponent implements OnInit {
     this._booking.onLoadHotels(hotelCity).then((hotels) => {
       this.hotelList = hotels
     })
-    .catch((error) => {
-      console.log(error.message)
+    .catch((err) => {
+      console.log(err.message)
+    })
+    .finally(() => {
+      this.snack.open(`Liczba wyników: ${this.hotelList.length}`, 'OK')
     })
   }
 
