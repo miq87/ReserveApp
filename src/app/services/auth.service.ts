@@ -85,6 +85,8 @@ export class AuthService {
   logout() {
     firebase.auth().signOut().finally(() => {
       console.log('Logged out!')
+      this.currentUser = null
+      this.currentToken = null
       this.router.navigate(["/hotels"])
     })
   }
