@@ -29,12 +29,13 @@ export class AuthService {
       userCredential.user.updateProfile({
           displayName: user.firstName + ' ' + user.lastName
       })
-
-      this.insertUserData(userCredential).then(() => {
-        this.router.navigate(['/hotels'])
-      })
       .catch(err => {
         this.eventAuthError.next(err)
+      })
+      .finally(() => {
+        this.insertUserData(userCredential).then(() => {
+          this.router.navigate(['/hotels'])
+        })
       })
     })
     .catch((err) => {
