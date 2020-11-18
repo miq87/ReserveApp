@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  currentUser: any
+  isLogged: boolean
+
+  profileForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  })
+
+  constructor(private _auth: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this._auth.getCurrentUser((user) => {
+      if(user) {
+        this.currentUser = user
+        this.isLogged = true
+        console.log(user)
+      }
+      else {
+        this.isLogged = false
+      }
+    })
   }
 
 }

@@ -17,75 +17,69 @@ export class AuthService {
   readonly authState$: Observable<User | null> = this.fireAuth.authState
   private eventAuthError = new BehaviorSubject<string>("")
   eventAuthError$ = this.eventAuthError.asObservable()
-  newUser: any
+  currentUser: any
+  currentToken: any
 
   constructor(private fireAuth: AngularFireAuth, private router: Router) { }
     
   createUser(user) {
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
-      this.newUser = user
-      console.log(user)
-      console.log(userCredential)
+      this.currentUser = user
       userCredential.user.updateProfile({
           displayName: user.firstName + ' ' + user.lastName
       })
 
-      this.insertUserData(userCredential)
-      .then(() => {
+      this.insertUserData(userCredential).then(() => {
         this.router.navigate(['/hotels'])
       })
-      .catch(error => {
-        this.eventAuthError.next(error)
+      .catch(err => {
+        this.eventAuthError.next(err)
       })
     })
-    .catch((error) => {
-      this.eventAuthError.next(error)
+    .catch((err) => {
+      this.eventAuthError.next(err)
     })
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
     return firebase.firestore().doc(`users/${userCredential.user.uid}`).set({
-      email: this.newUser.email,
-      firstname: this.newUser.firstName,
-      lastname: this.newUser.lastName,
+      email: this.currentUser.email,
+      firstName: this.currentUser.firstName,
+      lastName: this.currentUser.lastName,
+      displayName: this.currentUser.displayName,
       role: 'network user'
     })
   }
   loginWithEmail(user) {
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage)
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((userCredential) => {
+      this.currentUser = userCredential.user
+    })
+    .catch((err) => {
+      console.log(err.message)
     });
   }
   loginGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      let token = (<any>result).credential.accessToken
-      let user = result.user
-      console.log(token)
-      console.log(user)
+    firebase.auth().signInWithPopup(provider).then((UserCredential) => {
+      this.currentToken = (<any>UserCredential).credential.accessToken
+      this.currentUser = UserCredential.user
       this.router.navigate(['/hotels'])
     })
-    .catch(error => {
-      console.log('error')
-      console.log(error)
+    .catch(err => {
+      console.log(err.message)
     })
   }
   loginFb() {
     const provider = new firebase.auth.FacebookAuthProvider
     //provider.addScope('user_birthday')
     firebase.auth().languageCode = 'pl_PL'
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      let token = (<any>result).credential.accessToken
-      let user = result.user
-      console.log(token)
-      console.log(user)
+    firebase.auth().signInWithPopup(provider).then((UserCredential) => {
+      this.currentToken = (<any>UserCredential).credential.accessToken
+      this.currentUser = UserCredential.user
       this.router.navigate(['/hotels'])
     })
-    .catch(error => {
-      console.log('error')
-      console.log(error)
+    .catch(err => {
+      console.log(err.message)
     })
   }
   logout() {
@@ -99,8 +93,7 @@ export class AuthService {
       map(authState => !!authState)
     )
   }
-
-   getCurrentUser(cb) {
+  getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
 

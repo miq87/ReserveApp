@@ -25,6 +25,7 @@ export class RegisternewComponent implements OnInit {
       this.authError = data
     })
   }
+  
   createUser() {
     this._auth.createUser(this.registerForm.value)
   }
