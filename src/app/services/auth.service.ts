@@ -25,29 +25,38 @@ export class AuthService {
   createUser(user) {
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
-      this.currentUser = user
+      this.currentUser = userCredential
+
       userCredential.user.updateProfile({
           displayName: user.firstName + ' ' + user.lastName
       })
-      .catch(err => {
+      .catch((err) => {
         this.eventAuthError.next(err)
       })
-      .finally(() => {
-        this.insertUserData(userCredential).then(() => {
-          this.router.navigate(['/hotels'])
-        })
-      })
+      
     })
     .catch((err) => {
       this.eventAuthError.next(err)
     })
+    .finally(() => {
+      console.log('finally')
+      console.log(this.currentUser)
+      this.insertUserData(this.currentUser).then((user) => {
+        console.log(user)
+        this.router.navigate(['/hotels'])
+      })
+      .catch((err) => {
+        this.eventAuthError.next(err)
+      })
+    })
+    
   }
-  insertUserData(userCredential: firebase.auth.UserCredential) {
+  insertUserData(userCredential) {
     return firebase.firestore().doc(`users/${userCredential.user.uid}`).set({
-      email: this.currentUser.email,
-      firstName: this.currentUser.firstName,
-      lastName: this.currentUser.lastName,
-      displayName: this.currentUser.displayName,
+      email: userCredential.user.email,
+      firstName: userCredential.user.firstName,
+      lastName: userCredential.user.lastName,
+      displayName: userCredential.user.displayName,
       role: 'network user'
     })
   }
