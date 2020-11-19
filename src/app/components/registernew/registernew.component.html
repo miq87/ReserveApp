@@ -2,7 +2,7 @@
   <form [formGroup]="registerForm" (ngSubmit)="createUser()">
     <div class="heading"><h3>Rejestracja</h3></div>
     <div class="row" *ngIf="authError">
-      <div class="col-12-md alert-danger">
+      <div class="alert-danger">
         {{ authError?.message }}
       </div>
     </div>
