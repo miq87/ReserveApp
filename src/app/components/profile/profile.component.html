@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
           <i class="fa fa-lock"></i>
-          <input class="form-control" [placeholder]="userData.date" name="date" type="date">
+          <input class="form-control" [placeholder]="userData.birthday" formControlName="birthday" name="birthday" type="date">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="profileForm.invalid">Zaktualizuj</button>

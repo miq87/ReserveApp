@@ -7,13 +7,8 @@ export class User implements IUser {
     email: string
     uid: string
     photoURL: string
-    date: Date
+    birthday: Date
     
-    /*constructor(firstName: string, lastName: string, email: string) {
-        this.firstName = firstName
-        this.lastName = lastName
-        this.email = email
-    }*/
     constructor() {}
     
 }

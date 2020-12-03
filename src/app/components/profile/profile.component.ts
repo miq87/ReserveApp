@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', Validators.required],
-    password: ['', Validators.required]
+    birthday: ['', Validators.required],
+    //password: ['', Validators.required]
   })
 
   constructor(private _auth: AuthService, private fb: FormBuilder) {
@@ -44,9 +45,9 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser() {
-    this._auth.updateUserData(this.currentUser.uid, this.userData).then((doc) => {
+    console.log(this.profileForm.value)
+    this._auth.updateUserData(this.currentUser.uid, this.profileForm.value).then((doc) => {
       console.log('user updated!')
-      console.log(doc)
     }).catch((err) => {
       console.log(err.mmessage)
     })
