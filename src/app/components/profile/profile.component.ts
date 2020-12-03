@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
+  currentUser: any
   userData: User
   isLogged: boolean
 
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this._auth.getCurrentUser((user) => {
       if(user) {
+        this.currentUser = user
         this.isLogged = true
         this._auth.getUserData(user.uid).then((user) => {
           this.userData = <User>user.data()
@@ -42,7 +44,12 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser() {
-
+    this._auth.updateUserData(this.currentUser.uid, this.userData).then((doc) => {
+      console.log('user updated!')
+      console.log(doc)
+    }).catch((err) => {
+      console.log(err.mmessage)
+    })
   }
 
 }
