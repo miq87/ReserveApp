@@ -109,5 +109,9 @@ export class AuthService {
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
+  getUserData(userId) {
+    return firebase.firestore().collection("users").doc(userId).get()
+    //doc(`users/${}`).get()
+  }
 
 }

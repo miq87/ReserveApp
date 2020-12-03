@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  currentUser: any
+  userData: User
   isLogged: boolean
 
   profileForm = this.fb.group({
@@ -24,14 +25,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this._auth.getCurrentUser((user) => {
       if(user) {
-        this.currentUser = user
         this.isLogged = true
-        console.log(user)
+        this._auth.getUserData(user.uid).then((user) => {
+          this.userData = <User>user.data()
+          console.log(this.userData)
+        }).catch((err) => {
+          console.log(err.message)
+        })
       }
       else {
         this.isLogged = false
       }
     })
+  }
+
+  updateUser() {
+
   }
 
 }
