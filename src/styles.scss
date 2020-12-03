@@ -13,12 +13,13 @@ html, body { height: 100% }
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 body {
     background-color: $dark-sky-blue;
     color: $safety-orange-blaze-orange;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 ul {
@@ -61,7 +62,7 @@ ul {
         opacity: 0.8;
     }
     .form-group {
-        margin: 0 auto 6px;
+        margin: 8px auto;
         position: relative;
     }
     .form-group > i {
@@ -69,13 +70,14 @@ ul {
         font-size: 18px;
         line-height: 32px;
         position: absolute;
-        left: 14px;
+        left: 12px;
     }
     .form-control {
-        color: $queen-blue;
+        max-width: 300px;
         border-radius: 0;
+        color: $queen-blue;
         padding: 4px 0px 0px 32px;
-        margin: 4px;
+        margin: 0px;
         box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
         transition: all 0.5s;
         border: 0px;

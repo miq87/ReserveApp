@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -20,7 +20,9 @@ export class ProfileComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private _auth: AuthService, private fb: FormBuilder) { }
+  constructor(private _auth: AuthService, private fb: FormBuilder) {
+    this.userData = new User()
+  }
 
   ngOnInit(): void {
     this._auth.getCurrentUser((user) => {
