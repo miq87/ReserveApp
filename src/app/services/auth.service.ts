@@ -111,7 +111,9 @@ export class AuthService {
   }
   getUserData(userId) {
     return firebase.firestore().collection("users").doc(userId).get()
-    //doc(`users/${}`).get()
+  }
+  updateUserData(userId, userData) {
+    return firebase.firestore().collection("users").doc(userId).update(userData)
   }
 
 }
