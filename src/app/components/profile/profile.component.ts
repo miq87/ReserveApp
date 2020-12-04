@@ -10,15 +10,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  currentUser: any
+  userId: string
   userData: User
   isLogged: boolean
 
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
+    displayName: ['', Validators.required],
     email: ['', Validators.required],
     birthday: ['', Validators.required],
+    role: ['', Validators.required],
   })
 
   constructor(private _auth: AuthService, private fb: FormBuilder) {
@@ -28,11 +30,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this._auth.getCurrentUser((user) => {
       if(user) {
-        this.currentUser = user
+        this.userId = user.uid
         this.isLogged = true
         this._auth.getUserData(user.uid).then((user) => {
           this.userData = <User>user.data()
-          console.log(this.userData)
+          this.profileForm.setValue(user.data())
         }).catch((err) => {
           console.log(err.message)
         })
@@ -44,9 +46,11 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser() {
-    console.log(this.profileForm.value)
-    this._auth.updateUserData(this.currentUser.uid, this.profileForm.value).then((doc) => {
-      console.log('user updated!')
+    this._auth.updateUserData(this.userId, this.profileForm.value).then((doc) => {
+      this._auth.updateUserProfile(this.profileForm.value.displayName).then((doc) => {
+      }).catch((err) => {
+        console.log(err.mmessage)
+      })
     }).catch((err) => {
       console.log(err.mmessage)
     })

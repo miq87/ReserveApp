@@ -115,5 +115,10 @@ export class AuthService {
   updateUserData(userId, userData) {
     return firebase.firestore().collection("users").doc(userId).update(userData)
   }
+  updateUserProfile(displayName) {
+    return firebase.auth().currentUser.updateProfile({
+      displayName: displayName
+    })
+  }
 
 }
