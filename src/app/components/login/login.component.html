@@ -1,19 +1,23 @@
 <div class="myCard">
-  <div class="heading">
-    <h3>Logowanie</h3>
-  </div>
+  <div class="heading"><h2>Logowanie</h2></div>
   <form [formGroup]="loginForm" (ngSubmit)="loginWithEmail()">
-    <input class="form-control" formControlName="email" type="email" name="email" placeholder="E-mail">
-    <input class="form-control" formControlName="password" type="password" name="password" placeholder="Password">
-    <button class="btn btn-primary btn-sm" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
+    <div class="form-group">
+      <i class="fa fa-user"></i>
+      <input class="form-control" formControlName="email" name="email" placeholder="E-mail" type="email">
+    </div>
+    <div class="form-group">
+      <i class="fa fa-lock"></i>
+      <input class="form-control" formControlName="password" name="password" placeholder="Hasło" type="password">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-md" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
+    </div>
   </form>
   <div>
-    <div>
-      <ul class="social">
-        <li><a class="fab fa-facebook-f" (click)="loginFb()"></a></li>
-        <li><a class="fab fa-google" (click)="loginGoogle()"></a></li>
-        <li><a class="fas fa-sign-out-alt" (click)="logout()"></a></li>
-      </ul>
-    </div>
+    <ul class="social">
+      <li><a class="fab fa-facebook-f" (click)="loginFb()"></a></li>
+      <li><a class="fab fa-google" (click)="loginGoogle()"></a></li>
+      <li><a class="fas fa-sign-out-alt" (click)="logout()"></a></li>
+    </ul>
   </div>
 </div>
