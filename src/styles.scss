@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
 $queen-blue: rgba(51, 101, 138, 1);
 $dark-sky-blue: rgba(134, 187, 216, 1);
 $charcoal: rgba(47, 72, 88, 1);
@@ -40,7 +41,18 @@ label {
     color: darkslategray;
 }
 .btn {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin: 4px;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    transition: all 0.5s;
+}
+.btn:hover {
+    opacity: 0.8;
 }
 
 .myCard {
@@ -67,16 +79,6 @@ label {
         span {
             font-size: 18px;
         }
-    }
-    .btn {
-        border-radius: 6px;
-        padding: 4px 8px;
-        margin: 4px;
-        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-        transition: all 0.5s;
-    }
-    .btn:hover {
-        opacity: 0.8;
     }
     .form-group {
         max-width: 300px;
