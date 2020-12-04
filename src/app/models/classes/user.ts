@@ -1,4 +1,4 @@
-import { IUser } from '../interfaces/iuser';
+import { IUser } from 'src/app/models/interfaces/iuser';
 
 export class User implements IUser {
     firstName: string
