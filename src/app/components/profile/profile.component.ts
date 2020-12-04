@@ -22,9 +22,7 @@ export class ProfileComponent implements OnInit {
     role: ['', Validators.required],
   })
 
-  constructor(private _auth: AuthService, private fb: FormBuilder) {
-    this.userData = new User()
-  }
+  constructor(private _auth: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this._auth.getCurrentUser((user) => {
@@ -42,6 +40,7 @@ export class ProfileComponent implements OnInit {
 
   updateUser() {
     this._auth.updateUserData(this.userId, this.profileForm.value).then((doc) => {
+      this.userData = this.profileForm.value
       this._auth.updateUserProfile(this.profileForm.value.displayName).then((doc) => {
       }).catch((err) => {
         console.log(err.mmessage)
