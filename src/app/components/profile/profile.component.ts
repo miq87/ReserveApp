@@ -12,7 +12,6 @@ export class ProfileComponent implements OnInit {
 
   userId: string
   userData: User
-  isLogged: boolean
 
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -31,16 +30,12 @@ export class ProfileComponent implements OnInit {
     this._auth.getCurrentUser((user) => {
       if(user) {
         this.userId = user.uid
-        this.isLogged = true
         this._auth.getUserData(user.uid).then((user) => {
           this.userData = <User>user.data()
           this.profileForm.setValue(user.data())
         }).catch((err) => {
           console.log(err.message)
         })
-      }
-      else {
-        this.isLogged = false
       }
     })
   }

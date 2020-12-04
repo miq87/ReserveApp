@@ -8,6 +8,7 @@ export class User implements IUser {
     uid: string
     photoURL: string
     birthday: Date
+    role: string
     
     constructor() {}
     
