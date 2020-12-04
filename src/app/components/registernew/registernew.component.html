@@ -24,7 +24,10 @@
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Zarejestruj</button>
-        <div>Masz już konto ? <a href="/login">Zaloguj</a></div>
+    </div>
+    <div class="form-group mb-5">
+      <span>Masz już konto ? </span>
+      <button type="submit" class="btn btn-sm btn-warning" [routerLink]="['/login']">Zaloguj</button>
     </div>
     <div class="form-footer">
       <span>Zarejestruj przez:</span>

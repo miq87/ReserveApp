@@ -37,16 +37,18 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
-
   updateUser() {
     this._auth.updateUserData(this.userId, this.profileForm.value).then((doc) => {
       this.userData = this.profileForm.value
+    })
+    .catch((err) => {
+      console.log(err.mmessage)
+    })
+    .finally(() => {
       this._auth.updateUserProfile(this.profileForm.value.displayName).then((doc) => {
       }).catch((err) => {
         console.log(err.mmessage)
       })
-    }).catch((err) => {
-      console.log(err.mmessage)
     })
   }
 
