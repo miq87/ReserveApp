@@ -84,6 +84,11 @@ ul {
         border-bottom: 2px solid $dark-sky-blue;
         height: 34px;
     }
+    .form-control[type=file] {
+        background: transparent;
+        box-shadow: none;
+        border: 0px;
+    }
     .form-control::placeholder {
         font-size: 16px;
         color: rgba(0,0,0,0.4);
