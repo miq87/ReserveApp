@@ -25,9 +25,18 @@ export class RegisternewComponent implements OnInit {
       this.authError = data
     })
   }
-  
   createUser() {
     this._auth.createUser(this.registerForm.value)
+  }
+  
+  loginFb() {
+    this._auth.loginFb()
+  }
+  loginGoogle() {
+    this._auth.loginGoogle()
+  }
+  loginInstagram() {
+    console.log('Instagram')
   }
 
 }

@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   loginWithEmail() {
-    console.log(this.loginForm.value)
     this._auth.loginWithEmail(this.loginForm.value)
   }
   loginFb() {

@@ -29,14 +29,15 @@
       <span>Masz już konto ? </span>
       <button type="submit" class="btn btn-sm btn-warning" [routerLink]="['/login']">Zaloguj</button>
     </div>
-    <div class="form-footer">
-      <span>Zarejestruj przez:</span>
-      <ul class="social">
-        <li><a class="fab fa-facebook-f" href=""></a></li>
-        <li><a class="fab fa-twitter" href=""></a></li>
-        <li><a class="fab fa-instagram" href=""></a></li>
-        <li><a class="fab fa-pinterest" href=""></a></li>
-      </ul>
+    <div class="social">
+      <div>Lub zaloguj przez</div>
+      <div>
+        <ul>
+          <li><a class="fab fa-facebook-f" (click)="loginFb()"></a></li>
+          <li><a class="fab fa-twitter" (click)="loginGoogle()"></a></li>
+          <li><a class="fab fa-instagram" (click)="loginInstagram()"></a></li>
+        </ul>
+      </div>
     </div>
   </form>
 </div>
