@@ -26,12 +26,21 @@ ul {
     list-style: none;
 }
 
+a {
+    color: #3FA9F2;
+    text-decoration: underline;
+    letter-spacing: 1px;
+}
+a:hover {
+    text-decoration: underline;
+}
+
 .myCard {
     background-color: $queen-blue;
     padding: 10px;
     margin: 0px 0px 8px 0px;
     box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-    color: $dark-sky-blue;
+    color: #FFF;
 
     .card {
         background-color: $honey-yellow;
@@ -76,13 +85,13 @@ ul {
         max-width: 300px;
         border-radius: 0;
         color: $queen-blue;
-        padding: 4px 0px 0px 32px;
+        padding-left: 36px;
         margin: 0px;
         box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
         transition: all 0.5s;
         border: 0px;
         border-bottom: 2px solid $dark-sky-blue;
-        height: 34px;
+        height: 36px;
     }
     .form-control[type=file] {
         background: transparent;
@@ -102,16 +111,7 @@ ul {
     .ng-invalid:not(form)  {
         border-left: 5px solid #a94442;
     }
-
-
-    .form-login {
-        color: #FFF;
-        font-size: 16px;
-        margin: 10px 0;
-        display: block;
-        a { color: #3FA9F2; }
-        a:hover { text-decoration: underline; }
-    }
+    
     .form-footer {
         background-color: $dark-sky-blue;
         text-align: center;

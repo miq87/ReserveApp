@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
     lastName: ['', Validators.required],
     email: ['', Validators.required],
     birthday: ['', Validators.required],
-    //password: ['', Validators.required]
   })
 
   constructor(private _auth: AuthService, private fb: FormBuilder) {

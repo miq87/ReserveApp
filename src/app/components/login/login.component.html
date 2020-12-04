@@ -14,10 +14,13 @@
     </div>
   </form>
   <div>
-    <ul class="social">
-      <li><a class="fab fa-facebook-f" (click)="loginFb()"></a></li>
-      <li><a class="fab fa-google" (click)="loginGoogle()"></a></li>
-      <li><a class="fas fa-sign-out-alt" (click)="logout()"></a></li>
-    </ul>
+    <div>
+      <i class="fab fa-facebook-f"></i>
+      <button class="btn btn-warning btn-md" (click)="loginFb()">Facebook login</button>
+    </div>
+    <div>
+      <i class="fab fa-google"></i>
+      <button class="btn btn-danger btn-md" (click)="loginGoogle()">Google login</button>
+    </div>
   </div>
 </div>
