@@ -12,15 +12,9 @@
     <div class="form-group">
       <button class="btn btn-primary btn-md" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
     </div>
+    <div class="form-group">
+      <button class="btn btn-warning" (click)="loginFb()"><i class="fab fa-facebook-f"></i> Zaloguj</button>
+      <button class="btn btn-danger" (click)="loginGoogle()"><i class="fab fa-google"></i> Zaloguj</button>
+    </div>
   </form>
-  <div>
-    <div>
-      <i class="fab fa-facebook-f"></i>
-      <button class="btn btn-warning btn-md" (click)="loginFb()">Facebook login</button>
-    </div>
-    <div>
-      <i class="fab fa-google"></i>
-      <button class="btn btn-danger btn-md" (click)="loginGoogle()">Google login</button>
-    </div>
-  </div>
 </div>

@@ -26,7 +26,6 @@ body {
 ul {
     list-style: none;
 }
-
 a {
     color: #3FA9F2;
     letter-spacing: 1px;
@@ -39,6 +38,9 @@ label {
     font-size: 12px;
     font-weight: 600;
     color: darkslategray;
+}
+.btn {
+    text-transform: uppercase;
 }
 
 .myCard {
