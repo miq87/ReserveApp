@@ -25,6 +25,9 @@ export class AuthService {
   resetError(): void {
     this.eventAuthError.next('')
   }
+  sendError(err): void {
+    this.eventAuthError.next(err)
+  }
 
   createUser(newUser) {
     firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)

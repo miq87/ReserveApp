@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
 
   userId: string
   userData: User
+  authError: any
 
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -19,22 +20,33 @@ export class ProfileComponent implements OnInit {
     displayName: ['', Validators.required],
     email: [{ value: '', disabled: true }, Validators.required],
     birthday: ['', Validators.required],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      zip: ['']
+    }),
     role: ['', Validators.required],
   })
+
 
   constructor(private _auth: AuthService, private fb: FormBuilder) {
     this.userData = new User()
   }
 
   ngOnInit(): void {
+    this._auth.eventAuthError$.subscribe(data => {
+      this.authError = data
+    })
     this._auth.getCurrentUser((user) => {
       if(user) {
         this.userId = user.uid
         this._auth.getUserData(user.uid).then((user) => {
           this.userData = <User>user.data()
-          this.profileForm.setValue(user.data())
-        }).catch((err) => {
-          console.log(err.message)
+          this.profileForm.patchValue(user.data())
+          console.log(this.userData)
+          console.log(this.profileForm.value)
+        }).catch(err => {
+          this._auth.sendError(err)
         })
       }
     })
@@ -44,12 +56,12 @@ export class ProfileComponent implements OnInit {
       this.userData = this.profileForm.value
     })
     .catch((err) => {
-      console.log(err.mmessage)
+      this._auth.sendError(err)
     })
     .finally(() => {
       this._auth.updateUserProfile(this.profileForm.value.displayName).then((doc) => {
       }).catch((err) => {
-        console.log(err.mmessage)
+        this._auth.sendError(err)
       })
     })
   }
