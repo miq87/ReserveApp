@@ -25,9 +25,7 @@ export class RegisternewComponent implements OnInit {
       this.authError = data
     })
   }
-  ngOnDestroy(): void {
-    this._auth.resetError()
-  }
+  
   createUser() {
     this._auth.createUser(this.registerForm.value)
   }

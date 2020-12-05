@@ -23,7 +23,7 @@ export class AuthService {
   constructor(private fireAuth: AngularFireAuth, private router: Router) { }
   
   resetError(): void {
-    this.eventAuthError.next(null)
+    this.eventAuthError.next('')
   }
 
   createUser(newUser) {

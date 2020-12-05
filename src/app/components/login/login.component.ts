@@ -23,9 +23,6 @@ export class LoginComponent implements OnInit {
     this._auth.eventAuthError$.subscribe(data => {
       this.authError = data
     })
-  }
-
-  ngOnDestroy(): void {
     this._auth.resetError()
   }
 
