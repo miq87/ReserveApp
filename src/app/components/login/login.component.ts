@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -22,6 +23,10 @@ export class LoginComponent implements OnInit {
     this._auth.eventAuthError$.subscribe(data => {
       this.authError = data
     })
+  }
+
+  ngOnDestroy(): void {
+    this._auth.resetError()
   }
 
   loginWithEmail() {

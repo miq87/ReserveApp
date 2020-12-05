@@ -21,7 +21,11 @@ export class AuthService {
   currentToken: any
 
   constructor(private fireAuth: AngularFireAuth, private router: Router) { }
-    
+  
+  resetError(): void {
+    this.eventAuthError.next(null)
+  }
+
   createUser(newUser) {
     firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
     .then((userCredential) => {
@@ -90,7 +94,10 @@ export class AuthService {
       this.router.navigate(['/hotels'])
     })
     .catch(err => {
-      this.eventAuthError.next(err)
+      if(err.code === 'auth/account-exists-with-different-credential') {
+        err.message = 'Istnieje już konto o emailu takim samym jak konto Facebooka'
+        this.eventAuthError.next(err)
+      }
     })
   }
   logout() {

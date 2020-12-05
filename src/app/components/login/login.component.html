@@ -1,8 +1,6 @@
 <div class="myCard">
   <div class="heading"><h2>Logowanie</h2></div>
-  <div class="row" *ngIf="authError">
-    <div class="alert-danger">{{ authError?.message }}</div>
-  </div>
+  <div *ngIf="authError" class="alert-danger">{{ authError?.message }}</div>
 
   <form [formGroup]="loginForm" (ngSubmit)="loginWithEmail()">
     <div class="form-group">
@@ -17,7 +15,7 @@
       <button class="btn btn-secondary btn-md" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
     </div>
   </form>
-  
+
   <div class="form-group">
     <button class="btn btn-primary" (click)="loginFb()"><i class="fab fa-facebook-f"></i> Zaloguj</button>
     <button class="btn btn-warning" (click)="loginGoogle()"><i class="fab fa-google"></i> Zaloguj</button>
