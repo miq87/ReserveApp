@@ -17,12 +17,14 @@ export class ProfileComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     displayName: ['', Validators.required],
-    email: ['', Validators.required],
+    email: [{ value: '', disabled: true }, Validators.required],
     birthday: ['', Validators.required],
     role: ['', Validators.required],
   })
 
-  constructor(private _auth: AuthService, private fb: FormBuilder) { }
+  constructor(private _auth: AuthService, private fb: FormBuilder) {
+    this.userData = new User()
+  }
 
   ngOnInit(): void {
     this._auth.getCurrentUser((user) => {
