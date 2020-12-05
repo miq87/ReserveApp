@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  authError: any
+
   loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
@@ -16,7 +18,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _auth: AuthService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this._auth.eventAuthError$.subscribe(data => {
+      this.authError = data
+    })
+  }
 
   loginWithEmail() {
     this._auth.loginWithEmail(this.loginForm.value)

@@ -28,7 +28,6 @@ export class RegisternewComponent implements OnInit {
   createUser() {
     this._auth.createUser(this.registerForm.value)
   }
-  
   loginFb() {
     this._auth.loginFb()
   }

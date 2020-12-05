@@ -15,7 +15,7 @@ import "firebase/firestore";
 export class AuthService {
 
   readonly authState$: Observable<User | null> = this.fireAuth.authState
-  private eventAuthError = new BehaviorSubject<string>("")
+  private eventAuthError = new BehaviorSubject<string>('')
   eventAuthError$ = this.eventAuthError.asObservable()
   currentUser: User
   currentToken: any
@@ -30,7 +30,7 @@ export class AuthService {
       userCredential.user.updateProfile({
           displayName: newUser.firstName + ' ' + newUser.lastName,
       })
-      .catch((err) => {
+      .catch(err => {
         this.eventAuthError.next(err)
       })
       .finally(() => {
@@ -38,13 +38,13 @@ export class AuthService {
           console.log('Dodałem informacje o użytkowniku do FireStore')
           this.router.navigate(['/hotels'])
         })
-        .catch((err) => {
+        .catch(err => {
           this.eventAuthError.next(err)
         })
       })
 
     })
-    .catch((err) => {
+    .catch(err => {
       this.eventAuthError.next(err)
     })
     
@@ -62,8 +62,8 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((userCredential) => {
       this.currentUser = userCredential.user
     })
-    .catch((err) => {
-      console.log(err.message)
+    .catch(err => {
+      this.eventAuthError.next(err)
     });
   }
   loginGoogle() {
@@ -74,7 +74,7 @@ export class AuthService {
       this.router.navigate(['/hotels'])
     })
     .catch(err => {
-      console.log(err.message)
+      this.eventAuthError.next(err)
     })
   }
   loginFb() {
@@ -90,7 +90,7 @@ export class AuthService {
       this.router.navigate(['/hotels'])
     })
     .catch(err => {
-      console.log(err.message)
+      this.eventAuthError.next(err)
     })
   }
   logout() {
