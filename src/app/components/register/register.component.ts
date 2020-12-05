@@ -3,11 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-registernew',
-  templateUrl: './registernew.component.html',
-  styleUrls: ['./registernew.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class RegisternewComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   authError: any
 

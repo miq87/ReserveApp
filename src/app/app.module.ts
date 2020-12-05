@@ -21,7 +21,7 @@ import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.c
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.component';
 import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
-import { RegisternewComponent } from './components/registernew/registernew.component';
+import { RegisterComponent } from './components/register/register.component';
 import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 import { Error404Component } from './components/error404/error404.component';
@@ -56,7 +56,7 @@ firebase.initializeApp(firebaseConfig);
     HotelsComponent,
     HotelItemComponent,
     HotelGeneratorComponent,
-    RegisternewComponent,
+    RegisterComponent,
     FindHotelsComponent,
     HotelDetailComponent,
     Error404Component,

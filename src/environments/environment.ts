@@ -6,9 +6,6 @@ export const environment = {
   production: true
 };
 
-export const baseUrl = "http://localhost:3000"
-
-export const heroesUrl = baseUrl + '/heroes'
 
 /*
  * For easier debugging in development mode, you can import the following file
