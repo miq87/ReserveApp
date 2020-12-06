@@ -62,7 +62,7 @@ export class AuthService {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       displayName: userCredential.user.displayName,
-      role: 'network user'
+      role: 'email user'
     })
   }
   insertFacebookUserData(userCredential: firebase.auth.UserCredential) {
@@ -101,7 +101,9 @@ export class AuthService {
     firebase.auth().signInWithPopup(provider).then((userCredential) => {
       //this.currentToken = (<any>userCredential).credential.accessToken
       this.currentUser = userCredential.user
-      this.insertFacebookUserData(userCredential)
+      if(userCredential.additionalUserInfo.isNewUser) {
+        this.insertFacebookUserData(userCredential)
+      }
       this.router.navigate(['/hotels'])
     })
     .catch(err => {
