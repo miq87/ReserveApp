@@ -25,15 +25,17 @@ export class LoginComponent implements OnInit {
     })
     this._auth.resetError()
   }
-
   loginWithEmail() {
     this._auth.loginWithEmail(this.loginForm.value)
   }
   loginFb() {
-    this._auth.loginFb()
+    this._auth.loginBy('facebook')
   }
   loginGoogle() {
-    this._auth.loginGoogle()
+    this._auth.loginBy('google')
+  }
+  loginInstagram() {
+    this._auth.loginBy('instagram')
   }
 
 }

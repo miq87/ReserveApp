@@ -30,13 +30,13 @@ export class RegisterComponent implements OnInit {
     this._auth.createUser(this.registerForm.value)
   }
   loginFb() {
-    this._auth.loginFb()
+    this._auth.loginBy('facebook')
   }
   loginGoogle() {
-    this._auth.loginGoogle()
+    this._auth.loginBy('google')
   }
   loginInstagram() {
-    console.log('Instagram')
+    this._auth.loginBy('instagram')
   }
 
 }

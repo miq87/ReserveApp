@@ -8,6 +8,7 @@ import { User } from 'firebase'
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class AuthService {
         this.eventAuthError.next(err)
       })
       .finally(() => {
-        this.insertUserData(userCredential, newUser).then(() => {
+        this.insertUserData(userCredential).then(() => {
           console.log('Dodałem informacje o użytkowniku do FireStore')
           this.router.navigate(['/hotels'])
         })
@@ -56,23 +57,22 @@ export class AuthService {
     })
     
   }
-  insertUserData(userCredential: firebase.auth.UserCredential, newUser) {
+  insertUserData(userCredential: firebase.auth.UserCredential) {
+    console.log((<any>userCredential).credential.accessToken)
+    console.log(userCredential.additionalUserInfo.profile)
+    let fullName = userCredential.user.displayName.split(' ', 2)
+
+    let pipe = new DatePipe('en-US')
+    let birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
+    console.log(birthday)
+
     return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
       email: userCredential.user.email,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
+      firstName: fullName[0],
+      lastName: fullName[1],
       displayName: userCredential.user.displayName,
-      role: 'email user'
-    })
-  }
-  insertFacebookUserData(userCredential: firebase.auth.UserCredential) {
-    let names = userCredential.user.displayName.split(' ', 2)
-    return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
-      email: userCredential.user.email,
-      firstName: names[0],
-      lastName: names[1],
-      displayName: userCredential.user.displayName,
-      role: 'facebook user'
+      birthday: birthday,
+      role: userCredential.additionalUserInfo.providerId
     })
   }
   loginWithEmail(user) {
@@ -83,28 +83,35 @@ export class AuthService {
       this.eventAuthError.next(err)
     });
   }
-  loginGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider
-    firebase.auth().signInWithPopup(provider).then((userCredential) => {
-      //this.currentToken = (<any>userCredential).credential.accessToken
-      this.currentUser = userCredential.user
-      this.router.navigate(['/hotels'])
-    })
-    .catch(err => {
-      this.eventAuthError.next(err)
-    })
-  }
-  loginFb() {
-    const provider = new firebase.auth.FacebookAuthProvider
-    //provider.addScope('user_birthday')
+  loginBy(prov: string) {
+    let provider
+
+    switch(prov) {
+      case 'google':
+        provider = new firebase.auth.GoogleAuthProvider
+        provider.addScope('https://www.googleapis.com/auth/user.birthday.read');
+        break
+      case 'facebook':
+        provider = new firebase.auth.FacebookAuthProvider
+        provider.addScope('user_birthday')
+        break
+      default:
+        provider = new firebase.auth.FacebookAuthProvider
+        
+    }
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then((userCredential) => {
-      //this.currentToken = (<any>userCredential).credential.accessToken
+      this.currentToken = (<any>userCredential).credential.accessToken
       this.currentUser = userCredential.user
       if(userCredential.additionalUserInfo.isNewUser) {
-        this.insertFacebookUserData(userCredential)
+        this.insertUserData(userCredential).then(() => {
+          console.log('Dodałem informacje o użytkowniku do FireStore')
+        })
+        .catch(err => {
+          this.eventAuthError.next(err)
+        })
       }
-      this.router.navigate(['/hotels'])
+      this.router.navigate(['/profile'])
     })
     .catch(err => {
       if(err.code === 'auth/account-exists-with-different-credential') {
@@ -112,6 +119,7 @@ export class AuthService {
         this.eventAuthError.next(err)
       }
     })
+
   }
   logout() {
     firebase.auth().signOut().finally(() => {
