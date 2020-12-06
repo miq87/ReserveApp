@@ -25,10 +25,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 import { Error404Component } from './components/error404/error404.component';
-import * as firebase from "firebase/app";
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import * as firebase from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",

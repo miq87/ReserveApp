@@ -55,12 +55,12 @@ export class ProfileComponent implements OnInit {
     this._auth.updateUserData(this.userId, this.profileForm.value).then((doc) => {
       this.userData = this.profileForm.value
     })
-    .catch((err) => {
+    .catch(err => {
       this._auth.sendError(err)
     })
     .finally(() => {
-      this._auth.updateUserProfile(this.profileForm.value.displayName).then((doc) => {
-      }).catch((err) => {
+      this._auth.updateUserDisplayName(this.profileForm.value.displayName).then((doc) => {
+      }).catch(err => {
         this._auth.sendError(err)
       })
     })

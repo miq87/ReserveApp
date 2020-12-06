@@ -57,12 +57,22 @@ export class AuthService {
     
   }
   insertUserData(userCredential: firebase.auth.UserCredential, newUser) {
-    return firebase.firestore().doc(`users/${userCredential.user.uid}`).set({
+    return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
       email: userCredential.user.email,
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       displayName: userCredential.user.displayName,
       role: 'network user'
+    })
+  }
+  insertFacebookUserData(userCredential: firebase.auth.UserCredential) {
+    let names = userCredential.user.displayName.split(' ', 2)
+    return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
+      email: userCredential.user.email,
+      firstName: names[0],
+      lastName: names[1],
+      displayName: userCredential.user.displayName,
+      role: 'facebook user'
     })
   }
   loginWithEmail(user) {
@@ -76,7 +86,7 @@ export class AuthService {
   loginGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider
     firebase.auth().signInWithPopup(provider).then((userCredential) => {
-      this.currentToken = (<any>userCredential).credential.accessToken
+      //this.currentToken = (<any>userCredential).credential.accessToken
       this.currentUser = userCredential.user
       this.router.navigate(['/hotels'])
     })
@@ -89,11 +99,9 @@ export class AuthService {
     //provider.addScope('user_birthday')
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then((userCredential) => {
-      this.currentToken = (<any>userCredential).credential.accessToken
+      //this.currentToken = (<any>userCredential).credential.accessToken
       this.currentUser = userCredential.user
-      console.log(this.currentToken)
-      console.log(this.currentUser)
-      console.log(userCredential.additionalUserInfo.isNewUser)
+      this.insertFacebookUserData(userCredential)
       this.router.navigate(['/hotels'])
     })
     .catch(err => {
@@ -120,12 +128,12 @@ export class AuthService {
     return firebase.auth().onAuthStateChanged(cb)
   }
   getUserData(userId) {
-    return firebase.firestore().collection("users").doc(userId).get()
+    return firebase.firestore().collection('users').doc(userId).get()
   }
   updateUserData(userId, userData) {
-    return firebase.firestore().collection("users").doc(userId).update(userData)
+    return firebase.firestore().collection('users').doc(userId).update(userData)
   }
-  updateUserProfile(displayName) {
+  updateUserDisplayName(displayName) {
     return firebase.auth().currentUser.updateProfile({
       displayName: displayName
     })
