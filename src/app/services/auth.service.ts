@@ -58,13 +58,22 @@ export class AuthService {
     
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    console.log((<any>userCredential).credential.accessToken)
     console.log(userCredential.additionalUserInfo.profile)
     let fullName = userCredential.user.displayName.split(' ', 2)
 
     let pipe = new DatePipe('en-US')
-    let birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
-    console.log(birthday)
+    let birthday
+
+    switch(userCredential.additionalUserInfo.providerId) {
+      case 'facebook.com':
+        birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
+        break;
+      case 'google.com':
+        birthday = '2000-09-11'
+        break;
+      case 'password':
+        birthday = '2000-09-11'
+    }
 
     return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
       email: userCredential.user.email,
