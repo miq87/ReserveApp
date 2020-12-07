@@ -9,6 +9,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { DatePipe } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthService {
   currentUser: User
   currentToken: any
 
-  constructor(private fireAuth: AngularFireAuth, private router: Router) { }
+  constructor(private fireAuth: AngularFireAuth, private router: Router, private http: HttpClient) { }
   
   resetError(): void {
     this.eventAuthError.next('')
@@ -63,11 +64,21 @@ export class AuthService {
     let pipe = new DatePipe('en-US')
     let birthday
 
+    console.log(userCredential)
+
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break;
       case 'google.com':
+        let headers = new HttpHeaders().set('Authorization', 'Bearer ' + (<any>userCredential).credential.accessToken)
+        let params =  new HttpParams().set('idToken', (<any>userCredential).credential.idToken)
+        console.log(headers)
+        this.http.get('https://people.googleapis.com/v1/people/me', { headers: headers, params: params }).subscribe((data) => {
+          console.log(data)
+        }, (error) => {
+          console.log(error.message)
+        })
         birthday = '2001-09-11'
         break;
       case 'password':
