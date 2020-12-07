@@ -58,7 +58,6 @@ export class AuthService {
     
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    console.log(userCredential.additionalUserInfo.profile)
     let fullName = userCredential.user.displayName.split(' ', 2)
 
     let pipe = new DatePipe('en-US')
@@ -69,10 +68,10 @@ export class AuthService {
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break;
       case 'google.com':
-        birthday = '2000-09-11'
+        birthday = '2001-09-11'
         break;
       case 'password':
-        birthday = '2000-09-11'
+        birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
     }
 
     return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
@@ -81,7 +80,8 @@ export class AuthService {
       lastName: fullName[1],
       displayName: userCredential.user.displayName,
       birthday: birthday,
-      role: userCredential.additionalUserInfo.providerId
+      role: userCredential.additionalUserInfo.providerId,
+      address: { street: '', city: '', zip: '' }
     })
   }
   loginWithEmail(user) {
