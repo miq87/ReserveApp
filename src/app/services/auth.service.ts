@@ -71,14 +71,6 @@ export class AuthService {
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break;
       case 'google.com':
-        let headers = new HttpHeaders().set('Authorization', 'Bearer ' + (<any>userCredential).credential.accessToken)
-        let params =  new HttpParams().set('idToken', (<any>userCredential).credential.idToken)
-        console.log(headers)
-        this.http.get('https://people.googleapis.com/v1/people/me', { headers: headers, params: params }).subscribe((data) => {
-          console.log(data)
-        }, (error) => {
-          console.log(error.message)
-        })
         birthday = '2001-09-11'
         break;
       case 'password':
@@ -123,6 +115,20 @@ export class AuthService {
     firebase.auth().signInWithPopup(provider).then((userCredential) => {
       this.currentToken = (<any>userCredential).credential.accessToken
       this.currentUser = userCredential.user
+      ///
+      if(prov == 'google') {
+        let params =  new HttpParams()
+        .set('personFields', "birthdays")
+        .set('key', 'AIzaSyC_fTrGTvK8jjXIj2epeiY2HKqVWD_MFeM')
+        .set('access_token', (<any>userCredential).credential.accessToken)
+        this.http.get('https://people.googleapis.com/v1/people/me', { params: params }).subscribe((data) => {
+          console.log(data)
+        }, (error) => {
+          console.log(error.message)
+        })
+      }
+      ///
+      
       if(userCredential.additionalUserInfo.isNewUser) {
         this.insertUserData(userCredential).then(() => {
           console.log('Dodałem informacje o użytkowniku do FireStore')
