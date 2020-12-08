@@ -4,12 +4,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase'
-
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+
+declare var gapi: any;
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +74,7 @@ export class AuthService {
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break;
       case 'google.com':
+        this.getGoogleBirthdays()
         birthday = '2001-09-11'
         break;
       case 'password':
@@ -86,6 +90,13 @@ export class AuthService {
       role: userCredential.additionalUserInfo.providerId,
       address: { street: '', city: '', zip: '' }
     })
+  }
+  getGoogleBirthdays() {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.currentToken)
+    let params =  new HttpParams().set('personFields', 'birthdays')
+    this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params }).subscribe((data) => {
+      console.log((<any>data).birthdays[0].date)
+    }, (error) => { console.log(error.message) })
   }
   loginWithEmail(user) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((userCredential) => {
@@ -109,25 +120,12 @@ export class AuthService {
         break
       default:
         provider = new firebase.auth.FacebookAuthProvider
-        
     }
+
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then((userCredential) => {
       this.currentToken = (<any>userCredential).credential.accessToken
       this.currentUser = userCredential.user
-      ///
-      if(prov == 'google') {
-        let params =  new HttpParams()
-        .set('personFields', "birthdays")
-        .set('key', 'AIzaSyC_fTrGTvK8jjXIj2epeiY2HKqVWD_MFeM')
-        .set('access_token', (<any>userCredential).credential.accessToken)
-        this.http.get('https://people.googleapis.com/v1/people/me', { params: params }).subscribe((data) => {
-          console.log(data)
-        }, (error) => {
-          console.log(error.message)
-        })
-      }
-      ///
       
       if(userCredential.additionalUserInfo.isNewUser) {
         this.insertUserData(userCredential).then(() => {

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/classes/user';
@@ -13,6 +14,7 @@ export class ProfileComponent implements OnInit {
   userId: string
   userData: User
   authError: any
+  userToken: any
 
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
