@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -44,7 +44,6 @@ export class AuthService {
       .finally(() => {
         this.insertUserData(userCredential).then(() => {
           console.log('Dodałem informacje o użytkowniku do FireStore')
-          this.router.navigate(['/hotels'])
         })
         .catch(err => {
           this.eventAuthError.next(err)
@@ -55,29 +54,27 @@ export class AuthService {
     .catch(err => {
       this.eventAuthError.next(err)
     })
-    
+    .finally(() => this.router.navigate(['/profile']))
   }
-  insertUserData(userCredential: firebase.auth.UserCredential) {
+  async insertUserData(userCredential: firebase.auth.UserCredential) {
     let fullName = userCredential.user.displayName.split(' ', 2)
 
     let pipe = new DatePipe('en-US')
     let birthday
 
-    console.log(userCredential)
-
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
-        break;
+        break
       case 'google.com':
         this.getGoogleBirthdays()
         birthday = '2001-09-11'
-        break;
+        break
       case 'password':
         birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
     }
 
-    return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
+    return await firebase.firestore().collection('users').doc(userCredential.user.uid).set({
       email: userCredential.user.email,
       firstName: fullName[0],
       lastName: fullName[1],
@@ -90,12 +87,18 @@ export class AuthService {
   getGoogleBirthdays() {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.currentToken)
     let params =  new HttpParams().set('personFields', 'birthdays')
-    this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params }).subscribe((data) => {
-
-      //let birthday: string = (<any>data).birthdays[0].date.year + '-' (<any>data).birthdays[0].date.year + '-' + (<any>data).birthdays[0].date.year
-      console.log('birtday')
-
-    }, (error) => { console.log(error.message) })
+    let birthdays
+    this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params })
+    .subscribe((data: any) => {
+      birthdays = data.birthdays;
+      birthdays.forEach(el => {
+        if(el.metadata.source.type === 'ACCOUNT') {
+          console.log(el.date);
+        }
+      });
+    }, err => {
+        this.eventAuthError.next(err)
+    })
   }
   loginWithEmail(user) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((userCredential) => {
@@ -134,7 +137,6 @@ export class AuthService {
           this.eventAuthError.next(err)
         })
       }
-      this.router.navigate(['/profile'])
     })
     .catch(err => {
       if(err.code === 'auth/account-exists-with-different-credential') {
@@ -142,6 +144,7 @@ export class AuthService {
         this.eventAuthError.next(err)
       }
     })
+    .finally(() => this.router.navigate(['/profile']))
 
   }
   logout() {
