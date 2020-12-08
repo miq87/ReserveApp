@@ -9,6 +9,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { DatePipe } from '@angular/common';
+import { NgZone } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthService {
   currentUser: User
   currentToken: any
 
-  constructor(private fireAuth: AngularFireAuth, private router: Router, private http: HttpClient) { }
+  constructor(private fireAuth: AngularFireAuth, private router: Router, private http: HttpClient, private zone: NgZone) { }
   
   resetError(): void {
     this.eventAuthError.next('')
@@ -144,8 +145,11 @@ export class AuthService {
         this.eventAuthError.next(err)
       }
     })
-    .finally(() => this.router.navigate(['/profile']))
-
+    .finally(() => {
+      this.zone.run(() => {
+        this.router.navigate(['/profile'])
+      })
+    })
   }
   logout() {
     firebase.auth().signOut().finally(() => {
