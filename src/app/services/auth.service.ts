@@ -9,10 +9,6 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { DatePipe } from '@angular/common';
-import { environment } from 'src/environments/environment';
-
-
-declare var gapi: any;
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +91,10 @@ export class AuthService {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.currentToken)
     let params =  new HttpParams().set('personFields', 'birthdays')
     this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params }).subscribe((data) => {
-      console.log((<any>data).birthdays[0].date)
+
+      //let birthday: string = (<any>data).birthdays[0].date.year + '-' (<any>data).birthdays[0].date.year + '-' + (<any>data).birthdays[0].date.year
+      console.log('birtday')
+
     }, (error) => { console.log(error.message) })
   }
   loginWithEmail(user) {
