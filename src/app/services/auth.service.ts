@@ -188,16 +188,21 @@ export class AuthService {
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
-  getUserData(userId) {
-    return firebase.firestore().collection('users').doc(userId).get()
+  getUserData() {
+
+    return firebase.firestore().collection('users').doc(this.currentUser.uid).get()
   }
-  updateUserData(userId, userData) {
-    return firebase.firestore().collection('users').doc(userId).update(userData)
+  updateUserData(userData) {
+    firebase.firestore().collection('users').doc(this.currentUser.uid).update(userData).then(() => {
+      this.updateUserDisplayName(userData.displayName)
+    }).catch(err => this.eventAuthError.next(err))
   }
   updateUserDisplayName(displayName) {
-    return firebase.auth().currentUser.updateProfile({
+    firebase.auth().currentUser.updateProfile({
       displayName: displayName
-    })
+    }).then(() => {
+      console.log('User Display Name updated')
+    }).catch(err => this.eventAuthError.next(err))
   }
   deleteUser(): void {
     firebase.auth().currentUser.delete().then(() => {

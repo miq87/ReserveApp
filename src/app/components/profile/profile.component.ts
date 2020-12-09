@@ -39,30 +39,18 @@ export class ProfileComponent implements OnInit {
     this._auth.getCurrentUser(user => {
       if(user) {
         this.userId = user.uid
-        this._auth.getUserData(user.uid).then(user => {
+        this._auth.getUserData().then(user => {
           this.userData = <User>(user.data())
           console.log(this.userData)
           this.profileForm.patchValue(this.userData)
         }).catch(err => {
-          console.log(err)
           this._auth.sendError(err)
         })
       }
     })
   }
   updateUser() {
-    this._auth.updateUserData(this.userId, this.profileForm.value).then((doc) => {
-      this.userData = this.profileForm.value
-    })
-    .catch(err => {
-      this._auth.sendError(err)
-    })
-    .finally(() => {
-      this._auth.updateUserDisplayName(this.profileForm.value.displayName).then((doc) => {
-      }).catch(err => {
-        this._auth.sendError(err)
-      })
-    })
+    this._auth.updateUserData(this.profileForm.value)
   }
   deleteUser() {
     this._auth.deleteUser()
