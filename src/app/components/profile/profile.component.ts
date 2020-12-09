@@ -31,9 +31,7 @@ export class ProfileComponent implements OnInit {
   })
 
 
-  constructor(private _auth: AuthService, private fb: FormBuilder) {
-    this.userData = new User()
-  }
+  constructor(private _auth: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this._auth.eventAuthError$.subscribe(data => {
@@ -44,8 +42,7 @@ export class ProfileComponent implements OnInit {
         this.userId = user.uid
         this._auth.getUserData(user.uid).then((user) => {
           this.userData = <User>user.data()
-          console.log(this.userData)
-          this.profileForm.patchValue(<User>user.data())
+          this.profileForm.patchValue(user.data())
         }).catch(err => {
           this._auth.sendError(err)
         })

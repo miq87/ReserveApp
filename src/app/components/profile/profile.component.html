@@ -1,7 +1,7 @@
 <div class="myCard">
   <div class="heading"><h2>Edycja profilu</h2></div>
   <div *ngIf="authError" class="alert-danger">{{ authError?.message }}</div>
-  <div>
+  <div *ngIf="userData">
     <form [formGroup]="profileForm" (ngSubmit)="updateUser()">
       <div class="form-group">
         <i class="fa fa-user"></i>

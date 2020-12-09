@@ -68,10 +68,10 @@ export class AuthService {
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break
       case 'google.com':
-        this.getGoogleBirthdays().then((data) => {
+        /*this.getGoogleBirthdays().then((data) => {
           birthday = data
-        })
-        //birthday = '2001-09-11'
+        })*/
+        birthday = '2001-09-11'
         break
       case 'password':
         birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
@@ -87,7 +87,7 @@ export class AuthService {
       address: { street: '', city: '', zip: '' }
     })
   }
-  getGoogleBirthdays(): Promise<string> {
+  getGoogleBirthdays() {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.currentToken)
     let params =  new HttpParams().set('personFields', 'birthdays')
     let birthdays
@@ -106,8 +106,8 @@ export class AuthService {
       }, err => {
         reject(err.message);
       })
-      reject('zle')
     })
+    return promise
   }
   loginWithEmail(user) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((userCredential) => {
