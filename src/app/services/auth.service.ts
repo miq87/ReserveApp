@@ -57,7 +57,7 @@ export class AuthService {
     })
     .finally(() => this.router.navigate(['/profile']))
   }
-  async insertUserData(userCredential: firebase.auth.UserCredential) {
+  insertUserData(userCredential: firebase.auth.UserCredential) {
     let fullName = userCredential.user.displayName.split(' ', 2)
 
     let pipe = new DatePipe('en-US')
@@ -68,14 +68,16 @@ export class AuthService {
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break
       case 'google.com':
-        this.getGoogleBirthdays()
-        birthday = '2001-09-11'
+        this.getGoogleBirthdays().then((data) => {
+          birthday = data
+        })
+        //birthday = '2001-09-11'
         break
       case 'password':
         birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
     }
 
-    return await firebase.firestore().collection('users').doc(userCredential.user.uid).set({
+    return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
       email: userCredential.user.email,
       firstName: fullName[0],
       lastName: fullName[1],
@@ -85,20 +87,25 @@ export class AuthService {
       address: { street: '', city: '', zip: '' }
     })
   }
-  getGoogleBirthdays() {
+  getGoogleBirthdays(): Promise<string> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.currentToken)
     let params =  new HttpParams().set('personFields', 'birthdays')
     let birthdays
-    this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params })
-    .subscribe((data: any) => {
-      birthdays = data.birthdays;
-      birthdays.forEach(el => {
-        if(el.metadata.source.type === 'ACCOUNT') {
-          console.log(el.date);
-        }
-      });
-    }, err => {
-        this.eventAuthError.next(err)
+    let gotowe
+
+    let promise = new Promise((resolve, reject) => {
+      this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params })
+      .subscribe((data: any) => {
+        birthdays = data.birthdays;
+        birthdays.forEach(el => {
+          if(el.metadata.source.type === 'ACCOUNT') {
+            gotowe = el.date.year + '-' + el.date.month + '-' + el.date.day;
+            resolve(gotowe);
+          }
+        });
+      }, err => {
+        reject(err.message);
+      })
     })
   }
   loginWithEmail(user) {
@@ -167,11 +174,11 @@ export class AuthService {
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
-  getUserData(userId) {
-    return firebase.firestore().collection('users').doc(userId).get()
+  async getUserData(userId) {
+    return await firebase.firestore().collection('users').doc(userId).get()
   }
-  updateUserData(userId, userData) {
-    return firebase.firestore().collection('users').doc(userId).update(userData)
+  async updateUserData(userId, userData) {
+    return await firebase.firestore().collection('users').doc(userId).update(userData)
   }
   updateUserDisplayName(displayName) {
     return firebase.auth().currentUser.updateProfile({

@@ -44,7 +44,8 @@ export class ProfileComponent implements OnInit {
         this.userId = user.uid
         this._auth.getUserData(user.uid).then((user) => {
           this.userData = <User>user.data()
-          this.profileForm.patchValue(this.userData)
+          console.log(this.userData)
+          this.profileForm.patchValue(<User>user.data())
         }).catch(err => {
           this._auth.sendError(err)
         })
