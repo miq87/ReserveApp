@@ -175,11 +175,11 @@ export class AuthService {
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
-  async getUserData(userId) {
-    return await firebase.firestore().collection('users').doc(userId).get()
+  getUserData(userId) {
+    return firebase.firestore().collection('users').doc(userId).get()
   }
-  async updateUserData(userId, userData) {
-    return await firebase.firestore().collection('users').doc(userId).update(userData)
+  updateUserData(userId, userData) {
+    return firebase.firestore().collection('users').doc(userId).update(userData)
   }
   updateUserDisplayName(displayName) {
     return firebase.auth().currentUser.updateProfile({
