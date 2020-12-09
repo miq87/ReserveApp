@@ -12,13 +12,9 @@ export class ProfileResolverService implements Resolve<User> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): User {
     let userData: User
-
-    this._auth.getUserData().then(user => {
-      userData = <User>user.data()
-      console.log(userData)
+    this._auth.getUserData().catch(user => {
+      userData = user.data()
     })
-    console.log(userData)
     return userData
-    
   }
 }
