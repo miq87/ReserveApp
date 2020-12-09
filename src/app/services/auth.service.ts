@@ -42,12 +42,7 @@ export class AuthService {
         this.eventAuthError.next(err)
       })
       .finally(() => {
-        this.insertUserData(userCredential).then(() => {
-          console.log('Dodałem informacje o użytkowniku do FireStore')
-        })
-        .catch(err => {
-          this.eventAuthError.next(err)
-        })
+        this.insertUserData(userCredential)
       })
 
     })
@@ -77,12 +72,7 @@ export class AuthService {
       this.currentUser = userCredential.user
       
       if(userCredential.additionalUserInfo.isNewUser) {
-        this.insertUserData(userCredential).then(() => {
-          console.log('Dodałem informacje o użytkowniku do FireStore')
-        })
-        .catch(err => {
-          this.eventAuthError.next(err)
-        })
+        this.insertUserData(userCredential)
       }
     })
     .catch(err => {
@@ -107,7 +97,7 @@ export class AuthService {
         promise = new Promise((resolve) => {
           resolve(pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd'))
         }).then(data => {
-          return this.addUserData(userCredential, data)
+          this.addUserData(userCredential, data)
         })
         break
       case 'google.com':
@@ -118,13 +108,13 @@ export class AuthService {
             reject(err)
           })
         }).then(data => {
-          return this.addUserData(userCredential, data)
+          this.addUserData(userCredential, data)
         }).catch(err => {
           this.eventAuthError.next(err)
         })
         break
       case 'password':
-        return this.addUserData(userCredential, pipe.transform(Date.now(), 'yyyy-MM-dd'))
+        this.addUserData(userCredential, pipe.transform(Date.now(), 'yyyy-MM-dd'))
     }
 
   }
@@ -140,7 +130,14 @@ export class AuthService {
       address: { street: '', city: '', zip: '' }
     }
     console.log(userData)
-    return firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData)
+
+    firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
+      console.log('Dodałem informacje o użytkowniku do FireStore')
+    })
+    .catch(err => {
+      this.eventAuthError.next(err)
+    })
+    
   }
   getGoogleBirthdays(accessToken) {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + accessToken)
@@ -174,10 +171,10 @@ export class AuthService {
   }
   
   logout() {
-    firebase.auth().signOut().finally(() => {
+    firebase.auth().signOut().then(() => {
       console.log('Wylogowany!')
       this.currentUser = null
-      this.router.navigate(['/hotels'])
+      this.router.navigate(['/register'])
     })
   }
   /*isLoggedIn(): Observable<boolean> {
@@ -189,7 +186,6 @@ export class AuthService {
     return firebase.auth().onAuthStateChanged(cb)
   }
   getUserData() {
-
     return firebase.firestore().collection('users').doc(this.currentUser.uid).get()
   }
   updateUserData(userData) {
