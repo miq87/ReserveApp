@@ -64,5 +64,8 @@ export class ProfileComponent implements OnInit {
       })
     })
   }
+  deleteUser() {
+    this._auth.deleteUser()
+  }
 
 }

@@ -3,21 +3,20 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase'
+import { User } from 'firebase';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { NgZone } from '@angular/core';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { DatePipe } from '@angular/common';
-import { NgZone } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  readonly authState$: Observable<User | null> = this.fireAuth.authState
+  //readonly authState$: Observable<User | null> = this.fireAuth.authState
   private eventAuthError = new BehaviorSubject<string>('')
   eventAuthError$ = this.eventAuthError.asObservable()
   currentUser: User
@@ -105,17 +104,10 @@ export class AuthService {
 
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
-        promise = new Promise((resolve, reject) => {
-          try {
-            resolve(pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd'))
-          }
-          catch(error) {
-            reject(error)
-          }
+        promise = new Promise((resolve) => {
+          resolve(pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd'))
         }).then(data => {
           return this.addUserData(userCredential, data)
-        }).catch(err => {
-          this.eventAuthError.next(err)
         })
         break
       case 'google.com':
@@ -147,6 +139,7 @@ export class AuthService {
       role: userCredential.additionalUserInfo.providerId,
       address: { street: '', city: '', zip: '' }
     }
+    console.log(userData)
     return firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData)
   }
   getGoogleBirthdays(accessToken) {
@@ -184,14 +177,14 @@ export class AuthService {
     firebase.auth().signOut().finally(() => {
       console.log('Wylogowany!')
       this.currentUser = null
-      this.router.navigate(["/hotels"])
+      this.router.navigate(['/hotels'])
     })
   }
-  isLoggedIn(): Observable<boolean> {
+  /*isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(
       map(authState => !!authState)
     )
-  }
+  }*/
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
@@ -205,6 +198,14 @@ export class AuthService {
     return firebase.auth().currentUser.updateProfile({
       displayName: displayName
     })
+  }
+  deleteUser(): void {
+    firebase.auth().currentUser.delete().then(() => {
+      this.router.navigate(['/register'])
+      console.log('Użytkownik usunięty')
+      firebase.firestore().collection('users').doc(this.currentUser.uid).delete().then(() => {
+      }).catch(err => this.eventAuthError.next(err))
+    }).catch(err => this.eventAuthError.next(err))
   }
 
 }
