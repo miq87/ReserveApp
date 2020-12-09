@@ -106,6 +106,7 @@ export class AuthService {
       }, err => {
         reject(err.message);
       })
+      reject('zle')
     })
   }
   loginWithEmail(user) {
