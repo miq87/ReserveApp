@@ -11,6 +11,7 @@ import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-det
 import { Error404Component } from './components/error404/error404.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard/';
+import { ProfileResolverService } from './services/profile-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hotels', pathMatch: 'full' },
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'members', component: MembersComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'promise', component: PromiseComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AngularFireAuthGuard] },
+  { path: 'profile', component: ProfileComponent, resolve: { userData: ProfileResolverService }, canActivate: [AngularFireAuthGuard] },
   { path: 'add', component: AddNewHotelComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'hotels', component: HotelsComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'hotels/:id', component: HotelDetailComponent, canActivate: [AngularFireAuthGuard] },

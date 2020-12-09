@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/classes/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProfileResolverService } from 'src/app/services/profile-resolver.service';
 
 @Component({
   selector: 'app-profile',
@@ -30,13 +32,24 @@ export class ProfileComponent implements OnInit {
     role: ['', Validators.required],
   })
 
-  constructor(private _auth: AuthService, private fb: FormBuilder) { }
+  constructor(
+    private _auth: AuthService,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this._auth.eventAuthError$.subscribe(data => {
       this.authError = data
     })
-    this._auth.getCurrentUser(user => {
+    //this.userData = this.activatedRoute.snapshot['userData']
+    this.activatedRoute.data.subscribe((data) => {
+      console.log(data)
+      this.userData = data.userData
+    })
+    console.log(this.userData)
+    this.profileForm.patchValue(this.userData)
+
+    /*this._auth.getCurrentUser(user => {
       if(user) {
         this.userId = user.uid
         this._auth.getUserData().then(user => {
@@ -47,7 +60,7 @@ export class ProfileComponent implements OnInit {
           this._auth.sendError(err)
         })
       }
-    })
+    })*/
   }
   updateUser() {
     this._auth.updateUserData(this.profileForm.value)

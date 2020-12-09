@@ -28,6 +28,7 @@ import { Error404Component } from './components/error404/error404.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import * as firebase from "firebase/app";
+import { ProfileResolverService } from './services/profile-resolver.service';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -78,7 +79,7 @@ firebase.initializeApp(firebaseConfig);
     DragDropModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [ProfileResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
