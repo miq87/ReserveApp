@@ -41,11 +41,11 @@ export class ProfileComponent implements OnInit {
     this._auth.eventAuthError$.subscribe(data => {
       this.authError = data
     })
-    //this.userData = this.activatedRoute.snapshot['userData']
-    this.activatedRoute.data.subscribe((data) => {
-      console.log(data)
-      this.userData = data.userData
-    })
+    /*this.activatedRoute.data.subscribe((data) => {
+      console.log(data.userData)
+      this.userData = <User>data.userData
+    })*/
+    this.userData = this.activatedRoute.snapshot.data['userData']
     console.log(this.userData)
     this.profileForm.patchValue(this.userData)
 
