@@ -10,6 +10,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import { DatePipe } from '@angular/common';
 import { NgZone } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +74,7 @@ export class AuthService {
     }
 
     firebase.auth().languageCode = 'pl_PL'
-    firebase.auth().signInWithPopup(provider).then((userCredential) => {
+    firebase.auth().signInWithPopup(provider).then(userCredential => {
       this.currentUser = userCredential.user
       
       if(userCredential.additionalUserInfo.isNewUser) {
@@ -98,25 +99,46 @@ export class AuthService {
     })
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    let fullName = userCredential.user.displayName.split(' ', 2)
-
     let pipe = new DatePipe('en-US')
-    let birthday
+    let promise
     let accessToken = (<any>userCredential).credential.accessToken
 
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
-        birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
+        promise = new Promise((resolve, reject) => {
+          try {
+            resolve(pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd'))
+          }
+          catch(error) {
+            reject(error)
+          }
+        }).then(data => {
+          return this.addUserData(userCredential, data)
+        }).catch(err => {
+          this.eventAuthError.next(err)
+        })
         break
       case 'google.com':
-        this.getGoogleBirthdays(accessToken)
-        birthday = '2001-09-11'
+        promise = new Promise((resolve, reject) => {
+          this.getGoogleBirthdays(accessToken).then(data => {
+            resolve(data)
+          }, err => {
+            reject(err)
+          })
+        }).then(data => {
+          return this.addUserData(userCredential, data)
+        }).catch(err => {
+          this.eventAuthError.next(err)
+        })
         break
       case 'password':
-        birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
+        return this.addUserData(userCredential, pipe.transform(Date.now(), 'yyyy-MM-dd'))
     }
 
-    return firebase.firestore().collection('users').doc(userCredential.user.uid).set({
+  }
+  addUserData(userCredential: firebase.auth.UserCredential, birthday) {
+    let fullName = userCredential.user.displayName.split(' ', 2)
+    let userData = {
       email: userCredential.user.email,
       firstName: fullName[0],
       lastName: fullName[1],
@@ -124,7 +146,8 @@ export class AuthService {
       birthday: birthday,
       role: userCredential.additionalUserInfo.providerId,
       address: { street: '', city: '', zip: '' }
-    })
+    }
+    return firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData)
   }
   getGoogleBirthdays(accessToken) {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + accessToken)
@@ -142,15 +165,14 @@ export class AuthService {
             resolve(bd);
           }
         });
-        resolve(null)
       }, err => {
-        reject(err.message);
+        reject(err);
       })
     })
     return promise
   }
   loginWithEmail(user) {
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((userCredential) => {
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(userCredential => {
       this.currentUser = userCredential.user
     })
     .catch(err => {

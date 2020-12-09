@@ -30,20 +30,21 @@ export class ProfileComponent implements OnInit {
     role: ['', Validators.required],
   })
 
-
   constructor(private _auth: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this._auth.eventAuthError$.subscribe(data => {
       this.authError = data
     })
-    this._auth.getCurrentUser((user) => {
+    this._auth.getCurrentUser(user => {
       if(user) {
         this.userId = user.uid
-        this._auth.getUserData(user.uid).then((user) => {
-          this.userData = <User>user.data()
-          this.profileForm.patchValue(user.data())
+        this._auth.getUserData(user.uid).then(user => {
+          this.userData = <User>(user.data())
+          console.log(this.userData)
+          this.profileForm.patchValue(this.userData)
         }).catch(err => {
+          console.log(err)
           this._auth.sendError(err)
         })
       }
