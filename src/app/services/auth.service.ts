@@ -68,9 +68,6 @@ export class AuthService {
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
         break
       case 'google.com':
-        /*this.getGoogleBirthdays().then((data) => {
-          birthday = data
-        })*/
         birthday = '2001-09-11'
         break
       case 'password':
