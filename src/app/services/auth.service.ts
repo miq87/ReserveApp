@@ -113,7 +113,6 @@ export class AuthService {
       default:
         birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
         this.addUserData(userCredential, birthday)
-        break
     }
   }
   addUserData(userCredential, bd) {
@@ -140,7 +139,6 @@ export class AuthService {
     let params =  new HttpParams().set('personFields', 'birthdays')
     let pipe = new DatePipe('en-US')
     let bd
-    console.log({ headers: headers, params: params })
 
      return new Promise((resolve, reject) => {
       this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params })
