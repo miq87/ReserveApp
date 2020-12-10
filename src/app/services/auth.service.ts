@@ -20,6 +20,7 @@ export class AuthService {
   private eventAuthError = new BehaviorSubject<string>('')
   eventAuthError$ = this.eventAuthError.asObservable()
   currentUser: User
+  accessToken: any
 
   constructor(private fireAuth: AngularFireAuth, private router: Router, private http: HttpClient, private zone: NgZone) { }
   
@@ -70,6 +71,7 @@ export class AuthService {
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then(userCredential => {
       this.currentUser = userCredential.user
+      this.accessToken = (<any>userCredential).credential.accessToken
       
       if(userCredential.additionalUserInfo.isNewUser) {
         this.insertUserData(userCredential)
@@ -88,38 +90,30 @@ export class AuthService {
     })
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
+    let fullName = userCredential.user.displayName.split(' ', 2)
     let pipe = new DatePipe('en-US')
-    let promise
-    let accessToken = (<any>userCredential).credential.accessToken
-
+    let birthday
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
-        promise = new Promise((resolve) => {
-          resolve(pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd'))
-        }).then(data => {
-          this.addUserData(userCredential, data)
-        })
-        break
+        birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
+        break;
       case 'google.com':
-        promise = new Promise((resolve, reject) => {
-          this.getGoogleBirthdays(accessToken).then(data => {
+        new Promise((resolve, reject) => {
+          this.getGoogleBirthdays().then(data => {
             resolve(data)
           }, err => {
             reject(err)
           })
         }).then(data => {
-          this.addUserData(userCredential, data)
+          birthday = data
         }).catch(err => {
           this.eventAuthError.next(err)
         })
+        break;
+      default:
+        birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
         break
-      case 'password':
-        this.addUserData(userCredential, pipe.transform(Date.now(), 'yyyy-MM-dd'))
     }
-
-  }
-  addUserData(userCredential: firebase.auth.UserCredential, birthday) {
-    let fullName = userCredential.user.displayName.split(' ', 2)
     let userData = {
       email: userCredential.user.email,
       firstName: fullName[0],
@@ -136,8 +130,8 @@ export class AuthService {
       this.eventAuthError.next(err)
     })
   }
-  getGoogleBirthdays(accessToken) {
-    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + accessToken)
+  getGoogleBirthdays() {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.accessToken)
     let params =  new HttpParams().set('personFields', 'birthdays')
     let pipe = new DatePipe('en-US')
     let bd
