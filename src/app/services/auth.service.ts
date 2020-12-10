@@ -139,24 +139,23 @@ export class AuthService {
   getGoogleBirthdays(accessToken) {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + accessToken)
     let params =  new HttpParams().set('personFields', 'birthdays')
-    let birthdays
+    let pipe = new DatePipe('en-US')
     let bd
+    console.log({ headers: headers, params: params })
 
-    let promise = new Promise((resolve, reject) => {
+     return new Promise((resolve, reject) => {
       this.http.get('https://people.googleapis.com/v1/people/me' , { headers: headers, params: params })
       .subscribe((data: any) => {
-        birthdays = data.birthdays;
-        birthdays.forEach(el => {
+        bd = data.birthdays;
+        bd.forEach(el => {
           if(el.metadata.source.type === 'ACCOUNT') {
-            bd = el.date.year + '-' + el.date.month + '-' + el.date.day;
-            resolve(bd);
+            resolve(pipe.transform(el.date.year + '-' + el.date.month + '-' + el.date.day, 'yyyy-MM-dd'))
           }
         });
       }, err => {
         reject(err);
       })
     })
-    return promise
   }
   loginWithEmail(user) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(userCredential => {
