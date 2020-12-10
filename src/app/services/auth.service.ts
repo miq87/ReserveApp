@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -199,11 +198,12 @@ export class AuthService {
   }
   deleteUser(): void {
     firebase.auth().currentUser.delete().then(() => {
-      this.router.navigate(['/register'])
-      console.log('Użytkownik usunięty')
-      firebase.firestore().collection('users').doc(this.currentUser.uid).delete().then(() => {
-      }).catch(err => this.eventAuthError.next(err))
+      console.log('Użytkownik usunięty ' + this.currentUser.uid)
     }).catch(err => this.eventAuthError.next(err))
+    firebase.firestore().collection('users').doc(this.currentUser.uid).delete().then(() => {
+      console.log('Usunięte z Firestore ' +  this.currentUser.uid)
+    }).catch(err => this.eventAuthError.next(err))
+    this.router.navigate(['/register'])
   }
 
 }

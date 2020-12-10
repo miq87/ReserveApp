@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/classes/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { ProfileResolverService } from 'src/app/services/profile-resolver.service';
 
 @Component({
   selector: 'app-profile',
