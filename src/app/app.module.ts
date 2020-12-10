@@ -79,7 +79,7 @@ firebase.initializeApp(firebaseConfig);
     DragDropModule,
     MatProgressSpinnerModule
   ],
-  providers: [ProfileResolverService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

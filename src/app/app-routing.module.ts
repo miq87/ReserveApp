@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'members', component: MembersComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'promise', component: PromiseComponent },
-  { path: 'profile', component: ProfileComponent, resolve: { userData: ProfileResolverService }, canActivate: [AngularFireAuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AngularFireAuthGuard], resolve: { userData: ProfileResolverService } },
   { path: 'add', component: AddNewHotelComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'hotels', component: HotelsComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'hotels/:id', component: HotelDetailComponent, canActivate: [AngularFireAuthGuard] },
