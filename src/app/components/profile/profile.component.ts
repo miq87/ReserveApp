@@ -35,32 +35,14 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this._auth.eventAuthError$.subscribe(data => {
       this.authError = data
     })
-    /*this.activatedRoute.data.subscribe((data) => {
-      console.log(data.userData)
-      this.userData = <User>data.userData
-    })*/
-    this.userData = this.activatedRoute.snapshot.data['userData']
-    console.log(this.userData)
+    this.userData = this.route.snapshot.data['userData']
     this.profileForm.patchValue(this.userData)
-
-    /*this._auth.getCurrentUser(user => {
-      if(user) {
-        this.userId = user.uid
-        this._auth.getUserData().then(user => {
-          this.userData = <User>(user.data())
-          console.log(this.userData)
-          this.profileForm.patchValue(this.userData)
-        }).catch(err => {
-          this._auth.sendError(err)
-        })
-      }
-    })*/
   }
   updateUser() {
     this._auth.updateUserData(this.profileForm.value)

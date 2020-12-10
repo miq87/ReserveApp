@@ -129,15 +129,12 @@ export class AuthService {
       role: userCredential.additionalUserInfo.providerId,
       address: { street: '', city: '', zip: '' }
     }
-    console.log(userData)
-
     firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
       console.log('Dodałem informacje o użytkowniku do FireStore')
     })
     .catch(err => {
       this.eventAuthError.next(err)
     })
-    
   }
   getGoogleBirthdays(accessToken) {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + accessToken)
@@ -185,8 +182,12 @@ export class AuthService {
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
-  getUserData() {
-    return firebase.firestore().collection('users').doc(this.currentUser.uid).get()
+  getUserData(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      firebase.firestore().collection('users').doc(this.currentUser.uid).get().then(user => {
+        resolve(user.data())
+      }, err => reject(err))
+    })
   }
   updateUserData(userData) {
     firebase.firestore().collection('users').doc(this.currentUser.uid).update(userData).then(() => {

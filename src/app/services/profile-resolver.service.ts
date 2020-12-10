@@ -11,8 +11,7 @@ export class ProfileResolverService implements Resolve<User> {
 
   constructor(private _auth: AuthService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    let observable$ = from(this._auth.getUserData())
-    return observable$
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any>  {
+    return this._auth.getUserData()
   }
 }
