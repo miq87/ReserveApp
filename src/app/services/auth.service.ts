@@ -90,12 +90,12 @@ export class AuthService {
     })
   }
   insertUserData(userCredential: firebase.auth.UserCredential) {
-    let fullName = userCredential.user.displayName.split(' ', 2)
     let pipe = new DatePipe('en-US')
     let birthday
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
+        this.addUserData(userCredential, birthday)
         break;
       case 'google.com':
         new Promise((resolve, reject) => {
@@ -104,25 +104,30 @@ export class AuthService {
           }, err => {
             reject(err)
           })
-        }).then(data => {
-          birthday = data
+        }).then(bd => {
+          this.addUserData(userCredential, bd)
         }).catch(err => {
           this.eventAuthError.next(err)
         })
         break;
       default:
         birthday = pipe.transform(Date.now(), 'yyyy-MM-dd')
+        this.addUserData(userCredential, birthday)
         break
     }
+  }
+  addUserData(userCredential, bd) {
+    let fullName = userCredential.user.displayName.split(' ', 2)
     let userData = {
       email: userCredential.user.email,
       firstName: fullName[0],
       lastName: fullName[1],
       displayName: userCredential.user.displayName,
-      birthday: birthday,
+      birthday: bd,
       role: userCredential.additionalUserInfo.providerId,
       address: { street: '', city: '', zip: '' }
     }
+    console.log(userData)
     firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
       console.log('Dodałem informacje o użytkowniku do FireStore')
     })
