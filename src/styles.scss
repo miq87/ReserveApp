@@ -58,15 +58,16 @@ label {
 .myCard {
     background-color: $queen-blue;
     padding: 10px;
-    margin: 0px 0px 8px 0px;
+    margin-bottom: 12px;
     box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     color: #FFF;
 
     .alert-danger {
-        font-size: 14px;
+        font-size: 16px;
         max-width: 80%;
-        margin: 0px auto;
+        text-align: center;
         padding: 4px;
+        margin: 12px auto;
         box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     }
 
@@ -80,10 +81,7 @@ label {
     .heading {
         color: $safety-orange-blaze-orange;
         text-align: center;
-        margin: 0px auto 10px;
-        h3 {
-            font-size: 24px;
-        }
+        margin: 0px auto 20px;
         span {
             font-size: 18px;
         }

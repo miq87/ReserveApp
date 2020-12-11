@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -125,7 +125,6 @@ export class AuthService {
       role: userCredential.additionalUserInfo.providerId,
       address: { street: '', city: '', zip: '' }
     }
-    console.log(userData)
     firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
       console.log('Dodałem informacje o użytkowniku do FireStore')
     })
@@ -161,7 +160,6 @@ export class AuthService {
       this.eventAuthError.next(err)
     });
   }
-  
   logout() {
     firebase.auth().signOut().then(() => {
       console.log('Wylogowany!')
@@ -179,9 +177,11 @@ export class AuthService {
   }
   getUserData(): Promise<any> {
     return new Promise((resolve, reject) => {
-      firebase.firestore().collection('users').doc(this.currentUser.uid).get().then(user => {
-        resolve(user.data())
-      }, err => reject(err))
+      setTimeout(() => {
+        firebase.firestore().collection('users').doc(this.currentUser.uid).get().then(doc => {
+          resolve(doc.data())
+        }, err => reject(err))
+      }, 600)
     })
   }
   updateUserData(userData) {
