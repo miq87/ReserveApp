@@ -28,7 +28,7 @@ import { Error404Component } from './components/error404/error404.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import * as firebase from "firebase/app";
-import { ProfileResolverService } from './services/profile-resolver.service';
+import { LazyImgDirective } from './shared/directives/lazy-img.directive';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -62,6 +62,7 @@ firebase.initializeApp(firebaseConfig);
     Error404Component,
     RightSidebarComponent,
     ProfileComponent,
+    LazyImgDirective
   ],
   imports: [
     BrowserModule,
