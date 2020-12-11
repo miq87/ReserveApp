@@ -175,14 +175,8 @@ export class AuthService {
   getCurrentUser(cb) {
     return firebase.auth().onAuthStateChanged(cb)
   }
-  getUserData(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        firebase.firestore().collection('users').doc(this.currentUser.uid).get().then(doc => {
-          resolve(doc.data())
-        }, err => reject(err))
-      }, 600)
-    })
+  getUserData(cb, err) {
+    return firebase.firestore().collection('users').doc(this.currentUser.uid).onSnapshot(cb, err)
   }
   updateUserData(userData) {
     firebase.firestore().collection('users').doc(this.currentUser.uid).update(userData).then(() => {

@@ -1,7 +1,7 @@
 <div class="myCard">
   <div class="heading"><h3>Edycja profilu</h3></div>
   <div *ngIf="authError" class="alert-danger">{{ authError?.message }}</div>
-  <div *ngIf="!userData" class="alert-danger">Nie załadowałem danych profilu</div>
+  <div *ngIf="!userData" class="loader">Ładowanie...</div>
   <div *ngIf="userData">
     <form [formGroup]="profileForm" (ngSubmit)="updateUser()">
       <div class="form-group">

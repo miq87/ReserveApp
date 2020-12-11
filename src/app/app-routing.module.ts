@@ -11,7 +11,6 @@ import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-det
 import { Error404Component } from './components/error404/error404.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard/';
-import { ProfileResolverService } from './services/profile-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hotels', pathMatch: 'full' },
