@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.handleBurger()
-    this._auth.getCurrentUser((user) => {
+    this._auth.getCurrentUser(user => {
       if(user) {
         this.currentUser = user
         this.isLogged = true

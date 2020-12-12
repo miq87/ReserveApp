@@ -18,10 +18,9 @@ export class AuthService {
   //readonly authState$: Observable<User | null> = this.fireAuth.authState
   private eventAuthError = new BehaviorSubject<string>('')
   eventAuthError$ = this.eventAuthError.asObservable()
-  currentUser: User
-  accessToken: any
+  private accessToken: any
 
-  constructor(private fireAuth: AngularFireAuth, private router: Router, private http: HttpClient, private zone: NgZone) { }
+  constructor(private router: Router, private http: HttpClient, private zone: NgZone) { }
   
   resetError(): void {
     this.eventAuthError.next('')
@@ -32,24 +31,15 @@ export class AuthService {
 
   createUser(newUser) {
     firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
-    .then((userCredential) => {
-      this.currentUser = userCredential.user
-
-      userCredential.user.updateProfile({
-          displayName: newUser.firstName + ' ' + newUser.lastName,
-      })
-      .catch(err => {
-        this.eventAuthError.next(err)
-      })
-      .finally(() => {
+    .then(userCredential => {
+      this.updateUserDisplayName(newUser.firstName + ' ' + newUser.lastName).then(() => {
         this.insertUserData(userCredential)
       })
-
+      this.router.navigate(['/profile'])
     })
     .catch(err => {
       this.eventAuthError.next(err)
     })
-    .finally(() => this.router.navigate(['/profile']))
   }
   loginBy(prov: string) {
     let provider
@@ -69,9 +59,7 @@ export class AuthService {
 
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then(userCredential => {
-      this.currentUser = userCredential.user
       this.accessToken = (<any>userCredential).credential.accessToken
-      
       if(userCredential.additionalUserInfo.isNewUser) {
         this.insertUserData(userCredential)
       }
@@ -91,6 +79,7 @@ export class AuthService {
   insertUserData(userCredential: firebase.auth.UserCredential) {
     let pipe = new DatePipe('en-US')
     let birthday
+    
     switch(userCredential.additionalUserInfo.providerId) {
       case 'facebook.com':
         birthday = pipe.transform((<any>userCredential).additionalUserInfo.profile.birthday, 'yyyy-MM-dd')
@@ -153,9 +142,7 @@ export class AuthService {
     })
   }
   loginWithEmail(user) {
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(userCredential => {
-      this.currentUser = userCredential.user
-    })
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .catch(err => {
       this.eventAuthError.next(err)
     });
@@ -163,8 +150,6 @@ export class AuthService {
   logout() {
     firebase.auth().signOut().then(() => {
       console.log('Wylogowany!')
-      this.currentUser = null
-      this.router.navigate(['/register'])
     })
   }
   /*isLoggedIn(): Observable<boolean> {
@@ -176,28 +161,30 @@ export class AuthService {
     return firebase.auth().onAuthStateChanged(cb)
   }
   getUserData(cb, err) {
-    return firebase.firestore().collection('users').doc(this.currentUser.uid).onSnapshot(cb, err)
+    return firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).onSnapshot(cb, err)
   }
   updateUserData(userData) {
-    firebase.firestore().collection('users').doc(this.currentUser.uid).update(userData).then(() => {
+    firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).update(userData).then(() => {
       this.updateUserDisplayName(userData.displayName)
     }).catch(err => this.eventAuthError.next(err))
   }
   updateUserDisplayName(displayName) {
-    firebase.auth().currentUser.updateProfile({
+    return firebase.auth().currentUser.updateProfile({
       displayName: displayName
-    }).then(() => {
-      console.log('User Display Name updated')
     }).catch(err => this.eventAuthError.next(err))
   }
   deleteUser(): void {
+    let userId = firebase.auth().currentUser.uid
+    console.log('Usuwam ' + userId)
+
     firebase.auth().currentUser.delete().then(() => {
-      console.log('Użytkownik usunięty ' + this.currentUser.uid)
+      console.log('Użytkownik usunięty ' + userId)
     }).catch(err => this.eventAuthError.next(err))
-    firebase.firestore().collection('users').doc(this.currentUser.uid).delete().then(() => {
-      console.log('Usunięte z Firestore ' +  this.currentUser.uid)
+    firebase.firestore().collection('users').doc(userId).delete().then(() => {
+      console.log('Usunięte z Firestore ' +  userId)
     }).catch(err => this.eventAuthError.next(err))
-    this.router.navigate(['/register'])
+
+    this.router.navigate(['/'])
   }
 
 }
