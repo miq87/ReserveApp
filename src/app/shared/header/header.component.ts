@@ -20,9 +20,7 @@ export class HeaderComponent implements OnInit {
         this.currentUser = user
         this.isLogged = true
       }
-      else {
-        this.isLogged = false
-      }
+      else { this.isLogged = false }
     })
   }
   
