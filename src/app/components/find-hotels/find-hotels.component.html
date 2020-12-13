@@ -5,6 +5,7 @@
   <div>
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
       <div class="form-group">
+        <label for="city">Miasto</label>
         <input class="form-control" formControlName="city" name="city" placeholder="Miasto">
       </div>
       <div class="form-group">
