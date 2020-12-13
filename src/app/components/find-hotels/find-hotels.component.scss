@@ -4,4 +4,6 @@ $charcoal: rgba(47, 72, 88, 1);
 $honey-yellow: rgba(246, 174, 45, 1);
 $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 
-
+input[name=city] {
+    text-transform: capitalize;
+}

@@ -3,18 +3,18 @@
     <h3>Cel podróży:</h3>
   </div>
   <div>
-    <form #hotelCity="ngForm" (ngSubmit)="onSubmit(hotelCity.value.city)">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
       <div class="form-group">
-        <input class="form-control" #city="ngModel" ngModel name="city" placeholder="Miasto">
+        <input class="form-control" formControlName="city" name="city" placeholder="Miasto">
       </div>
       <div class="form-group">
-          <input type="date" class="form-control" ngModel #dateFrom="ngModel" name="dateFrom">
+          <input class="form-control" formControlName="dateFrom" name="dateFrom" type="date">
       </div>
       <div class="form-group">
-          <input type="date" class="form-control" ngModel #dateTo="ngModel" name="dateTo">
+          <input class="form-control" formControlName="dateTo" name="dateTo" type="date">
       </div>
       <div class="form-group">
-        <button class="btn btn-warning btn-md" type="submit">Szukaj</button>
+        <button class="btn btn-warning btn-md" type="submit" [disabled]="searchForm.invalid">Szukaj</button>
       </div>
     </form> 
   </div>

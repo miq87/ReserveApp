@@ -1,11 +1,12 @@
-<div class="myCard" *ngIf="hotelList">
-  <div class="heading">
-    <span>Liczba wyników: {{ hotelList.length }}</span>
-  </div>
-  <div>
-    <div class="col-md-12" *ngFor="let hotel of hotelList">
+<div class="myCard">
+  <div *ngIf="!hotelList" class="alert-danger">Brak wyników</div>
+  <div *ngIf="hotelList">
+    <div class="m-2">
+      <span>Liczba wyników: {{ hotelList.length }}</span>
+    </div>
+    <div *ngFor="let hotel of hotelList">
       <app-hotel-item [hotel]="hotel"></app-hotel-item>
     </div>
   </div>
 </div>
-<div class="myCard" *ngIf="!hotelList">Brak wyników</div>
+

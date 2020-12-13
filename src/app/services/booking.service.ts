@@ -66,6 +66,7 @@ export class BookingService {
     snapshot.forEach(doc => {
       hotelList.push(new Hotel(doc.id, doc.data()))
     })
+    console.log(hotelList)
     return hotelList;
   }
   consoleAddedNewHotel(hotel: Hotel) {

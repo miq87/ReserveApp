@@ -3,7 +3,6 @@ import { Hotel } from 'src/app/models/hotel';
 import { MessengerService } from 'src/app/services/messenger.service';
 import { Subscription } from 'rxjs';
 import { BookingService } from 'src/app/services/booking.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-hotels',
@@ -13,21 +12,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class HotelsComponent implements OnInit {
 
   hotelList: Hotel[]
-  numReq = 0
-  subscription: Subscription
+  private numReq = 0
+  private subscription: Subscription
 
-  constructor(private _msg: MessengerService, private _booking: BookingService, private snack: MatSnackBar) {
-    this.hotelList = []
-  }
+  constructor(private _msg: MessengerService, private _booking: BookingService) { }
 
   ngOnInit() {
-    this.subscription = this._msg.getMsg().subscribe(data => {
-      if(data) {
-        this.hotelList = []
+    this.subscription = this._msg.getMsg().subscribe((city: string) => {
+      if(city) {
         this.numReq++
-        console.log(`Otrzymałem wiadomość ${data}`)
+        console.log(`Otrzymałem wiadomość ${city}`)
         console.log(`Ilość zapytań: ${this.numReq}`)
-        this.onLoadHotels(<string>data)
+        this.onLoadHotels(city)
       }
     })
   }
@@ -36,14 +32,11 @@ export class HotelsComponent implements OnInit {
     this.subscription.unsubscribe();
   }
   onLoadHotels(hotelCity: string) {
-    this._booking.onLoadHotels(hotelCity).then((hotels) => {
+    this._booking.onLoadHotels(hotelCity).then(hotels => {
       this.hotelList = hotels
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err.message)
-    })
-    .finally(() => {
-      this.snack.open(`Liczba wyników: ${this.hotelList.length}`, 'OK')
     })
   }
 

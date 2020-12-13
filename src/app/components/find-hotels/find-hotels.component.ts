@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessengerService } from 'src/app/services/messenger.service';
 
@@ -9,13 +11,33 @@ import { MessengerService } from 'src/app/services/messenger.service';
 })
 export class FindHotelsComponent implements OnInit {
 
-  constructor(private _msg: MessengerService, private _router: Router) { }
+  searchForm = this.fb.group({
+    city: ['', Validators.required],
+    dateFrom: ['', Validators.required],
+    dateTo: ['', Validators.required]
+  })
 
-  ngOnInit() { }
+  constructor(private fb: FormBuilder, private _msg: MessengerService, private _router: Router) { }
 
-  onSubmit(hotelCity: string) {
-    hotelCity = hotelCity.substring(0,1).toUpperCase() + hotelCity.substring(1).toLowerCase()
-    this._msg.sendMsg(hotelCity)
+  ngOnInit() {
+    let pipe = new DatePipe('en-US')
+    this.searchForm.patchValue({
+      dateFrom: pipe.transform(Date.now(), 'yyyy-MM-dd'),
+      dateTo: pipe.transform(Date.now()+604800000, 'yyyy-MM-dd') // Dodaje 7 dni (w milisekundach)
+    })
+  }
+  onSearch() {
+    let city = this.titleCase(this.searchForm.value.city)
+    this.searchForm.patchValue({ city: city })
+    this._msg.sendMsg(city)
     this._router.navigate(['hotels'])
   }
+  titleCase(str) {
+    let splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+    }
+    return splitStr.join(' '); 
+ }
+
 }
