@@ -16,7 +16,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PromiseComponent } from './components/promise/promise.component'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.component';
@@ -29,6 +28,11 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
 import { ProfileComponent } from './components/profile/profile.component';
 import * as firebase from "firebase/app";
 import { LazyImgDirective } from './shared/directives/lazy-img.directive';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -78,7 +82,10 @@ firebase.initializeApp(firebaseConfig);
     MatSnackBarModule,
     LayoutModule,
     DragDropModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

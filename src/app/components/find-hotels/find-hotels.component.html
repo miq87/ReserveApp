@@ -9,15 +9,30 @@
         <input class="form-control" formControlName="city" name="city" placeholder="Miasto">
       </div>
       <div class="form-group">
-          <input class="form-control" formControlName="dateFrom" name="dateFrom" type="date">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName="dateStart" placeholder="Od">
+            <input matEndDate formControlName="dateEnd" placeholder="Do">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>     
+          <mat-error *ngIf="searchForm.controls.dateStart.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="searchForm.controls.dateEnd.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
       </div>
       <div class="form-group">
-          <input class="form-control" formControlName="dateTo" name="dateTo" type="date">
+        <mat-form-field appearance="fill">
+          <mat-label>Udogodnienia</mat-label>
+          <mat-select formControlName="facilities" multiple>
+            <mat-option *ngFor="let fac of facList" [value]="fac.id">{{ fac.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div class="form-group">
         <button class="btn btn-warning btn-md" type="submit" [disabled]="searchForm.invalid">Szukaj</button>
       </div>
-    </form> 
+    </form>
   </div>
 </div>
   

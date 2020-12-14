@@ -12,11 +12,11 @@ export class BookingService {
   async addNewHotel(hotel: Hotel): Promise<string> {
     let retHotelId: string
     await firebase.firestore().collection('hotels').add(JSON.parse(JSON.stringify(hotel)))
-    .then((doc) => {
+    .then(doc => {
       this.consoleAddedNewHotel(hotel)
       retHotelId = doc.id
-    }).catch((error) => {
-      console.log('Błąd podczas dodawania nowego hotelu!', error.message)
+    }).catch(err => {
+      console.log('Błąd podczas dodawania nowego hotelu!', err.message)
     })
     return retHotelId || null
   }
@@ -24,17 +24,17 @@ export class BookingService {
     await firebase.firestore().collection('hotels').doc(hotelId).delete()
     .then(() => {
       console.log('Usunąłem hotel o id: ' + hotelId)
-    }).catch((error) => {
-      console.log('Błąd podczas usuwania hotelu!', error.message)
+    }).catch(err => {
+      console.log('Błąd podczas usuwania hotelu!', err.message)
     })
   }
   async getHotelDetails(hotelId: string): Promise<Hotel> {
     let hotel: Hotel
     await firebase.firestore().collection('hotels').doc(hotelId).get()
-    .then((doc) => {
+    .then(doc => {
       hotel = new Hotel(doc.id, doc.data()) 
-    }).catch((error) => {
-      console.log('Błąd podczas ładowania szczegółów hotelu!', error.message)
+    }).catch(err => {
+      console.log('Błąd podczas ładowania szczegółów hotelu!', err.message)
     })
     return hotel || null
   }
@@ -43,11 +43,11 @@ export class BookingService {
     let hotelFacilities: number[] = []
 
     await firebase.firestore().collection('facilities').doc(hotelId).get()
-    .then((doc) => {
+    .then(doc => {
       hotelFacilities = <number[]>(doc.data().facList)
     })
-    .catch((error) => {
-      console.log("Nie wczytano udogodnień!", error.message)
+    .catch(err => {
+      console.log("Nie wczytano udogodnień!", err.message)
     })
 
     return hotelFacilities || null;

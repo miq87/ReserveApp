@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FacilitiesService {
-  facilities: any[]
+  private facilities: any[]
 
   constructor(private http: HttpClient) {
-    this.http.get("assets/data.json").subscribe((data) => {
-      this.facilities = (<any>data).facilities
+    this.http.get("assets/data.json").subscribe((data: any) => {
+      this.facilities = data.facilities
     })
   }
 
@@ -20,6 +20,10 @@ export class FacilitiesService {
       retValues.push(selectedOpt.name)
     })
     return retValues
+  }
+
+  getAllFacilities() {
+    return this.http.get("assets/data.json")
   }
 
 }

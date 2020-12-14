@@ -1,23 +1,29 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FacilitiesService } from 'src/app/services/facilities.service';
 import { MessengerService } from 'src/app/services/messenger.service';
+
 
 @Component({
   selector: 'app-find-hotels',
   templateUrl: './find-hotels.component.html',
-  styleUrls: ['./find-hotels.component.scss']
+  styleUrls: ['./find-hotels.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FindHotelsComponent implements OnInit {
 
+  facList: any[]
+
   searchForm = this.fb.group({
     city: ['', Validators.required],
-    dateFrom: ['', Validators.required],
-    dateTo: ['', Validators.required]
+    dateStart: ['', Validators.required],
+    dateEnd: ['', Validators.required],
+    facilities: ['']
   })
 
-  constructor(private fb: FormBuilder, private _msg: MessengerService, private _router: Router) { }
+  constructor(private fb: FormBuilder, private _fs: FacilitiesService, private _msg: MessengerService, private _router: Router) { }
 
   ngOnInit() {
     let pipe = new DatePipe('en-US')
@@ -25,8 +31,13 @@ export class FindHotelsComponent implements OnInit {
       dateFrom: pipe.transform(Date.now(), 'yyyy-MM-dd'),
       dateTo: pipe.transform(Date.now()+604800000, 'yyyy-MM-dd') // Dodaje 7 dni (w milisekundach)
     })
+    this._fs.getAllFacilities().subscribe((data: any) => {
+      this.facList = data.facilities
+      console.log(this.facList)
+    })
   }
   onSearch() {
+    console.log(this.searchForm.value)
     let city = this.titleCase(this.searchForm.value.city)
     this.searchForm.patchValue({ city: city })
     this._msg.sendMsg(city)
