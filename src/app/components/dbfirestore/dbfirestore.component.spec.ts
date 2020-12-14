@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DbfirestoreComponent } from './dbfirestore.component';
 
@@ -6,7 +6,7 @@ describe('DbfirestoreComponent', () => {
   let component: DbfirestoreComponent;
   let fixture: ComponentFixture<DbfirestoreComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DbfirestoreComponent ]
     })
