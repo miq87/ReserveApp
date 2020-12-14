@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
@@ -87,6 +88,7 @@ firebase.initializeApp(firebaseConfig);
     MatProgressSpinnerModule,
     MatSelectModule,
     MatButtonModule,
+    MatNativeDateModule,
     MatDatepickerModule,
     AngularFireAuthModule
   ],
