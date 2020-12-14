@@ -26,7 +26,7 @@ import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-det
 import { Error404Component } from './components/error404/error404.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import * as firebase from "firebase/app";
+import firebase from 'firebase/app';
 import { LazyImgDirective } from './shared/directives/lazy-img.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -45,6 +45,7 @@ const firebaseConfig = {
   appId: "1:975222630848:web:7da25526260536bdaec025",
   measurementId: "G-HC19CB5LSS"
 }
+
 
 firebase.initializeApp(firebaseConfig);
 

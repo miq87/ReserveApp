@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 
 @Component({
   selector: 'app-promise',

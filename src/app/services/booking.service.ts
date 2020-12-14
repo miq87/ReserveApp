@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 
 @Injectable({
   providedIn: 'root'

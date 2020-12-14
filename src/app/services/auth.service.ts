@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NgZone } from '@angular/core';
-import * as firebase from "firebase/app";
-//import "firebase/auth";
-//import "firebase/firestore";
+import firebase from "firebase";
+import "firebase/auth";
+import "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +17,7 @@ export class AuthService {
   private eventAuthError = new BehaviorSubject<string>('')
   eventAuthError$ = this.eventAuthError.asObservable()
   private accessToken: any
+
 
   constructor(private router: Router, private http: HttpClient, private zone: NgZone) { }
   
