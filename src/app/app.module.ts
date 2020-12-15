@@ -21,20 +21,22 @@ import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.component';
 import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 import { RegisterComponent } from './components/register/register.component';
-import { FindHotelsComponent } from './components/find-hotels/find-hotels.component';
+import { SearchHotelsComponent } from './components/search-hotels/search-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 import { Error404Component } from './components/error404/error404.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import firebase from 'firebase/app';
 import { LazyImgDirective } from './shared/directives/lazy-img.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import firebase from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -46,7 +48,6 @@ const firebaseConfig = {
   appId: "1:975222630848:web:7da25526260536bdaec025",
   measurementId: "G-HC19CB5LSS"
 }
-
 
 firebase.initializeApp(firebaseConfig);
 
@@ -64,7 +65,7 @@ firebase.initializeApp(firebaseConfig);
     HotelItemComponent,
     HotelGeneratorComponent,
     RegisterComponent,
-    FindHotelsComponent,
+    SearchHotelsComponent,
     HotelDetailComponent,
     Error404Component,
     RightSidebarComponent,
@@ -85,7 +86,9 @@ firebase.initializeApp(firebaseConfig);
     MatSnackBarModule,
     LayoutModule,
     DragDropModule,
+    MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatInputModule,
     MatSelectModule,
     MatButtonModule,
     MatNativeDateModule,

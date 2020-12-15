@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FindHotelsComponent } from './find-hotels.component';
+import { SearchHotelsComponent } from './search-hotels.component';
 
 describe('FindHotelsComponent', () => {
-  let component: FindHotelsComponent;
-  let fixture: ComponentFixture<FindHotelsComponent>;
+  let component: SearchHotelsComponent;
+  let fixture: ComponentFixture<SearchHotelsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FindHotelsComponent ]
+      declarations: [ SearchHotelsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FindHotelsComponent);
+    fixture = TestBed.createComponent(SearchHotelsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

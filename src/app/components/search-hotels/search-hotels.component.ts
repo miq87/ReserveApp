@@ -7,12 +7,12 @@ import { MessengerService } from 'src/app/services/messenger.service';
 
 
 @Component({
-  selector: 'app-find-hotels',
-  templateUrl: './find-hotels.component.html',
-  styleUrls: ['./find-hotels.component.scss'],
+  selector: 'app-search-hotels',
+  templateUrl: './search-hotels.component.html',
+  styleUrls: ['./search-hotels.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FindHotelsComponent implements OnInit {
+export class SearchHotelsComponent implements OnInit {
 
   facList: any[]
 
@@ -33,7 +33,6 @@ export class FindHotelsComponent implements OnInit {
     })
     this._fs.getAllFacilities().subscribe((data: any) => {
       this.facList = data.facilities
-      console.log(this.facList)
     })
   }
   onSearch() {

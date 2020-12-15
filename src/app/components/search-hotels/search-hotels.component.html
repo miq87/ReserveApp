@@ -5,15 +5,17 @@
   <div>
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
       <div class="form-group">
-        <label for="city">Miasto</label>
-        <input class="form-control" formControlName="city" name="city" placeholder="Miasto">
+        <mat-form-field appearance="legacy">
+          <mat-label>Miasto</mat-label>
+          <input matInput formControlName="city" name="city">
+        </mat-form-field>
       </div>
       <div class="form-group">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="legacy">
           <mat-label>Podaj termin</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate formControlName="dateStart">
-            <input matEndDate formControlName="dateEnd">
+            <input matInput matStartDate formControlName="dateStart" placeholder="Od">
+            <input matInput matEndDate formControlName="dateEnd" placeholder="Do">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>     
@@ -22,7 +24,7 @@
         </mat-form-field>
       </div>
       <div class="form-group">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="legacy">
           <mat-label>Udogodnienia</mat-label>
           <mat-select formControlName="facilities" multiple>
             <mat-option *ngFor="let fac of facList" [value]="fac.id">{{ fac.name }}</mat-option>
@@ -30,7 +32,7 @@
         </mat-form-field>
       </div>
       <div class="form-group">
-        <button class="btn btn-warning btn-md" type="submit" [disabled]="searchForm.invalid">Szukaj</button>
+        <button class="btn btn-warning btn-lg" type="submit" [disabled]="searchForm.invalid">Szukaj</button>
       </div>
     </form>
   </div>

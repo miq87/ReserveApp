@@ -7,13 +7,22 @@ $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 input[name=city] {
     text-transform: capitalize;
 }
-
+.mat-form-field {
+    font-size: 18px;
+    width: 100%;
+}
+.mat-form-field.mat-focused {
+    .mat-form-field-label {
+        color: $dark-sky-blue;
+        font-size: 24px;
+    }
+}
+.mat-select {
+    padding: 0px;
+}
 .mat-select-panel {
-    margin-left: 40px;
+    margin-left: 20px;
 }
 .mat-option-text {
-    font-size: 14px;
-}
-.mat-date-range-input {
-    font-size: 14px
+    font-size: 16px;
 }
