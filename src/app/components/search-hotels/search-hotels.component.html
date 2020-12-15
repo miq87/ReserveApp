@@ -19,8 +19,8 @@
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>     
-          <mat-error *ngIf="searchForm.controls.dateStart.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-          <mat-error *ngIf="searchForm.controls.dateEnd.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          <mat-error *ngIf="searchForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
+          <mat-error *ngIf="searchForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group">

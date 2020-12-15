@@ -33,14 +33,16 @@ export class HotelGeneratorComponent implements OnInit {
       let rCity = this.hotelCity[Math.floor((Math.random() * (this.hotelCity.length)))]
       let rNumber = Math.floor((Math.random() * 100) + 10)
       let rPostalCode = Math.floor((Math.random() * 80000) + 10000)
+      let facilities = [ 1, 2, 3, 4]
       
-      let newHotel = new Hotel(null,
-        { 'hotelName': rName,
-          'street': rStreet + ' ' + rNumber,
-          'city': rCity[0],
-          'state': rCity[1],
-          'postalCode': rPostalCode })
-
+      let newHotel = {
+        'hotelName': rName,
+        'street': rStreet + ' ' + rNumber,
+        'city': rCity[0],
+        'state': rCity[1],
+        'postalCode': rPostalCode,
+        'facilities': facilities
+      }
       this.booking_.addNewHotel(newHotel)
     }
   }

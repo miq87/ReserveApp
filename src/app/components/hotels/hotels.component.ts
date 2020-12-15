@@ -18,12 +18,13 @@ export class HotelsComponent implements OnInit {
   constructor(private _msg: MessengerService, private _booking: BookingService) { }
 
   ngOnInit() {
-    this.subscription = this._msg.getMsg().subscribe((city: string) => {
-      if(city) {
+    this.subscription = this._msg.getMsg().subscribe(data => {
+      if(data) {
         this.numReq++
-        console.log(`Otrzymałem wiadomość ${city}`)
+        console.log("Otrzymałem wiadomość:")
+        console.log(data)
         console.log(`Ilość zapytań: ${this.numReq}`)
-        this.onLoadHotels(city)
+        this.onLoadHotels(data)
       }
     })
   }
@@ -31,8 +32,8 @@ export class HotelsComponent implements OnInit {
     this._msg.sendMsg(null)
     this.subscription.unsubscribe();
   }
-  onLoadHotels(hotelCity: string) {
-    this._booking.onLoadHotels(hotelCity).then(hotels => {
+  onLoadHotels(data) {
+    this._booking.onLoadHotels(data).then(hotels => {
       this.hotelList = hotels
     })
     .catch(err => {

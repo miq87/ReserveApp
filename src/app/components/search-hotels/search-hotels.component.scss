@@ -4,6 +4,14 @@ $charcoal: rgba(47, 72, 88, 1);
 $honey-yellow: rgba(246, 174, 45, 1);
 $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 
+input:-webkit-autofill, input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, select:-webkit-autofill,
+select:-webkit-autofill:hover, select:-webkit-autofill:focus {
+  background: transparent;
+  -webkit-text-fill-color: #FFF;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 input[name=city] {
     text-transform: capitalize;
 }
@@ -13,8 +21,8 @@ input[name=city] {
 }
 .mat-form-field.mat-focused {
     .mat-form-field-label {
-        color: $dark-sky-blue;
-        font-size: 24px;
+        color: #FFF;
+        translate: none;
     }
 }
 .mat-select {

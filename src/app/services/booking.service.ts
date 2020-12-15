@@ -9,9 +9,9 @@ export class BookingService {
 
   constructor() { }
 
-  async addNewHotel(hotel: Hotel): Promise<string> {
+  async addNewHotel(hotel): Promise<string> {
     let retHotelId: string
-    await firebase.firestore().collection('hotels').add(JSON.parse(JSON.stringify(hotel)))
+    await firebase.firestore().collection('hotels').add(hotel)
     .then(doc => {
       this.consoleAddedNewHotel(hotel)
       retHotelId = doc.id
@@ -53,23 +53,27 @@ export class BookingService {
     return hotelFacilities || null;
   }
 
-  async onLoadHotels(hotelCity: string): Promise<Hotel[]> {
-    const hotelsRef = firebase.firestore().collection('hotels')
+  async onLoadHotels(hotelData): Promise<Hotel[]> {
+    let hotelsRef = firebase.firestore().collection('hotels')
     let hotelList: Hotel[] = [];
-
-    const snapshot = await hotelsRef.where('city', '==', hotelCity).get()
+  
+    const snapshot = await hotelsRef
+      .where('city', '==', hotelData.city)
+      .where('facilities', 'array-contains-any', hotelData.facilities)
+      .get()
     if(snapshot.empty) {
       console.log('Brak wyników!')
       return null
     }
-    console.log(`Załadowałem: ${hotelCity}\n`)
+    console.log(`Załadowałem: ${hotelData.city}\n`)
     snapshot.forEach(doc => {
+      console.log(doc.data())
       hotelList.push(new Hotel(doc.id, doc.data()))
     })
     console.log(hotelList)
     return hotelList;
   }
-  consoleAddedNewHotel(hotel: Hotel) {
+  consoleAddedNewHotel(hotel) {
     console.log(`Dodałem:\n\t${hotel.hotelName}\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
   }
 

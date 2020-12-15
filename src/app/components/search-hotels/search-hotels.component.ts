@@ -36,10 +36,9 @@ export class SearchHotelsComponent implements OnInit {
     })
   }
   onSearch() {
-    console.log(this.searchForm.value)
     let city = this.titleCase(this.searchForm.value.city)
     this.searchForm.patchValue({ city: city })
-    this._msg.sendMsg(city)
+    this._msg.sendMsg(this.searchForm.value)
     this._router.navigate(['hotels'])
   }
   titleCase(str) {

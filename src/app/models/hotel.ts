@@ -5,6 +5,7 @@ export class Hotel {
     city: string
     state: string
     postalCode: string
+    facilities: number[]
 
     constructor(docId: string, data: any) {
         this.id = docId
@@ -13,5 +14,6 @@ export class Hotel {
         this.city = data.city
         this.state = data.state
         this.postalCode = data.postalCode
+        this.facilities = data.facilities
     }
 }
