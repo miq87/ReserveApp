@@ -17,13 +17,11 @@ html, body { height: 100% }
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
-
 body {
     background-color: $dark-sky-blue;
     color: $safety-orange-blaze-orange;
     font-size: 20px;
 }
-
 ul {
     list-style: none;
 }
@@ -70,14 +68,25 @@ label {
         margin: 12px auto;
         box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     }
-
     .card {
         background-color: $honey-yellow;
         color: $charcoal;
         box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
         border: 0px;
     }
-
+    .card-body {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .card-image {
+            max-width: 200px;
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+            }
+        }
+    }
     .heading {
         color: $safety-orange-blaze-orange;
         text-align: center;

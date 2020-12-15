@@ -32,7 +32,7 @@ export class BookingService {
     let hotel: Hotel
     await firebase.firestore().collection('hotels').doc(hotelId).get()
     .then(doc => {
-      hotel = new Hotel(doc.id, doc.data()) 
+      hotel = new Hotel(doc.id, doc.data())
     }).catch(err => {
       console.log('Błąd podczas ładowania szczegółów hotelu!', err.message)
     })
