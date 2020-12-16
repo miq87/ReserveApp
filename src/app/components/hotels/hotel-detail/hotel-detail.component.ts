@@ -24,18 +24,19 @@ export class HotelDetailComponent implements OnInit {
   ngOnInit(): void {
     let hotelId = this.route.snapshot.paramMap.get('id')
 
-    this._bs.getHotelDetails(hotelId).then((data) => {
+    this._bs.getHotelDetails(hotelId).then(data => {
       this.hotel = data;
+      this.hotelFacilities = this._facs.getFacilities(this.hotel.facilities)
     }).catch(err => {
       console.log(err.code)
     })
-    this._fs.getMainImage(hotelId).then((data) => {
+    this._fs.getMainImage(hotelId).then(data => {
       console.log(data)
       this.hotelMainImg = data
     })
     .catch(err => {
       console.log(err.code)
-      this._fs.getDefaultImage().then((data) => {
+      this._fs.getDefaultImage().then(data => {
         console.log(data)
         this.hotelMainImg = data
       })

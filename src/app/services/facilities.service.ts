@@ -15,7 +15,7 @@ export class FacilitiesService {
 
   getFacilities(values: number[]): string[] {
     let retValues: string[] = []
-    values.forEach((value) => {
+    values.forEach(value => {
       let selectedOpt = this.facilities.find(opt => opt.id == value);
       retValues.push(selectedOpt.name)
     })
