@@ -20,6 +20,7 @@ export class BookingService {
     })
     return retHotelId || null
   }
+  
   async removeHotelById(hotelId: string) {
     await firebase.firestore().collection('hotels').doc(hotelId).delete()
     .then(() => {
@@ -28,6 +29,7 @@ export class BookingService {
       console.log('Błąd podczas usuwania hotelu!', err.message)
     })
   }
+
   async getHotelDetails(hotelId: string): Promise<Hotel> {
     let hotel: Hotel
     await firebase.firestore().collection('hotels').doc(hotelId).get()
@@ -37,20 +39,6 @@ export class BookingService {
       console.log('Błąd podczas ładowania szczegółów hotelu!', err.message)
     })
     return hotel || null
-  }
-
-  async getHotelFacilities(hotelId: string): Promise<number[]> {
-    let hotelFacilities: number[] = []
-
-    await firebase.firestore().collection('facilities').doc(hotelId).get()
-    .then(doc => {
-      hotelFacilities = <number[]>(doc.data().facList)
-    })
-    .catch(err => {
-      console.log("Nie wczytano udogodnień!", err.message)
-    })
-
-    return hotelFacilities || null;
   }
 
   async onLoadHotels(hotelData): Promise<Hotel[]> {
