@@ -49,7 +49,15 @@ label {
 .btn:hover {
     opacity: 0.8;
 }
-
+.alert-danger {
+    font-size: 16px;
+    max-width: 80%;
+    text-align: center;
+    padding: 4px;
+    margin: 12px auto;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
 .card {
     background-color: $honey-yellow;
     color: $charcoal;
@@ -66,6 +74,7 @@ label {
             max-width: 100%;
             max-height: 100%;
             box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+            border-radius: 12px;
         }
     }
     ul {
@@ -93,15 +102,8 @@ label {
     margin-bottom: 12px;
     box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     color: #FFF;
+    border-radius: 6px;
 
-    .alert-danger {
-        font-size: 16px;
-        max-width: 80%;
-        text-align: center;
-        padding: 4px;
-        margin: 12px auto;
-        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-    }
     .heading {
         color: $safety-orange-blaze-orange;
         text-align: center;

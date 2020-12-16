@@ -13,13 +13,17 @@ export class FacilitiesService {
     })
   }
 
-  getFacilities(values: number[]): string[] {
-    let retValues: string[] = []
-    values.forEach(value => {
-      let selectedOpt = this.facilities.find(opt => opt.id == value);
-      retValues.push(selectedOpt.name)
+  getFacilities(values: number[]) {
+    let retValues: string[]
+
+    return new Promise((resolve) => {
+      values.forEach(value => {
+        let selectedOpt = this.facilities.find(opt => opt.id == value);
+        retValues.push(selectedOpt.name)
+      })
+      console.log(retValues)
+      resolve(retValues)
     })
-    return retValues
   }
 
   getAllFacilities() {
