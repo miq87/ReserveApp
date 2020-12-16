@@ -26,11 +26,11 @@ export class SearchHotelsComponent implements OnInit {
   constructor(private fb: FormBuilder, private _fs: FacilitiesService, private _msg: MessengerService, private _router: Router) { }
 
   ngOnInit() {
-    let pipe = new DatePipe('en-US')
+    /*let pipe = new DatePipe('en-US')
     this.searchForm.patchValue({
       dateFrom: pipe.transform(Date.now(), 'yyyy-MM-dd'),
       dateTo: pipe.transform(Date.now()+604800000, 'yyyy-MM-dd') // Dodaje 7 dni (w milisekundach)
-    })
+    })*/
     this._fs.getAllFacilities().subscribe((data: any) => {
       this.facList = data.facilities
     })

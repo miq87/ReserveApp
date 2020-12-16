@@ -30,5 +30,14 @@
         { "id": 14, "name": "warmińsko-mazurskie" },
         { "id": 15, "name": "wielkopolskie" },
         { "id": 16, "name": "zachodnio-pomorskie" }
+    ],
+    "hotelNames": [
+        { "id": 1,  "name": "Grand" },
+        { "id": 2,  "name": "Hanza" },
+        { "id": 3,  "name": "Sheraton" },
+        { "id": 4,  "name": "Amber" },
+        { "id": 5,  "name": "Mercure" },
+        { "id": 6,  "name": "Orbis" },
+        { "id": 7,  "name": "Radison Blu" }
     ]
 }

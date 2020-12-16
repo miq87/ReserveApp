@@ -26,17 +26,17 @@ export class HotelDetailComponent implements OnInit {
 
     this._bs.getHotelDetails(hotelId).then(data => {
       this.hotel = data;
-      console.log(this.hotel)
-    }).catch(err => {
-      console.log(err.code)
-    }).finally(() => {
+
       this._facs.getFacilities(this.hotel.facilities).then((data: string[]) => {
         this.hotelFacilities = data
       }).catch(err => {
         console.log(err.message)
       })
-    })
 
+    }).catch(err => {
+      console.log(err.code)
+    })
+    
     this._fs.getMainImage(hotelId).then(data => {
       console.log(data)
       this.hotelMainImg = data

@@ -15,7 +15,6 @@ export class FacilitiesService {
 
   getFacilities(values: number[]) {
     let retValues: string[] = []
-
     return new Promise((resolve) => {
       values.forEach(value => {
         let selectedOpt = this.facilities.find(opt => opt.id == value);

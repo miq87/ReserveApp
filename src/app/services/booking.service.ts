@@ -20,7 +20,7 @@ export class BookingService {
     })
     return retHotelId || null
   }
-  
+
   async removeHotelById(hotelId: string) {
     await firebase.firestore().collection('hotels').doc(hotelId).delete()
     .then(() => {
@@ -47,7 +47,7 @@ export class BookingService {
   
     const snapshot = await hotelsRef
       .where('city', '==', hotelData.city)
-      .where('facilities', 'array-contains-any', hotelData.facilities)
+      .where('facilities', 'array-contains', hotelData.facilities[0])
       .get()
     if(snapshot.empty) {
       console.log('Brak wyników!')
@@ -55,10 +55,21 @@ export class BookingService {
     }
     console.log(`Załadowałem: ${hotelData.city}\n`)
     snapshot.forEach(doc => {
-      console.log(doc.data())
-      hotelList.push(new Hotel(doc.id, doc.data()))
+      let hotel = doc.data()
+      
+      console.log(hotelData.facilities)
+      console.log(hotel.facilities)
+      
+      for(let i = 1; i < hotelData.facilities.length; i++) {
+        if(!hotel.facilities.includes(hotelData.facilities[i]))
+          return null
+      }
+
+      hotelList.push(new Hotel(doc.id, hotel))
+
     })
-    console.log(hotelList)
+
+    //console.log(hotelList)
     return hotelList;
   }
   consoleAddedNewHotel(hotel) {
