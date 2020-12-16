@@ -29,6 +29,12 @@ export class HotelDetailComponent implements OnInit {
       console.log(this.hotel)
     }).catch(err => {
       console.log(err.code)
+    }).finally(() => {
+      this._facs.getFacilities(this.hotel.facilities).then((data: string[]) => {
+        this.hotelFacilities = data
+      }).catch(err => {
+        console.log(err.message)
+      })
     })
 
     this._fs.getMainImage(hotelId).then(data => {
@@ -43,12 +49,7 @@ export class HotelDetailComponent implements OnInit {
       })
     })
 
-    this._facs.getFacilities(this.hotel.facilities).then(data => {
-      console.log(data)
-      //this.hotelFacilities = data
-    }).catch(err => {
-      console.log(err.message)
-    })
+    
 
   }
 
