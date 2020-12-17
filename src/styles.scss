@@ -97,7 +97,52 @@ label {
         }
     }
 }
-
+.form-group {
+    max-width: 300px;
+    margin: 8px auto;
+    position: relative;
+}
+.form-group > i {
+    color: $queen-blue;
+    font-size: 20px;
+    line-height: 36px;
+    position: absolute;
+    left: 12px;
+}
+.form-group > label {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+.form-control {
+    border-radius: 6px;
+    padding-left: 40px;
+    margin: 0px;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    transition: all 0.5s;
+    border: 0px;
+    border-bottom: 2px solid $dark-sky-blue;
+    height: 36px;
+}
+.form-control[type=file] {
+    background: transparent;
+    box-shadow: none;
+    border: 0px;
+}
+.form-control::placeholder {
+    font-size: 16px;
+    color: rgba(0,0,0,0.4);
+}
+.form-control:hover {
+    border-bottom: 2px solid $safety-orange-blaze-orange;
+}
+/*
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948;
+}
+.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442;
+}*/
 
 .myCard {
     background-color: $queen-blue;
@@ -106,7 +151,6 @@ label {
     box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     color: #FFF;
     border-radius: 6px;
-
     .heading {
         color: $safety-orange-blaze-orange;
         text-align: center;
@@ -115,54 +159,6 @@ label {
             font-size: 18px;
         }
     }
-    .form-group {
-        max-width: 300px;
-        margin: 8px auto;
-        position: relative;
-    }
-    .form-group > i {
-        color: $queen-blue;
-        font-size: 20px;
-        line-height: 36px;
-        position: absolute;
-        left: 12px;
-    }
-    .form-group > label {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-    }
-    .form-control {
-        border-radius: 0;
-        color: $queen-blue;
-        padding-left: 40px;
-        margin: 0px;
-        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-        transition: all 0.5s;
-        border: 0px;
-        border-bottom: 2px solid $dark-sky-blue;
-        height: 36px;
-    }
-    .form-control[type=file] {
-        background: transparent;
-        box-shadow: none;
-        border: 0px;
-    }
-    .form-control::placeholder {
-        font-size: 16px;
-        color: rgba(0,0,0,0.4);
-    }
-    .form-control:hover {
-        border-bottom: 2px solid $safety-orange-blaze-orange;
-    }
-    /*
-    .ng-valid[required], .ng-valid.required  {
-        border-left: 5px solid #42A948;
-    }
-    .ng-invalid:not(form)  {
-        border-left: 5px solid #a94442;
-    }*/
-    
 }
 
 .social {
