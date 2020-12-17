@@ -1,9 +1,7 @@
 <div class="myCard">
   <div *ngIf="!hotelList" class="alert-danger">Brak wyników</div>
   <div *ngIf="hotelList">
-    <div class="m-2">
-      <span>Liczba wyników: {{ hotelList.length }}</span>
-    </div>
+    <div class="alert-success">Liczba wyników: {{ hotelList.length }}</div>
     <div *ngFor="let hotel of hotelList">
       <app-hotel-item [hotel]="hotel"></app-hotel-item>
     </div>

@@ -44,11 +44,20 @@ export class BookingService {
   async onLoadHotels(hotelData): Promise<Hotel[]> {
     let hotelsRef = firebase.firestore().collection('hotels')
     let hotelList: Hotel[] = [];
+    let snapshot
   
-    const snapshot = await hotelsRef
+    if(hotelData.facilities[0]) {
+      snapshot = await hotelsRef
       .where('city', '==', hotelData.city)
       .where('facilities', 'array-contains', hotelData.facilities[0])
       .get()
+    }
+    else {
+      snapshot = await hotelsRef
+      .where('city', '==', hotelData.city)
+      .get()
+    }
+    
     if(snapshot.empty) {
       console.log('Brak wyników!')
       return null

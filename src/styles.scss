@@ -52,8 +52,8 @@ label {
 .btn:hover {
     opacity: 0.8;
 }
-.alert-danger {
-    font-size: 16px;
+.alert-danger, .alert-success {
+    font-size: 18px;
     max-width: 80%;
     text-align: center;
     padding: 4px;

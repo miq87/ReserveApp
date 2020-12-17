@@ -12,21 +12,17 @@ import { BookingService } from 'src/app/services/booking.service';
 export class HotelGeneratorComponent implements OnInit {
 
   assetsUrl = "assets/data.json"
-
-  hotelNames = [ 'Grand', 'Hanza', 'Sheraton', 'Amber', 'Mercure', 'Orbis', 'Radisson Blu',
-                 'Rezydent', 'Number One', 'Smart', 'Eva', 'Bryza', 'Szydłowski', 'Roko' ]
-  hotelStreet = [ 'Adama Mickiewicza', 'Grunwaldzka', 'Jana Jerzego Haffnera', 'Stefana Czarnieckiego', 'Henryka Sienkiewicza',
-                 'Generała Józefa Fiszera', 'Prezydenta Lecha Kaczyńskiego', 'Stanisława Wyspiańskiego', 'Generała Józefa Hallera',
-                 'Jana Pawła II', 'Kołobrzeska', 'Macieja Płażyńskiego', 'Piastowska', 'Pomorska', 'Kolejowa', 'Traugutta' ]
-  hotelCity = [ ['Gdańsk', 'pomorskie'], ['Sopot', 'pomorskie'], ['Gdynia', 'pomorskie'],
-                ['Warszawa', 'mazowieckie'], ['Kraków', 'małopolskie'], ['Wrocław', 'dolnośląskie'], ['Poznań', 'wielkopolskie'],
-                ['Katowice', 'śląskie'], ['Szczecin', 'zachodnio-pomorskie'], ['Chorzów', 'śląskie'], ['Rzeszów','podkarpackie'],
-                ['Zakopane', 'małopolskie'], ['Toruń', 'kujawsko-pomorskie'], ['Białystok', 'podlaskie'], ['Łódź', 'łódzkie'],
-                ['Lublin', 'lubelskie'] ]
+  hotelNames = []
+  hotelStreet = []
+  hotelCity = []
 
   constructor(private _booking: BookingService, private http: HttpClient) {
     http.get(this.assetsUrl).subscribe((data: any) => {
-      console.log(data.hotelNames)
+      for(let i = 0; i < 16; i++) {
+        this.hotelNames.push(data.hotelNames[i].name)
+        this.hotelStreet.push(data.hotelStreet[i].name)
+        this.hotelCity.push([data.hotelCity[i].name, data.hotelCity[i].state])
+      }
     })
   }
 
@@ -56,8 +52,10 @@ export class HotelGeneratorComponent implements OnInit {
   }
   randomFacilities(): number[] {
     let facArray: number[] = []
-    for(let i = 0; i < this.randomInt(3, 9); i++) {
-      facArray.push(this.randomInt(1,13))
+    let randomElement
+    for(let i = 0; i < 9; i++) {
+      randomElement = this.randomInt(1,13)
+      if(!facArray.includes(randomElement)) facArray.push(randomElement)
     }
     return facArray
   }
