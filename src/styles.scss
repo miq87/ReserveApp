@@ -22,6 +22,18 @@ body {
     color: $safety-orange-blaze-orange;
     font-size: 20px;
 }
+.mainSection {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .leftSidebar {
+        width: 30%;
+        max-width: 400px;
+    }
+    .mainContent {
+        width: 70%
+    }
+}
 a {
     color: $dark-sky-blue;
     letter-spacing: 1px;

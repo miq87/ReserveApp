@@ -6,19 +6,19 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HandleErrorsService {
 
-  private eventAuthError = new BehaviorSubject('')
-  private eventAuthError$ = this.eventAuthError.asObservable()
+  private isError = new BehaviorSubject('')
+  private isError$ = this.isError.asObservable()
 
   constructor() { }
 
   resetError(): void {
-    this.eventAuthError.next('')
+    this.isError.next('')
   }
   sendError(err): void {
-    this.eventAuthError.next(err)
+    this.isError.next(err)
   }
   getError() {
-    return this.eventAuthError$
+    return this.isError$
   }
 
 }
