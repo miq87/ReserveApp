@@ -13,7 +13,7 @@ import { MessengerService } from 'src/app/services/messenger.service';
 export class HotelItemComponent implements OnInit {
 
   @Input() hotel: Hotel
-  imgMain: string
+  hotelMainImg: string
 
   constructor(
     private _fs: FireStorageService,
@@ -22,16 +22,16 @@ export class HotelItemComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this._fs.getMainImage(this.hotel.id).then((data) => {
-      this.imgMain = data
+    this._fs.getMainImage(this.hotel.id).then(data => {
+      this.hotelMainImg = data
     })
     .catch(err => {
       console.log(err.code)
-      this._fs.getDefaultImage().then((data) => {
-        this.imgMain = data
+      this._fs.getDefaultImage().then(data => {
+        this.hotelMainImg = data
       })
       .catch(err => {
-        console.log(err.code)
+        console.log(err.message)
       })
     })
   }

@@ -44,7 +44,11 @@ export class HotelGeneratorComponent implements OnInit {
         'postalCode': rPostalCode,
         'facilities': facilities
       }
-      this._booking.addNewHotel(newHotel)
+      this._booking.addNewHotel(newHotel).then(hotelId => {
+        for(let i = 0; i < 6; i++) {
+          this._booking.addNewRoom(hotelId, this.randomInt(2, 7))
+        }
+      })
     }
   }
   randomInt(min, max) {

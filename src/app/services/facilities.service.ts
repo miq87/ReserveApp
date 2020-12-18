@@ -20,7 +20,6 @@ export class FacilitiesService {
         let selectedOpt = this.facilities.find(opt => opt.id == value);
         retValues.push(selectedOpt.name)
       })
-      console.log(retValues)
       resolve(retValues)
     })
   }

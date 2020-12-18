@@ -22,18 +22,6 @@ body {
     color: $safety-orange-blaze-orange;
     font-size: 20px;
 }
-.mainSection {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    .leftSidebar {
-        width: 30%;
-        max-width: 400px;
-    }
-    .mainContent {
-        width: 70%
-    }
-}
 a {
     color: $dark-sky-blue;
     letter-spacing: 1px;
@@ -78,37 +66,41 @@ label {
     color: $charcoal;
     box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     border: 0px;
-}
-.card-body {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    .card-image {
-        max-width: 200px;
-        img {
-            max-width: 100%;
-            max-height: 100%;
-            box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-            border-radius: 6px;
-        }
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+        border-radius: 6px;
     }
-    ul {
-        font-size: 0.7em;
-        list-style: none;
+    .card-body {
         display: flex;
         align-items: flex-start;
-        flex-flow: row wrap;
         justify-content: flex-start;
-        li {
-            margin: 2px;
-            padding: 2px 4px;
-            background-color: rgba(117, 5, 182, 0.7);
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
+        .card-image {
+            max-width: 200px;
+            img {
+                
+            }
+        }
+        ul {
+            font-size: 0.7em;
+            list-style: none;
+            display: flex;
+            align-items: flex-start;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            li {
+                margin: 2px;
+                padding: 2px 4px;
+                background-color: rgba(117, 5, 182, 0.7);
+                color: #fff;
+                border-radius: 4px;
+                cursor: pointer;
+            }
         }
     }
 }
+
 .form-group {
     max-width: 300px;
     margin: 8px auto;

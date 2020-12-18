@@ -1,17 +1,20 @@
-<div class="card mb-2">
+<div class="card m-2" *ngIf="hotel">
   <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
   <div class="card-body">
-    <div class="card-image m-2">
-      <img [src]="imgMain" [alt]="hotel.hotelName">
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4"><img [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
+        <div class="col-lg-8">
+          <p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p>
+        </div>
+      </div>
     </div>
-    <div class="m-2">
-      <h4>{{ hotel.street }}</h4>
-      <p>{{ hotel.postalCode }} {{ hotel.city }}, {{ hotel.state }}</p>
-    </div>
+
   </div>
   <div class="card-footer">
     <div class="btn-group">
-      <button class="btn btn-success btn-md" (click)="onBook()">Zarezerwuj hotel</button>
+      <button class="btn btn-success btn-md" (click)="onBook()">Wybierz</button>
       <button class="btn btn-danger btn-md" (click)="onRemove()">Usuń hotel</button>
     </div>
   </div>

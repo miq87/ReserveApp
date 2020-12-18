@@ -3,22 +3,23 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NgZone } from '@angular/core';
+import { HandleErrorsService } from './handle-errors.service';
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
-import { HandleErrorsService } from './handle-errors.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  //readonly authState$: Observable<User | null> = this.fireAuth.authState
-  //private eventAuthError = new BehaviorSubject<string>('')
-  //eventAuthError$ = this.eventAuthError.asObservable()
   private accessToken: any
 
-  constructor(private router: Router, private http: HttpClient, private zone: NgZone, private handleError: HandleErrorsService) { }
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private zone: NgZone,
+    private handleError: HandleErrorsService) { }
 
   createUser(newUser) {
     firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)

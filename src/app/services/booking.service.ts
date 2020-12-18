@@ -11,14 +11,25 @@ export class BookingService {
 
   async addNewHotel(hotel): Promise<string> {
     let retHotelId: string
-    await firebase.firestore().collection('hotels').add(hotel)
-    .then(doc => {
+    await firebase.firestore().collection('hotels').add(hotel).then(doc => {
       this.consoleAddedNewHotel(hotel)
       retHotelId = doc.id
     }).catch(err => {
       console.log('Błąd podczas dodawania nowego hotelu!', err.message)
     })
     return retHotelId || null
+  }
+
+  async addNewRoom(hotelId: string, personNum: number) {
+    let room = {
+      "hotelId": hotelId,
+      "personNum": personNum
+    }
+    await firebase.firestore().collection('rooms').add(room).then(doc => {
+      console.log(`Dodałem pokój dla ${personNum} osób w hotelu ${hotelId}`)
+    }).catch(err => {
+      console.log(`Błąd podczas dodawania pokoju w hotelu ${hotelId}`, err.message)
+    })
   }
 
   async removeHotelById(hotelId: string) {
