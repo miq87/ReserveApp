@@ -22,10 +22,9 @@ export class BookingService {
 
   async addNewRoom(hotelId: string, personNum: number) {
     let room = {
-      "hotelId": hotelId,
       "personNum": personNum
     }
-    await firebase.firestore().collection('rooms').add(room).then(doc => {
+    await firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').add(room).then(doc => {
       console.log(`Dodałem pokój dla ${personNum} osób w hotelu ${hotelId}`)
     }).catch(err => {
       console.log(`Błąd podczas dodawania pokoju w hotelu ${hotelId}`, err.message)
