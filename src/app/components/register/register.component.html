@@ -1,6 +1,6 @@
 <div class="myCard">
   <div class="heading"><h2>Rejestracja</h2></div>
-  <div *ngIf="authError" class="alert-danger">{{ authError?.message }}</div>
+  <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
 
   <form [formGroup]="registerForm" (ngSubmit)="createUser()">
     <div class="form-group">

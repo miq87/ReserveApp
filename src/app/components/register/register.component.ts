@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  authError: any
+  isError: any
 
   registerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -18,14 +19,13 @@ export class RegisterComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private _auth: AuthService) { }
+  constructor(private fb: FormBuilder, private _auth: AuthService, private handleError: HandleErrorsService) { }
 
   ngOnInit(): void {
-    this._auth.eventAuthError$.subscribe(data => {
-      this.authError = data
+    this.handleError.getError().subscribe(data => {
+      this.isError = data
     })
   }
-  
   createUser() {
     this._auth.createUser(this.registerForm.value)
   }

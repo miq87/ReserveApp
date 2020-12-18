@@ -1,6 +1,6 @@
 <div class="myCard">
   <div class="heading"><h2>Logowanie</h2></div>
-  <div *ngIf="authError" class="alert-danger">{{ authError?.message }}</div>
+  <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
 
   <form [formGroup]="loginForm" (ngSubmit)="loginWithEmail()">
     <div class="form-group">

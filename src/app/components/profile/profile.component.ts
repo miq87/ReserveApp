@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/classes/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 
 @Component({
   selector: 'app-profile',
@@ -33,7 +34,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private fb: FormBuilder,
-    private route: ActivatedRoute) { }
+    private handleError: HandleErrorsService) { }
 
   ngOnInit(): void {
     this._auth.getUserData(doc => {
@@ -42,9 +43,9 @@ export class ProfileComponent implements OnInit {
         this.profileForm.patchValue(doc.data())
       }
     }, err => {
-      this._auth.sendError(err)
+      this.handleError.sendError(err)
     })
-    this._auth.eventAuthError$.subscribe(data => {
+    this.handleError.getError().subscribe(data => {
       this.authError = data
     })
   }

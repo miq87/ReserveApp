@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NgZone } from '@angular/core';
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
+import { HandleErrorsService } from './handle-errors.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +14,11 @@ import "firebase/firestore";
 export class AuthService {
 
   //readonly authState$: Observable<User | null> = this.fireAuth.authState
-  private eventAuthError = new BehaviorSubject<string>('')
-  eventAuthError$ = this.eventAuthError.asObservable()
+  //private eventAuthError = new BehaviorSubject<string>('')
+  //eventAuthError$ = this.eventAuthError.asObservable()
   private accessToken: any
 
-
-  constructor(private router: Router, private http: HttpClient, private zone: NgZone) { }
-  
-  resetError(): void {
-    this.eventAuthError.next('')
-  }
-  sendError(err): void {
-    this.eventAuthError.next(err)
-  }
+  constructor(private router: Router, private http: HttpClient, private zone: NgZone, private handleError: HandleErrorsService) { }
 
   createUser(newUser) {
     firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
@@ -37,7 +29,7 @@ export class AuthService {
       this.router.navigate(['/profile'])
     })
     .catch(err => {
-      this.eventAuthError.next(err)
+      this.handleError.sendError(err)
     })
   }
   loginBy(prov: string) {
@@ -66,7 +58,7 @@ export class AuthService {
     .catch(err => {
       if(err.code === 'auth/account-exists-with-different-credential') {
         err.message = 'Istnieje już konto o emailu takim samym jak konto Facebooka'
-        this.eventAuthError.next(err)
+        this.handleError.sendError(err)
       }
     })
     .finally(() => {
@@ -94,7 +86,7 @@ export class AuthService {
         }).then(bd => {
           this.addUserData(userCredential, bd)
         }).catch(err => {
-          this.eventAuthError.next(err)
+          this.handleError.sendError(err)
         })
         break;
       default:
@@ -117,7 +109,7 @@ export class AuthService {
       console.log('Dodałem informacje o użytkowniku do FireStore')
     })
     .catch(err => {
-      this.eventAuthError.next(err)
+      this.handleError.sendError(err)
     })
   }
   getGoogleBirthdays() {
@@ -143,7 +135,7 @@ export class AuthService {
   loginWithEmail(user) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .catch(err => {
-      this.eventAuthError.next(err)
+      this.handleError.sendError(err)
     });
   }
   logout() {
@@ -165,12 +157,13 @@ export class AuthService {
   updateUserData(userData) {
     firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).update(userData).then(() => {
       this.updateUserDisplayName(userData.displayName)
-    }).catch(err => this.eventAuthError.next(err))
+    }).catch(err => this.handleError.sendError(err))
+
   }
   updateUserDisplayName(displayName) {
     return firebase.auth().currentUser.updateProfile({
       displayName: displayName
-    }).catch(err => this.eventAuthError.next(err))
+    }).catch(err => this.handleError.sendError(err))
   }
   deleteUser(): void {
     let userId = firebase.auth().currentUser.uid
@@ -178,10 +171,10 @@ export class AuthService {
 
     firebase.auth().currentUser.delete().then(() => {
       console.log('Użytkownik usunięty ' + userId)
-    }).catch(err => this.eventAuthError.next(err))
+    }).catch(err => this.handleError.sendError(err))
     firebase.firestore().collection('users').doc(userId).delete().then(() => {
       console.log('Usunięte z Firestore ' +  userId)
-    }).catch(err => this.eventAuthError.next(err))
+    }).catch(err => this.handleError.sendError(err))
 
     this.router.navigate(['/'])
   }

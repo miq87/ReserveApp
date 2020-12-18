@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +11,19 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  authError: any
+  isError: any
 
   loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private _auth: AuthService) {}
+  constructor(private fb: FormBuilder, private _auth: AuthService, private handleError: HandleErrorsService) {}
 
   ngOnInit(): void {
-    this._auth.eventAuthError$.subscribe(data => {
-      this.authError = data
+    this.handleError.getError().subscribe(data => {
+      this.isError = data
     })
-    this._auth.resetError()
   }
   loginWithEmail() {
     this._auth.loginWithEmail(this.loginForm.value)
