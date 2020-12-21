@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Hotel } from 'src/app/models/hotel';
+import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { FacilitiesService } from 'src/app/services/facilities.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
@@ -8,21 +10,37 @@ import { FireStorageService } from 'src/app/services/fire-storage.service';
 @Component({
   selector: 'app-hotel-detail',
   templateUrl: './hotel-detail.component.html',
-  styleUrls: ['./hotel-detail.component.scss']
+  styleUrls: ['./hotel-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HotelDetailComponent implements OnInit {
   hotel: Hotel
+  hotelRooms = []
   hotelFacilities: string[]
   hotelMainImg: string
+
+  reservationForm = this.fb.group({
+    roomId: ['', Validators.required],
+    userId: ['', Validators.required],
+    date: ['', Validators.required]
+  })
 
   constructor(
     private route: ActivatedRoute,
     private _bs: BookingService,
     private _fs: FireStorageService,
-    private _facs: FacilitiesService) { }
+    private _facs: FacilitiesService,
+    private _auth: AuthService,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     let hotelId = this.route.snapshot.paramMap.get('id')
+
+    this._auth.getCurrentUser(user => {
+      if(user) {
+        this.reservationForm.patchValue({ userId: user.uid })
+      }
+    })
 
     this._bs.getHotelDetails(hotelId).then(data => {
       this.hotel = data;
@@ -33,8 +51,18 @@ export class HotelDetailComponent implements OnInit {
         console.log(err.message)
       })
 
+      this._bs.getHotelRooms(hotelId).then(querySnapshot => {
+        querySnapshot.docs.forEach(doc => {
+          this.hotelRooms.push({ id: doc.id, ...doc.data() })
+        });
+        console.log(this.hotelRooms)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
     }).catch(err => {
-      console.log(err.code)
+      console.log(err)
     })
     
     this._fs.getMainImage(hotelId).then(data => {
@@ -49,8 +77,10 @@ export class HotelDetailComponent implements OnInit {
       })
     })
 
-    
+  }
 
+  onBook() {
+    console.log(this.reservationForm.value)
   }
 
 }

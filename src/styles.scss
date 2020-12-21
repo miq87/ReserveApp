@@ -91,6 +91,20 @@ label {
     }
 }
 
+.mat-select-panel {
+    background: $charcoal;
+}
+.mat-label {
+    color: #000;
+}
+.mat-select {
+    color: #000;
+}
+
+.mat-form-field-label, .mat-select-value {
+    color: $charcoal;
+}
+
 .form-group {
     max-width: 300px;
     margin: 8px auto;

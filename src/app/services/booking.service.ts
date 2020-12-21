@@ -51,6 +51,10 @@ export class BookingService {
     return hotel || null
   }
 
+  getHotelRooms(hotelId: string) {
+    return firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').get()
+  }
+
   async onLoadHotels(hotelData): Promise<Hotel[]> {
     let hotelsRef = firebase.firestore().collection('hotels')
     let hotelList: Hotel[] = [];
