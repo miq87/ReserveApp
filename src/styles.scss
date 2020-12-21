@@ -73,18 +73,8 @@ label {
         border-radius: 6px;
     }
     .card-body {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        .card-image {
-            max-width: 200px;
-            img {
-                
-            }
-        }
         ul {
             font-size: 0.7em;
-            list-style: none;
             display: flex;
             align-items: flex-start;
             flex-flow: row wrap;
@@ -92,7 +82,7 @@ label {
             li {
                 margin: 2px;
                 padding: 2px 4px;
-                background-color: rgba(117, 5, 182, 0.7);
+                background-color: rgba(47, 72, 88, 0.8);
                 color: #fff;
                 border-radius: 4px;
                 cursor: pointer;
