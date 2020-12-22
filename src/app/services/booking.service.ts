@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
 import firebase from "firebase/app";
+import { IBook } from '../models/interfaces/ibook';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,15 @@ export class BookingService {
 
   getHotelRooms(hotelId: string) {
     return firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').get()
+  }
+
+  sendBook(bookData: IBook) {
+    firebase.firestore().collection('books').add(bookData).then(doc => {
+      
+    })
+    .catch(err => {
+      console.log('Błąd podczas dodawania rezerwacji', err.message)
+    })
   }
 
   async onLoadHotels(hotelData): Promise<Hotel[]> {

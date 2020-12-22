@@ -19,10 +19,12 @@ export class HotelDetailComponent implements OnInit {
   hotelFacilities: string[]
   hotelMainImg: string
 
-  reservationForm = this.fb.group({
+  bookForm = this.fb.group({
     roomId: ['', Validators.required],
     userId: ['', Validators.required],
-    date: ['', Validators.required]
+    dateStart: ['', Validators.required],
+    dateEnd: ['', Validators.required],
+    notice: [''],
   })
 
   constructor(
@@ -38,7 +40,7 @@ export class HotelDetailComponent implements OnInit {
 
     this._auth.getCurrentUser(user => {
       if(user) {
-        this.reservationForm.patchValue({ userId: user.uid })
+        this.bookForm.patchValue({ userId: user.uid })
       }
     })
 
@@ -80,7 +82,7 @@ export class HotelDetailComponent implements OnInit {
   }
 
   onBook() {
-    console.log(this.reservationForm.value)
+    console.log(this.bookForm.value)
   }
 
 }
