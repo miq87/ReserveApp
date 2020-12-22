@@ -35,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ToastrModule } from 'ngx-toastr';
 
 import firebase from 'firebase/app';
 
@@ -74,6 +75,7 @@ firebase.initializeApp(firebaseConfig);
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -81,7 +83,7 @@ firebase.initializeApp(firebaseConfig);
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC_fTrGTvK8jjXIj2epeiY2HKqVWD_MFeM'
     }),
-    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     MatSnackBarModule,
     LayoutModule,

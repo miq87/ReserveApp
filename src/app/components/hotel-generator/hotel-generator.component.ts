@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Hotel } from 'src/app/models/hotel';
 import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
@@ -16,7 +14,7 @@ export class HotelGeneratorComponent implements OnInit {
   hotelStreet = []
   hotelCity = []
 
-  constructor(private _booking: BookingService, private http: HttpClient) {
+  constructor(private _bs: BookingService, private http: HttpClient) {
     http.get(this.assetsUrl).subscribe((data: any) => {
       for(let i = 0; i < 16; i++) {
         this.hotelNames.push(data.hotelNames[i].name)
@@ -44,11 +42,9 @@ export class HotelGeneratorComponent implements OnInit {
         'postalCode': rPostalCode,
         'facilities': facilities
       }
-      this._booking.addNewHotel(newHotel).then(hotelId => {
-        for(let i = 0; i < 6; i++) {
-          this._booking.addNewRoom(hotelId, this.randomInt(2, 7))
-        }
-      })
+
+      this._bs.addNewHotel(newHotel, [2,4,4,6,6,8,8])
+      
     }
   }
   randomInt(min, max) {

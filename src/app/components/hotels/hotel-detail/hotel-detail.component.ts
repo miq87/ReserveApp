@@ -82,7 +82,7 @@ export class HotelDetailComponent implements OnInit {
   }
 
   onBook() {
-    console.log(this.bookForm.value)
+    this._bs.sendBook(this.bookForm.value)
   }
 
 }

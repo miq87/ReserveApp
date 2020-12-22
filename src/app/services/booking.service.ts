@@ -2,18 +2,26 @@ import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
 import firebase from "firebase/app";
 import { IBook } from '../models/interfaces/ibook';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
 
-  constructor() { }
+  constructor(private _toastr: ToastrService) { }
 
-  async addNewHotel(hotel): Promise<string> {
+  async addNewHotel(hotel, roomNum?: number[]): Promise<string> {
     let retHotelId: string
     await firebase.firestore().collection('hotels').add(hotel).then(doc => {
-      this.consoleAddedNewHotel(hotel)
+      //this.consoleAddedNewHotel(hotel)
+
+      if(roomNum) {
+        for(let i = 0; i < roomNum.length; i++) {
+          this.addNewRoom(doc.id, roomNum[i])
+        }
+      }
+
       retHotelId = doc.id
     }).catch(err => {
       console.log('Błąd podczas dodawania nowego hotelu!', err.message)
@@ -25,7 +33,7 @@ export class BookingService {
     let room = {
       "personNum": personNum
     }
-    await firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').add(room).then(doc => {
+    await firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').add(room).then(() => {
       console.log(`Dodałem pokój dla ${personNum} osób w hotelu ${hotelId}`)
     }).catch(err => {
       console.log(`Błąd podczas dodawania pokoju w hotelu ${hotelId}`, err.message)
@@ -57,10 +65,11 @@ export class BookingService {
   }
 
   sendBook(bookData: IBook) {
-    firebase.firestore().collection('books').add(bookData).then(doc => {
-      
+    firebase.firestore().collection('books').add(bookData).then(() => {
+      this._toastr.success('Dodałem nową rezerwację')
     })
     .catch(err => {
+      this._toastr.error('Nie mogę dokonać rezerwacji')
       console.log('Błąd podczas dodawania rezerwacji', err.message)
     })
   }
@@ -102,7 +111,6 @@ export class BookingService {
 
     })
 
-    //console.log(hotelList)
     return hotelList;
   }
   consoleAddedNewHotel(hotel) {
