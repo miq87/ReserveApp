@@ -13,6 +13,7 @@
         <ul>
           <li><a href="#" *ngIf="isLogged" (click)="onLogout()">Wyloguj <span>({{ currentUser.displayName }})</span></a></li>
           <li><a href="#" *ngIf="isLogged" [routerLink]="['/profile']">Profil</a></li>
+          <li><a href="#" *ngIf="isLogged" [routerLink]="['/myreservation']">Moje rezerwacje</a></li>
           <li><a href="#" *ngIf="!isLogged" [routerLink]="['/register']">Zarejestruj</a></li>
           <li><a href="#" *ngIf="!isLogged" [routerLink]="['/login']">Zaloguj</a></li>
           <li><a href="#" *ngIf="isLogged" [routerLink]="['/generator']">Generator hoteli</a></li>

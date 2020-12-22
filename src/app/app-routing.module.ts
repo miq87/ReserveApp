@@ -11,6 +11,7 @@ import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-det
 import { Error404Component } from './components/error404/error404.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard/';
+import { MyReservationComponent } from './components/my-reservation/my-reservation.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hotels', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'hotels', component: HotelsComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'hotels/:id', component: HotelDetailComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'generator', component: HotelGeneratorComponent, canActivate: [AngularFireAuthGuard] },
+  { path: 'myreservation', component: MyReservationComponent, canActivate: [AngularFireAuthGuard] },
   { path: '**', component: Error404Component }
 ];
 
