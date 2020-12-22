@@ -15,7 +15,7 @@ export class HotelGeneratorComponent implements OnInit {
   hotelCity = []
 
   constructor(private _bs: BookingService, private http: HttpClient) {
-    http.get(this.assetsUrl).subscribe((data: any) => {
+    this.http.get(this.assetsUrl).subscribe((data: any) => {
       for(let i = 0; i < 16; i++) {
         this.hotelNames.push(data.hotelNames[i].name)
         this.hotelStreet.push(data.hotelStreet[i].name)
@@ -42,14 +42,14 @@ export class HotelGeneratorComponent implements OnInit {
         'postalCode': rPostalCode,
         'facilities': facilities
       }
-
-      this._bs.addNewHotel(newHotel, [2,4,4,6,6,8,8])
-      
+      this._bs.addNewHotel(newHotel, [2,4,6,8])
     }
   }
+
   randomInt(min, max) {
     return min + Math.floor((max - min) * Math.random());
   }
+
   randomFacilities(): number[] {
     let facArray: number[] = []
     let randomElement

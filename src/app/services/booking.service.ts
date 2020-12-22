@@ -14,14 +14,12 @@ export class BookingService {
   async addNewHotel(hotel, roomNum?: number[]): Promise<string> {
     let retHotelId: string
     await firebase.firestore().collection('hotels').add(hotel).then(doc => {
-      //this.consoleAddedNewHotel(hotel)
-
+      this.consoleAddedNewHotel(hotel)
       if(roomNum) {
         for(let i = 0; i < roomNum.length; i++) {
           this.addNewRoom(doc.id, roomNum[i])
         }
       }
-
       retHotelId = doc.id
     }).catch(err => {
       console.log('Błąd podczas dodawania nowego hotelu!', err.message)
