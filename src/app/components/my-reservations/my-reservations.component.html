@@ -1,9 +1,7 @@
 <div class="myCard">
-    <div class="heading"><h2>Moje rezerwacje</h2></div>
-  
-    <form [formGroup]="myResForm">
-
-    </form>
-  
+  <div class="heading"><h2>Moje rezerwacje</h2></div>
+  <div class="row">
+    <app-my-reservation-item [myReservation]="myReservations"></app-my-reservation-item>
+  </div>
 </div>
   

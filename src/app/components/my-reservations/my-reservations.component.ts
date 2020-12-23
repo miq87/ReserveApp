@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Reservation } from 'src/app/models/classes/reservation';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { ReservationsService } from 'src/app/services/reservations.service';
   styleUrls: ['./my-reservations.component.scss']
 })
 export class MyReservationsComponent implements OnInit {
+
+  myReservations: Reservation[]
 
   myResForm = this.fb.group({
     roomId: ['', Validators.required],
@@ -22,6 +25,7 @@ export class MyReservationsComponent implements OnInit {
   ngOnInit(): void {
     this._res.getReservations().then(myReservations => {
       console.log(myReservations)
+      this.myReservations = myReservations
     })
   }
 
