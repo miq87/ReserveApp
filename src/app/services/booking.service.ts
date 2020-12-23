@@ -3,6 +3,7 @@ import { Hotel } from '../models/hotel';
 import firebase from "firebase/app";
 import { IReservation } from '../models/interfaces/ireservation';
 import { ToastrService } from 'ngx-toastr';
+import { Reservation } from '../models/classes/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -72,16 +73,27 @@ export class BookingService {
     })
   }
 
-  async getMyReservations() {
+  async getMyReservations(): Promise<Reservation[]> {
+    let resList: Reservation[] = []
     let resRef = firebase.firestore().collection('reservations')
     let snapshot = await resRef
       .where('userId', '==', firebase.auth().currentUser.uid)
       .get()
+
+    if(snapshot.empty) {
+      console.log('Brak wyników!')
+      return null
+    }
+    snapshot.forEach(doc => {
+      resList.push(<Reservation>doc.data())
+    })
+    console.log(resList)
+    return resList
   }
 
   async onLoadHotels(hotelData): Promise<Hotel[]> {
+    let hotelList: Hotel[] = []
     let hotelsRef = firebase.firestore().collection('hotels')
-    let hotelList: Hotel[] = [];
     let snapshot
   
     if(hotelData.facilities[0]) {
@@ -95,7 +107,6 @@ export class BookingService {
       .where('city', '==', hotelData.city)
       .get()
     }
-    
     if(snapshot.empty) {
       console.log('Brak wyników!')
       return null
@@ -104,20 +115,15 @@ export class BookingService {
     snapshot.forEach(doc => {
       let hotel = doc.data()
       
-      console.log(hotelData.facilities)
-      console.log(hotel.facilities)
-      
       for(let i = 1; i < hotelData.facilities.length; i++) {
         if(!hotel.facilities.includes(hotelData.facilities[i]))
           return null
       }
-
       hotelList.push(new Hotel(doc.id, hotel))
-
     })
-
     return hotelList;
   }
+
   consoleAddedNewHotel(hotel) {
     console.log(`Dodałem:\n\t${hotel.hotelName}\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
   }
