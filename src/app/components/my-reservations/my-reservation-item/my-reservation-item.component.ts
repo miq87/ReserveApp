@@ -22,6 +22,7 @@ export class MyReservationItemComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    console.log(this.myReservation)
   }
 
 }

@@ -15,7 +15,6 @@ export class MyReservationsComponent implements OnInit {
 
   ngOnInit(): void {
     this._res.getReservations().then(myReservations => {
-      console.log(myReservations)
       this.myReservations = myReservations
     })
   }
