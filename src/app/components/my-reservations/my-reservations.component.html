@@ -10,7 +10,9 @@
     </div>
   </div>
   <div class="row" *ngFor="let myRes of myReservations">
-    <app-my-reservation-item [myReservation]="myRes"></app-my-reservation-item>
+    <div class="col-lg-12">
+      <app-my-reservation-item [myReservation]="myRes"></app-my-reservation-item>
+    </div>
   </div>
 </div>
   
