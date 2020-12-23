@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
-import firebase from "firebase/app";
-import { IReservation } from '../models/interfaces/ireservation';
 import { ToastrService } from 'ngx-toastr';
-import { Reservation } from '../models/classes/reservation';
+import firebase from "firebase/app";
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,34 +60,6 @@ export class BookingService {
 
   getHotelRooms(hotelId: string) {
     return firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').get()
-  }
-
-  async makeReservation(resData: IReservation) {
-    await firebase.firestore().collection('reservations').add(resData).then(() => {
-      this._toastr.success('Dodałem nową rezerwację')
-    })
-    .catch(err => {
-      this._toastr.error('Nie mogę dokonać rezerwacji')
-      console.log('Błąd podczas dodawania rezerwacji', err.message)
-    })
-  }
-
-  async getMyReservations(): Promise<Reservation[]> {
-    let resList: Reservation[] = []
-    let resRef = firebase.firestore().collection('reservations')
-    let snapshot = await resRef
-      .where('userId', '==', firebase.auth().currentUser.uid)
-      .get()
-
-    if(snapshot.empty) {
-      console.log('Brak wyników!')
-      return null
-    }
-    snapshot.forEach(doc => {
-      resList.push(<Reservation>doc.data())
-    })
-    console.log(resList)
-    return resList
   }
 
   async onLoadHotels(hotelData): Promise<Hotel[]> {

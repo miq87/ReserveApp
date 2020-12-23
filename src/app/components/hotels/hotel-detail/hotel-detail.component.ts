@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { FacilitiesService } from 'src/app/services/facilities.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
   selector: 'app-hotel-detail',
@@ -33,6 +34,7 @@ export class HotelDetailComponent implements OnInit {
     private _fs: FireStorageService,
     private _facs: FacilitiesService,
     private _auth: AuthService,
+    private _res: ReservationsService,
     private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -82,7 +84,7 @@ export class HotelDetailComponent implements OnInit {
   }
 
   onBook() {
-    this._bs.makeReservation(this.resForm.value)
+    this._res.makeReservation(this.resForm.value)
   }
 
 }

@@ -1,0 +1,39 @@
+import { Injectable } from '@angular/core';
+import { Reservation } from '../models/classes/reservation';
+import { ToastrService } from 'ngx-toastr';
+import firebase from "firebase/app";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReservationsService {
+
+  constructor(private _toastr: ToastrService) { }
+
+  async makeReservation(resData: Reservation) {
+    await firebase.firestore().collection('reservations').add(resData).then(() => {
+      this._toastr.success('Dodałem nową rezerwację')
+    })
+    .catch(err => {
+      this._toastr.error('Nie mogę dokonać rezerwacji')
+      console.log('Błąd podczas dodawania rezerwacji', err.message)
+    })
+  }
+
+  async getReservations(): Promise<Reservation[]> {
+    let resList: Reservation[] = []
+    let resRef = firebase.firestore().collection('reservations')
+    let snapshot = await resRef
+      .where('userId', '==', firebase.auth().currentUser.uid)
+      .get()
+    if(snapshot.empty) {
+      console.log('Brak wyników!')
+      return null
+    }
+    snapshot.forEach(doc => {
+      resList.push(<Reservation>doc.data())
+    })
+    return resList
+  }
+
+}
