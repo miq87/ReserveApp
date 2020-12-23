@@ -1,40 +1,45 @@
-<div class="myCard">
-  <div class="heading">
-    <h3>Cel podróży:</h3>
+<div class="container myCard">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="heading"><h3>Cel podróży:</h3></div>
+    </div>
   </div>
-  <div>
-    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-      <div class="form-group">
-        <mat-form-field appearance="legacy">
-          <mat-label>Miasto</mat-label>
-          <input matInput formControlName="city" name="city">
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-form-field appearance="legacy">
-          <mat-label>Podaj termin</mat-label>
-          <mat-date-range-input [rangePicker]="picker">
-            <input matInput matStartDate formControlName="dateStart" placeholder="Od">
-            <input matInput matEndDate formControlName="dateEnd" placeholder="Do">
-          </mat-date-range-input>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>     
-          <mat-error *ngIf="searchForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
-          <mat-error *ngIf="searchForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-form-field appearance="legacy">
-          <mat-label>Udogodnienia</mat-label>
-          <mat-select formControlName="facilities" multiple>
-            <mat-option *ngFor="let fac of facList" [value]="fac.id">{{ fac.name }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-warning btn-lg" type="submit" [disabled]="searchForm.invalid">Szukaj</button>
-      </div>
-    </form>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Miasto</mat-label>
+            <input matInput formControlName="city" name="city">
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Podaj termin</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matInput matStartDate formControlName="dateStart" placeholder="Od">
+              <input matInput matEndDate formControlName="dateEnd" placeholder="Do">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>     
+            <mat-error *ngIf="searchForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
+            <mat-error *ngIf="searchForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Udogodnienia</mat-label>
+            <mat-select formControlName="facilities" multiple>
+              <mat-option *ngFor="let fac of facList" [value]="fac.id">{{ fac.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-warning btn-lg" type="submit" [disabled]="searchForm.invalid">Szukaj</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
   
+</div>
