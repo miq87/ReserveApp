@@ -21,7 +21,7 @@ export class ReservationsService {
   }
 
   async getReservations(): Promise<Reservation[]> {
-    let resList: Reservation[] = []
+    let resList: any[] = []
     let resRef = firebase.firestore().collection('reservations')
     let snapshot = await resRef
       .where('userId', '==', firebase.auth().currentUser.uid)
@@ -31,7 +31,7 @@ export class ReservationsService {
       return null
     }
     snapshot.forEach(doc => {
-      resList.push(<Reservation>doc.data())
+      resList.push(doc.data())
     })
     return resList
   }
