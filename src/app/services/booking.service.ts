@@ -3,7 +3,6 @@ import { Hotel } from '../models/hotel';
 import { ToastrService } from 'ngx-toastr';
 import firebase from "firebase/app";
 
-
 @Injectable({
   providedIn: 'root'
 })
