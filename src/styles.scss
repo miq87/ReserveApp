@@ -52,6 +52,12 @@ label {
 .btn:hover {
     opacity: 0.8;
 }
+img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
 .alert-danger, .alert-success {
     font-size: 18px;
     max-width: 80%;
@@ -66,12 +72,6 @@ label {
     color: $charcoal;
     box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
     border: 0px;
-    img {
-        max-width: 100%;
-        max-height: 100%;
-        box-shadow: 1px 1px 15px 0 rgba(0,0,0,0.2);
-        border-radius: 6px;
-    }
     .card-body {
         ul {
             font-size: 0.7em;

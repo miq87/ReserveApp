@@ -1,6 +1,17 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6">{{ myReservation.roomId }}</div>
-    <div class="col-lg-6">{{ myReservation.userId }}</div>
+<div class="card" *ngIf="myReservation">
+  <div class="card-header">
+    {{ myReservation.hotelId }}
+  </div>
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4"><img [src]="hotelMainImg"></div>
+        <div class="col-lg-8">{{ myReservation.userId }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+
   </div>
 </div>
