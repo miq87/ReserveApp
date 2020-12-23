@@ -36,4 +36,14 @@ export class ReservationsService {
     return resList
   }
 
+  async deleteReservation(reservationId: string) {
+    await firebase.firestore().collection('reservations').doc(reservationId).delete().then(() => {
+      this._toastr.success('Usunąłem rezerwację')
+    })
+    .catch(err => {
+      this._toastr.error('Problem z usunięciem rezerwacji')
+      console.log(err.message)
+    })
+  }
+
 }
