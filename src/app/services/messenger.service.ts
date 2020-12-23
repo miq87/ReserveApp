@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class MessengerService {
 
     subject = new BehaviorSubject(null)
+    subject$ = this.subject.asObservable()
 
     constructor() { }
 
@@ -15,6 +16,6 @@ export class MessengerService {
         this.subject.next(msg)
     }
     getMsg() {
-        return this.subject.asObservable()
+        return this.subject$
     }
 }

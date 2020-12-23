@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
 import firebase from "firebase/app";
-import { IBook } from '../models/interfaces/ibook';
+import { IReservation } from '../models/interfaces/ireservation';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -62,14 +62,21 @@ export class BookingService {
     return firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').get()
   }
 
-  sendBook(bookData: IBook) {
-    firebase.firestore().collection('books').add(bookData).then(() => {
+  async makeReservation(resData: IReservation) {
+    await firebase.firestore().collection('reservations').add(resData).then(() => {
       this._toastr.success('Dodałem nową rezerwację')
     })
     .catch(err => {
       this._toastr.error('Nie mogę dokonać rezerwacji')
       console.log('Błąd podczas dodawania rezerwacji', err.message)
     })
+  }
+
+  async getMyReservations() {
+    let resRef = firebase.firestore().collection('reservations')
+    let snapshot = await resRef
+      .where('userId', '==', firebase.auth().currentUser.uid)
+      .get()
   }
 
   async onLoadHotels(hotelData): Promise<Hotel[]> {

@@ -1,4 +1,4 @@
-export interface IBook {
+export interface IReservation {
     userId: string
     roomId: string
     dateStart: Date

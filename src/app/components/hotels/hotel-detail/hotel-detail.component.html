@@ -1,5 +1,5 @@
 <div class="card" *ngIf="hotel">
-  <form [formGroup]="bookForm" (ngSubmit)="onBook()">
+  <form [formGroup]="resForm" (ngSubmit)="onBook()">
     <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
       <div class="card-body">
 
@@ -28,8 +28,8 @@
               </mat-date-range-input>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>     
-              <mat-error *ngIf="bookForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
-              <mat-error *ngIf="bookForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
+              <mat-error *ngIf="resForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
+              <mat-error *ngIf="resForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-6">
@@ -56,7 +56,7 @@
 
     </div>
     <div class="card-footer">
-      <button class="btn btn-success btn-md" [disabled]="bookForm.invalid">Zarezerwuj</button>
+      <button class="btn btn-success btn-md" [disabled]="resForm.invalid">Zarezerwuj</button>
     </div>
 
   </form>
