@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Reservation } from 'src/app/models/classes/reservation';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
   selector: 'app-my-reservation-item',
@@ -22,7 +23,7 @@ export class MyReservationItemComponent implements OnInit {
     notice: [''],
   })
 
-  constructor(private fb: FormBuilder, private _fs: FireStorageService) { }
+  constructor(private fb: FormBuilder, private _fs: FireStorageService, private _res: ReservationsService) { }
 
   ngOnInit(): void {
 
@@ -41,6 +42,10 @@ export class MyReservationItemComponent implements OnInit {
       })
     })
 
+  }
+
+  onRemoveReservation(reservationId: string) {
+    this._res.deleteReservation(reservationId)
   }
 
 }
