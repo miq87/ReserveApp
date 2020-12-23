@@ -26,6 +26,7 @@ import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-det
 import { Error404Component } from './components/error404/error404.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
 import { LazyImgDirective } from './shared/directives/lazy-img.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,7 +39,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 
 import firebase from 'firebase/app';
-import { MyReservationComponent } from './components/my-reservation/my-reservation.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -73,7 +73,7 @@ firebase.initializeApp(firebaseConfig);
     RightSidebarComponent,
     ProfileComponent,
     LazyImgDirective,
-    MyReservationComponent
+    MyReservationsComponent
   ],
   imports: [
     BrowserModule,
