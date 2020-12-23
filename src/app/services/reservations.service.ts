@@ -27,7 +27,7 @@ export class ReservationsService {
       .where('userId', '==', firebase.auth().currentUser.uid)
       .get()
     if(snapshot.empty) {
-      console.log('Brak wyników!')
+      console.log('Brak rezerwacji')
       return null
     }
     snapshot.forEach(doc => {
