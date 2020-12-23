@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Hotel } from 'src/app/models/hotel';
+import { Hotel } from 'src/app/models/classes/hotel';
 import { BookingService } from 'src/app/services/booking.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
 

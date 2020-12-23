@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hotel } from '../models/hotel';
+import { Hotel } from '../models/classes/hotel';
 import { ToastrService } from 'ngx-toastr';
 import firebase from "firebase/app";
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Hotel } from 'src/app/models/hotel';
+import { Hotel } from 'src/app/models/classes/hotel';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { FacilitiesService } from 'src/app/services/facilities.service';
@@ -21,6 +21,7 @@ export class HotelDetailComponent implements OnInit {
   hotelMainImg: string
 
   resForm = this.fb.group({
+    hotelId: ['', Validators.required],
     roomId: ['', Validators.required],
     userId: ['', Validators.required],
     dateStart: ['', Validators.required],
@@ -42,7 +43,7 @@ export class HotelDetailComponent implements OnInit {
 
     this._auth.getCurrentUser(user => {
       if(user) {
-        this.resForm.patchValue({ userId: user.uid })
+        this.resForm.patchValue({ hotelId: hotelId, userId: user.uid })
       }
     })
 
