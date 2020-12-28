@@ -11,12 +11,12 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 export class MyReservationsComponent implements OnInit, OnDestroy {
 
   myReservations: Reservation[]
+  unsub
 
   constructor(private _res: ReservationsService) { }
 
   ngOnInit(): void {
-
-    this._res.getReservations(querySnapshot => {
+    this.unsub = this._res.getReservations(querySnapshot => {
       if(querySnapshot.empty) {
         console.log('Brak rezerwacji')
       }
@@ -30,11 +30,10 @@ export class MyReservationsComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err.message)
     })
-
   }
 
   ngOnDestroy(): void {
-    this._res.unSubReservations()
+    this.unsub()
   }
 
 }
