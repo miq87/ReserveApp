@@ -14,9 +14,14 @@ export class MyReservationsComponent implements OnInit {
   constructor(private _res: ReservationsService) { }
 
   ngOnInit(): void {
-    this._res.getReservations().then(myReservations => {
-      this.myReservations = myReservations
+    this._res.getReservations(querySnapshot => {
+      this.myReservations = []
+      querySnapshot.forEach(doc => {
+        console.log({ resId: doc.id, ...doc.data() })
+        this.myReservations.push(<Reservation>{ resId: doc.id, ...doc.data() })
+      });
     })
+    
   }
 
 }

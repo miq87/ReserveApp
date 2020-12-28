@@ -16,8 +16,10 @@ export class MyReservationItemComponent implements OnInit {
   hotelMainImg: string
 
   myResForm = this.fb.group({
-    roomId: ['', Validators.required],
+    resId: ['', Validators.required],
+    hotelId: ['', Validators.required],
     userId: ['', Validators.required],
+    roomId: ['', Validators.required],
     dateStart: ['', Validators.required],
     dateEnd: ['', Validators.required],
     notice: [''],
@@ -44,8 +46,8 @@ export class MyReservationItemComponent implements OnInit {
 
   }
 
-  onRemoveReservation(reservationId: string) {
-    this._res.deleteReservation(reservationId)
+  onRemoveReservation() {
+    this._res.deleteReservation(this.myReservation.resId)
   }
 
 }

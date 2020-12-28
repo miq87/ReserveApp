@@ -1,4 +1,5 @@
 export interface IReservation {
+    resId?: string
     hotelId: string
     userId: string
     roomId: string

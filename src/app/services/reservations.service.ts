@@ -20,25 +20,16 @@ export class ReservationsService {
     })
   }
 
-  async getReservations(): Promise<Reservation[]> {
-    let resList: any[] = []
+  async getReservations(querySnapshot) {
     let resRef = firebase.firestore().collection('reservations')
-    let snapshot = await resRef
+    await resRef
       .where('userId', '==', firebase.auth().currentUser.uid)
-      .get()
-    if(snapshot.empty) {
-      console.log('Brak rezerwacji')
-      return null
-    }
-    snapshot.forEach(doc => {
-      resList.push(doc.data())
-    })
-    return resList
+      .onSnapshot(querySnapshot)
   }
 
-  async deleteReservation(reservationId: string) {
-    await firebase.firestore().collection('reservations').doc(reservationId).delete().then(() => {
-      this._toastr.success('Usunąłem rezerwację')
+  async deleteReservation(resId: string) {
+    await firebase.firestore().collection('reservations').doc(resId).delete().then(() => {
+      this._toastr.success(`Usunąłem rezerwację ${resId}`)
     })
     .catch(err => {
       this._toastr.error('Problem z usunięciem rezerwacji')
