@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Reservation } from 'src/app/models/classes/reservation';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
@@ -10,18 +9,18 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 })
 export class MyReservationsComponent implements OnInit, OnDestroy {
 
-  myReservations: Reservation[]
+  myReservations: Reservation[] = []
   unsub
 
   constructor(private _res: ReservationsService) { }
 
   ngOnInit(): void {
     this.unsub = this._res.getReservations(querySnapshot => {
+      this.myReservations = []
       if(querySnapshot.empty) {
         console.log('Brak rezerwacji')
       }
       else {
-        this.myReservations = []
         querySnapshot.forEach(doc => {
           console.log({ resId: doc.id, ...doc.data() })
           this.myReservations.push(<Reservation>{ resId: doc.id, ...doc.data() })

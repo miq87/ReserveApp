@@ -22,9 +22,8 @@ export class ReservationsService {
     })
   }
 
-  async getReservations(querySnapshot, error) {
-    return await this.resRef
-      .where('userId', '==', firebase.auth().currentUser.uid)
+  getReservations(querySnapshot, error) {
+    return this.resRef.where('userId', '==', firebase.auth().currentUser.uid)
       .onSnapshot(querySnapshot, error)
   }
 
