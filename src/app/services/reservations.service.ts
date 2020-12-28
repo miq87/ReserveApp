@@ -8,10 +8,12 @@ import firebase from "firebase/app";
 })
 export class ReservationsService {
 
+  private resRef = firebase.firestore().collection('reservations')
+
   constructor(private _toastr: ToastrService) { }
 
   async makeReservation(resData: Reservation) {
-    await firebase.firestore().collection('reservations').add(resData).then(() => {
+    await this.resRef.add(resData).then(() => {
       this._toastr.success('Dodałem nową rezerwację')
     })
     .catch(err => {
@@ -20,15 +22,18 @@ export class ReservationsService {
     })
   }
 
-  async getReservations(querySnapshot) {
-    let resRef = firebase.firestore().collection('reservations')
-    await resRef
+  async getReservations(querySnapshot, error) {
+    await this.resRef
       .where('userId', '==', firebase.auth().currentUser.uid)
-      .onSnapshot(querySnapshot)
+      .onSnapshot(querySnapshot, error)
+  }
+
+  async unSubReservations() {
+    await this.resRef.onSnapshot(() => {});
   }
 
   async deleteReservation(resId: string) {
-    await firebase.firestore().collection('reservations').doc(resId).delete().then(() => {
+    await this.resRef.doc(resId).delete().then(() => {
       this._toastr.success(`Usunąłem rezerwację ${resId}`)
     })
     .catch(err => {

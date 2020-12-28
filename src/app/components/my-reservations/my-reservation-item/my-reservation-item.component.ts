@@ -30,23 +30,20 @@ export class MyReservationItemComponent implements OnInit {
   ngOnInit(): void {
 
     this.myResForm.patchValue(this.myReservation)
-    console.log(this.myResForm.value)
 
     this._fs.getMainImage(this.myReservation.hotelId).then(data => {
-      console.log(data)
       this.hotelMainImg = data
     })
     .catch(err => {
       console.log(err.code)
       this._fs.getDefaultImage().then(data => {
-        console.log(data)
         this.hotelMainImg = data
       })
     })
 
   }
 
-  onRemoveReservation() {
+  onDeleteReservation() {
     this._res.deleteReservation(this.myReservation.resId)
   }
 
