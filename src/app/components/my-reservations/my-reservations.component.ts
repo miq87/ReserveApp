@@ -11,7 +11,6 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 export class MyReservationsComponent implements OnInit, OnDestroy {
 
   myReservations: Reservation[]
-  sub: Subscription
 
   constructor(private _res: ReservationsService) { }
 

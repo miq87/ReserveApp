@@ -22,8 +22,8 @@ export class HotelDetailComponent implements OnInit {
 
   resForm = this.fb.group({
     hotelId: ['', Validators.required],
-    roomId: ['', Validators.required],
     userId: ['', Validators.required],
+    roomId: ['', Validators.required],
     dateStart: ['', Validators.required],
     dateEnd: ['', Validators.required],
     notice: [''],
