@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Hotel } from '../models/classes/hotel';
 import { ToastrService } from 'ngx-toastr';
 import firebase from "firebase/app";
+import { Room } from '../models/classes/room';
 
 @Injectable({
   providedIn: 'root'
@@ -57,8 +58,18 @@ export class BookingService {
     return hotel || null
   }
 
-  getHotelRooms(hotelId: string) {
-    return firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').get()
+  async getHotelRooms(hotelId: string): Promise<Room[]> {
+    let rooms: Room[] = []
+    await firebase.firestore().collection('hotels').doc(hotelId).collection('rooms').get()
+    .then(querySnapshot => {
+      querySnapshot.docs.forEach(doc => {
+        rooms.push(<Room>{ roomId: doc.id, ...doc.data() })
+      });
+    })
+    .catch(err => {
+      console.log('Błąd podczas ładowania pokoi', err.message)
+    })
+    return rooms || null
   }
 
   async onLoadHotels(hotelData): Promise<Hotel[]> {

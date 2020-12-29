@@ -31,6 +31,8 @@ export class MyReservationItemComponent implements OnInit {
 
     this.myResForm.patchValue(this.myReservation)
 
+    console.log(this.myResForm.value)
+
     this._fs.getMainImage(this.myReservation.hotelId).then(data => {
       this.hotelMainImg = data
     })

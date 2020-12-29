@@ -36,7 +36,7 @@
             <mat-form-field appearance="fill">
               <mat-label>Wybierz pokój</mat-label>
               <mat-select formControlName="roomId">
-                <mat-option *ngFor="let room of hotelRooms" [value]="room.id">Liczba osób: {{ room.personNum }}</mat-option>
+                <mat-option *ngFor="let room of hotelRooms" [value]="room.roomId">Liczba osób: {{ room.personNum }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>

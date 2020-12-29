@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Hotel } from 'src/app/models/classes/hotel';
+import { Room } from 'src/app/models/classes/room';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { FacilitiesService } from 'src/app/services/facilities.service';
@@ -16,8 +17,8 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 })
 export class HotelDetailComponent implements OnInit {
   hotel: Hotel
-  hotelRooms = []
-  hotelFacilities: string[]
+  hotelRooms: Room[] = []
+  hotelFacilities: string[] = []
   hotelMainImg: string
 
   resForm = this.fb.group({
@@ -47,7 +48,7 @@ export class HotelDetailComponent implements OnInit {
       }
     })
 
-    this._bs.getHotelDetails(hotelId).then(data => {
+    this._bs.getHotelDetails(hotelId).then((data: Hotel) => {
       this.hotel = data;
 
       this._facs.getFacilities(this.hotel.facilities).then((data: string[]) => {
@@ -56,18 +57,10 @@ export class HotelDetailComponent implements OnInit {
         console.log(err.message)
       })
 
-      this._bs.getHotelRooms(hotelId).then(querySnapshot => {
-        querySnapshot.docs.forEach(doc => {
-          this.hotelRooms.push({ id: doc.id, ...doc.data() })
-        });
-        console.log(this.hotelRooms)
-      })
-      .catch(err => {
-        console.log(err)
+      this._bs.getHotelRooms(hotelId).then((data: Room[]) => {
+        this.hotelRooms = data
       })
 
-    }).catch(err => {
-      console.log(err)
     })
     
     this._fs.getMainImage(hotelId).then(data => {

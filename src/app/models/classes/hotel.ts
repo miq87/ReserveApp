@@ -1,5 +1,5 @@
 export class Hotel {
-    id: string
+    hotelId: string
     hotelName: string
     street: string
     city: string
@@ -8,7 +8,7 @@ export class Hotel {
     facilities: number[]
 
     constructor(docId: string, data: any) {
-        this.id = docId
+        this.hotelId = docId
         this.hotelName = data.hotelName
         this.street = data.street
         this.city = data.city

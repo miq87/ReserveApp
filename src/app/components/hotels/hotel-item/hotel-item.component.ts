@@ -22,7 +22,7 @@ export class HotelItemComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this._fs.getMainImage(this.hotel.id).then(data => {
+    this._fs.getMainImage(this.hotel.hotelId).then(data => {
       this.hotelMainImg = data
     })
     .catch(err => {
@@ -37,12 +37,12 @@ export class HotelItemComponent implements OnInit {
   }
 
   onBook() {
-    console.log('Chcę zarezerwować: ' + this.hotel.id)
-    this.router.navigate(['/hotels', this.hotel.id])
+    console.log('Chcę zarezerwować: ' + this.hotel.hotelId)
+    this.router.navigate(['/hotels', this.hotel.hotelId])
   }
 
   onRemove() {
-    this._bs.removeHotelById(this.hotel.id).finally(() => {
+    this._bs.removeHotelById(this.hotel.hotelId).finally(() => {
       this._msg.sendMsg(this.hotel.city)
     })
   }
