@@ -15,14 +15,14 @@ export class MyReservationsComponent implements OnInit, OnDestroy {
   constructor(private _res: ReservationsService) { }
 
   ngOnInit(): void {
+
     this.unsub = this._res.getReservations(querySnapshot => {
-      this.myReservations = []
       if(querySnapshot.empty) {
         console.log('Brak rezerwacji')
       }
       else {
-        querySnapshot.forEach(doc => {
-          console.log({ resId: doc.id, ...doc.data() })
+        this.myReservations = []
+        querySnapshot.docs.forEach(doc => {
           this.myReservations.push(<Reservation>{ resId: doc.id, ...doc.data() })
         });
       }

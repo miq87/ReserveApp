@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Reservation } from '../models/classes/reservation';
 import { ToastrService } from 'ngx-toastr';
 import firebase from "firebase/app";
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,9 @@ export class ReservationsService {
     })
   }
 
-  getReservations(querySnapshot, error) {
-    return this.resRef.where('userId', '==', firebase.auth().currentUser.uid)
-      .onSnapshot(querySnapshot, error)
+  async getReservations(querySnapshot, error) {
+    return await this.resRef.where('userId', '==', firebase.auth().currentUser.uid)
+    .onSnapshot(querySnapshot, error)
   }
 
   async deleteReservation(resId: string) {
