@@ -17,11 +17,11 @@ export class MyReservationsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.unsub = this._res.getReservations(querySnapshot => {
+      this.myReservations = []
       if(querySnapshot.empty) {
         console.log('Brak rezerwacji')
       }
       else {
-        this.myReservations = []
         querySnapshot.docs.forEach(doc => {
           this.myReservations.push(<Reservation>{ resId: doc.id, ...doc.data() })
         });
@@ -29,6 +29,7 @@ export class MyReservationsComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err.message)
     })
+
   }
 
   ngOnDestroy(): void {
