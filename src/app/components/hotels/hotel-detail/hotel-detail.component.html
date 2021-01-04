@@ -5,7 +5,7 @@
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-4"><img [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
+          <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
           <div class="col-lg-8">
             <p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p>
           </div>

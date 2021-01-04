@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { pipe } from 'rxjs';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { Reservation } from 'src/app/models/classes/reservation';
 import { BookingService } from 'src/app/services/booking.service';
@@ -20,7 +19,8 @@ export class MyReservationItemComponent implements OnInit {
   hotel: Hotel
   hotelMainImg: string
   pipe = new DatePipe('en-US')
-  dateSt: string
+  dateStart: string
+  dateEnd: string
 
   myResForm = this.fb.group({
     resId: ['', Validators.required],
@@ -40,21 +40,17 @@ export class MyReservationItemComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.dateStart = this.pipe.transform((<any>this.myRes.dateStart).seconds * 1000, 'yyyy-MM-dd')
+    this.dateEnd = this.pipe.transform((<any>this.myRes.dateEnd).seconds * 1000, 'yyyy-MM-dd')
+
     this.myResForm.patchValue(this.myRes)
 
     this._bs.getHotelDetails(this.myRes.hotelId).then((data: Hotel) => {
       this.hotel = data
-      console.log(this.hotel)
     })
 
-    this._fs.getMainImage(this.myRes.hotelId).then(data => {
-      this.hotelMainImg = data
-    })
-    .catch(err => {
-      console.log(err.code)
-      this._fs.getDefaultImage().then(data => {
-        this.hotelMainImg = data
-      })
+    this._fs.getMainImage(this.myRes.hotelId).then(url => {
+      this.hotelMainImg = url
     })
 
   }

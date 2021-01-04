@@ -9,7 +9,7 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 })
 export class MyReservationsComponent implements OnInit, OnDestroy {
 
-  myReservations: Reservation[] = []
+  myReservations: any[] = []
   unsub
 
   constructor(private _res: ReservationsService) { }
@@ -23,8 +23,9 @@ export class MyReservationsComponent implements OnInit, OnDestroy {
       }
       else {
         querySnapshot.docs.forEach(doc => {
-          this.myReservations.push(<Reservation>{ resId: doc.id, ...doc.data() })
+          this.myReservations.push(new Reservation(doc.id, doc.data()))
         });
+        console.log(this.myReservations)
       }
     }, err => {
       console.log(err.message)

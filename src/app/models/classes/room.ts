@@ -1,6 +1,9 @@
-import { Iroom } from "../interfaces/iroom"
-
-export class Room implements Iroom {
-    roomId?: string
+export class Room {
+    roomId: string
     personNum: number
+
+    constructor(roomId: string, roomData: any) {
+        this.roomId = roomId
+        this.personNum = roomData.personNum
+    }
 }

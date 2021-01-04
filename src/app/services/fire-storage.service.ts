@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { rejects } from 'assert';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 
@@ -12,10 +13,10 @@ export class FireStorageService {
 
   constructor() { }
 
-  getMainImage(hotelId: string) {
+  /*getMainImage(hotelId: string) {
     var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
     return spaceRef.getDownloadURL()
-  }
+  }*/
   getDefaultImage() {
     var spaceRef = this.storageRef.child('images/main_img.jpg')
     return spaceRef.getDownloadURL()
@@ -27,6 +28,26 @@ export class FireStorageService {
   sendImage(hotelId: string, file: File) {
     var spaceRef = this.storageRef.child(`images/${hotelId}/${file.name}`)
     return spaceRef.put(file)
+  }
+
+  getMainImage(hotelId: string): Promise<string> {
+    var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
+
+    return new Promise((resolve, reject) => {
+      spaceRef.getDownloadURL().then(url => {
+        resolve(url)
+      })
+      .catch(err => {
+        console.log(err.code)
+        this.getDefaultImage().then(url => {
+          resolve(url)
+        })
+        .catch(err => {
+          reject(err)
+        })
+      })
+    })
+
   }
 
 }

@@ -22,17 +22,8 @@ export class HotelItemComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this._fs.getMainImage(this.hotel.hotelId).then(data => {
-      this.hotelMainImg = data
-    })
-    .catch(err => {
-      console.log(err.code)
-      this._fs.getDefaultImage().then(data => {
-        this.hotelMainImg = data
-      })
-      .catch(err => {
-        console.log(err.message)
-      })
+    this._fs.getMainImage(this.hotel.hotelId).then(url => {
+      this.hotelMainImg = url
     })
   }
 

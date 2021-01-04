@@ -63,16 +63,8 @@ export class HotelDetailComponent implements OnInit {
 
     })
     
-    this._fs.getMainImage(hotelId).then(data => {
-      console.log(data)
-      this.hotelMainImg = data
-    })
-    .catch(err => {
-      console.log(err.code)
-      this._fs.getDefaultImage().then(data => {
-        console.log(data)
-        this.hotelMainImg = data
-      })
+    this._fs.getMainImage(hotelId).then(url => {
+      this.hotelMainImg = url
     })
 
   }
