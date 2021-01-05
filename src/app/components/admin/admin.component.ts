@@ -12,7 +12,9 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this._bs.getMyHotels(snapshot => {
-      console.log(snapshot)
+      snapshot.docs.forEach(snap => {
+        console.log(snap.data())        
+      });
 
     }, error => {
       console.log(error.message)

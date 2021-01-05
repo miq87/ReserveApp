@@ -76,7 +76,6 @@ export class BookingService {
 
   async getMyHotels(snapshot, error) {
     let adminId = firebase.auth().currentUser.uid
-    console.log(adminId)
     return await this.hotelsRef.where('adminId', '==', adminId).onSnapshot(snapshot, error)
   }
 
