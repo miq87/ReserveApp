@@ -16,6 +16,6 @@ export class Hotel {
         this.state = data.state
         this.postalCode = data.postalCode
         this.facilities = data.facilities
-        this.adminId = data.userId
+        this.adminId = data.adminId
     }
 }
