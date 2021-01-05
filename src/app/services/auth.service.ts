@@ -155,6 +155,9 @@ export class AuthService {
   getUserData(cb, err) {
     return firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).onSnapshot(cb, err)
   }
+  getCurrentUserId() {
+    return firebase.auth().currentUser.uid
+  }
   updateUserData(userData) {
     firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).update(userData).then(() => {
       this.updateUserDisplayName(userData.displayName)

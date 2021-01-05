@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class HotelGeneratorComponent implements OnInit {
   hotelStreet = []
   hotelCity = []
 
-  constructor(private _bs: BookingService, private http: HttpClient) {
+  constructor(private _bs: BookingService, private http: HttpClient, private _auth: AuthService) {
     this.http.get(this.assetsUrl).subscribe((data: any) => {
       for(let i = 0; i < 16; i++) {
         this.hotelNames.push(data.hotelNames[i].name)
@@ -40,8 +41,10 @@ export class HotelGeneratorComponent implements OnInit {
         'city': rCity[0],
         'state': rCity[1],
         'postalCode': rPostalCode,
-        'facilities': facilities
+        'facilities': facilities,
+        'adminId': this._auth.getCurrentUserId()
       }
+      console.log(newHotel)
       this._bs.addNewHotel(newHotel, [2,4,6,8])
     }
   }
