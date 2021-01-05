@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hotel } from 'src/app/models/classes/hotel';
-import { BookingService } from 'src/app/services/booking.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
-import { MessengerService } from 'src/app/services/messenger.service';
 
 @Component({
   selector: 'app-hotel-item',
@@ -17,8 +15,6 @@ export class HotelItemComponent implements OnInit {
 
   constructor(
     private _fs: FireStorageService,
-    private _bs: BookingService,
-    private _msg: MessengerService,
     private router: Router) { }
 
   ngOnInit() {
@@ -30,12 +26,6 @@ export class HotelItemComponent implements OnInit {
   onBook() {
     console.log('Chcę zarezerwować: ' + this.hotel.hotelId)
     this.router.navigate(['/hotels', this.hotel.hotelId])
-  }
-
-  onRemove() {
-    this._bs.removeHotelById(this.hotel.hotelId).finally(() => {
-      this._msg.sendMsg(this.hotel.city)
-    })
   }
 
 }

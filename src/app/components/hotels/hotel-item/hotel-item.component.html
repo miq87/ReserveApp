@@ -1,11 +1,15 @@
 <div class="card" *ngIf="hotel">
-  <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
+  <div class="card-header">
+    <h2>{{ hotel.hotelName }}</h2>
+  </div>
   <div class="card-body">
 
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
-        <div class="col-lg-8"><p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p></div>
+        <div class="col-lg-8">
+          <p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p>
+        </div>
       </div>
     </div>
 
@@ -13,7 +17,6 @@
   <div class="card-footer">
     <div class="btn-group">
       <button class="btn btn-success btn-md" (click)="onBook()">Wybierz</button>
-      <button class="btn btn-danger btn-md" (click)="onRemove()">Usuń hotel</button>
     </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ export class Hotel {
     state: string
     postalCode: string
     facilities: number[]
+    adminId: string
 
     constructor(docId: string, data: any) {
         this.hotelId = docId
@@ -15,5 +16,6 @@ export class Hotel {
         this.state = data.state
         this.postalCode = data.postalCode
         this.facilities = data.facilities
+        this.adminId = data.userId
     }
 }

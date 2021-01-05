@@ -40,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import firebase from 'firebase/app';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -75,7 +76,8 @@ firebase.initializeApp(firebaseConfig);
     ProfileComponent,
     LazyImgDirective,
     MyReservationsComponent,
-    MyReservationItemComponent
+    MyReservationItemComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
