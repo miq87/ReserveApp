@@ -24,7 +24,6 @@ export class AdminComponent implements OnInit, OnDestroy {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     }),
-    role: ['', Validators.required],
   })
 
   constructor(private _bs: BookingService, private fb: FormBuilder) { }
@@ -53,11 +52,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
-    console.log(`selected ${hotel.hotelName}`)
   }
 
   updateHotel() {
-    //this._bs.updateHotelInfo(this.hotelForm.value)
+    this._bs.updateHotelInfo(this.selectedHotel.hotelId, this.hotelForm.value)
     console.log(this.hotelForm.value)
   }
 

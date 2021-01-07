@@ -29,12 +29,11 @@ export class BookingService {
     return retHotelId || null
   }
 
-  async updateHotelInfo(hotel) {
-    console.log(hotel)
-    await this.hotelsRef.doc(hotel.hotelId).update(hotel).then(() => {
-      console.log(`Zaktualizowałem dane hotelu ${hotel.hotelId}`)
+  async updateHotelInfo(hotelId, hotelData) {
+    await this.hotelsRef.doc(hotelId).update(hotelData).then(() => {
+      console.log(`Zaktualizowałem dane hotelu ${hotelId}`)
     }).catch(err => {
-      console.log(`Błąd podczas aktualizacji danych hotelu ${hotel.hotelId}`, err.message)
+      console.log(`Błąd podczas aktualizacji danych hotelu ${hotelId}`, err.message)
     })
   }
 
