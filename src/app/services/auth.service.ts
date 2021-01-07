@@ -180,7 +180,7 @@ export class AuthService {
     let userId = firebase.auth().currentUser.uid
 
     firebase.auth().currentUser.delete().then(() => {
-      console.log(`Użytkownik o id: ${userId} usunięty`)
+      console.log(`Usunąłem użytkownika o id: ${userId}`)
     }).catch(err => this.handleError.sendError(err))
     firebase.firestore().collection('users').doc(userId).delete().then(() => {
       console.log(`Usunąłem z FireStore dane użytkownika o id: ${userId}`)
