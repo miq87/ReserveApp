@@ -85,13 +85,13 @@ export class BookingService {
 
     if (searchData.facilities[0]) {
       snapshot = await this.hotelsRef
-        .where('city', '==', searchData.city)
+        .where('address.city', '==', searchData.city)
         .where('facilities', 'array-contains', searchData.facilities[0])
         .get()
     }
     else {
       snapshot = await this.hotelsRef
-        .where('city', '==', searchData.city)
+        .where('address.city', '==', searchData.city)
         .get()
     }
     if (snapshot.empty) {
