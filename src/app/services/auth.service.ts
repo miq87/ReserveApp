@@ -48,7 +48,6 @@ export class AuthService {
       default:
         provider = new firebase.auth.FacebookAuthProvider
     }
-
     firebase.auth().languageCode = 'pl_PL'
     firebase.auth().signInWithPopup(provider).then(userCredential => {
       this.accessToken = (<any>userCredential).credential.accessToken
@@ -95,16 +94,17 @@ export class AuthService {
         this.addUserData(userCredential, birthday)
     }
   }
-  addUserData(userCredential, bd) {
+  addUserData(userCredential, birthday) {
     let fullName = userCredential.user.displayName.split(' ', 2)
     let userData = {
       email: userCredential.user.email,
       firstName: fullName[0],
       lastName: fullName[1],
       displayName: userCredential.user.displayName,
-      birthday: bd,
+      birthday: birthday,
       role: userCredential.additionalUserInfo.providerId,
-      address: { street: '', city: '', zip: '' }
+      address: { street: '', city: '', zip: '' },
+      isAdmin: false
     }
     firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
       console.log('Dodałem informacje o użytkowniku do FireStore')

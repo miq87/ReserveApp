@@ -1,6 +1,4 @@
-import { IUser } from 'src/app/models/interfaces/iuser';
-
-export class User implements IUser {
+export class User {
     firstName: string
     lastName: string
     displayName: string
@@ -10,11 +8,11 @@ export class User implements IUser {
     birthday: Date
     address: Address
     role: string
-    
+    isAdmin: false
+
     constructor() {
         this.address = new Address()
     }
-    
 }
 
 class Address {
