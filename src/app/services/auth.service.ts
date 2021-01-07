@@ -108,10 +108,18 @@ export class AuthService {
     }
     firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
       console.log('Dodałem informacje o użytkowniku do FireStore')
+    }).catch(err => {
+      this.handleError.sendError(err)
     })
-      .catch(err => {
-        this.handleError.sendError(err)
-      })
+  }
+  async isAdmin(): Promise<boolean> {
+    let retValue: boolean = false
+    await firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).get().then(userData => {
+      if (userData.data().isAdmin == true) {
+        retValue = true
+      }
+    })
+    return retValue || null
   }
   getGoogleBirthdays() {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.accessToken)
@@ -162,7 +170,6 @@ export class AuthService {
     firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).update(userData).then(() => {
       this.updateUserDisplayName(userData.displayName)
     }).catch(err => this.handleError.sendError(err))
-
   }
   updateUserDisplayName(displayName) {
     return firebase.auth().currentUser.updateProfile({

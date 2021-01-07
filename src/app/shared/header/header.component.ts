@@ -10,20 +10,24 @@ export class HeaderComponent implements OnInit {
 
   currentUser: any
   isLogged: boolean
+  isAdmin: boolean
 
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
     this.handleBurger()
     this._auth.getCurrentUser(user => {
-      if(user) {
+      if (user) {
         this.currentUser = user
         this.isLogged = true
+        this._auth.isAdmin().then(data => {
+          this.isAdmin = data
+        })
       }
       else { this.isLogged = false }
     })
   }
-  
+
   handleBurger() {
     const burger = document.querySelector('.burger')
     const nav = document.querySelector('.nav-links')
