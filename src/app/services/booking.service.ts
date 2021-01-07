@@ -29,6 +29,15 @@ export class BookingService {
     return retHotelId || null
   }
 
+  async updateHotelInfo(hotel) {
+    console.log(hotel)
+    await this.hotelsRef.doc(hotel.hotelId).update(hotel).then(() => {
+      console.log(`Zaktualizowałem dane hotelu ${hotel.hotelId}`)
+    }).catch(err => {
+      console.log(`Błąd podczas aktualizacji danych hotelu ${hotel.hotelId}`, err.message)
+    })
+  }
+
   async addNewRoom(hotelId: string, personNum: number) {
     let room = {
       "personNum": personNum

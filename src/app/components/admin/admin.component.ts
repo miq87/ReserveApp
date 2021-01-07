@@ -15,16 +15,14 @@ export class AdminComponent implements OnInit, OnDestroy {
   unsub
 
   hotelForm = this.fb.group({
-    hotelId: ['', Validators.required],
+    adminId: [{ value: '', disabled: true }],
+    hotelId: [{ value: '', disabled: true }, Validators.required],
     hotelName: ['', Validators.required],
-    street: ['', Validators.required],
-    city: [{ value: '', disabled: true }, Validators.required],
-    state: ['', Validators.required],
     address: this.fb.group({
-      street: [''],
-      city: [''],
-      state: [''],
-      zip: ['']
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zip: ['', Validators.required]
     }),
     role: ['', Validators.required],
   })
@@ -34,7 +32,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.unsub = this._bs.getMyHotels(querySnapshot => {
       this.hotelList = []
-      if(querySnapshot.empty) {
+      if (querySnapshot.empty) {
         console.log('Brak hoteli')
       }
       else {
@@ -56,6 +54,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
     console.log(`selected ${hotel.hotelName}`)
+  }
+
+  updateHotel() {
+    //this._bs.updateHotelInfo(this.hotelForm.value)
+    console.log(this.hotelForm.value)
   }
 
 }
