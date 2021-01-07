@@ -58,7 +58,9 @@ export class AdminComponent implements OnInit, OnDestroy {
     this._bs.updateHotelInfo(this.selectedHotel.hotelId, this.hotelForm.value)
   }
   removeHotel() {
-    this._bs.removeHotelById(this.selectedHotel.hotelId)
+    this._bs.removeHotelById(this.selectedHotel.hotelId).then(() => {
+      this.selectedHotel = null
+    })
   }
 
 }
