@@ -11,6 +11,7 @@ import { BookingService } from 'src/app/services/booking.service';
 export class AdminComponent implements OnInit, OnDestroy {
 
   hotelList: Hotel[] = []
+  selectedHotel: Hotel
   unsub
 
   hotelForm = this.fb.group({
@@ -22,6 +23,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     address: this.fb.group({
       street: [''],
       city: [''],
+      state: [''],
       zip: ['']
     }),
     role: ['', Validators.required],
@@ -51,6 +53,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   onSelect(hotel) {
+    this.selectedHotel = hotel
+    this.hotelForm.patchValue(hotel)
     console.log(`selected ${hotel.hotelName}`)
   }
 

@@ -1,5 +1,7 @@
-<div class="myCard">
-  <div class="heading"><h2>Logowanie</h2></div>
+<div class="myCard my-form-class">
+  <div class="heading">
+    <h2>Logowanie</h2>
+  </div>
   <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
 
   <form [formGroup]="loginForm" (ngSubmit)="loginWithEmail()">
