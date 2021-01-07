@@ -24,16 +24,18 @@ export class BookingService {
       }
       retHotelId = doc.id
     }).catch(err => {
-      console.log('Błąd podczas dodawania nowego hotelu!', err.message)
+      console.log('Błąd podczas dodawania nowego hotelu!')
+      console.log(err.message)
     })
     return retHotelId || null
   }
 
   async updateHotelInfo(hotelId, hotelData) {
     await this.hotelsRef.doc(hotelId).update(hotelData).then(() => {
-      console.log(`Zaktualizowałem dane hotelu ${hotelId}`)
+      console.log(`Zaktualizowałem dane hotelu o id: ${hotelId}`)
     }).catch(err => {
-      console.log(`Błąd podczas aktualizacji danych hotelu ${hotelId}`, err.message)
+      console.log(`Błąd podczas aktualizacji danych hotelu o id ${hotelId}`)
+      console.log(err.message)
     })
   }
 
@@ -42,18 +44,20 @@ export class BookingService {
       "personNum": personNum
     }
     await this.hotelsRef.doc(hotelId).collection('rooms').add(room).then(() => {
-      console.log(`Dodałem pokój dla ${personNum} osób w hotelu ${hotelId}`)
+      console.log(`Dodałem pokój dla ${personNum} osób w hotelu o id: ${hotelId}`)
     }).catch(err => {
-      console.log(`Błąd podczas dodawania pokoju w hotelu ${hotelId}`, err.message)
+      console.log(`Błąd podczas dodawania pokoju w hotelu o id: ${hotelId}`)
+      console.log(err.message)
     })
   }
 
   async removeHotelById(hotelId: string) {
     await this.hotelsRef.doc(hotelId).delete()
       .then(() => {
-        console.log('Usunąłem hotel o id: ' + hotelId)
+        console.log(`Usunąłem hotel o id: ${hotelId} `)
       }).catch(err => {
-        console.log('Błąd podczas usuwania hotelu!', err.message)
+        console.log(`Błąd podczas usuwania hotelu o id: ${hotelId}`)
+        console.log(err.message)
       })
   }
 
@@ -63,7 +67,8 @@ export class BookingService {
       .then(doc => {
         hotel = new Hotel(doc.id, doc.data())
       }).catch(err => {
-        console.log('Błąd podczas ładowania szczegółów hotelu!', err.message)
+        console.log('Błąd podczas ładowania szczegółów hotelu!')
+        console.log(err.message)
       })
     return hotel || null
   }
@@ -77,7 +82,8 @@ export class BookingService {
         });
       })
       .catch(err => {
-        console.log('Błąd podczas ładowania pokoi', err.message)
+        console.log('Błąd podczas ładowania pokoji')
+        console.log(err.message)
       })
     return rooms || null
   }
