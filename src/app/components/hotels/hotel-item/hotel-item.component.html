@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
         <div class="col-lg-8">
-          <p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p>
+          <p>{{ hotel.address.street }}<br>{{hotel.address.zip }} {{ hotel.address.city }}, {{ hotel.address.state }}</p>
         </div>
       </div>
     </div>

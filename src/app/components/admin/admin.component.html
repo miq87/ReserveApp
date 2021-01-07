@@ -1,6 +1,22 @@
 <div class="container-fluid myCard">
   <div class="row">
     <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h2>Moje hotele:</h2>
+        </div>
+        <div class="card-body">
+          <mat-form-field appearance="fill">
+            <mat-label>Wybierz hotel z listy</mat-label>
+            <mat-select>
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let hotel of hotelList" (click)="onSelect(hotel)" [value]="hotel.hotelId">
+                {{ hotel.hotelName }}, ul. {{ hotel.address.street }}, {{ hotel.address.city }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="card-footer"></div>
+      </div>
     </div>
   </div>
 </div>

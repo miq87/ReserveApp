@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/classes/hotel';
 import { ToastrService } from 'ngx-toastr';
-import firebase from "firebase/app";
 import { Room } from '../models/classes/room';
+import firebase from "firebase/app";
 
 @Injectable({
   providedIn: 'root'
@@ -112,7 +112,8 @@ export class BookingService {
   }
 
   consoleAddedNewHotel(hotel) {
-    console.log(`Dodałem:\n\t${hotel.hotelName}\n\t${hotel.street}\n\t${hotel.postalCode} ${hotel.city}, ${hotel.state}\n`)
+    console.log('Dodałem nowy hotel:')
+    console.log(hotel)
   }
 
 }

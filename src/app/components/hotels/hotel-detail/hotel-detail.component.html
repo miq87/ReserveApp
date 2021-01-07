@@ -1,13 +1,15 @@
 <div class="card" *ngIf="hotel">
   <form [formGroup]="resForm" (ngSubmit)="onBook()">
-    <div class="card-header"><h2>{{ hotel.hotelName }}</h2></div>
+    <div class="card-header">
+      <h2>{{ hotel.hotelName }}</h2>
+    </div>
     <div class="card-body">
 
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
           <div class="col-lg-8">
-            <p>{{ hotel.street }}<br>{{hotel.postalCode}} {{ hotel.city}}, {{ hotel.state}}</p>
+            <p>{{ hotel.address.street }}<br>{{hotel.address.zip }} {{ hotel.address.city }}, {{ hotel.address.state }}</p>
           </div>
         </div>
         <div class="row">
@@ -27,7 +29,7 @@
                 <input matInput matEndDate formControlName="dateEnd" placeholder="Do">
               </mat-date-range-input>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>     
+              <mat-date-range-picker #picker></mat-date-range-picker>
               <mat-error *ngIf="resForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
               <mat-error *ngIf="resForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
             </mat-form-field>
@@ -50,7 +52,7 @@
               <input matInput formControlName="notice" name="notice">
             </mat-form-field>
           </div>
-        
+
         </div>
       </div>
 

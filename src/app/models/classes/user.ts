@@ -1,13 +1,5 @@
 import { IUser } from 'src/app/models/interfaces/iuser';
 
-class Address {
-    street: string
-    city: string
-    zip: string
-
-    constructor() { }
-}
-
 export class User implements IUser {
     firstName: string
     lastName: string
@@ -23,4 +15,12 @@ export class User implements IUser {
         this.address = new Address()
     }
     
+}
+
+class Address {
+    street: string
+    city: string
+    zip: string
+
+    constructor() { }
 }

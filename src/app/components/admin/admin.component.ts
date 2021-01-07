@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { BookingService } from 'src/app/services/booking.service';
 
@@ -12,7 +13,21 @@ export class AdminComponent implements OnInit, OnDestroy {
   hotelList: Hotel[] = []
   unsub
 
-  constructor(private _bs: BookingService) { }
+  hotelForm = this.fb.group({
+    hotelId: ['', Validators.required],
+    hotelName: ['', Validators.required],
+    street: ['', Validators.required],
+    city: [{ value: '', disabled: true }, Validators.required],
+    state: ['', Validators.required],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      zip: ['']
+    }),
+    role: ['', Validators.required],
+  })
+
+  constructor(private _bs: BookingService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.unsub = this._bs.getMyHotels(querySnapshot => {
@@ -33,6 +48,10 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsub()
+  }
+
+  onSelect(hotel) {
+    console.log(`selected ${hotel.hotelName}`)
   }
 
 }
