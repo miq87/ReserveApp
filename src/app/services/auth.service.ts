@@ -107,7 +107,7 @@ export class AuthService {
       isAdmin: false
     }
     firebase.firestore().collection('users').doc(userCredential.user.uid).set(userData).then(() => {
-      console.log('Dodałem informacje o użytkowniku do FireStore')
+      console.log(`Dodałem do FireStore dane użytkownika o id: ${userCredential.user.uid}`)
     }).catch(err => {
       this.handleError.sendError(err)
     })
@@ -178,13 +178,12 @@ export class AuthService {
   }
   deleteUser(): void {
     let userId = firebase.auth().currentUser.uid
-    console.log('Usuwam ' + userId)
 
     firebase.auth().currentUser.delete().then(() => {
-      console.log('Użytkownik usunięty ' + userId)
+      console.log(`Użytkownik o id: ${userId} usunięty`)
     }).catch(err => this.handleError.sendError(err))
     firebase.firestore().collection('users').doc(userId).delete().then(() => {
-      console.log('Usunięte z Firestore ' + userId)
+      console.log(`Usunąłem z FireStore dane użytkownika o id: ${userId}`)
     }).catch(err => this.handleError.sendError(err))
 
     this.router.navigate(['/'])

@@ -19,7 +19,7 @@
       <div *ngIf="!userData" class="loader">Ładowanie...</div>
       <div *ngIf="userData">
 
-        <form [formGroup]="profileForm" (ngSubmit)="updateUser()">
+        <form [formGroup]="profileForm">
           <div class="form-group">
             <i class="fa fa-user"></i>
             <label for="firstName">Imię</label>
@@ -33,23 +33,27 @@
           <div class="form-group">
             <i class="fa fa-user"></i>
             <label for="displayName">Wyświetlaj jako</label>
-            <input class="form-control" formControlName="displayName" name="displayName" [placeholder]="userData.displayName">
+            <input class="form-control" formControlName="displayName" name="displayName"
+              [placeholder]="userData.displayName">
           </div>
           <div class="form-group">
             <i class="fa fa-envelope"></i>
             <label for="email">E-mail</label>
-            <input class="form-control" formControlName="email" name="email" [placeholder]="userData.email" [attr.disabled]="true">
+            <input class="form-control" formControlName="email" name="email" [placeholder]="userData.email"
+              [attr.disabled]="true">
           </div>
           <div class="form-group">
             <i class="fa fa-calendar" aria-hidden="true"></i>
-            <input class="form-control" formControlName="birthday" name="birthday" [placeholder]="userData.birthday" type="date">
+            <input class="form-control" formControlName="birthday" name="birthday" [placeholder]="userData.birthday"
+              type="date">
           </div>
           <div class="form-group" formGroupName="address">
             <h4>Adres:</h4>
             <div class="form-group">
               <i class="fas fa-road" aria-hidden="true"></i>
               <label for="street">Ulica</label>
-              <input class="form-control" formControlName="street" name="street" [placeholder]="userData.address.street">
+              <input class="form-control" formControlName="street" name="street"
+                [placeholder]="userData.address.street">
             </div>
             <div class="form-group">
               <i class="fas fa-city" aria-hidden="true"></i>
@@ -63,7 +67,11 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-success" [disabled]="profileForm.invalid">Zaktualizuj</button>
+            <div class="btn-group">
+              <button type="submit" (click)="updateUser()" class="btn btn-success"
+              [disabled]="profileForm.invalid">Zaktualizuj</button>
+              <button type="submit" (click)="deleteUser()" class="btn btn-danger">Usuń konto</button>
+            </div>
           </div>
         </form>
 
