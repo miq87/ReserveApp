@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { BookingService } from 'src/app/services/booking.service';
+import { FireStorageService } from 'src/app/services/fire-storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -26,7 +27,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }),
   })
 
-  constructor(private _bs: BookingService, private fb: FormBuilder) { }
+  constructor(private _bs: BookingService, private fb: FormBuilder, private _fs: FireStorageService) { }
 
   ngOnInit(): void {
     this.unsub = this._bs.getMyHotels(querySnapshot => {
@@ -42,11 +43,14 @@ export class AdminComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.message)
     })
+
   }
 
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
+
+    this._fs.getAllImages(hotel.hotelId)
   }
 
   updateHotel() {

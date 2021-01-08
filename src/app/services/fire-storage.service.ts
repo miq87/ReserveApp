@@ -8,15 +8,11 @@ import 'firebase/storage';
 })
 export class FireStorageService {
 
-  storage = firebase.storage()
-  storageRef = this.storage.ref()
+  private storage = firebase.storage()
+  private storageRef = this.storage.ref()
 
   constructor() { }
 
-  /*getMainImage(hotelId: string) {
-    var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
-    return spaceRef.getDownloadURL()
-  }*/
   getDefaultImage() {
     var spaceRef = this.storageRef.child('images/main_img.jpg')
     return spaceRef.getDownloadURL()
@@ -29,7 +25,6 @@ export class FireStorageService {
     var spaceRef = this.storageRef.child(`images/${hotelId}/${file.name}`)
     return spaceRef.put(file)
   }
-
   getMainImage(hotelId: string): Promise<string> {
     var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
 
@@ -37,17 +32,32 @@ export class FireStorageService {
       spaceRef.getDownloadURL().then(url => {
         resolve(url)
       })
-      .catch(err => {
-        console.log(err.code)
-        this.getDefaultImage().then(url => {
-          resolve(url)
-        })
         .catch(err => {
-          reject(err)
+          console.log(err.code)
+          this.getDefaultImage().then(url => {
+            resolve(url)
+          })
+            .catch(err => {
+              reject(err)
+            })
         })
-      })
     })
 
+  }
+
+  getAllImages(hotelId: string) {
+    var listRef = this.storageRef.child(`images/${hotelId}`)
+
+    listRef.listAll().then(res => {
+      res.prefixes.forEach(folderRef => {
+        console.log(folderRef)
+      })
+      res.items.forEach(itemRef => {
+        console.log(itemRef)
+      })
+    }).catch(err => {
+      console.log(err.message)
+    })
   }
 
 }
