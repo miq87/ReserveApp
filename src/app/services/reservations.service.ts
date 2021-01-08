@@ -17,25 +17,24 @@ export class ReservationsService {
     await this.resRef.add(resData).then(() => {
       this._toastr.success('Dodałem nową rezerwację')
     })
-    .catch(err => {
-      this._toastr.error('Nie mogę dokonać rezerwacji')
-      console.log('Błąd podczas dodawania rezerwacji', err.message)
-    })
+      .catch(err => {
+        this._toastr.error('Nie mogę dokonać rezerwacji')
+        console.log('Błąd podczas dodawania rezerwacji', err.message)
+      })
   }
 
   getReservations(querySnapshot, error) {
-    return this.resRef.where('userId', '==', firebase.auth().currentUser.uid)
-    .onSnapshot(querySnapshot, error)
+    return this.resRef.where('userId', '==', firebase.auth().currentUser.uid).onSnapshot(querySnapshot, error)
   }
 
   async deleteReservation(resId: string) {
     await this.resRef.doc(resId).delete().then(() => {
       this._toastr.success(`Usunąłem rezerwację ${resId}`)
     })
-    .catch(err => {
-      this._toastr.error('Problem z usunięciem rezerwacji')
-      console.log(err.message)
-    })
+      .catch(err => {
+        this._toastr.error('Problem z usunięciem rezerwacji')
+        console.log(err.message)
+      })
   }
 
 }

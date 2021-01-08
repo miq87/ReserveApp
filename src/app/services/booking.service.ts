@@ -88,9 +88,9 @@ export class BookingService {
     return rooms || null
   }
 
-  async getMyHotels(querySnapshot, error) {
+  getMyHotels(querySnapshot, error) {
     let adminId = firebase.auth().currentUser.uid
-    return await this.hotelsRef.where('adminId', '==', adminId).onSnapshot(querySnapshot, error)
+    return this.hotelsRef.where('adminId', '==', adminId).onSnapshot(querySnapshot, error)
   }
 
   async onLoadHotels(searchData): Promise<Hotel[]> {
