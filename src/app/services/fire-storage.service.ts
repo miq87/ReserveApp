@@ -56,7 +56,7 @@ export class FireStorageService {
         console.log(itemRef)
       })
     }).catch(err => {
-      console.log(err.message)
+      console.log(err)
     })
   }
 

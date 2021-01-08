@@ -49,7 +49,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
-
     this._fs.getAllImages(hotel.hotelId)
   }
 
