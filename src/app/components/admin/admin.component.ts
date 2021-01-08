@@ -39,14 +39,9 @@ export class AdminComponent implements OnInit, OnDestroy {
           this.hotelList.push(new Hotel(doc.id, doc.data()))
         });
       }
-      console.log(this.hotelList)
     }, error => {
       console.log(error.message)
     })
-  }
-
-  ngOnDestroy(): void {
-    this.unsub()
   }
 
   onSelect(hotel) {
@@ -57,10 +52,15 @@ export class AdminComponent implements OnInit, OnDestroy {
   updateHotel() {
     this._bs.updateHotelInfo(this.selectedHotel.hotelId, this.hotelForm.value)
   }
+
   removeHotel() {
     this._bs.removeHotelById(this.selectedHotel.hotelId).then(() => {
       this.selectedHotel = null
     })
+  }
+
+  ngOnDestroy(): void {
+    this.unsub()
   }
 
 }

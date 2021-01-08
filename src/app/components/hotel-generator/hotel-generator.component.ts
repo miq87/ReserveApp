@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 
@@ -8,23 +9,28 @@ import { BookingService } from 'src/app/services/booking.service';
   templateUrl: './hotel-generator.component.html',
   styleUrls: ['./hotel-generator.component.scss']
 })
-export class HotelGeneratorComponent implements OnInit {
+export class HotelGeneratorComponent implements OnInit, OnDestroy {
 
   assetsUrl = "assets/data.json"
   hotelNames = []
   hotelStreet = []
   hotelCity = []
+  unsub: Subscription
 
   constructor(private _bs: BookingService, private http: HttpClient, private _auth: AuthService) { }
 
-  ngOnInit() {
-    this.http.get(this.assetsUrl).subscribe((data: any) => {
+  ngOnInit(): void {
+    this.unsub = this.http.get(this.assetsUrl).subscribe((data: any) => {
       for (let i = 0; i < 16; i++) {
         this.hotelNames.push(data.hotelNames[i].name)
         this.hotelStreet.push(data.hotelStreet[i].name)
         this.hotelCity.push([data.hotelCity[i].name, data.hotelCity[i].state])
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.unsub.unsubscribe()
   }
 
   hotelGenerator(ileHoteli: number) {
