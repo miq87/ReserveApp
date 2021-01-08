@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Reservation } from '../models/classes/reservation';
 import { ToastrService } from 'ngx-toastr';
 import firebase from "firebase/app";
-import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class ReservationsService {
     })
       .catch(err => {
         this._toastr.error('Nie mogę dokonać rezerwacji')
-        console.log('Błąd podczas dodawania rezerwacji', err.message)
+        console.log(err.message)
       })
   }
 
@@ -29,7 +28,7 @@ export class ReservationsService {
 
   async deleteReservation(resId: string) {
     await this.resRef.doc(resId).delete().then(() => {
-      this._toastr.success(`Usunąłem rezerwację ${resId}`)
+      this._toastr.success('Usunąłem rezerwację')
     })
       .catch(err => {
         this._toastr.error('Problem z usunięciem rezerwacji')
