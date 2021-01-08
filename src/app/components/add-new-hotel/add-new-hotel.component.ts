@@ -45,17 +45,21 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
 
     this.hotelForm.patchValue({ adminId: this._auth.getCurrentUserId() })
   }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe()
   }
+
   onFileSelected(event) {
     this.mainImg = event.target.files[0]
   }
+
   onFilesSelected(event) {
-    for(let i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.allImages.push(event.target.files[i])
     }
   }
+
   onSubmit() {
     //let correctCity = (<string>this.hotelForm.value.address.city).substring(0,1).toUpperCase() + (<string>this.hotelForm.value.address.city).substring(1)
 
@@ -63,20 +67,18 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       console.log(retId)
       this.returnHotelId = retId
 
-      if(this.mainImg) {
+      if (this.mainImg) {
         this._fs.sendMainImage(this.returnHotelId, this.mainImg).then(() => {
           this.consoleInfo(this.mainImg.name, this.returnHotelId)
         })
       }
-      if(this.allImages.length > 0) {
-        for(let i = 0; i < this.allImages.length; i++) {
-          this._fs.sendImage(this.returnHotelId, this.allImages[i]).then(() => {
-            this.consoleInfo(this.allImages[i].name, this.returnHotelId)
-          })
+      for (let i = 0; i < this.allImages.length; i++) {
+        this._fs.sendImage(this.returnHotelId, this.allImages[i]).then(() => {
+          this.consoleInfo(this.allImages[i].name, this.returnHotelId)
+        })
           .catch((error) => {
             console.log(error.message)
           })
-        }
       }
 
     })
