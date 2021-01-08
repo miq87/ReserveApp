@@ -27,7 +27,8 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
 
   states: any
   returnHotelId: string
-  allFiles: File[] = []
+  mainImg: File
+  allImages: File[] = []
   sub: Subscription
 
   constructor(
@@ -48,11 +49,11 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe()
   }
   onFileSelected(event) {
-    this.allFiles.push(event.target.files[0])
+    this.mainImg = event.target.files[0]
   }
   onFilesSelected(event) {
     for(let i = 0; i < event.target.files.length; i++) {
-      this.allFiles.push(event.target.files[i])
+      this.allImages.push(event.target.files[i])
     }
   }
   onSubmit() {
@@ -62,17 +63,20 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       console.log(retId)
       this.returnHotelId = retId
 
-      this._fs.sendMainImage(this.returnHotelId, this.allFiles[0]).then(() => {
-        this.consoleInfo(this.allFiles[0].name, this.returnHotelId)
-      })
-
-      for(let i = 1; i < this.allFiles.length; i++) {
-        this._fs.sendImage(this.returnHotelId, this.allFiles[i]).then(() => {
-          this.consoleInfo(this.allFiles[i].name, this.returnHotelId)
+      if(this.mainImg) {
+        this._fs.sendMainImage(this.returnHotelId, this.mainImg).then(() => {
+          this.consoleInfo(this.mainImg.name, this.returnHotelId)
         })
-        .catch((error) => {
-          console.log(error.message)
-        })
+      }
+      if(this.allImages.length > 0) {
+        for(let i = 0; i < this.allImages.length; i++) {
+          this._fs.sendImage(this.returnHotelId, this.allImages[i]).then(() => {
+            this.consoleInfo(this.allImages[i].name, this.returnHotelId)
+          })
+          .catch((error) => {
+            console.log(error.message)
+          })
+        }
       }
 
     })
