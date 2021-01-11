@@ -27,6 +27,7 @@
     "animate.css": "^4.1.1",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.6.3",
+    "splitting": "^1.0.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

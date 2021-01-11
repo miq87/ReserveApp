@@ -1,37 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
-$queen-blue: rgba(51,
-101,
-138,
-1);
-$dark-sky-blue: rgba(134,
-187,
-216,
-1);
-$charcoal: rgba(47,
-72,
-88,
-1);
-$honey-yellow: rgba(246,
-174,
-45,
-1);
-$safety-orange-blaze-orange: rgba(242,
-100,
-25,
-1);
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap");
+$queen-blue: rgba(51, 101, 138, 1);
+$dark-sky-blue: rgba(134, 187, 216, 1);
+$charcoal: rgba(47, 72, 88, 1);
+$honey-yellow: rgba(246, 174, 45, 1);
+$safety-orange-blaze-orange: rgba(242, 100, 25, 1);
 html,
 body {
-  height: 100%
+  height: 100%;
 }
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
@@ -39,6 +24,21 @@ body {
   background-color: $dark-sky-blue;
   color: $safety-orange-blaze-orange;
   font-size: 20px;
+}
+
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  > div {
+    padding: 2px;
+    width: 33%;
+    img {
+      border-radius: 0px;
+      opacity: 0.8;
+    }
+  }
 }
 
 a {
@@ -55,14 +55,14 @@ ul {
 }
 
 label {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: darkslategray;
 }
 
 .btn {
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -143,14 +143,14 @@ img {
     margin: 8px auto;
     position: relative;
   }
-  .form-group>i {
+  .form-group > i {
     color: $queen-blue;
     font-size: 20px;
     line-height: 36px;
     position: absolute;
     left: 12px;
   }
-  .form-group>label {
+  .form-group > label {
     position: absolute;
     top: 4px;
     right: 4px;
@@ -165,7 +165,7 @@ img {
     border-bottom: 2px solid $dark-sky-blue;
     height: 36px;
   }
-  .form-control[type=file] {
+  .form-control[type="file"] {
     background: transparent;
     box-shadow: none;
     border: 0px;
@@ -178,7 +178,6 @@ img {
     border-bottom: 2px solid $safety-orange-blaze-orange;
   }
 }
-
 
 /*.ng-valid[required],
 .ng-valid.required {
@@ -195,7 +194,7 @@ img {
   padding: 10px;
   margin-bottom: 12px;
   box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.2);
-  color: #FFF;
+  color: #fff;
   border-radius: 6px;
   .heading {
     text-align: center;
@@ -221,14 +220,14 @@ img {
     }
   }
   a {
-    color: #FFF;
-    background-color: #3FA9F2;
+    color: #fff;
+    background-color: #3fa9f2;
     font-size: 24px;
     text-align: center;
     line-height: 42px;
     height: 44px;
     width: 44px;
-    border: 2px solid #FFF;
+    border: 2px solid #fff;
     border-radius: 50%;
     transition: all 0.5s;
   }
@@ -240,7 +239,7 @@ img {
   }
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
   .myCard .form-group .btn,
   .myCard .form-group .form-login {
     text-align: center;

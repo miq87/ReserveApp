@@ -1,3 +1,5 @@
+<script src="https://unpkg.com/splitting@1.0.5/dist/splitting.js"></script>
+<script src="admin.js"></script>
 <div class="container-fluid myCard">
   <div class="row">
     <div class="col-lg-12">
@@ -19,6 +21,15 @@
 
           <div class="card-body" *ngIf="selectedHotel">
             <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="gallery">
+                    <div *ngFor="let imgUrl of imgUrlList">
+                      <img [src]="imgUrl" />
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
@@ -67,22 +78,12 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12">
-
-                  <div class="img-container" *ngFor="let imgUrl of imgUrlList">
-                    <div class="container">
-                      <a href="{{ imgUrl }}"><img [src]="imgUrl" [alt]="selectedHotel.hotelName"></a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
             </div>
           </div>
           <div class="card-footer">
             <div class="btn-group">
-              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-success" [disabled]="hotelForm.invalid">Zaktualizuj</button>
+              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-success"
+                [disabled]="hotelForm.invalid">Zaktualizuj</button>
               <button (click)="removeHotel()" *ngIf="selectedHotel" class="btn btn-danger">Usuń</button>
             </div>
           </div>
