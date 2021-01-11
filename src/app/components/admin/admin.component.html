@@ -72,9 +72,7 @@
 
                   <div class="img-container" *ngFor="let imgUrl of imgUrlList">
                     <div class="container">
-                      <img [src]="imgUrl">
-                      <span class="title">Lorem ipsum dolor</span>
-                      <span class="text">Morbi diam viverra mattis sociis magna, habitasse penatibus non lectus</span>
+                      <a href="{{ imgUrl }}"><img [src]="imgUrl" [alt]="selectedHotel.hotelName"></a>
                     </div>
                   </div>
 
