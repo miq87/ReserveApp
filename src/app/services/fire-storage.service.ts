@@ -45,19 +45,20 @@ export class FireStorageService {
 
   }
 
-  getAllImages(hotelId: string) {
+  async getAllImages(hotelId: string): Promise<string[]> {
     var listRef = this.storageRef.child(`images/${hotelId}`)
+    var urlList = []
 
-    listRef.listAll().then(res => {
-      res.prefixes.forEach(folderRef => {
-        console.log(folderRef)
-      })
+    await listRef.listAll().then(res => {
       res.items.forEach(itemRef => {
-        console.log(itemRef)
+        itemRef.getDownloadURL().then(url => {
+          urlList.push(url)
+        })
       })
     }).catch(err => {
       console.log(err)
     })
+    return urlList
   }
 
 }

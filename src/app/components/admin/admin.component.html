@@ -67,6 +67,19 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-lg-12">
+
+                  <div class="img-container" *ngFor="let imgUrl of imgUrlList">
+                    <div class="container">
+                      <img [src]="imgUrl">
+                      <span class="title">Lorem ipsum dolor</span>
+                      <span class="text">Morbi diam viverra mattis sociis magna, habitasse penatibus non lectus</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer">

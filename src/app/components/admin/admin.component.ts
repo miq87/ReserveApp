@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   hotelList: Hotel[] = []
   selectedHotel: Hotel
   unsub
+  imgUrlList: string[]
 
   hotelForm = this.fb.group({
     adminId: [{ value: '', disabled: true }],
@@ -49,7 +50,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
-    this._fs.getAllImages(hotel.hotelId)
+    this._fs.getAllImages(hotel.hotelId).then(imgUrlList => {
+      this.imgUrlList = imgUrlList
+    })
   }
 
   updateHotel() {
