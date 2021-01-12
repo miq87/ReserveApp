@@ -13,15 +13,13 @@ export class FacilitiesService {
     })
   }
 
-  getFacilities(values: number[]) {
-    let retValues: string[] = []
-    return new Promise((resolve) => {
-      values.forEach(value => {
-        let selectedOpt = this.facilities.find(opt => opt.id == value);
-        retValues.push(selectedOpt.name)
-      })
-      resolve(retValues)
+  async getFacilities(values: number[]): Promise<string[]> {
+    let retFacilities: string[] = []
+    values.forEach(value => {
+      let selectedOpt = this.facilities.find(opt => opt.id == value);
+      retFacilities.push(selectedOpt.name)
     })
+    return retFacilities || null
   }
 
   getAllFacilities() {

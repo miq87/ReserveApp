@@ -51,13 +51,10 @@ export class HotelDetailComponent implements OnInit {
     this._bs.getHotelDetails(hotelId).then((data: Hotel) => {
       this.hotel = data;
 
-      this._facs.getFacilities(this.hotel.facilities).then((data: string[]) => {
+      this._facs.getFacilities(this.hotel.facilities).then(data => {
         this.hotelFacilities = data
-      }).catch(err => {
-        console.log(err.message)
       })
-
-      this._bs.getHotelRooms(hotelId).then((data: Room[]) => {
+      this._bs.getHotelRooms(hotelId).then(data => {
         this.hotelRooms = data
       })
 
