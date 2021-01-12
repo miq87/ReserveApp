@@ -26,6 +26,7 @@
                   <div class="gallery">
                     <div *ngFor="let imgUrl of imgUrlList">
                       <img [src]="imgUrl" />
+                      <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </div>
                   </div>
                 </div>
@@ -82,9 +83,8 @@
           </div>
           <div class="card-footer">
             <div class="btn-group">
-              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-success"
-                [disabled]="hotelForm.invalid">Zaktualizuj</button>
-              <button (click)="removeHotel()" *ngIf="selectedHotel" class="btn btn-danger">Usuń</button>
+              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-success" [disabled]="hotelForm.invalid">Zaktualizuj</button>
+              <button (click)="deleteHotel()" *ngIf="selectedHotel" class="btn btn-danger">Usuń</button>
             </div>
           </div>
 

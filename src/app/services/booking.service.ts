@@ -51,7 +51,7 @@ export class BookingService {
     })
   }
 
-  async removeHotelById(hotelId: string) {
+  async deleteHotelById(hotelId: string) {
     await this.hotelsRef.doc(hotelId).delete()
       .then(() => {
         console.log(`Usunąłem hotel o id: ${hotelId} `)

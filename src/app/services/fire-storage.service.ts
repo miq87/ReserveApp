@@ -61,4 +61,13 @@ export class FireStorageService {
     return urlList
   }
 
+  async deleteImg(imgUrl: string) {
+    console.log(imgUrl)
+    await this.storage.refFromURL(imgUrl).delete().then(() => {
+      console.log(`Usunąłem plik: ${imgUrl}`)
+    }).catch(err => {
+      console.log(err.message)
+    })
+  }
+
 }

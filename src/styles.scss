@@ -2,11 +2,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap");
-$queen-blue: rgba(51, 101, 138, 1);
-$dark-sky-blue: rgba(134, 187, 216, 1);
-$charcoal: rgba(47, 72, 88, 1);
-$honey-yellow: rgba(246, 174, 45, 1);
-$safety-orange-blaze-orange: rgba(242, 100, 25, 1);
+$queen-blue: rgba(51,
+101,
+138,
+1);
+$dark-sky-blue: rgba(134,
+187,
+216,
+1);
+$charcoal: rgba(47,
+72,
+88,
+1);
+$honey-yellow: rgba(246,
+174,
+45,
+1);
+$safety-orange-blaze-orange: rgba(242,
+100,
+25,
+1);
 html,
 body {
   height: 100%;
@@ -31,12 +46,18 @@ body {
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
-  > div {
+  >div {
+    position: relative;
     padding: 2px;
     width: 33%;
     img {
       border-radius: 0px;
       opacity: 0.8;
+    }
+    .btn {
+      position: absolute;
+      top: 2px;
+      right: 2px;
     }
   }
 }
@@ -143,14 +164,14 @@ img {
     margin: 8px auto;
     position: relative;
   }
-  .form-group > i {
+  .form-group>i {
     color: $queen-blue;
     font-size: 20px;
     line-height: 36px;
     position: absolute;
     left: 12px;
   }
-  .form-group > label {
+  .form-group>label {
     position: absolute;
     top: 4px;
     right: 4px;
@@ -178,6 +199,7 @@ img {
     border-bottom: 2px solid $safety-orange-blaze-orange;
   }
 }
+
 
 /*.ng-valid[required],
 .ng-valid.required {
