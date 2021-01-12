@@ -37,10 +37,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
-
-import firebase from 'firebase/app';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
 import { AdminComponent } from './components/admin/admin.component';
+import firebase from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -87,7 +86,7 @@ firebase.initializeApp(firebaseConfig);
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_fTrGTvK8jjXIj2epeiY2HKqVWD_MFeM'
+      apiKey: 'AIzaSyAMgMV7ER34afwoVPmwcrA6deI0EUYISVI'
     }),
     ToastrModule.forRoot(),
     ReactiveFormsModule,

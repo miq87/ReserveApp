@@ -48,7 +48,7 @@ export class HotelDetailComponent implements OnInit {
       }
     })
 
-    this._bs.getHotelDetails(hotelId).then((data: Hotel) => {
+    this._bs.getHotelDetails(hotelId).then(data => {
       this.hotel = data;
 
       this._facs.getFacilities(this.hotel.facilities).then(data => {
