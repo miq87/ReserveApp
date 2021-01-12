@@ -80,7 +80,9 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   addRoom(personNum: number) {
     this._bs.addNewRoom(this.selectedHotel.hotelId, personNum)
-
+    this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
+      this.roomList = roomList
+    })
   }
 
   ngOnDestroy(): void {
