@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Hotel } from 'src/app/models/classes/hotel';
+import { Room } from 'src/app/models/classes/room';
 import { BookingService } from 'src/app/services/booking.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
 
@@ -11,10 +12,12 @@ import { FireStorageService } from 'src/app/services/fire-storage.service';
 })
 export class AdminComponent implements OnInit, OnDestroy {
 
+  personNums = [1, 2, 3, 4, 5, 6]
   hotelList: Hotel[] = []
+  roomList: Room[] = []
+  imgUrlList: string[]
   selectedHotel: Hotel
   unsub
-  imgUrlList: string[]
 
   hotelForm = this.fb.group({
     adminId: [{ value: '', disabled: true }],
@@ -45,11 +48,17 @@ export class AdminComponent implements OnInit, OnDestroy {
       console.log(error.message)
     })
 
+    if (this.selectedHotel) {
+      console.log(this.selectedHotel.hotelId)
+    }
   }
 
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
+    this._bs.getHotelRooms(hotel.hotelId).then(roomList => {
+      this.roomList = roomList
+    })
     this._fs.getAllImages(hotel.hotelId).then(imgUrlList => {
       this.imgUrlList = imgUrlList
     })
@@ -67,6 +76,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   deleteImg(imgUrl: string) {
     this._fs.deleteImg(imgUrl)
+  }
+
+  addRoom(personNum: number) {
+    this._bs.addNewRoom(this.selectedHotel.hotelId, personNum)
+
   }
 
   ngOnDestroy(): void {

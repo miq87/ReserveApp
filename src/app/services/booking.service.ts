@@ -74,18 +74,18 @@ export class BookingService {
   }
 
   async getHotelRooms(hotelId: string): Promise<Room[]> {
-    let rooms: Room[] = []
+    let roomList: Room[] = []
     await this.hotelsRef.doc(hotelId).collection('rooms').get()
       .then(querySnapshot => {
         querySnapshot.docs.forEach(doc => {
-          rooms.push(<Room>{ roomId: doc.id, ...doc.data() })
+          roomList.push(new Room(doc.id, doc.data()))
         });
       })
       .catch(err => {
         console.log('Błąd podczas ładowania pokoji')
         console.log(err.message)
       })
-    return rooms || null
+    return roomList || null
   }
 
   getMyHotels(querySnapshot, error) {

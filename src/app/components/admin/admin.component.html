@@ -79,6 +79,22 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div>Dodaj pokój dla ... osób:</div>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Ilość osób</mat-label>
+                    <mat-select>
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum)">
+                        {{ personNum }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-8">
+                  <div *ngFor="let room of roomList">{{ room.personNum }}</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer">
