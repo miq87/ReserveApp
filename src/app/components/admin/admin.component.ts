@@ -79,9 +79,18 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   addRoom(personNum: number) {
-    this._bs.addNewRoom(this.selectedHotel.hotelId, personNum)
-    this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
-      this.roomList = roomList
+    this._bs.addNewRoom(this.selectedHotel.hotelId, personNum).then(() => {
+      this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
+        this.roomList = roomList
+      })
+    })
+  }
+
+  deleteRoom(hotelId: string, roomId: string) {
+    this._bs.deleteRoom(hotelId, roomId).then(() => {
+      this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
+        this.roomList = roomList
+      })
     })
   }
 

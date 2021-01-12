@@ -51,6 +51,15 @@ export class BookingService {
     })
   }
 
+  async deleteRoom(hotelId: string, roomId: string) {
+    await this.hotelsRef.doc(hotelId).collection('rooms').doc(roomId).delete().then(() => {
+      console.log(`Usunąłem pokój o id: ${roomId}`)
+    }).catch(err => {
+      console.log(`Błąd podczas usuwania pokoju o id: ${roomId}`)
+      console.log(err.message)
+    })
+  }
+
   async deleteHotelById(hotelId: string) {
     await this.hotelsRef.doc(hotelId).delete()
       .then(() => {

@@ -91,8 +91,13 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div class="col-lg-8">
-                  <div *ngFor="let room of roomList">{{ room.personNum }}</div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3" *ngFor="let room of roomList">
+                  <div class="room-item"><span>Pokój dla {{ room.personNum }} osób</span>
+                    <button class="btn btn-sm btn-danger" (click)="deleteRoom(this.selectedHotel.hotelId, room.roomId)"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
                 </div>
               </div>
             </div>
