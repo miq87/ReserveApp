@@ -3,6 +3,7 @@ $dark-sky-blue: rgba(134, 187, 216, 1);
 $charcoal: rgba(47, 72, 88, 1);
 $honey-yellow: rgba(246, 174, 45, 1);
 $safety-orange-blaze-orange: rgba(242, 100, 25, 1);
+$text-white: #fff;
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap");
@@ -67,7 +68,7 @@ header {
         margin: 0px 12px;
       }
       a {
-        color: #FFF;
+        color: $text-white;
         text-decoration: none;
         letter-spacing: 1px;
         font-size: 18px;
@@ -106,7 +107,7 @@ header {
 .room-item {
   position: relative;
   background: $charcoal;
-  color: #fff;
+  color: $text-white;
   margin: 2px;
   padding: 2px;
   border-bottom: 2px solid $safety-orange-blaze-orange;
@@ -153,7 +154,7 @@ img {
   padding: 10px;
   margin-bottom: 12px;
   box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.2);
-  color: #fff;
+  color: $text-white;
   border-radius: 6px;
   .heading {
     text-align: center;
@@ -176,7 +177,7 @@ img {
       margin: 2px;
       padding: 2px 6px;
       background-color: rgba(47, 72, 88, 0.8);
-      color: #fff;
+      color: $text-white;
       cursor: pointer;
     }
   }
@@ -195,11 +196,11 @@ img {
 }
 
 .mat-label {
-  color: #000;
+  color: $charcoal;
 }
 
 .mat-select {
-  color: #000;
+  color: $charcoal;
 }
 
 .mat-form-field-label,
@@ -221,7 +222,7 @@ img {
 
 .mat-form-field.mat-focused {
   .mat-form-field-label {
-    color: #FFF;
+    color: $text-white;
     translate: none;
   }
 }
@@ -237,7 +238,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   background: transparent;
-  -webkit-text-fill-color: #FFF;
+  -webkit-text-fill-color: $text-white;
   transition: background-color 5000s ease-in-out 0s;
 }
 
