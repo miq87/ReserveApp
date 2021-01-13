@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { MembersComponent } from './components/members/members.component';
-import { PromiseComponent } from './components/promise/promise.component';
 import { AddNewHotelComponent } from './components/admin/add-new-hotel/add-new-hotel.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelGeneratorComponent } from './components/admin/hotel-generator/hotel-generator.component';
