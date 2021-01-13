@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Facilities } from '../models/classes/facilities';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacilitiesService {
-  private facilities: any[]
+  private facilities: Facilities[]
 
   constructor(private http: HttpClient) {
     this.http.get("assets/data.json").subscribe((data: any) => {
-      this.facilities = data.facilities
+      this.facilities = <Facilities[]>(data.facilities)
     })
   }
 

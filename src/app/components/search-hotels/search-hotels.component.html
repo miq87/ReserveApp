@@ -31,7 +31,7 @@
           <mat-form-field appearance="legacy">
             <mat-label>Udogodnienia</mat-label>
             <mat-select formControlName="facilities" multiple>
-              <mat-option *ngFor="let fac of facList" [value]="fac.id">{{ fac.name }}</mat-option>
+              <mat-option *ngFor="let fac of facilities" [value]="fac.id">{{ fac.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

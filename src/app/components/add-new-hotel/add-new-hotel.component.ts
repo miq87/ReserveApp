@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Facilities } from 'src/app/models/classes/facilities';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
@@ -22,10 +23,12 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       city: ['', Validators.required],
       state: ['', Validators.required],
       zip: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(6)])]
-    })
+    }),
+    facilities: ['']
   })
 
-  states: any
+  facilities: Facilities[]
+  states: any[]
   returnHotelId: string
   mainImg: File
   allImages: File[] = []
@@ -39,8 +42,9 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
     private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.sub = this.http.get("assets/data.json").subscribe((data) => {
-      this.states = (<any>data).states
+    this.sub = this.http.get("assets/data.json").subscribe((data: any) => {
+      this.states = data.states
+      this.facilities = data.facilities
     })
 
     this.hotelForm.patchValue({ adminId: this._auth.getCurrentUserId() })
@@ -61,10 +65,7 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    //let correctCity = (<string>this.hotelForm.value.address.city).substring(0,1).toUpperCase() + (<string>this.hotelForm.value.address.city).substring(1)
-
     this._booking.addNewHotel(this.hotelForm.value).then((retId) => {
-      console.log(retId)
       this.returnHotelId = retId
 
       if (this.mainImg) {
@@ -76,13 +77,11 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
         this._fs.sendImage(this.returnHotelId, this.allImages[i]).then(() => {
           this.consoleInfo(this.allImages[i].name, this.returnHotelId)
         })
-          .catch((error) => {
-            console.log(error.message)
+          .catch((err) => {
+            console.log(err.message)
           })
       }
-
     })
-
   }
 
   consoleInfo(name: string, id: string) {

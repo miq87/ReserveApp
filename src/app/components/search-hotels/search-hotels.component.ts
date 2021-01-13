@@ -1,10 +1,9 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Facilities } from 'src/app/models/classes/facilities';
 import { FacilitiesService } from 'src/app/services/facilities.service';
 import { MessengerService } from 'src/app/services/messenger.service';
-
 
 @Component({
   selector: 'app-search-hotels',
@@ -14,7 +13,7 @@ import { MessengerService } from 'src/app/services/messenger.service';
 })
 export class SearchHotelsComponent implements OnInit {
 
-  facList: any[]
+  facilities: Facilities[] = []
 
   searchForm = this.fb.group({
     city: ['', Validators.required],
@@ -31,7 +30,7 @@ export class SearchHotelsComponent implements OnInit {
 
   ngOnInit() {
     this._fs.getAllFacilities().subscribe((data: any) => {
-      this.facList = data.facilities
+      this.facilities = data.facilities
     })
   }
   onSearch() {
