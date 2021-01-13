@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { PromiseComponent } from './components/promise/promise.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AddNewHotelComponent } from './components/admin/add-new-hotel/add-new-hotel.component';
 import { HotelGeneratorComponent } from './components/admin/hotel-generator/hotel-generator.component';
@@ -60,7 +59,6 @@ firebase.initializeApp(firebaseConfig);
     FooterComponent,
     HeaderComponent,
     MembersComponent,
-    PromiseComponent,
     AdminComponent,
     AddNewHotelComponent,
     HotelGeneratorComponent,
