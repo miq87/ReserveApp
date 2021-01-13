@@ -80,20 +80,19 @@
               </div>
               <div class="row">
                 <div class="col-lg-4">
-                  <div>Dodaj pokój dla ... osób:</div>
                   <mat-form-field appearance="fill">
-                    <mat-label>Ilość osób</mat-label>
+                    <mat-label>Dodaj pokój dla</mat-label>
                     <mat-select>
-                      <mat-option>None</mat-option>
+                      <mat-option>Anuluj</mat-option>
                       <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum)">
-                        {{ personNum }}</mat-option>
+                        {{ personNum }} osób</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-3" *ngFor="let room of roomList">
-                  <div class="room-item"><span>Pokój dla {{ room.personNum }} osób</span>
+                  <div class="room-item"><span>{{ room.personNum }} osobowy</span>
                     <button class="btn btn-sm btn-danger" (click)="deleteRoom(this.selectedHotel.hotelId, room.roomId)"><i
                         class="fas fa-trash"></i></button>
                   </div>
@@ -103,8 +102,8 @@
           </div>
           <div class="card-footer">
             <div class="btn-group">
-              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-success" [disabled]="hotelForm.invalid">Zaktualizuj</button>
-              <button (click)="deleteHotel()" *ngIf="selectedHotel" class="btn btn-danger">Usuń</button>
+              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-lg btn-success" [disabled]="hotelForm.invalid">Zaktualizuj</button>
+              <button (click)="deleteHotel()" *ngIf="selectedHotel" class="btn btn-lg btn-danger">Usuń</button>
             </div>
           </div>
         </form>

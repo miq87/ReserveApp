@@ -1,65 +1,65 @@
-<div class="card" *ngIf="hotel">
-  <form [formGroup]="resForm" (ngSubmit)="onBook()">
-    <div class="card-header">
-      <h2>{{ hotel.hotelName }}</h2>
-    </div>
-    <div class="card-body">
-
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
-          <div class="col-lg-8">
-            <p>{{ hotel.address.street }}<br>{{hotel.address.zip }} {{ hotel.address.city }}, {{ hotel.address.state }}</p>
+<div class="container-fluid myCard">
+  <div class="card" *ngIf="hotel">
+    <form [formGroup]="resForm" (ngSubmit)="onBook()">
+      <div class="card-header">
+        <h2>{{ hotel.hotelName }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
+            <div class="col-lg-8">
+              <p>{{ hotel.address.street }}<br>{{hotel.address.zip }} {{ hotel.address.city }}, {{ hotel.address.state }}
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 mt-3">
-            <ul *ngIf="hotelFacilities">
-              <li *ngFor="let fac of hotelFacilities">{{ fac }}</li>
-            </ul>
+          <div class="row">
+            <div class="col-lg-12 mt-3">
+              <div class="facilities" *ngIf="hotelFacilities">
+                <ul>
+                  <li *ngFor="let fac of hotelFacilities">{{ fac }}</li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="row" *ngIf="hotelRooms">
-
-          <div class="col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Podaj termin</mat-label>
-              <mat-date-range-input [rangePicker]="picker">
-                <input matInput matStartDate formControlName="dateStart" placeholder="Od">
-                <input matInput matEndDate formControlName="dateEnd" placeholder="Do">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-              <mat-error *ngIf="resForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data</mat-error>
-              <mat-error *ngIf="resForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
-            </mat-form-field>
+          <div class="row" *ngIf="hotelRooms">
+            <div class="col-lg-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Podaj termin</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matInput matStartDate formControlName="dateStart" placeholder="Od">
+                  <input matInput matEndDate formControlName="dateEnd" placeholder="Do">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-error *ngIf="resForm.controls.dateStart.hasError('matStartDateInvalid')">Nieprawidłowa data
+                </mat-error>
+                <mat-error *ngIf="resForm.controls.dateEnd.hasError('matEndDateInvalid')">Nieprawidłowa data</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Wybierz pokój</mat-label>
+                <mat-select formControlName="roomId">
+                  <mat-option *ngFor="let room of hotelRooms" [value]="room.roomId">Liczba osób: {{ room.personNum }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
-          <div class="col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Wybierz pokój</mat-label>
-              <mat-select formControlName="roomId">
-                <mat-option *ngFor="let room of hotelRooms" [value]="room.roomId">Liczba osób: {{ room.personNum }}</mat-option>
-              </mat-select>
-            </mat-form-field>
+          <div class="row">
+            <div class="col-lg-12">
+              <mat-form-field appearance="fill">
+                <mat-label>Uwagi do rezerwacji</mat-label>
+                <input matInput formControlName="notice" name="notice">
+              </mat-form-field>
+            </div>
           </div>
-
-        </div>
-        <div class="row">
-
-          <div class="col-lg-12">
-            <mat-form-field appearance="fill">
-              <mat-label>Uwagi do rezerwacji</mat-label>
-              <input matInput formControlName="notice" name="notice">
-            </mat-form-field>
-          </div>
-
         </div>
       </div>
-
-    </div>
-    <div class="card-footer">
-      <button class="btn btn-success btn-md" [disabled]="resForm.invalid">Zarezerwuj</button>
-    </div>
-
-  </form>
+      <div class="card-footer">
+        <button class="btn btn-lg btn-success" [disabled]="resForm.invalid">Zarezerwuj</button>
+      </div>
+    </form>
+  </div>
 </div>
