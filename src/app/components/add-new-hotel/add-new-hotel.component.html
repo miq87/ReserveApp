@@ -20,7 +20,7 @@
                       <input matInput formControlName="hotelName" name="hotelName">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                      <mat-label>Udogodnienia</mat-label>
+                      <mat-label>Udogodnienia:</mat-label>
                       <mat-select formControlName="facilities" multiple>
                         <mat-option *ngFor="let fac of facilities" [value]="fac.id">{{ fac.name }}</mat-option>
                       </mat-select>

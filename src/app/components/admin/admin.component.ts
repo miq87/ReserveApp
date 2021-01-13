@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Facilities } from 'src/app/models/classes/facilities';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { Room } from 'src/app/models/classes/room';
 import { BookingService } from 'src/app/services/booking.service';
+import { FacilitiesService } from 'src/app/services/facilities.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   personNums = [1, 2, 3, 4, 5, 6]
   hotelList: Hotel[] = []
   roomList: Room[] = []
+  facilities: Facilities[]
   imgUrlList: string[]
   selectedHotel: Hotel
   unsub
@@ -29,9 +32,14 @@ export class AdminComponent implements OnInit, OnDestroy {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     }),
+    facilities: ['']
   })
 
-  constructor(private _bs: BookingService, private fb: FormBuilder, private _fs: FireStorageService) { }
+  constructor(
+    private fb: FormBuilder,
+    private _bs: BookingService,
+    private _fs: FireStorageService,
+    private _facs: FacilitiesService) { }
 
   ngOnInit(): void {
     this.unsub = this._bs.getMyHotels(querySnapshot => {
@@ -48,9 +56,9 @@ export class AdminComponent implements OnInit, OnDestroy {
       console.log(error.message)
     })
 
-    if (this.selectedHotel) {
-      console.log(this.selectedHotel.hotelId)
-    }
+    this._facs.getAllFacilities().subscribe((data: any) => {
+      this.facilities = data.facilities
+    })
   }
 
   onSelect(hotel) {
@@ -65,6 +73,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   updateHotel() {
+    console.log(this.hotelForm.value)
     this._bs.updateHotelInfo(this.selectedHotel.hotelId, this.hotelForm.value)
   }
 
