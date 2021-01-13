@@ -19,14 +19,17 @@ export class RegisterComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private _auth: AuthService, private handleError: HandleErrorsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private _auth: AuthService,
+    private handleError: HandleErrorsService) { }
 
   ngOnInit(): void {
     this.handleError.getError().subscribe(data => {
       this.isError = data
     })
   }
-  createUser() {
+  onRegister() {
     this._auth.createUser(this.registerForm.value)
   }
   loginFb() {
@@ -34,9 +37,6 @@ export class RegisterComponent implements OnInit {
   }
   loginGoogle() {
     this._auth.loginBy('google')
-  }
-  loginInstagram() {
-    this._auth.loginBy('instagram')
   }
 
 }

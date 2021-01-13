@@ -1,50 +1,47 @@
-<div class="myCard my-form-class">
-  <div class="heading">
-    <h2>Rejestracja</h2>
-  </div>
-  <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
-
-  <form [formGroup]="registerForm" (ngSubmit)="createUser()">
-    <div class="form-group">
-      <i class="fa fa-user"></i>
-      <input class="form-control" formControlName="firstName" name="firstName" placeholder="Imię">
+<div class="container-fluid myCard">
+  <div class="card">
+    <div class="card-header">
+      <h2>Rejestracja</h2>
     </div>
-    <div class="form-group">
-      <i class="fa fa-user"></i>
-      <input class="form-control" formControlName="lastName" name="lastName" placeholder="Nazwisko">
-    </div>
-    <div class="form-group">
-      <i class="fa fa-envelope"></i>
-      <input class="form-control" formControlName="email" name="email" placeholder="E-mail" type="email">
-    </div>
-    <div class="form-group">
-      <i class="fa fa-lock"></i>
-      <input class="form-control" formControlName="password" name="password" placeholder="Hasło" type="password">
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Zarejestruj</button>
-    </div>
-  </form>
-
-  <div class="form-group mb-5">
-    <span>Masz już konto ? </span>
-    <button type="submit" class="btn btn-sm btn-warning" [routerLink]="['/login']">Zaloguj</button>
-  </div>
-
-  <div class="social">
-    <div>Lub zaloguj przez</div>
-    <div>
-      <ul>
-        <li>
-          <a class="fab fa-facebook-f" (click)="loginFb()"></a>
-        </li>
-        <li>
-          <a class="fab fa-twitter" (click)="loginGoogle()"></a>
-        </li>
-        <li>
-          <a class="fab fa-instagram" (click)="loginInstagram()"></a>
-        </li>
-      </ul>
+    <div class="card-body">
+      <div class="container">
+        <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
+        <div class="row">
+          <div class="col-lg-6">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+              <div class="form-group">
+                <mat-form-field appearance="fill">
+                  <mat-label>Imię:</mat-label>
+                  <input matInput formControlName="firstName" name="firstName">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Nazwisko:</mat-label>
+                  <input matInput formControlName="lastName" name="lastName">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>E-mail:</mat-label>
+                  <input type="email" matInput formControlName="email" name="email">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Hasło:</mat-label>
+                  <input type="password" matInput formControlName="password" name="password" autocomplete="on">
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-lg btn-secondary" type="submit" [disabled]="registerForm.invalid">Zarejestruj</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <button class="btn btn-lg btn-primary" (click)="loginFb()"><i class="fab fa-facebook-f"></i>
+                Zaloguj</button>
+              <button class="btn btn-lg btn-danger" (click)="loginGoogle()"><i class="fab fa-google"></i>
+                Zaloguj</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

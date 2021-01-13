@@ -1,6 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
       this.isError = data
     })
   }
-  loginWithEmail() {
+  onLogin() {
     this._auth.loginWithEmail(this.loginForm.value)
   }
   loginFb() {
@@ -33,9 +32,6 @@ export class LoginComponent implements OnInit {
   }
   loginGoogle() {
     this._auth.loginBy('google')
-  }
-  loginInstagram() {
-    this._auth.loginBy('instagram')
   }
 
 }

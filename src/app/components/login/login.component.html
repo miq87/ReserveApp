@@ -1,25 +1,39 @@
-<div class="myCard my-form-class">
-  <div class="heading">
-    <h2>Logowanie</h2>
-  </div>
-  <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
-
-  <form [formGroup]="loginForm" (ngSubmit)="loginWithEmail()">
-    <div class="form-group">
-      <i class="fa fa-user"></i>
-      <input class="form-control" formControlName="email" name="email" placeholder="E-mail" type="email">
+<div class="container-fluid myCard">
+  <div class="card">
+    <div class="card-header">
+      <h2>Logowanie</h2>
     </div>
-    <div class="form-group">
-      <i class="fa fa-lock"></i>
-      <input class="form-control" formControlName="password" name="password" placeholder="Hasło" type="password">
+    <div class="card-body">
+      <div class="container">
+        <div *ngIf="isError" class="alert-danger">{{ isError?.message }}</div>
+        <div class="row">
+          <div class="col-lg-6">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+              <div class="form-group">
+                <mat-form-field appearance="fill">
+                  <mat-label>E-mail:</mat-label>
+                  <input type="email" matInput formControlName="email" name="email">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Hasło:</mat-label>
+                  <input type="password" matInput formControlName="password" name="password" autocomplete="on">
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-lg btn-secondary" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <button class="btn btn-lg btn-primary" (click)="loginFb()"><i class="fab fa-facebook-f"></i>
+                Zaloguj</button>
+              <button class="btn btn-lg btn-danger" (click)="loginGoogle()"><i class="fab fa-google"></i>
+                Zaloguj</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <button class="btn btn-secondary btn-md" type="submit" [disabled]="loginForm.invalid">Zaloguj</button>
-    </div>
-  </form>
-
-  <div class="form-group">
-    <button class="btn btn-primary" (click)="loginFb()"><i class="fab fa-facebook-f"></i> Zaloguj</button>
-    <button class="btn btn-warning" (click)="loginGoogle()"><i class="fab fa-google"></i> Zaloguj</button>
   </div>
 </div>
