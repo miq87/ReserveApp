@@ -35,12 +35,27 @@ body {
   font-weight: 400;
 }
 
-a {}
-
 body {
   background-color: $dark-sky-blue;
   color: $safety-orange-blaze-orange;
   font-size: 20px;
+}
+
+a {
+  color: $charcoal;
+  letter-spacing: 1px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+label {
+  display: block
 }
 
 header {
@@ -64,7 +79,7 @@ header {
       justify-content: flex-end;
       flex-flow: row wrap;
       li {
-        margin: 0px 8px;
+        margin: 0px 12px;
       }
       a {
         color: #FFF;
@@ -112,19 +127,6 @@ header {
   border-bottom: 2px solid $safety-orange-blaze-orange;
   font-size: 16px;
   text-align: center;
-}
-
-a {
-  color: $dark-sky-blue;
-  letter-spacing: 1px;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  list-style: none;
 }
 
 .btn {
