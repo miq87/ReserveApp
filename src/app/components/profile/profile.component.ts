@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
     lastName: ['', Validators.required],
     displayName: ['', Validators.required],
     email: [{ value: '', disabled: true }, Validators.required],
-    birthday: ['', Validators.required],
+    birthday: [''],
     address: this.fb.group({
       street: [''],
       city: [''],
