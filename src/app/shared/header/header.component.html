@@ -11,9 +11,7 @@
           <li *ngIf="isLogged"><a href="#" [routerLink]="['/my-reservations']">Moje rezerwacje</a></li>
           <li *ngIf="!isLogged"><a href="#" [routerLink]="['/register']">Zarejestruj</a></li>
           <li *ngIf="!isLogged"><a href="#" [routerLink]="['/login']">Zaloguj</a></li>
-          <li *ngIf="isAdmin"><a href="#" [routerLink]="['/generator']">Generator hoteli</a></li>
-          <li *ngIf="isAdmin"><a href="#" [routerLink]="['/admin']">[Admin]</a></li>
-          <li *ngIf="isAdmin"><a href="#" [routerLink]="['/add']">[Dodaj nowy hotel]</a></li>
+          <li *ngIf="isAdmin"><a href="#" [routerLink]="['/admin']">*Admin</a></li>
         </ul>
       </div>
     </div>

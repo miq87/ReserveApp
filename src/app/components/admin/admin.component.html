@@ -16,9 +16,12 @@
                 {{ hotel.hotelName }}, ul. {{ hotel.address.street }}, {{ hotel.address.city }}</mat-option>
             </mat-select>
           </mat-form-field>
+          <div class="btn-group">
+            <button class="btn btn-lg btn-primary" [routerLink]="['/add']">Dodaj nowy hotel</button>
+            <button class="btn btn-lg btn-secondary" [routerLink]="['/generator']">Generator hoteli</button>
+          </div>
         </div>
         <form [formGroup]="hotelForm">
-
           <div class="card-body" *ngIf="selectedHotel">
             <div class="container">
               <div class="row">
@@ -104,7 +107,6 @@
               <button (click)="deleteHotel()" *ngIf="selectedHotel" class="btn btn-danger">Usuń</button>
             </div>
           </div>
-
         </form>
       </div>
     </div>
