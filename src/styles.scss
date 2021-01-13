@@ -41,6 +41,46 @@ body {
   font-size: 20px;
 }
 
+header {
+  background: $queen-blue;
+  border-bottom: 3px solid $safety-orange-blaze-orange;
+  margin-bottom: 24px;
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    color: $dark-sky-blue;
+    letter-spacing: 8px;
+    font-size: 52px;
+    text-shadow: 3px 3px #000;
+    margin: 10px 10px;
+  }
+  .nav-links {
+    height: 100%;
+    ul {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-flow: row wrap;
+      li {
+        margin: 0px 8px;
+        border-bottom: 2px solid $safety-orange-blaze-orange;
+      }
+      a {
+        color: #FFF;
+        text-decoration: none;
+        letter-spacing: 1px;
+        font-size: 18px;
+        text-transform: uppercase;
+        span {
+          font-size: 0.8em;
+          color: $honey-yellow;
+          letter-spacing: normal;
+        }
+      }
+    }
+  }
+}
+
 .gallery {
   display: flex;
   flex-flow: row wrap;
@@ -86,13 +126,6 @@ ul {
   list-style: none;
 }
 
-label {
-  font-family: "Nunito", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: darkslategray;
-}
-
 .btn {
   font-family: "Exo 2", sans-serif;
   font-weight: 600;
@@ -125,6 +158,23 @@ img {
   margin: 12px auto;
   box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+}
+
+.myCard {
+  background-color: $queen-blue;
+  padding: 10px;
+  margin-bottom: 12px;
+  box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 6px;
+  .heading {
+    text-align: center;
+    color: $safety-orange-blaze-orange;
+    margin-bottom: 28px;
+    span {
+      font-size: 18px;
+    }
+  }
 }
 
 .card {
@@ -169,48 +219,6 @@ img {
   color: $charcoal;
 }
 
-.my-form-class {
-  .form-group {
-    max-width: 300px;
-    margin: 8px auto;
-    position: relative;
-  }
-  .form-group>i {
-    color: $queen-blue;
-    font-size: 20px;
-    line-height: 36px;
-    position: absolute;
-    left: 12px;
-  }
-  .form-group>label {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-  }
-  .form-control {
-    border-radius: 6px;
-    padding-left: 40px;
-    margin: 0px;
-    box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.5s;
-    border: 0px;
-    border-bottom: 2px solid $dark-sky-blue;
-    height: 36px;
-  }
-  .form-control[type="file"] {
-    background: transparent;
-    box-shadow: none;
-    border: 0px;
-  }
-  .form-control::placeholder {
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.4);
-  }
-  .form-control:hover {
-    border-bottom: 2px solid $safety-orange-blaze-orange;
-  }
-}
-
 
 /*.ng-valid[required],
 .ng-valid.required {
@@ -221,63 +229,3 @@ img {
   border-left: 5px solid #a94442;
 }
 */
-
-.myCard {
-  background-color: $queen-blue;
-  padding: 10px;
-  margin-bottom: 12px;
-  box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.2);
-  color: #fff;
-  border-radius: 6px;
-  .heading {
-    text-align: center;
-    color: $safety-orange-blaze-orange;
-    margin-bottom: 28px;
-    span {
-      font-size: 18px;
-    }
-  }
-}
-
-.social {
-  div {
-    max-width: 300px;
-    margin: 6px auto;
-  }
-  ul {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    li {
-      margin: 4px;
-    }
-  }
-  a {
-    color: #fff;
-    background-color: #3fa9f2;
-    font-size: 24px;
-    text-align: center;
-    line-height: 42px;
-    height: 44px;
-    width: 44px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    transition: all 0.5s;
-  }
-  a:hover {
-    color: #fff;
-    background-color: $safety-orange-blaze-orange;
-    border-color: #fff;
-    text-decoration: none;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .myCard .form-group .btn,
-  .myCard .form-group .form-login {
-    text-align: center;
-    display: block;
-    float: none;
-    margin: 0 auto 15px;
-  }
-}
