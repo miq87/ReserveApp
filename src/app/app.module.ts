@@ -9,17 +9,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
-import { DbfirestoreComponent } from './components/dbfirestore/dbfirestore.component';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { PromiseComponent } from './components/promise/promise.component'
-import { AddNewHotelComponent } from './components/add-new-hotel/add-new-hotel.component';
+import { PromiseComponent } from './components/promise/promise.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AddNewHotelComponent } from './components/admin/add-new-hotel/add-new-hotel.component';
+import { HotelGeneratorComponent } from './components/admin/hotel-generator/hotel-generator.component';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { HotelItemComponent } from './components/hotels/hotel-item/hotel-item.component';
-import { HotelGeneratorComponent } from './components/hotel-generator/hotel-generator.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchHotelsComponent } from './components/search-hotels/search-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
@@ -38,7 +38,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
-import { AdminComponent } from './components/admin/admin.component';
 import firebase from 'firebase/app';
 
 const firebaseConfig = {
@@ -61,12 +60,12 @@ firebase.initializeApp(firebaseConfig);
     FooterComponent,
     HeaderComponent,
     MembersComponent,
-    DbfirestoreComponent,
     PromiseComponent,
+    AdminComponent,
     AddNewHotelComponent,
+    HotelGeneratorComponent,
     HotelsComponent,
     HotelItemComponent,
-    HotelGeneratorComponent,
     RegisterComponent,
     SearchHotelsComponent,
     HotelDetailComponent,
@@ -75,19 +74,18 @@ firebase.initializeApp(firebaseConfig);
     ProfileComponent,
     LazyImgDirective,
     MyReservationsComponent,
-    MyReservationItemComponent,
-    AdminComponent
+    MyReservationItemComponent
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAMgMV7ER34afwoVPmwcrA6deI0EUYISVI'
+    }),
+    AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAMgMV7ER34afwoVPmwcrA6deI0EUYISVI'
-    }),
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     MatSnackBarModule,
