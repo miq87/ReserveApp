@@ -30,7 +30,7 @@ export class BookingService {
     return retHotelId || null
   }
 
-  async updateHotelInfo(hotelId, hotelData) {
+  async updateHotel(hotelId, hotelData) {
     await this.hotelsRef.doc(hotelId).update(hotelData).then(() => {
       console.log(`Zaktualizowałem dane hotelu o id: ${hotelId}`)
     }).catch(err => {

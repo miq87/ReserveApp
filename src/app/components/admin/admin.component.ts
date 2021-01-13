@@ -78,7 +78,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   updateHotel() {
     console.log(this.hotelForm.value)
-    this._bs.updateHotelInfo(this.selectedHotel.hotelId, this.hotelForm.value)
+    this._bs.updateHotel(this.selectedHotel.hotelId, this.hotelForm.value)
   }
 
   deleteHotel() {
@@ -98,7 +98,7 @@ export class AdminComponent implements OnInit, OnDestroy {
       })
     })
   }
-  
+
   deleteRoom(hotelId: string, roomId: string) {
     this._bs.deleteRoom(hotelId, roomId).then(() => {
       this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {

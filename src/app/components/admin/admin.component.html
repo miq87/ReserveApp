@@ -16,24 +16,20 @@
                 {{ hotel.hotelName }}, ul. {{ hotel.address.street }}, {{ hotel.address.city }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <div class="btn-group">
-            <button class="btn btn-lg btn-primary" [routerLink]="['/add']">Dodaj nowy hotel</button>
-            <button class="btn btn-lg btn-secondary" [routerLink]="['/generator']">Generator hoteli</button>
-          </div>
         </div>
-        <form [formGroup]="hotelForm">
-          <div class="card-body" *ngIf="selectedHotel">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="gallery">
-                    <div *ngFor="let imgUrl of imgUrlList">
-                      <img [src]="imgUrl" />
-                      <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                    </div>
+        <div class="card-body" *ngIf="selectedHotel">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="gallery">
+                  <div *ngFor="let imgUrl of imgUrlList">
+                    <img [src]="imgUrl" />
+                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                   </div>
                 </div>
               </div>
+            </div>
+            <form [formGroup]="hotelForm">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
@@ -78,35 +74,37 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-4">
-                  <mat-form-field appearance="fill">
-                    <mat-label>Dodaj pokój dla</mat-label>
-                    <mat-select>
-                      <mat-option>Anuluj</mat-option>
-                      <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum)">
-                        {{ personNum }} osób</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
+            </form>
+            <div class="row">
+              <div class="col-lg-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Dodaj pokój dla</mat-label>
+                  <mat-select>
+                    <mat-option>Anuluj</mat-option>
+                    <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum)">
+                      {{ personNum }} osób</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
-              <div class="row">
-                <div class="col-lg-3" *ngFor="let room of roomList">
-                  <div class="room-item"><span>{{ room.personNum }} osobowy</span>
-                    <button class="btn btn-sm btn-danger" (click)="deleteRoom(this.selectedHotel.hotelId, room.roomId)"><i
-                        class="fas fa-trash"></i></button>
-                  </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3" *ngFor="let room of roomList">
+                <div class="room-item"><span>{{ room.personNum }} osobowy</span>
+                  <button class="btn btn-sm btn-danger" (click)="deleteRoom(this.selectedHotel.hotelId, room.roomId)"><i
+                      class="fas fa-trash"></i></button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card-footer">
-            <div class="btn-group">
-              <button (click)="updateHotel()" *ngIf="selectedHotel" class="btn btn-lg btn-success" [disabled]="hotelForm.invalid">Zaktualizuj</button>
-              <button (click)="deleteHotel()" *ngIf="selectedHotel" class="btn btn-lg btn-danger">Usuń</button>
-            </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button class="btn btn-lg btn-success" (click)="updateHotel()" *ngIf="selectedHotel" [disabled]="hotelForm.invalid">Zaktualizuj</button>
+            <button class="btn btn-lg btn-danger" (click)="deleteHotel()" *ngIf="selectedHotel">Usuń</button>
+            <button class="btn btn-lg btn-primary" [routerLink]="['/add']">Dodaj nowy hotel</button>
+            <button class="btn btn-lg btn-secondary" [routerLink]="['/generator']">Generator hoteli</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
