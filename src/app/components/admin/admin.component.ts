@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   personNums = [1, 2, 3, 4, 5, 6]
   hotelList: Hotel[] = []
-  roomList: Room[] = []
+  roomList: Room[]
   facilities: Facilities[]
   imgUrlList: string[]
   selectedHotel: Hotel
@@ -61,6 +61,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     })
   }
 
+  ngOnDestroy(): void {
+    this.unsub()
+  }
+
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
@@ -94,17 +98,13 @@ export class AdminComponent implements OnInit, OnDestroy {
       })
     })
   }
-
+  
   deleteRoom(hotelId: string, roomId: string) {
     this._bs.deleteRoom(hotelId, roomId).then(() => {
       this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
         this.roomList = roomList
       })
     })
-  }
-
-  ngOnDestroy(): void {
-    this.unsub()
   }
 
 }
