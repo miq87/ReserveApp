@@ -74,11 +74,29 @@ header {
         margin: 0px 12px;
       }
       a {
+        position: relative;
         color: $text-white;
         text-decoration: none;
         letter-spacing: 1px;
         font-size: 22px;
         text-transform: uppercase;
+        
+        &::after {
+          position: absolute;
+          content: "";
+          top: 100%;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: $safety-orange-blaze-orange;
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.5s;
+        }
+        &:hover::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
         span {
           font-size: 0.8em;
           color: $honey-yellow;
