@@ -78,6 +78,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     })
   }
 
+  onReset() {
+    this.selectedHotel = null
+  }
+
   updateHotel() {
     console.log(this.hotelForm.value)
     this._bs.updateHotel(this.selectedHotel.hotelId, this.hotelForm.value)

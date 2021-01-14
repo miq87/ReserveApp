@@ -11,7 +11,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Wybierz hotel z listy</mat-label>
             <mat-select>
-              <mat-option>None</mat-option>
+              <mat-option (click)="onReset()">Nie wybieraj</mat-option>
               <mat-option *ngFor="let hotel of hotelList" (click)="onSelect(hotel)" [value]="hotel.hotelId">
                 {{ hotel.hotelName }}, ul. {{ hotel.address.street }}, {{ hotel.address.city }}</mat-option>
             </mat-select>
@@ -112,9 +112,11 @@
           </div>
         </div>
         <div class="card-footer">
-          <div class="btn-group">
-            <button class="btn btn-lg btn-success" (click)="updateHotel()" *ngIf="selectedHotel" [disabled]="hotelForm.invalid">Zaktualizuj</button>
-            <button class="btn btn-lg btn-danger" (click)="deleteHotel()" *ngIf="selectedHotel">Usuń</button>
+          <div class="btn-group" *ngIf="selectedHotel">
+            <button class="btn btn-lg btn-success" (click)="updateHotel()" [disabled]="hotelForm.invalid">Zaktualizuj</button>
+            <button class="btn btn-lg btn-danger" (click)="deleteHotel()">Usuń</button>
+          </div>
+          <div class="btn-group" *ngIf="!selectedHotel">
             <button class="btn btn-lg btn-primary" [routerLink]="['/add']">Dodaj nowy hotel</button>
             <button class="btn btn-lg btn-secondary" [routerLink]="['/generator']">Generator hoteli</button>
           </div>
