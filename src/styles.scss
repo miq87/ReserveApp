@@ -150,7 +150,8 @@ img {
   max-width: 80%;
   text-align: center;
   padding: 4px;
-  margin: 12px auto;
+  margin: 0px auto;
+  margin-bottom: 24px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
 }
@@ -161,7 +162,7 @@ img {
   margin-bottom: 8px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
   color: $text-white;
-  //border-radius: 6px;
+  border-radius: 6px;
   .heading {
     text-align: center;
     color: $safety-orange-blaze-orange;
