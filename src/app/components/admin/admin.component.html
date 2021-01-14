@@ -24,7 +24,7 @@
                 <div class="gallery">
                   <div *ngFor="let imgUrl of imgUrlList">
                     <img [src]="imgUrl" />
-                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-danger" (click)="deleteImg(imgUrl)"><i class="fas fa-trash"></i></button>
                   </div>
                 </div>
               </div>
@@ -75,6 +75,20 @@
                 </div>
               </div>
             </form>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="mainImg">Zdjęcie tytułowe:</label>
+                  <input type="file" name="mainImg" (change)="onFileSelected($event)">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="images">Reszta zdjęć:</label>
+                  <input type="file" name="images" (change)="onFilesSelected($event)" multiple>
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-lg-4">
                 <mat-form-field appearance="fill">

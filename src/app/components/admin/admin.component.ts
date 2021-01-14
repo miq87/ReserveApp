@@ -20,6 +20,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   facilities: Facilities[]
   imgUrlList: string[]
   selectedHotel: Hotel
+  mainImg: File
+  allImages: File[] = []
   unsub
 
   hotelForm = this.fb.group({
@@ -79,6 +81,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   updateHotel() {
     console.log(this.hotelForm.value)
     this._bs.updateHotel(this.selectedHotel.hotelId, this.hotelForm.value)
+
+    if (this.mainImg) {
+      this._fs.sendMainImage(this.selectedHotel.hotelId, this.mainImg)
+    }
+    if (this.allImages) {
+      this._fs.sendImages(this.selectedHotel.hotelId, this.allImages)
+    }
   }
 
   deleteHotel() {
@@ -88,7 +97,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   deleteImg(imgUrl: string) {
-    this._fs.deleteImg(imgUrl)
+    this._fs.deleteImg(imgUrl).then(() => {
+      this._fs.getAllImages(this.selectedHotel.hotelId).then(imgUrlList => {
+        this.imgUrlList = imgUrlList
+      })
+    })
   }
 
   addRoom(personNum: number) {
@@ -105,6 +118,16 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.roomList = roomList
       })
     })
+  }
+
+  onFileSelected(event) {
+    this.mainImg = event.target.files[0]
+  }
+
+  onFilesSelected(event) {
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.allImages.push(event.target.files[i])
+    }
   }
 
 }

@@ -69,23 +69,12 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       this.returnHotelId = retId
 
       if (this.mainImg) {
-        this._fs.sendMainImage(this.returnHotelId, this.mainImg).then(() => {
-          this.consoleInfo(this.mainImg.name, this.returnHotelId)
-        })
+        this._fs.sendMainImage(this.returnHotelId, this.mainImg)
       }
-      for (let i = 0; i < this.allImages.length; i++) {
-        this._fs.sendImage(this.returnHotelId, this.allImages[i]).then(() => {
-          this.consoleInfo(this.allImages[i].name, this.returnHotelId)
-        })
-          .catch((err) => {
-            console.log(err.message)
-          })
+      if (this.allImages) {
+        this._fs.sendImages(this.returnHotelId, this.allImages)
       }
     })
-  }
-
-  consoleInfo(name: string, id: string) {
-    console.log(`Dodałem '${name}' do hotelu o ID '${id}'!`)
   }
 
 }
