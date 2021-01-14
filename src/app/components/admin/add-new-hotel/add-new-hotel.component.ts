@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Facilities } from 'src/app/models/classes/facilities';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,7 +38,7 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private _auth: AuthService,
-    private _booking: BookingService,
+    private _bs: BookingService,
     private _fs: FireStorageService,
     private http: HttpClient) { }
 
@@ -46,7 +47,6 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       this.states = data.states
       this.facilities = data.facilities
     })
-
     this.hotelForm.patchValue({ adminId: this._auth.getCurrentUserId() })
   }
 
@@ -65,14 +65,16 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this._booking.addNewHotel(this.hotelForm.value).then((retId) => {
+    this._bs.addNewHotel(this.hotelForm.value).then((retId) => {
       this.returnHotelId = retId
 
       if (this.mainImg) {
         this._fs.sendMainImage(this.returnHotelId, this.mainImg)
       }
       if (this.allImages) {
-        this._fs.sendImages(this.returnHotelId, this.allImages)
+        this.allImages.forEach(file => {
+          this._fs.sendImage(this.returnHotelId, file)
+        })
       }
     })
   }

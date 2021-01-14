@@ -11,7 +11,7 @@ export class BookingService {
 
   private hotelsRef = firebase.firestore().collection('hotels')
 
-  constructor(private _toastr: ToastrService) { }
+  constructor() { }
 
   async addNewHotel(hotel, roomNum?: number[]): Promise<string> {
     let retHotelId: string

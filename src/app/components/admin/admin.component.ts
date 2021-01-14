@@ -20,8 +20,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   facilities: Facilities[]
   imgUrlList: string[]
   selectedHotel: Hotel
-  mainImg: File
-  allImages: File[] = []
   unsub
 
   hotelForm = this.fb.group({
@@ -70,12 +68,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   onSelect(hotel) {
     this.selectedHotel = hotel
     this.hotelForm.patchValue(hotel)
-    this._bs.getHotelRooms(hotel.hotelId).then(roomList => {
-      this.roomList = roomList
-    })
-    this._fs.getAllImages(hotel.hotelId).then(imgUrlList => {
-      this.imgUrlList = imgUrlList
-    })
+    this.loadRooms()
+    this.loadImages()
   }
 
   onReset() {
@@ -85,13 +79,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   updateHotel() {
     console.log(this.hotelForm.value)
     this._bs.updateHotel(this.selectedHotel.hotelId, this.hotelForm.value)
-
-    if (this.mainImg) {
-      this._fs.sendMainImage(this.selectedHotel.hotelId, this.mainImg)
-    }
-    if (this.allImages) {
-      this._fs.sendImages(this.selectedHotel.hotelId, this.allImages)
-    }
+    this.loadImages()
   }
 
   deleteHotel() {
@@ -102,35 +90,45 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   deleteImg(imgUrl: string) {
     this._fs.deleteImg(imgUrl).then(() => {
-      this._fs.getAllImages(this.selectedHotel.hotelId).then(imgUrlList => {
-        this.imgUrlList = imgUrlList
-      })
+      this.loadImages()
     })
   }
 
   addRoom(personNum: number) {
     this._bs.addNewRoom(this.selectedHotel.hotelId, personNum).then(() => {
-      this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
-        this.roomList = roomList
-      })
+      this.loadRooms()
     })
   }
 
   deleteRoom(hotelId: string, roomId: string) {
     this._bs.deleteRoom(hotelId, roomId).then(() => {
-      this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
-        this.roomList = roomList
-      })
+      this.loadRooms()
+    })
+  }
+
+  loadRooms() {
+    this._bs.getHotelRooms(this.selectedHotel.hotelId).then(roomList => {
+      this.roomList = roomList
+    })
+  }
+
+  loadImages() {
+    this._fs.getAllImages(this.selectedHotel.hotelId).then(imgUrlList => {
+      this.imgUrlList = imgUrlList
     })
   }
 
   onFileSelected(event) {
-    this.mainImg = event.target.files[0]
+    this._fs.sendMainImage(this.selectedHotel.hotelId, event.target.files[0]).then(() => {
+      this.loadImages()
+    })
   }
 
   onFilesSelected(event) {
-    for (let i = 0; i < event.target.files.length; i++) {
-      this.allImages.push(event.target.files[i])
+    for(let i = 0; i < event.target.files.length; i++) {
+      this._fs.sendImage(this.selectedHotel.hotelId, event.target.files[i]).then(() => {
+        this.loadImages()
+      })
     }
   }
 
