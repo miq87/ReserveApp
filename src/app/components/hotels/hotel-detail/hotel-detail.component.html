@@ -7,14 +7,23 @@
       <div class="card-body">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-4"><img *ngIf="hotelMainImg" [src]="hotelMainImg" [alt]="hotel.hotelName"></div>
+            <div class="col-lg-4"><img *ngIf="hotelImages" [src]="hotelImages[0]" [alt]="hotel.hotelName"></div>
             <div class="col-lg-8">
               <p>{{ hotel.address.street }}<br>{{hotel.address.zip }} {{ hotel.address.city }}, {{ hotel.address.state }}
               </p>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-12 mt-3">
+            <div class="col-lg-12 mt-2">
+              <div class="gallery">
+                <div *ngFor="let imgUrl of hotelImages">
+                  <img [src]="imgUrl" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 mt-2">
               <div class="facilities" *ngIf="hotelFacilities">
                 <ul>
                   <li *ngFor="let fac of hotelFacilities">{{ fac }}</li>
