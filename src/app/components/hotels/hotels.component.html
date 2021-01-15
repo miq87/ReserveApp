@@ -1,21 +1,17 @@
 <div class="container-fluid myCard">
-
   <div class="row">
     <div class="col-lg-12">
       <div *ngIf="!hotelList" class="alert-danger">Brak wyników</div>
     </div>
   </div>
-
   <div class="row" *ngIf="hotelList">
     <div class="col-lg-12">
       <div class="alert-success">Liczba wyników: {{ hotelList.length }}</div>
     </div>
   </div>
-
   <div class="row" *ngFor="let hotel of hotelList">
     <div class="col-lg-12">
       <app-hotel-item [hotel]="hotel"></app-hotel-item>
     </div>
   </div>
-
 </div>
