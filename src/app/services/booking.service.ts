@@ -82,6 +82,22 @@ export class BookingService {
     return hotel || null
   }
 
+  addImgUrl(hotelId: string, newImgUrl: string) {
+    let autoImgUrlList: string[] = []
+    this.hotelsRef.doc(hotelId).get().then(doc => {
+      if(doc.data().autoImgUrlList) {
+        autoImgUrlList = doc.data().autoImgUrlList
+      }
+      autoImgUrlList.push(newImgUrl)
+
+      this.hotelsRef.doc(hotelId).update({ autoImgUrlList }).catch(err => {
+        console.log(err.message)
+      })
+    }).catch(err => {
+      console.log(err.message)
+    })
+  }
+
   async getHotelRooms(hotelId: string): Promise<Room[]> {
     let roomList: Room[] = []
     await this.hotelsRef.doc(hotelId).collection('rooms').get()
@@ -135,8 +151,7 @@ export class BookingService {
   }
 
   consoleAddedNewHotel(hotel) {
-    console.log('Dodałem nowy hotel:')
-    console.log(hotel)
+    console.log('Dodałem nowy hotel:', hotel)
   }
 
 }

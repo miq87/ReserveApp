@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BookingService } from './booking.service';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 
@@ -10,7 +11,7 @@ export class FireStorageService {
   private storage = firebase.storage()
   private storageRef = this.storage.ref()
 
-  constructor() { }
+  constructor(private _bs: BookingService) { }
 
   getDefaultImage() {
     var spaceRef = this.storageRef.child('images/main_img.jpg')
@@ -26,10 +27,15 @@ export class FireStorageService {
   }
 
   async sendImage(hotelId: string, file: File) {
-    await this.storageRef.child(`images/${hotelId}/${file.name}`).put(file).then(() => {
-      console.log(`Dodałem '${file.name}' do hotelu o ID '${hotelId}'!`)
-    }).catch(err => {
+    var uploadTask = this.storageRef.child(`images/${hotelId}/${file.name}`).put(file)
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
+    }, err => {
       console.log(err.message)
+    }, () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+        console.log('File available at: ', url);
+        this._bs.addImgUrl(hotelId, url)
+      });
     })
   }
 

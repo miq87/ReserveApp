@@ -69,7 +69,7 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       this.returnHotelId = retId
 
       if (this.mainImg) {
-        this._fs.sendMainImage(this.returnHotelId, this.mainImg)
+        this._fs.sendImage(this.returnHotelId, this.mainImg)
       }
       if (this.allImages) {
         this.allImages.forEach(file => {
