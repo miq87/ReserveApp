@@ -49,7 +49,7 @@
     { "id": 15, "name": "Hilton" },
     { "id": 16, "name": "Holiday Inn" }
   ],
-  "hotelStreet": [
+  "streets": [
     { "id": 1, "name": "Adama Mickiewicza" },
     { "id": 2, "name": "Grunwaldzka" },
     { "id": 3, "name": "Jana Jerzego Haffnera" },
@@ -67,7 +67,7 @@
     { "id": 15, "name": "Kolejowa" },
     { "id": 16, "name": "Traugutta" }
   ],
-  "hotelCity": [
+  "cities": [
     { "id": 1, "name": "Gdańsk", "state": "pomorskie" },
     { "id": 2, "name": "Sopot", "state": "pomorskie" },
     { "id": 3, "name": "Gdynia", "state": "pomorskie" },

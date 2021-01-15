@@ -12,25 +12,34 @@ import { BookingService } from 'src/app/services/booking.service';
 export class HotelGeneratorComponent implements OnInit, OnDestroy {
 
   assetsUrl = "assets/data.json"
+  assetsGalleriesUrl = "assets/galleries.json"
   hotelNames = []
   hotelStreet = []
   hotelCity = []
-  unsub: Subscription
+  hotelGalleries = []
+  sub1: Subscription
+  sub2: Subscription
+
 
   constructor(private _bs: BookingService, private http: HttpClient, private _auth: AuthService) { }
 
   ngOnInit(): void {
-    this.unsub = this.http.get(this.assetsUrl).subscribe((data: any) => {
+    this.sub1 = this.http.get(this.assetsUrl).subscribe((data: any) => {
       for (let i = 0; i < 16; i++) {
         this.hotelNames.push(data.hotelNames[i].name)
-        this.hotelStreet.push(data.hotelStreet[i].name)
-        this.hotelCity.push([data.hotelCity[i].name, data.hotelCity[i].state])
+        this.hotelStreet.push(data.streets[i].name)
+        this.hotelCity.push([data.cities[i].name, data.cities[i].state])
       }
+    })
+    this.sub2 = this.http.get(this.assetsGalleriesUrl).subscribe((data: any) => {
+      this.hotelGalleries = data.galleries
+      console.log(this.hotelGalleries)
     })
   }
 
   ngOnDestroy() {
-    this.unsub.unsubscribe()
+    this.sub1.unsubscribe()
+    this.sub2.unsubscribe()
   }
 
   hotelGenerator(ileHoteli: number) {
