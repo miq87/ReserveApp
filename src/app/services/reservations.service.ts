@@ -23,7 +23,9 @@ export class ReservationsService {
   }
 
   getReservations(querySnapshot, error) {
-    return this.resRef.where('userId', '==', firebase.auth().currentUser.uid).onSnapshot(querySnapshot, error)
+    let userId = firebase.auth().currentUser.uid
+    console.log(userId)
+    return this.resRef.where('userId', '==', userId).onSnapshot(querySnapshot, error)
   }
 
   async deleteReservation(resId: string) {

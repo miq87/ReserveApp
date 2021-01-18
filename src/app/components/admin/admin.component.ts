@@ -1,6 +1,6 @@
-import { query } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Facilities } from 'src/app/models/classes/facilities';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { Room } from 'src/app/models/classes/room';
@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   personNums = [1, 2, 3, 4, 5, 6]
   hotelList: Hotel[] = []
-  roomList: Room[] = []
+  roomList: Room[]
   facilities: Facilities[]
   hotelIndex: number = -1
   subHotels
@@ -43,6 +43,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     private _facs: FacilitiesService) { }
 
   ngOnInit(): void {
+
+    this._facs.getAllFacilities().toPromise().then((data: any) => {
+      this.facilities = data.facilities
+    })
+
     this.subHotels = this._bs.getMyHotels(querySnapshot => {
       this.hotelList = []
       if (querySnapshot.empty) {
@@ -56,15 +61,10 @@ export class AdminComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.message)
     })
-
-    this._facs.getAllFacilities().subscribe((data: any) => {
-      this.facilities = data.facilities
-    })
+    
   }
 
   ngOnDestroy(): void {
-    this.subHotels()
-    this.subRooms()
   }
 
   onSelect(index: number) {
@@ -72,6 +72,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.hotelForm.patchValue(this.hotelList[this.hotelIndex])
 
     this.subRooms = this._bs.getMyRooms(this.hotelList[this.hotelIndex].hotelId, querySnapshot => {
+      console.log('subRooms żyje!')
       this.roomList = []
       if (querySnapshot.empty) {
         console.log('Brak pokoi')
