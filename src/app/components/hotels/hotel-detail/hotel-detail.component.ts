@@ -6,7 +6,6 @@ import { Room } from 'src/app/models/classes/room';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { FacilitiesService } from 'src/app/services/facilities.service';
-import { FireStorageService } from 'src/app/services/fire-storage.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({

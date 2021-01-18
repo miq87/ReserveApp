@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/classes/hotel';
-import { ToastrService } from 'ngx-toastr';
 import { Room } from '../models/classes/room';
 import firebase from "firebase/app";
 
@@ -83,14 +82,29 @@ export class BookingService {
   }
 
   addImgUrl(hotelId: string, newImgUrl: string) {
-    let autoImgUrlList: string[] = []
+    let imgUrlList: string[] = []
     this.hotelsRef.doc(hotelId).get().then(doc => {
-      if(doc.data().autoImgUrlList) {
-        autoImgUrlList = doc.data().autoImgUrlList
+      if(doc.data().imgUrlList) {
+        imgUrlList = doc.data().imgUrlList
       }
-      autoImgUrlList.push(newImgUrl)
+      imgUrlList.push(newImgUrl)
 
-      this.hotelsRef.doc(hotelId).update({ autoImgUrlList }).catch(err => {
+      this.hotelsRef.doc(hotelId).update({ imgUrlList }).catch(err => {
+        console.log(err.message)
+      })
+    }).catch(err => {
+      console.log(err.message)
+    })
+  }
+
+  async deleteImgUrl(hotelId: string, index: number) {
+    let imgUrlList: string[] = []
+    this.hotelsRef.doc(hotelId).get().then(doc => {
+      if(doc.data().imgUrlList) {
+        imgUrlList = doc.data().imgUrlList
+      }
+      imgUrlList.splice(index, 1)
+      this.hotelsRef.doc(hotelId).update({ imgUrlList }).catch(err => {
         console.log(err.message)
       })
     }).catch(err => {
@@ -111,6 +125,10 @@ export class BookingService {
         console.log(err.message)
       })
     return roomList || null
+  }
+
+  getMyRooms(hotelId, querySnapshot, error) {
+    return this.hotelsRef.doc(hotelId).collection('rooms').onSnapshot(querySnapshot, error)
   }
 
   getMyHotels(querySnapshot, error) {

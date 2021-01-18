@@ -5,7 +5,7 @@
   <div class="card-body">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-4"><img *ngIf="hotel.autoImgUrlList[0]" [src]="hotel.autoImgUrlList[0]" [alt]="hotel.hotelName"></div>
+        <div class="col-lg-4"><img *ngIf="hotel.imgUrlList[0]" [src]="hotel.imgUrlList[0]" [alt]="hotel.hotelName"></div>
         <div class="col-lg-8">
           <p>{{ hotel.address.street }}<br>{{hotel.address.zip }} {{ hotel.address.city }}, {{ hotel.address.state }}</p>
         </div>

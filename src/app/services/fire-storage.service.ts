@@ -18,16 +18,21 @@ export class FireStorageService {
     return spaceRef.getDownloadURL()
   }
 
-  async sendMainImage(hotelId: string, file: File) {
-    await this.storageRef.child(`images/${hotelId}/main_img.jpg`).put(file).then(() => {
-      console.log(`Dodałem 'main_img.jpg' do hotelu o ID '${hotelId}'!`)
-    }).catch(err => {
-      console.log(err.message)
-    })
-  }
+  // async sendMainImage(hotelId: string, file: File) {
+  //   await this.storageRef.child(`images/${hotelId}/main_img.jpg`).put(file).then(() => {
+  //     console.log(`Dodałem 'main_img.jpg' do hotelu o ID '${hotelId}'!`)
+  //   }).catch(err => {
+  //     console.log(err.message)
+  //   })
+  // }
 
-  async sendImage(hotelId: string, file: File) {
-    var uploadTask = this.storageRef.child(`images/${hotelId}/${file.name}`).put(file)
+  async sendImage(hotelId: string, file: File, main?: boolean) {
+    if(main) {
+      var uploadTask = this.storageRef.child(`images/${hotelId}/main_img.jpg`).put(file)
+    }
+    else {
+      var uploadTask = this.storageRef.child(`images/${hotelId}/${file.name}`).put(file)
+    }
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
     }, err => {
       console.log(err.message)
