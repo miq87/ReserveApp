@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { ignoreElements } from 'rxjs/operators';
 import { Facilities } from 'src/app/models/classes/facilities';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { Room } from 'src/app/models/classes/room';
@@ -21,6 +19,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   roomList: Room[]
   facilities: Facilities[]
   hotelIndex: number = -1
+  selectedHotelId: string
   subHotels
   subRooms
 
@@ -74,9 +73,10 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   onSelect(index: number) {
     this.hotelIndex = index
+    this.selectedHotelId = this.hotelList[index].hotelId
     this.hotelForm.patchValue(this.hotelList[this.hotelIndex])
 
-    this.subRooms = this._bs.getMyRooms(this.hotelList[this.hotelIndex].hotelId, querySnapshot => {
+    this.subRooms = this._bs.getMyRooms(this.selectedHotelId, querySnapshot => {
       this.roomList = []
       if (querySnapshot.empty) {
         console.log('Brak pokoi')
@@ -97,35 +97,34 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   updateHotel() {
-    this._bs.updateHotel(this.hotelList[this.hotelIndex].hotelId, this.hotelForm.value)
+    this._bs.updateHotel(this.selectedHotelId, this.hotelForm.value)
   }
 
   deleteHotel() {
-    this._bs.deleteHotelById(this.hotelList[this.hotelIndex].hotelId).then(() => {
+    this._bs.deleteHotelById(this.selectedHotelId).then(() => {
       this.hotelIndex = -1
     })
   }
 
   deleteImg(index: number) {
-    this._bs.deleteImgUrl(this.hotelList[this.hotelIndex].hotelId, index)
-    console.log('index: ', this.hotelList[this.hotelIndex].hotelId, index)
+    this._bs.deleteImgUrl(this.selectedHotelId, index)
   }
 
   addRoom(personNum: number) {
-    this._bs.addNewRoom(this.hotelList[this.hotelIndex].hotelId, personNum)
+    this._bs.addNewRoom(this.selectedHotelId, personNum)
   }
 
   deleteRoom(roomId: string) {
-    this._bs.deleteRoom(this.hotelList[this.hotelIndex].hotelId, roomId)
+    this._bs.deleteRoom(this.selectedHotelId, roomId)
   }
 
   onFileSelected(event) {
-    this._fs.sendImage(this.hotelList[this.hotelIndex].hotelId, event.target.files[0], true)
+    this._fs.sendImage(this.selectedHotelId, event.target.files[0], true)
   }
 
   onFilesSelected(event) {
     for(let i = 0; i < event.target.files.length; i++) {
-      this._fs.sendImage(this.hotelList[this.hotelIndex].hotelId, event.target.files[i])
+      this._fs.sendImage(this.selectedHotelId, event.target.files[i])
     }
   }
 
