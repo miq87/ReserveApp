@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Hotel } from 'src/app/models/classes/hotel';
@@ -14,11 +14,12 @@ import { ReservationsService } from 'src/app/services/reservations.service';
   styleUrls: ['./hotel-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HotelDetailComponent implements OnInit {
+export class HotelDetailComponent implements OnInit, OnDestroy {
   hotel: Hotel
-  hotelRooms: Room[] = []
-  hotelFacilities: string[] = []
-  hotelImages: string[] = []
+  roomList: Room[]
+  hotelFacilities: string[]
+  hotelImages: string[]
+  subRooms
 
   resForm = this.fb.group({
     hotelId: ['', Validators.required],
@@ -41,23 +42,37 @@ export class HotelDetailComponent implements OnInit {
     let hotelId = this.route.snapshot.paramMap.get('id')
 
     this._auth.getCurrentUser(user => {
-      if(user) {
+      if (user) {
         this.resForm.patchValue({ hotelId: hotelId, userId: user.uid })
       }
     })
 
-    this._bs.getHotelDetails(hotelId).then(data => {
-      this.hotel = data;
+    this._bs.getHotelDetails(hotelId).then(hotel => {
+      this.hotel = hotel
 
       this._facs.getFacilities(this.hotel.facilities).then(data => {
         this.hotelFacilities = data
       })
-      this._bs.getHotelRooms(hotelId).then(data => {
-        this.hotelRooms = data
+      this.subRooms = this._bs.getMyRooms(hotelId, querySnapshot => {
+        this.roomList = []
+        if (querySnapshot.empty) {
+          console.log('Brak pokoi')
+        }
+        else {
+          querySnapshot.docs.forEach(doc => {
+            this.roomList.push(new Room(doc.id, doc.data()))
+          });
+        }
+      }, err => {
+        console.log(err.message)
       })
-
+      
     })
-    
+
+  }
+
+  ngOnDestroy(): void {
+    this.subRooms()
   }
 
   onBook() {

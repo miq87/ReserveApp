@@ -87,12 +87,12 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   onReset() {
+    this.subRooms()
     this.hotelIndex = -1
   }
 
   updateHotel() {
     this._bs.updateHotel(this.hotelList[this.hotelIndex].hotelId, this.hotelForm.value)
-    console.log(this.hotelForm.value)
   }
 
   deleteHotel() {
