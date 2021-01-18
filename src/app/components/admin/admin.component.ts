@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   personNums = [1, 2, 3, 4, 5, 6]
   hotelList: Hotel[] = []
-  roomList: Room[]
+  roomList: Room[] = []
   facilities: Facilities[]
   hotelIndex: number = -1
   subHotels
@@ -70,6 +70,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   onSelect(index: number) {
     this.hotelIndex = index
     this.hotelForm.patchValue(this.hotelList[this.hotelIndex])
+
     this.subRooms = this._bs.getMyRooms(this.hotelList[this.hotelIndex].hotelId, querySnapshot => {
       this.roomList = []
       if (querySnapshot.empty) {
