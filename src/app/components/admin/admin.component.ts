@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ignoreElements } from 'rxjs/operators';
 import { Facilities } from 'src/app/models/classes/facilities';
 import { Hotel } from 'src/app/models/classes/hotel';
 import { Room } from 'src/app/models/classes/room';
@@ -65,6 +66,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subHotels()
+    if(this.subRooms) {
+      this.subRooms()
+    }
   }
 
   onSelect(index: number) {
@@ -72,7 +77,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.hotelForm.patchValue(this.hotelList[this.hotelIndex])
 
     this.subRooms = this._bs.getMyRooms(this.hotelList[this.hotelIndex].hotelId, querySnapshot => {
-      console.log('subRooms żyje!')
       this.roomList = []
       if (querySnapshot.empty) {
         console.log('Brak pokoi')
