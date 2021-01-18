@@ -49,10 +49,6 @@ export class MyReservationItemComponent implements OnInit {
       this.hotel = data
     })
 
-    this._fs.getMainImage(this.myRes.hotelId).then(url => {
-      this.hotelMainImg = url
-    })
-
   }
 
   onDeleteReservation() {

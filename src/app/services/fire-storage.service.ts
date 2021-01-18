@@ -44,41 +44,38 @@ export class FireStorageService {
     })
   }
 
-  getMainImage(hotelId: string): Promise<string> {
-    var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
+  // getMainImage(hotelId: string): Promise<string> {
+  //   var spaceRef = this.storageRef.child(`images/${hotelId}/main_img.jpg`)
+  //   return new Promise((resolve, reject) => {
+  //     spaceRef.getDownloadURL().then(url => {
+  //       resolve(url)
+  //     })
+  //       .catch(err => {
+  //         console.log(err.code)
+  //         this.getDefaultImage().then(url => {
+  //           resolve(url)
+  //         })
+  //           .catch(err => {
+  //             reject(err)
+  //           })
+  //       })
+  //   })
+  // }
 
-    return new Promise((resolve, reject) => {
-      spaceRef.getDownloadURL().then(url => {
-        resolve(url)
-      })
-        .catch(err => {
-          console.log(err.code)
-          this.getDefaultImage().then(url => {
-            resolve(url)
-          })
-            .catch(err => {
-              reject(err)
-            })
-        })
-    })
-
-  }
-
-  async getAllImages(hotelId: string): Promise<string[]> {
-    var listRef = this.storageRef.child(`images/${hotelId}`)
-    var urlList = []
-
-    await listRef.listAll().then(res => {
-      res.items.forEach(itemRef => {
-        itemRef.getDownloadURL().then(url => {
-          urlList.push(url)
-        })
-      })
-    }).catch(err => {
-      console.log(err)
-    })
-    return urlList
-  }
+  // async getAllImages(hotelId: string): Promise<string[]> {
+  //   var listRef = this.storageRef.child(`images/${hotelId}`)
+  //   var urlList = []
+  //   await listRef.listAll().then(res => {
+  //     res.items.forEach(itemRef => {
+  //       itemRef.getDownloadURL().then(url => {
+  //         urlList.push(url)
+  //       })
+  //     })
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
+  //   return urlList
+  // }
 
   async deleteImg(imgUrl: string) {
     await this.storage.refFromURL(imgUrl).delete().then(() => {
