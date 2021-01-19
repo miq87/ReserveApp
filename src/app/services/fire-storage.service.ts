@@ -26,7 +26,7 @@ export class FireStorageService {
   //   })
   // }
 
-  async sendImage(hotelId: string, file: File, main?: boolean) {
+  sendImage(hotelId: string, file: File, main?: boolean) {
     if(main) {
       var uploadTask = this.storageRef.child(`images/${hotelId}/main_img.jpg`).put(file)
     }
@@ -39,7 +39,7 @@ export class FireStorageService {
     }, () => {
       uploadTask.snapshot.ref.getDownloadURL().then(url => {
         console.log('File available at: ', url);
-        this._bs.addImgUrl(hotelId, url)
+        this._bs.addImgUrl(hotelId, url, main)
       });
     })
   }

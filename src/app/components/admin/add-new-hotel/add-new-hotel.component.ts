@@ -33,7 +33,8 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
   returnHotelId: string
   mainImg: File
   allImages: File[] = []
-  sub: Subscription
+  subStates: Subscription
+  subFacilities: Subscription
 
   constructor(
     private fb: FormBuilder,
@@ -43,15 +44,18 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
     private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.sub = this.http.get("assets/data.json").subscribe((data: any) => {
+    this.subStates = this.http.get("assets/data.json").subscribe((data: any) => {
       this.states = data.states
+    })
+    this.subFacilities = this.http.get("assets/facilities.json").subscribe((data: any) => {
       this.facilities = data.facilities
     })
     this.hotelForm.patchValue({ adminId: this._auth.getCurrentUserId() })
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe()
+    this.subStates.unsubscribe()
+    this.subFacilities.unsubscribe()
   }
 
   onFileSelected(event) {
@@ -69,7 +73,7 @@ export class AddNewHotelComponent implements OnInit, OnDestroy {
       this.returnHotelId = retId
 
       if (this.mainImg) {
-        this._fs.sendImage(this.returnHotelId, this.mainImg)
+        this._fs.sendImage(this.returnHotelId, this.mainImg, true)
       }
       if (this.allImages) {
         this.allImages.forEach(file => {

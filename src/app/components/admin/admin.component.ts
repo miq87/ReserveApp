@@ -61,12 +61,12 @@ export class AdminComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.message)
     })
-    
+
   }
 
   ngOnDestroy(): void {
     this.subHotels()
-    if(this.subRooms) {
+    if (this.subRooms) {
       this.subRooms()
     }
   }
@@ -123,7 +123,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   onFilesSelected(event) {
-    for(let i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this._fs.sendImage(this.selectedHotelId, event.target.files[i])
     }
   }

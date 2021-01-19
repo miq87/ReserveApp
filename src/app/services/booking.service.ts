@@ -85,13 +85,16 @@ export class BookingService {
     return this.hotelsRef.doc(hotelId).onSnapshot(querySnapshot, error)
   }
 
-  addImgUrl(hotelId: string, newImgUrl: string) {
+  addImgUrl(hotelId: string, newImgUrl: string, main?: boolean) {
     let imgUrlList: string[] = []
     this.hotelsRef.doc(hotelId).get().then(doc => {
       if(doc.data().imgUrlList) {
         imgUrlList = doc.data().imgUrlList
       }
-      imgUrlList.push(newImgUrl)
+      if(main) {
+        imgUrlList[0] = newImgUrl
+      }
+      else imgUrlList.push(newImgUrl)
 
       this.hotelsRef.doc(hotelId).update({ imgUrlList }).catch(err => {
         console.log(err.message)
