@@ -119,21 +119,6 @@ export class BookingService {
     })
   }
 
-  // async getHotelRooms(hotelId: string): Promise<Room[]> {
-  //   let roomList: Room[] = []
-  //   await this.hotelsRef.doc(hotelId).collection('rooms').get()
-  //     .then(querySnapshot => {
-  //       querySnapshot.docs.forEach(doc => {
-  //         roomList.push(new Room(doc.id, doc.data()))
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log('Błąd podczas ładowania pokoji')
-  //       console.log(err.message)
-  //     })
-  //   return roomList || null
-  // }
-
   getMyRooms(hotelId, querySnapshot, error) {
     return this.hotelsRef.doc(hotelId).collection('rooms').onSnapshot(querySnapshot, error)
   }
