@@ -8,8 +8,10 @@ import { Facilities } from '../models/classes/facilities';
 export class FacilitiesService {
   private facilities: Facilities[]
 
+  assetsUrl = 'assets/facilities.json'
+
   constructor(private http: HttpClient) {
-    this.http.get("assets/data.json").subscribe((data: any) => {
+    this.http.get(this.assetsUrl).subscribe((data: any) => {
       this.facilities = <Facilities[]>(data.facilities)
     })
   }
@@ -24,7 +26,7 @@ export class FacilitiesService {
   }
 
   getAllFacilities() {
-    return this.http.get("assets/data.json")
+    return this.http.get(this.assetsUrl)
   }
 
 }

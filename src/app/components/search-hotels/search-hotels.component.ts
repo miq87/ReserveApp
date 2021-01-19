@@ -13,7 +13,7 @@ import { MessengerService } from 'src/app/services/messenger.service';
 })
 export class SearchHotelsComponent implements OnInit {
 
-  facilities: Facilities[] = []
+  facilities: Facilities[]
 
   searchForm = this.fb.group({
     city: ['', Validators.required],
