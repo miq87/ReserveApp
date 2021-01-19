@@ -1,7 +1,8 @@
 {
   "galleries": [{
       "id": 1,
-      "urlList": [
+      "name": "PURO Gdańsk Stare Miasto",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/118/118737918.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/269/269804376.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/269/269804362.jpg",
@@ -11,7 +12,8 @@
     },
     {
       "id": 2,
-      "urlList": [
+      "name": "Radisson Hotel & Suites, Gdansk",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/232/232849048.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/222/222385371.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/252/252069534.jpg",
@@ -21,7 +23,8 @@
     },
     {
       "id": 3,
-      "urlList": [
+      "name": "Hampton By Hilton Gdansk Old Town",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/149/149197811.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/180/180519192.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/225/225732210.jpg",
@@ -31,7 +34,8 @@
     },
     {
       "id": 4,
-      "urlList": [
+      "name": "Hilton Gdansk",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/141/14124278.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/141/14124341.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/111/111002228.jpg",
@@ -41,7 +45,8 @@
     },
     {
       "id": 5,
-      "urlList": [
+      "name": "Holiday Inn Gdansk - City Centre",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/270/270391587.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/278/278425981.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/278/278425979.jpg",
@@ -51,17 +56,19 @@
     },
     {
       "id": 6,
-      "urlList": [
-        "https://cf.bstatic.com/images/hotel/max1024x768/904/90419957.jpg",
+      "name": "Radisson Blu Hotel, Gdańsk",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/270/270014717.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/273/273914245.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/273/273914057.jpg",
-        "https://cf.bstatic.com/images/hotel/max1024x768/273/273913548.jpg"
+        "https://cf.bstatic.com/images/hotel/max1024x768/273/273913548.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/273/273913726.jpg"
       ]
     },
     {
       "id": 7,
-      "urlList": [
+      "name": "PURO Kraków Kazimierz",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/159/159895558.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/274/274031884.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/159/159893391.jpg",
@@ -71,7 +78,8 @@
     },
     {
       "id": 8,
-      "urlList": [
+      "name": "Radisson Blu Hotel Krakow",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/232/232813470.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/107/107457290.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/107/107456392.jpg",
@@ -81,7 +89,8 @@
     },
     {
       "id": 9,
-      "urlList": [
+      "name": "Aparthotel Stare Miasto",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/238/238403042.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/213/213502135.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/213/213502124.jpg",
@@ -91,7 +100,8 @@
     },
     {
       "id": 10,
-      "urlList": [
+      "name": "Bona Apartments SPA",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/242/242173684.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/278/278708691.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/263/263729867.jpg",
@@ -101,7 +111,8 @@
     },
     {
       "id": 11,
-      "urlList": [
+      "name": "Little Britain ApartHotel SAUNA&DAILY SPA HEN&STAG DO",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/265/265093668.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/268/268372829.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/268/268370593.jpg",
@@ -111,7 +122,8 @@
     },
     {
       "id": 12,
-      "urlList": [
+      "name": "Novotel Warszawa Centrum",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/277/277585563.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/211/211007015.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/376/37620932.jpg",
@@ -121,7 +133,8 @@
     },
     {
       "id": 13,
-      "urlList": [
+      "name": "InterContinental Warszawa",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/274/274545138.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/280/280215972.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/280/280219157.jpg",
@@ -131,7 +144,8 @@
     },
     {
       "id": 14,
-      "urlList": [
+      "name": "Renaissance Warsaw Airport Hotel",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/275/275266603.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/273/273024227.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/273/273024297.jpg",
@@ -141,19 +155,21 @@
     },
     {
       "id": 15,
-      "urlList": [
+      "name": "Radisson Blu Hotel & Residences",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/268/268553639.jpg",
-        "https://cf.bstatic.com/images/hotel/max1024x768/246/246583484.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/200/200376933.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/200/200363430.jpg",
-        "https://cf.bstatic.com/images/hotel/max1024x768/200/200361531.jpg"
+        "https://cf.bstatic.com/images/hotel/max1024x768/200/200361531.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/200/200363153.jpg"
       ]
     },
     {
       "id": 16,
-      "urlList": [
+      "name": "Aparthotel Prestige Zakopane",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/271/271476822.jpg",
-        "https://cf.bstatic.com/images/hotel/max1024x768/283/283024886.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/283/283024558.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/283/283024781.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/283/283024703.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/282/282672891.jpg"
@@ -161,22 +177,112 @@
     },
     {
       "id": 17,
-      "urlList": [
+      "name": "Aries Hotel & SPA Zakopane",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/507/50727445.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/132/132954689.jpg",
-        "https://cf.bstatic.com/images/hotel/max1024x768/269/269931765.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/269/269931767.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/269/269931770.jpg",
-        "https://cf.bstatic.com/images/hotel/max1024x768/269/269931671.jpg"
+        "https://cf.bstatic.com/images/hotel/max1024x768/376/37672820.jpg"
       ]
     },
     {
       "id": 18,
-      "urlList": [
+      "name": "Etiuda Zakopane",
+      "imgUrlList": [
         "https://cf.bstatic.com/images/hotel/max1024x768/253/253309262.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/197/197584538.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/197/197593813.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/197/197594810.jpg",
         "https://cf.bstatic.com/images/hotel/max1024x768/202/202719596.jpg"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "PURO Wrocław Stare Miasto",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/119/119175118.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/183/183959663.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/267/267192589.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/116/116287995.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/267/267192722.jpg"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Scandic Wrocław",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/283/283441111.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/283/283441102.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/283/283441105.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/283/283441106.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/283/283441107.jpg"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Apartament 24 - OVO",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/237/237070641.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/202/202283730.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/237/237070623.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/243/243524876.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/237/237068322.jpg"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Dream4You Apartments",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/184/184226355.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/278/278447044.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/278/278447458.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/254/254202617.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/256/256453523.jpg"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "DoubleTree by Hilton Wroclaw",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/775/77507754.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/264/264574704.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/264/264574808.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/264/264573981.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/264/264574279.jpg"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Bathtub View Luxury Apartments in Sky Tower",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/282/282179539.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/241/241247726.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/278/278178482.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/258/258547762.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/278/278180460.jpg"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Radisson Blu Hotel Wroclaw",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/280/280301308.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/145/145523385.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/145/145491801.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/232/232794484.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/145/145490640.jpg"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Hotel Monopol",
+      "imgUrlList": [
+        "https://cf.bstatic.com/images/hotel/max1024x768/256/256690549.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/219/219796126.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/226/226828089.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/225/225018210.jpg",
+        "https://cf.bstatic.com/images/hotel/max1024x768/225/225018217.jpg"
       ]
     }
   ]

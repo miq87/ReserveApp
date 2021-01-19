@@ -12,6 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard/';
 import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AllImagesComponent } from './compontents/all-images/all-images.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'hotels', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'generator', component: HotelGeneratorComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'my-reservations', component: MyReservationsComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard] },
+  { path: 'images', component: AllImagesComponent, canActivate: [AngularFireAuthGuard] },
   { path: '**', component: Error404Component }
 ];
 

@@ -38,6 +38,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
 import firebase from 'firebase/app';
+import { AllImagesComponent } from './compontents/all-images/all-images.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -72,7 +73,8 @@ firebase.initializeApp(firebaseConfig);
     ProfileComponent,
     LazyImgDirective,
     MyReservationsComponent,
-    MyReservationItemComponent
+    MyReservationItemComponent,
+    AllImagesComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

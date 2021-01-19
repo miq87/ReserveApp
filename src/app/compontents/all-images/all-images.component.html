@@ -1,0 +1,14 @@
+<div class="myCard">
+  <div class="container">
+    <div class="row" *ngFor="let gal of hotelGalleries; index as i">
+      <div class="col-lg-12">
+        <h4>{{ i + 1 }}: {{ gal.name }}</h4>
+        <div class="gallery">
+          <div *ngFor="let imgUrl of gal.imgUrlList">
+            <img [src]="imgUrl" alt="HOTEL">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
