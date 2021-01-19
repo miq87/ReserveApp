@@ -1,5 +1,4 @@
 <div class="container-fluid myCard">
-
   <div class="card">
     <div class="card-header">
       <h2>Edycja profilu</h2>
@@ -7,8 +6,12 @@
     <div class="card-body">
       <div *ngIf="!userData" class="loader">Ładowanie...</div>
       <form [formGroup]="profileForm">
-
         <div class="container" *ngIf="userData">
+          <div class="row">
+            <div class="col-lg-3 mb-3">
+              <img [src]="photoUrl">
+            </div>
+          </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
@@ -63,5 +66,4 @@
       </div>
     </div>
   </div>
-
 </div>

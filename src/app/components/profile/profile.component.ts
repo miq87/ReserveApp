@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   userData: User
   authError: any
   userToken: any
+  photoUrl: string
 
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -44,9 +45,18 @@ export class ProfileComponent implements OnInit {
     }, err => {
       this.handleError.sendError(err)
     })
+    
     this.handleError.getError().subscribe(data => {
       this.authError = data
     })
+
+    this._auth.getCurrentUser(user => {
+      if(user) {
+        console.log(user.photoURL)
+        this.photoUrl = user.photoURL
+      }
+    })
+
   }
   updateUser() {
     this._auth.updateUserData(this.profileForm.value)
