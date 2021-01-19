@@ -49,7 +49,7 @@ export class HotelGeneratorComponent implements OnInit, OnDestroy {
       let rNumber = this.randomInt(10, 100)
       let rZip = this.randomInt(10000, 100000)
       let facilities = this.randomFacilities()
-      let imgUrlList = this.hotelGalleries[this.randomInt(1, this.hotelGalleries.length)].imgUrlList
+      let imgUrlList = this.hotelGalleries[this.randomInt(0, this.hotelGalleries.length)].imgUrlList
       
       let newHotel = {
         'hotelName': rName,
