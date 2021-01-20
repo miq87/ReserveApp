@@ -6,7 +6,5 @@ export class SearchRequest {
   dateEnd: Date
   facilities: Facilities[]
 
-  constructor() {
-    this.facilities = []
-   }
+  constructor() { }
 }
