@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Hotel } from '../models/classes/hotel';
 import { Room } from '../models/classes/room';
 import firebase from "firebase/app";
+import { SearchRequest } from '../models/classes/search-request';
 
 @Injectable({
   providedIn: 'root'
@@ -88,10 +89,10 @@ export class BookingService {
   addImgUrl(hotelId: string, newImgUrl: string, main?: boolean) {
     let imgUrlList: string[] = []
     this.hotelsRef.doc(hotelId).get().then(doc => {
-      if(doc.data().imgUrlList) {
+      if (doc.data().imgUrlList) {
         imgUrlList = doc.data().imgUrlList
       }
-      if(main) {
+      if (main) {
         imgUrlList[0] = newImgUrl
       }
       else imgUrlList.push(newImgUrl)
@@ -107,7 +108,7 @@ export class BookingService {
   async deleteImgUrl(hotelId: string, index: number) {
     let imgUrlList: string[] = []
     this.hotelsRef.doc(hotelId).get().then(doc => {
-      if(doc.data().imgUrlList) {
+      if (doc.data().imgUrlList) {
         imgUrlList = doc.data().imgUrlList
       }
       imgUrlList.splice(index, 1)
@@ -128,31 +129,31 @@ export class BookingService {
     return this.hotelsRef.where('adminId', '==', adminId).onSnapshot(querySnapshot, error)
   }
 
-  async onLoadHotels(searchData): Promise<Hotel[]> {
+  async loadHotels(searchReq: SearchRequest): Promise<Hotel[]> {
     let hotelList: Hotel[] = []
     let snapshot
 
-    if (searchData.facilities[0]) {
+    if (searchReq.facilities[0]) {
       snapshot = await this.hotelsRef
-        .where('address.city', '==', searchData.city)
-        .where('facilities', 'array-contains', searchData.facilities[0])
+        .where('address.city', '==', searchReq.city)
+        .where('facilities', 'array-contains', searchReq.facilities[0])
         .get()
     }
     else {
       snapshot = await this.hotelsRef
-        .where('address.city', '==', searchData.city)
+        .where('address.city', '==', searchReq.city)
         .get()
     }
     if (snapshot.empty) {
       console.log('Brak wyników!')
       return null
     }
-    console.log(`Załadowałem: ${searchData.city}\n`)
+    console.log(`Załadowałem: ${searchReq.city}\n`)
     snapshot.forEach(doc => {
       let hotel = doc.data()
 
-      for (let i = 1; i < searchData.facilities.length; i++) {
-        if (!hotel.facilities.includes(searchData.facilities[i]))
+      for (let i = 1; i < searchReq.facilities.length; i++) {
+        if (!hotel.facilities.includes(searchReq.facilities[i]))
           return null
       }
       hotelList.push(new Hotel(doc.id, hotel))
