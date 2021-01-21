@@ -136,6 +136,15 @@ header {
   border-bottom: 2px solid $safety-orange-blaze-orange;
   font-size: 16px;
   text-align: center;
+  >div {
+    padding: 2px 4px;
+    text-align: left;
+  }
+  >button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+  }
 }
 
 .btn {

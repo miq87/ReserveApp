@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Facilities } from 'src/app/models/classes/facilities';
 import { Hotel } from 'src/app/models/classes/hotel';
-import { Room } from 'src/app/models/classes/room';
+import { Room, RoomData } from 'src/app/models/classes/room';
 import { BookingService } from 'src/app/services/booking.service';
 import { FacilitiesService } from 'src/app/services/facilities.service';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
@@ -20,6 +20,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   facilities: Facilities[]
   hotelIndex: number = -1
   selectedHotelId: string
+  //roomPrice: number
   subHotels
   subRooms
 
@@ -110,8 +111,9 @@ export class AdminComponent implements OnInit, OnDestroy {
     this._bs.deleteImgUrl(this.selectedHotelId, index)
   }
 
-  addRoom(personNum: number) {
-    this._bs.addNewRoom(this.selectedHotelId, personNum)
+  addRoom(personNum: number, price: number) {
+    let roomData = new RoomData(personNum, price)
+    this._bs.addNewRoom(this.selectedHotelId, roomData)
   }
 
   deleteRoom(roomId: string) {

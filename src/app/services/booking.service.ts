@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/classes/hotel';
-import { Room } from '../models/classes/room';
+import { RoomData } from '../models/classes/room';
 import firebase from "firebase/app";
 import { SearchRequest } from '../models/classes/search-request';
 
@@ -13,14 +13,32 @@ export class BookingService {
 
   constructor() { }
 
-  async addNewHotel(hotel, roomNum?: number[]): Promise<string> {
+  // async addNewHotel(hotel, personNum?: number[]): Promise<string> {
+  //   let retHotelId: string
+  //   await this.hotelsRef.add(hotel).then(doc => {
+  //     this.consoleAddedNewHotel(hotel)
+  //     if (personNum) {
+
+  //       personNum.forEach(room => {
+  //         this.addNewRoom(doc.id, room)
+  //       })
+
+  //     }
+  //     retHotelId = doc.id
+  //   }).catch(err => {
+  //     console.log('Błąd podczas dodawania nowego hotelu!')
+  //     console.log(err.message)
+  //   })
+  //   return retHotelId || null
+  // }
+  async addNewHotel(hotel, roomData?: RoomData[]): Promise<string> {
     let retHotelId: string
     await this.hotelsRef.add(hotel).then(doc => {
       this.consoleAddedNewHotel(hotel)
-      if (roomNum) {
-        for (let i = 0; i < roomNum.length; i++) {
-          this.addNewRoom(doc.id, roomNum[i])
-        }
+      if (roomData) {
+        roomData.forEach(room => {
+          this.addNewRoom(doc.id, room)
+        })
       }
       retHotelId = doc.id
     }).catch(err => {
@@ -39,12 +57,22 @@ export class BookingService {
     })
   }
 
-  async addNewRoom(hotelId: string, personNum: number) {
-    let room = {
-      "personNum": personNum
-    }
+  // async addNewRoom(hotelId: string, personNum: number, price?: number) {
+  //   let room = {
+  //     "personNum": personNum,
+  //     "price": price
+  //   }
+  //   await this.hotelsRef.doc(hotelId).collection('rooms').add(room).then(() => {
+  //     console.log(`Dodałem pokój dla ${personNum} osób w hotelu o id: ${hotelId}`)
+  //   }).catch(err => {
+  //     console.log(`Błąd podczas dodawania pokoju w hotelu o id: ${hotelId}`)
+  //     console.log(err.message)
+  //   })
+  // }
+  async addNewRoom(hotelId: string, roomData: RoomData) {
+    let room = JSON.parse(JSON.stringify(roomData))
     await this.hotelsRef.doc(hotelId).collection('rooms').add(room).then(() => {
-      console.log(`Dodałem pokój dla ${personNum} osób w hotelu o id: ${hotelId}`)
+      console.log(`Dodałem pokój w cenie ${roomData.price} dla ${roomData.personNum} osób w hotelu o id: ${hotelId}`)
     }).catch(err => {
       console.log(`Błąd podczas dodawania pokoju w hotelu o id: ${hotelId}`)
       console.log(err.message)

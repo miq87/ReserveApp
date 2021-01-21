@@ -100,17 +100,25 @@
                   <mat-label>Dodaj pokój dla</mat-label>
                   <mat-select>
                     <mat-option>Anuluj</mat-option>
-                    <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum)">
+                    <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum, 333)">
                       {{ personNum }} osób</mat-option>
                   </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Cena za dobę</mat-label>
+                  <input type="number" matInput name="roomPrice" #roomPrice>
                 </mat-form-field>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-3" *ngFor="let room of roomList">
-                <div class="room-item"><span>{{ room.personNum }} osobowy</span>
-                  <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.roomId)"><i
-                      class="fas fa-trash"></i></button>
+                <div class="room-item">
+                  <div>{{ room.personNum }} osobowy</div>
+                  <div> Cena: {{ room.price }}</div>
+                  <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.roomId)">
+                    <i class="fas fa-trash"></i></button>
                 </div>
               </div>
             </div>
