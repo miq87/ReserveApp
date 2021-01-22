@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hotel } from '../models/classes/hotel';
+import { Hotel, HotelData } from '../models/classes/hotel';
 import { RoomData } from '../models/classes/room';
 import firebase from "firebase/app";
 import { SearchRequest } from '../models/classes/search-request';
@@ -102,7 +102,7 @@ export class BookingService {
     let hotel: Hotel
     await this.hotelsRef.doc(hotelId).get()
       .then(doc => {
-        hotel = new Hotel(doc.id, doc.data())
+        hotel = new Hotel(doc.id, <HotelData>doc.data())
       }).catch(err => {
         console.log('Błąd podczas ładowania szczegółów hotelu!')
         console.log(err.message)

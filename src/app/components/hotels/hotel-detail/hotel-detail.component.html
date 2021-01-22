@@ -50,7 +50,8 @@
               <mat-form-field appearance="fill">
                 <mat-label>Wybierz pokój</mat-label>
                 <mat-select formControlName="roomId">
-                  <mat-option *ngFor="let room of roomList" [value]="room.roomId">Liczba osób: {{ room.personNum }}
+                  <mat-option *ngFor="let room of roomList" [value]="room.roomId">
+                    Liczba osób: {{ room.personNum }} | Cena: {{ room.price }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

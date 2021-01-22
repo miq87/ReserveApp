@@ -20,9 +20,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   facilities: Facilities[]
   hotelIndex: number = -1
   selectedHotelId: string
-  //roomPrice: number
   subHotels
   subRooms
+
+  roomForm = this.fb.group({
+    personNum: ['', Validators.required],
+    price: ['150', Validators.required]
+  })
 
   hotelForm = this.fb.group({
     adminId: [{ value: '', disabled: true }],
@@ -111,8 +115,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     this._bs.deleteImgUrl(this.selectedHotelId, index)
   }
 
-  addRoom(personNum: number, price: number) {
-    let roomData = new RoomData(personNum, price)
+  addRoom() {
+    let roomData = new RoomData(this.roomForm.value.personNum, this.roomForm.value.price)
     this._bs.addNewRoom(this.selectedHotelId, roomData)
   }
 
@@ -128,6 +132,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     for (let i = 0; i < event.target.files.length; i++) {
       this._fs.sendImage(this.selectedHotelId, event.target.files[i])
     }
+  }
+
+  onPriceChange(event) {
+    this.roomForm.value.price = event.value
+    console.log(this.roomForm.value)
   }
 
 }

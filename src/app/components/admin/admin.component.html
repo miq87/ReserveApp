@@ -94,24 +94,26 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Dodaj pokój dla</mat-label>
-                  <mat-select>
-                    <mat-option>Anuluj</mat-option>
-                    <mat-option *ngFor="let personNum of personNums" [value]="personNum" (click)="addRoom(personNum, 333)">
-                      {{ personNum }} osób</mat-option>
-                  </mat-select>
-                </mat-form-field>
+            <form [formGroup]="roomForm">
+              <div class="row">
+                <div class="col-lg-4 p-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Dodaj pokój dla</mat-label>
+                    <mat-select formControlName="personNum">
+                      <mat-option>Anuluj</mat-option>
+                      <mat-option *ngFor="let personNum of personNums" [value]="personNum">
+                        {{ personNum }} osób</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6 p-3">
+                  <div>Cena: {{ this.roomForm.value.price }} zł / doba</div>
+                  <mat-slider min="50" max="500" step="10" value="150" (change)="onPriceChange($event)"></mat-slider>
+                  <button class="btn btn-lg btn-warning" (click)="addRoom()" [disabled]="roomForm.invalid">Dodaj
+                    pokój</button>
+                </div>
               </div>
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Cena za dobę</mat-label>
-                  <input type="number" matInput name="roomPrice" #roomPrice>
-                </mat-form-field>
-              </div>
-            </div>
+            </form>
             <div class="row">
               <div class="col-lg-3" *ngFor="let room of roomList">
                 <div class="room-item">

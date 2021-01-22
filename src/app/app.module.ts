@@ -34,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSliderModule } from '@angular/material/slider';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
@@ -95,6 +96,7 @@ firebase.initializeApp(firebaseConfig);
     MatProgressSpinnerModule,
     MatInputModule,
     MatSelectModule,
+    MatSliderModule,
     MatButtonModule,
     MatNativeDateModule,
     MatDatepickerModule,
