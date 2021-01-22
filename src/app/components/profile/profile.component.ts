@@ -52,7 +52,6 @@ export class ProfileComponent implements OnInit {
 
     this._auth.getCurrentUser(user => {
       if(user) {
-        console.log(user.photoURL)
         this.photoUrl = user.photoURL
       }
     })
