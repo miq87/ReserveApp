@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MembersComponent } from './components/members/members.component';
 import { AngularFireModule } from '@angular/fire';
 import { AgmCoreModule } from '@agm/core';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -40,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
 import firebase from 'firebase/app';
 import { AllImagesComponent } from './compontents/all-images/all-images.component';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
@@ -100,7 +102,8 @@ firebase.initializeApp(firebaseConfig);
     MatButtonModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
