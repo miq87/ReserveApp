@@ -32,7 +32,8 @@
               <mat-option *ngFor="let fac of facilities" [value]="fac.id">{{ fac.name }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <div class="custom-slider">
+          <div class="custom-slider mb-3">
+            <p>Cena za dobę (PLN):</p>
             <ngx-slider [(value)]="searchForm.value.priceMin" [(highValue)]="searchForm.value.priceMax" [options]="options" (valueChange)="onPriceChange($event)" (highValueChange)="onHighValueChange($event)"></ngx-slider>
           </div>
           <button type="submit" class="btn btn-warning btn-lg" [disabled]="searchForm.invalid">Szukaj</button>

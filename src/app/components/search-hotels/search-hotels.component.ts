@@ -56,10 +56,10 @@ export class SearchHotelsComponent implements OnInit {
     return splitStr.join(' ');
   }
   onPriceChange(event) {
-    console.log(this.searchForm.value)
+    console.log('priceMin: ', event)
   }
   onHighValueChange(event) {
-    console.log(this.searchForm.value)
+    console.log('priceMax:', event)
   }
 
 }
