@@ -5,6 +5,8 @@ export class SearchRequest {
   dateStart: Date
   dateEnd: Date
   facilities: Facilities[]
+  priceMin: number
+  priceMax: number
 
   constructor() { }
 }

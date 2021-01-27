@@ -33,7 +33,7 @@
             </mat-select>
           </mat-form-field>
           <div class="custom-slider">
-            <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (valueChange)="onPriceChange($event)" (highValueChange)="onHighValueChange($event)"></ngx-slider>
+            <ngx-slider [(value)]="searchForm.value.priceMin" [(highValue)]="searchForm.value.priceMax" [options]="options" (valueChange)="onPriceChange($event)" (highValueChange)="onHighValueChange($event)"></ngx-slider>
           </div>
           <button type="submit" class="btn btn-warning btn-lg" [disabled]="searchForm.invalid">Szukaj</button>
         </div>

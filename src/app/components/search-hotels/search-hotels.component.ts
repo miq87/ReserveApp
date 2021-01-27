@@ -19,24 +19,16 @@ export class SearchHotelsComponent implements OnInit {
   maxValue: number = 400
   options: Options = {
     floor: 0,
-    ceil: 500,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '<b>Min price:</b> $' + value;
-        case LabelType.High:
-          return '<b>Max price:</b> $' + value;
-        default:
-          return '$' + value;
-      }
-    }
+    ceil: 500
   }
 
   searchForm = this.fb.group({
     city: ['', Validators.required],
     dateStart: ['', Validators.required],
     dateEnd: ['', Validators.required],
-    facilities: ['']
+    facilities: [''],
+    priceMin: [100, Validators.required],
+    priceMax: [400, Validators.required]
   })
 
   constructor(
@@ -64,10 +56,10 @@ export class SearchHotelsComponent implements OnInit {
     return splitStr.join(' ');
   }
   onPriceChange(event) {
-    console.log(event)
+    console.log(this.searchForm.value)
   }
   onHighValueChange(event) {
-    console.log(event)
+    console.log(this.searchForm.value)
   }
 
 }
