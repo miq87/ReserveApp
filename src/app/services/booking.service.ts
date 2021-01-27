@@ -13,24 +13,6 @@ export class BookingService {
 
   constructor() { }
 
-  // async addNewHotel(hotel, personNum?: number[]): Promise<string> {
-  //   let retHotelId: string
-  //   await this.hotelsRef.add(hotel).then(doc => {
-  //     this.consoleAddedNewHotel(hotel)
-  //     if (personNum) {
-
-  //       personNum.forEach(room => {
-  //         this.addNewRoom(doc.id, room)
-  //       })
-
-  //     }
-  //     retHotelId = doc.id
-  //   }).catch(err => {
-  //     console.log('Błąd podczas dodawania nowego hotelu!')
-  //     console.log(err.message)
-  //   })
-  //   return retHotelId || null
-  // }
   async addNewHotel(hotel, roomData?: RoomData[]): Promise<string> {
     let retHotelId: string
     await this.hotelsRef.add(hotel).then(doc => {
