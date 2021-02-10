@@ -41,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
 import firebase from 'firebase/app';
 import { AllImagesComponent } from './compontents/all-images/all-images.component';
+import { NazwaKomponentuComponent } from './nazwa-komponentu/nazwa-komponentu.component';
 
 
 const firebaseConfig = {
@@ -77,7 +78,8 @@ firebase.initializeApp(firebaseConfig);
     LazyImgDirective,
     MyReservationsComponent,
     MyReservationItemComponent,
-    AllImagesComponent
+    AllImagesComponent,
+    NazwaKomponentuComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
