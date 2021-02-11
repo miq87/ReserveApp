@@ -56,6 +56,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -147,11 +147,13 @@ export class AuthService {
         this.handleError.sendError(err)
       });
   }
+
   logout() {
     firebase.auth().signOut().then(() => {
       console.log('Wylogowany!')
     })
   }
+
   /*isLoggedIn(): Observable<boolean> {
     return this.authState$.pipe(
       map(authState => !!authState)
