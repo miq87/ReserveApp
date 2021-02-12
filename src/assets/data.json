@@ -17,6 +17,7 @@
     { "id": 15, "name": "wielkopolskie" },
     { "id": 16, "name": "zachodnio-pomorskie" }
   ],
+
   "hotelNames": [
     { "id": 1, "name": "Grand" },
     { "id": 2, "name": "Hanza" },
@@ -35,6 +36,7 @@
     { "id": 15, "name": "Hilton" },
     { "id": 16, "name": "Holiday Inn" }
   ],
+
   "streets": [
     { "id": 1, "name": "Adama Mickiewicza" },
     { "id": 2, "name": "Grunwaldzka" },
@@ -53,6 +55,7 @@
     { "id": 15, "name": "Kolejowa" },
     { "id": 16, "name": "Traugutta" }
   ],
+
   "cities": [
     { "id": 1, "name": "Gdańsk", "state": "pomorskie" },
     { "id": 2, "name": "Sopot", "state": "pomorskie" },
@@ -71,4 +74,5 @@
     { "id": 15, "name": "Łódź", "state": "łódzkie" },
     { "id": 16, "name": "Lublin", "state": "lubelskie" }
   ]
+
 }
