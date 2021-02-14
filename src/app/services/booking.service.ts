@@ -30,6 +30,19 @@ export class BookingService {
     return retHotelId || null
   }
 
+  async addNewHotel_(hotel): Promise<string> {
+    let retHotelId: string
+
+    await firebase.firestore().collection('hotels').add(hotel).then(doc => {
+      console.log('Dodano nowy hotel')
+      retHotelId = doc.id
+    }).catch(err => {
+      console.log('Błąd podczas dodawania nowego hotelu!')
+      console.log(err.message)
+    })
+    return retHotelId || null
+  }
+
   async updateHotel(hotelId, hotelData) {
     await this.hotelsRef.doc(hotelId).update(hotelData).then(() => {
       console.log(`Zaktualizowałem dane hotelu o id: ${hotelId}`)
