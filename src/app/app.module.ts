@@ -24,7 +24,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { SearchHotelsComponent } from './components/search-hotels/search-hotels.component';
 import { HotelDetailComponent } from './components/hotels/hotel-detail/hotel-detail.component';
 import { Error404Component } from './components/error404/error404.component';
-import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
 import { LazyImgDirective } from './shared/directives/lazy-img.directive';
@@ -40,7 +39,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
 import { AllImagesComponent } from './components/all-images/all-images.component';
-
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
@@ -58,7 +56,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +72,6 @@ firebase.initializeApp(firebaseConfig);
     SearchHotelsComponent,
     HotelDetailComponent,
     Error404Component,
-    RightSidebarComponent,
     ProfileComponent,
     LazyImgDirective,
     MyReservationsComponent,
