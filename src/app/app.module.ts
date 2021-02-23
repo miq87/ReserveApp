@@ -39,7 +39,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MyReservationItemComponent } from './components/my-reservations/my-reservation-item/my-reservation-item.component';
-import { AllImagesComponent } from './compontents/all-images/all-images.component';
+import { AllImagesComponent } from './components/all-images/all-images.component';
 
 import firebase from 'firebase/app';
 import "firebase/auth";
