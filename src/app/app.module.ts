@@ -8,7 +8,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MembersComponent } from './components/members/members.component';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule, FIREBASE_APP_NAME } from '@angular/fire';
 import { AgmCoreModule } from '@agm/core';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,9 +42,11 @@ import { AllImagesComponent } from './components/all-images/all-images.component
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
+import { environment } from 'src/environments/environment';
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAZedN_hMussPs1W25mNzoSgU8B8lQ5hsk",
+  apiKey: environment.FIREBASE_API_KEY,
   authDomain: "reserveapp-1e819.firebaseapp.com",
   databaseURL: "https://reserveapp-1e819.firebaseio.com",
   projectId: "reserveapp-1e819",
