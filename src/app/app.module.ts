@@ -45,7 +45,7 @@ import "firebase/firestore";
 import { environment } from 'src/environments/environment';
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: environment.FIREBASE_API_KEY,
   authDomain: "reserveapp-1e819.firebaseapp.com",
   databaseURL: "https://reserveapp-1e819.firebaseio.com",
   projectId: "reserveapp-1e819",
